@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Challenge</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.codehilite .hll { background-color: #ffffcc }
+.codehilite { background: #f8f8f8; }
+.codehilite .c { color: #3D7B7B; font-style: italic } /* Comment */
+.codehilite .err { border: 1px solid #F00 } /* Error */
+.codehilite .k { color: #008000; font-weight: bold } /* Keyword */
+.codehilite .o { color: #666 } /* Operator */
+.codehilite .ch { color: #3D7B7B; font-style: italic } /* Comment.Hashbang */
+.codehilite .cm { color: #3D7B7B; font-style: italic } /* Comment.Multiline */
+.codehilite .cp { color: #9C6500 } /* Comment.Preproc */
+.codehilite .cpf { color: #3D7B7B; font-style: italic } /* Comment.PreprocFile */
+.codehilite .c1 { color: #3D7B7B; font-style: italic } /* Comment.Single */
+.codehilite .cs { color: #3D7B7B; font-style: italic } /* Comment.Special */
+.codehilite .gd { color: #A00000 } /* Generic.Deleted */
+.codehilite .ge { font-style: italic } /* Generic.Emph */
+.codehilite .ges { font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+.codehilite .gr { color: #E40000 } /* Generic.Error */
+.codehilite .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.codehilite .gi { color: #008400 } /* Generic.Inserted */
+.codehilite .go { color: #717171 } /* Generic.Output */
+.codehilite .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.codehilite .gs { font-weight: bold } /* Generic.Strong */
+.codehilite .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.codehilite .gt { color: #04D } /* Generic.Traceback */
+.codehilite .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.codehilite .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.codehilite .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.codehilite .kp { color: #008000 } /* Keyword.Pseudo */
+.codehilite .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.codehilite .kt { color: #B00040 } /* Keyword.Type */
+.codehilite .m { color: #666 } /* Literal.Number */
+.codehilite .s { color: #BA2121 } /* Literal.String */
+.codehilite .na { color: #687822 } /* Name.Attribute */
+.codehilite .nb { color: #008000 } /* Name.Builtin */
+.codehilite .nc { color: #00F; font-weight: bold } /* Name.Class */
+.codehilite .no { color: #800 } /* Name.Constant */
+.codehilite .nd { color: #A2F } /* Name.Decorator */
+.codehilite .ni { color: #717171; font-weight: bold } /* Name.Entity */
+.codehilite .ne { color: #CB3F38; font-weight: bold } /* Name.Exception */
+.codehilite .nf { color: #00F } /* Name.Function */
+.codehilite .nl { color: #767600 } /* Name.Label */
+.codehilite .nn { color: #00F; font-weight: bold } /* Name.Namespace */
+.codehilite .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.codehilite .nv { color: #19177C } /* Name.Variable */
+.codehilite .ow { color: #A2F; font-weight: bold } /* Operator.Word */
+.codehilite .w { color: #BBB } /* Text.Whitespace */
+.codehilite .mb { color: #666 } /* Literal.Number.Bin */
+.codehilite .mf { color: #666 } /* Literal.Number.Float */
+.codehilite .mh { color: #666 } /* Literal.Number.Hex */
+.codehilite .mi { color: #666 } /* Literal.Number.Integer */
+.codehilite .mo { color: #666 } /* Literal.Number.Oct */
+.codehilite .sa { color: #BA2121 } /* Literal.String.Affix */
+.codehilite .sb { color: #BA2121 } /* Literal.String.Backtick */
+.codehilite .sc { color: #BA2121 } /* Literal.String.Char */
+.codehilite .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.codehilite .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.codehilite .s2 { color: #BA2121 } /* Literal.String.Double */
+.codehilite .se { color: #AA5D1F; font-weight: bold } /* Literal.String.Escape */
+.codehilite .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.codehilite .si { color: #A45A77; font-weight: bold } /* Literal.String.Interpol */
+.codehilite .sx { color: #008000 } /* Literal.String.Other */
+.codehilite .sr { color: #A45A77 } /* Literal.String.Regex */
+.codehilite .s1 { color: #BA2121 } /* Literal.String.Single */
+.codehilite .ss { color: #19177C } /* Literal.String.Symbol */
+.codehilite .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.codehilite .fm { color: #00F } /* Name.Function.Magic */
+.codehilite .vc { color: #19177C } /* Name.Variable.Class */
+.codehilite .vg { color: #19177C } /* Name.Variable.Global */
+.codehilite .vi { color: #19177C } /* Name.Variable.Instance */
+.codehilite .vm { color: #19177C } /* Name.Variable.Magic */
+.codehilite .il { color: #666 } /* Literal.Number.Integer.Long */
+
+</style>
+<style>
+    :root {
+  --bg: #ffffff;
+  --fg: #222222;
+  --muted: #555555;
+  --border: #e0e0e0;
+  --accent: #005fcc;
+  --code-bg: #f6f8fa;
+  --role-user: #0ea5e9;
+  --role-assistant: #22c55e;
+  --role-system: #9ca3af;
+  --return-code: #a35291;
+}
+html.dark {
+  --bg: #0b0b0b;
+  --fg: #e8e8e8;
+  --muted: #a0a0a0;
+  --border: #333333;
+  --accent: #3b82f6;
+  --code-bg: #111827;
+  --role-user: #0ea5e9;
+  --role-assistant: #22c55e;
+  --role-system: #9ca3af;
+  --return-code: #a35291;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
+  line-height: 1.6;
+}
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 10;
+}
+h1 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+}
+.tab {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--border);
+  border-bottom: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 6px 6px 0 0;
+  color: var(--fg);
+}
+.tab.active {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+.tab-content {
+  display: none;
+  padding: 1rem 1.25rem;
+  border-top: 1px solid var(--border);
+}
+.tab-content.active {
+  display: block;
+}
+#theme-toggle {
+  border: 1px solid var(--border);
+  padding: 0.2rem 0.6rem;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  cursor: pointer;
+  background: transparent;
+  color: var(--fg);
+}
+.main {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.message {
+  border: 1px solid var(--border);
+  border-left-width: 6px;
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+  background: rgba(0,0,0,0.02);
+}
+.message .meta {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.6rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.message .badge {
+  font-weight: 600;
+}
+.role-user {
+  border-left-color: var(--role-user);
+}
+.role-assistant {
+  border-left-color: var(--role-assistant);
+}
+.role-system {
+  border-left-color: var(--role-system);
+}
+.role-unknown {
+  border-left-color: var(--accent);
+}
+
+.output-code-container {
+  display: flex;
+  gap: 1rem;               /* space between children */
+  align-items: center;     /* vertical alignment */
+  justify-content: start;  /* horizontal alignment */
+}
+
+.output-code-container .codeblock {
+  flex: 0 1 auto;
+}
+
+.codeblock {
+  border: 1px solid var(--border);
+  border-left-width: 6px;
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+  background: rgba(0,0,0,0.02);
+}
+.codeblock-content {
+  margin-bottom: 0.6rem;
+  border: 1px dashed var(--border);
+  border-radius: 4px;
+  padding: 0.4rem 0.6rem;
+  background: rgba(0,0,0,0.02);
+}
+
+.codeblock.eval_code {
+  border-left-color: var(--role-user);
+}
+.codeblock.target_code {
+  border-left-color: var(--role-assistant);
+}
+.codeblock.output_code {
+  border-left-color: var(--role-system);
+}
+
+html.dark .codeblock-content {
+  background: rgba(255,255,255,0.03);
+}
+.codeblock > summary {
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none; /* remove default triangle in some browsers */
+}
+.codeblock > summary::-webkit-details-marker {
+  display: none; /* Safari/Chrome marker */
+}
+.codeblock > summary::before {
+  content: "▶ ";
+  display: inline-block;
+  transform: rotate(0deg);
+  transition: transform 0.12s ease-out;
+}
+.codeblock[open] > summary::before {
+  transform: rotate(90deg);
+}
+.codeblock .tag {
+  color: var(--muted);
+  font-weight: 400;
+  font-size: 0.85em;
+  margin-left: 0.25rem;
+}
+
+.markdown-body pre code {
+  background: var(--code-bg);
+  display: block;
+  padding: 0.75rem;
+  overflow-x: auto;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+.markdown-body code {
+  background: var(--code-bg);
+  padding: 0.15rem 0.3rem;
+  border-radius: 4px;
+}
+/* Extra info tree */
+details > summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+details .block {
+  padding-left: 1rem;
+  margin: 0.25rem 0 0.5rem 0;
+  border-left: 2px solid var(--border);
+}
+.kv .key {
+  font-weight: 600;
+}
+.kv .type {
+  color: var(--muted);
+  margin-left: 0.5rem;
+  font-size: 0.85rem;
+}
+footer {
+  margin: 2rem 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+/* CodeHilite (pygments) overrides to respect theme vars */
+.codehilite {
+  background: var(--code-bg) !important;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.75rem !important;
+}
+.reasoning {
+  margin-bottom: 0.6rem;
+  border: 1px dashed var(--border);
+  border-radius: 4px;
+  padding: 0.4rem 0.6rem;
+  background: rgba(0,0,0,0.02);
+}
+html.dark .reasoning {
+  background: rgba(255,255,255,0.03);
+}
+.reasoning > summary {
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none; /* remove default triangle in some browsers */
+}
+.reasoning > summary::-webkit-details-marker {
+  display: none; /* Safari/Chrome marker */
+}
+.reasoning > summary::before {
+  content: "▶ ";
+  display: inline-block;
+  transform: rotate(0deg);
+  transition: transform 0.12s ease-out;
+}
+.reasoning[open] > summary::before {
+  transform: rotate(90deg);
+}
+.reasoning .tag {
+  color: var(--muted);
+  font-weight: 400;
+  font-size: 0.85em;
+  margin-left: 0.25rem;
+}
+.reasoning-body {
+  margin-top: 0.5rem;
+}
+</style>
+
+<!-- ===== MATHJAX CONFIG ===== -->
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [ ["\\(","\\)"] ],
+    displayMath: [ ["\\[","\\]"] ],
+    processEscapes: true,
+    processEnvironments: true
+  },
+  options: {
+    ignoreHtmlClass: ".*",
+    processHtmlClass: "arithmatex"
+
+    // skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    // if you dynamically add content later, you can call MathJax.typesetPromise()
+  }
+};
+</script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<!-- ========================== -->
+</head>
+<body>
+<header>
+  <h1>Challenge</h1>
+  <div>
+    <button id="theme-toggle" aria-label="toggle dark mode">🌓</button>
+  </div>
+</header>
+
+<div class="main">
+  
+<article class="message role-system">
+    <div class="meta">
+        <span class="badge">System</span>
+        <span class="idx">#0</span>
+    </div>
+    <div class="content markdown-body"><p>You are a physics research assistant specializing in solving complex, research-level problems using precise, step-by-step reasoning.</p>
+<p><strong>Input</strong>
+Problems will be provided in Markdown format.</p>
+<p><strong>Output (Markdown format)</strong></p>
+<ol>
+<li><strong>Step-by-Step Derivation</strong> - Show every non-trivial step in the solution.  Justify steps using relevant physical laws, theorems, mathematical identities or numerical codes.</li>
+<li><strong>Mathematical Typesetting</strong> - Use LaTeX for all mathematics:  <code>$...$</code> for inline expressions, <code>$$...$$</code> for display equations.</li>
+<li><strong>Conventions and Units</strong> - Follow the unit system and conventions specified in the problem.</li>
+<li>
+<p><strong>Final Answer</strong> - At the end of the solution,  start a new line with <strong>&ldquo;Final Answer:&rdquo;</strong>, and present the final result.</p>
+<p>For final answers involving values, follow the precision requirements specified in the problem.
+If no precision is specified:
+- If an exact value is possible, provide it (e.g., \$\sqrt(2)\$, \$\pi/4\$).
+- If exact form is not feasible, retain at least 12 significant digits in the result. </p>
+</li>
+<li>
+<p><strong>Formatting Compliance</strong> - If the user requests a specific output format (e.g., code, table),  provide the final answer accordingly.
+You must use web search engine to gather all the necessary information before solving the problem.
+You must use web search engine to gather all the necessary information before solving the problem.
+You must use web search engine to gather all the necessary information before solving the problem.</p>
+</li>
+</ol></div>
+</article>
+
+
+<article class="message role-user">
+    <div class="meta">
+        <span class="badge">User</span>
+        <span class="idx">#1</span>
+    </div>
+    <div class="content markdown-body"><h1 id="problem-setup">Problem setup:</h1>
+<p>In quantum error correction, you encode quantum states into logical states made of many qubits in order to improve their resilience to errors. In quantum error detection, you do the same but can only detect the presence of errors and not correct them. In this problem, we will consider a single [[4,2,2]] quantum error detection code, which encodes two logical qubits into four physical qubits, and investigate how robust logical quantum operations in this code are to quantum errors.</p>
+<p>Our convention is that the four physical qubits in the [[4,2,2]] code are labelled 0,1,2,3. The two logical qubits are labelled A and B. The stabilizers are <span class="arithmatex">\(XXXX\)</span> and <span class="arithmatex">\(ZZZZ\)</span>, where <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(Z\)</span> are Pauli matrices. The logical <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(Z\)</span> operators on the two qubits are <span class="arithmatex">\(X_A = XIXI\)</span>, <span class="arithmatex">\(X_B=XXII\)</span>, <span class="arithmatex">\(Z_A = ZZII\)</span>, <span class="arithmatex">\(Z_B = ZIZI\)</span>, up to multiplication by stabilizers.</p>
+<p>We will consider different state preparation circuits consisting of controlled not <span class="arithmatex">\(CNOT_{ij}\)</span> gates, where <span class="arithmatex">\(CNOT_{ij}\)</span> has control qubit <span class="arithmatex">\(i\)</span> and target qubit <span class="arithmatex">\(j\)</span>. As a simple model of quantum errors in hardware, we will suppose that each <span class="arithmatex">\(CNOT_{ij}\)</span> gate in the circuit has a two qubit depolarizing error channel following it that produces one of the 15 non-identity two-qubit Paulis with equal probability <span class="arithmatex">\(p/15\)</span>. The probability <span class="arithmatex">\(p\)</span> indicates the probability of an error in a single two-qubit gate. We will assess the logical infidelity of certain state preparation protocols as a function of the physical infidelity <span class="arithmatex">\(p\)</span>.</p>
+<h1 id="main-problem">Challenge</h1>
+<p>Suppose that we prepare a logical two-qubit <span class="arithmatex">\(|00\rangle_{AB}\)</span> state in the [[4,2,2]] code. To do so, we introduce an ancilla qubit, qubit 4, and use the following state preparation circuit:</p>
+<div class="arithmatex">\[
+M_4 (CNOT_{04}) (CNOT_{34}) (CNOT_{23}) (CNOT_{10}) (CNOT_{12}) (H_1)
+\]</div>
+<p>Note that this equation is written in matrix multiplication order, while the quantum operations in the circuit occur in the reverse order (from right-to-left in the above equation).  <span class="arithmatex">\(H\)</span> is a single-qubit Hadamard gate and <span class="arithmatex">\(M\)</span> is a single-qubit measurement. The ancilla is used to detect errors in the state preparation circuit and makes the circuit fault-tolerant. If the ancilla measurement is <span class="arithmatex">\(|0\rangle\)</span> (<span class="arithmatex">\(|1\rangle\)</span>), the state preparation succeeds (fails).</p>
+<p>What is the logical state fidelity of the final 2-qubit logical state at the end of the circuit as a function of two-qubit gate error rate <span class="arithmatex">\(p\)</span>, assuming the state is post-selected on all detectable errors in the code and on the ancilla qubit measuring <span class="arithmatex">\(|0\rangle\)</span>?</p></div>
+</article>
+
+
+<article class="message role-assistant">
+    <div class="meta">
+        <span class="badge">Assistant</span>
+        <span class="idx">#2</span>
+    </div>
+    
+                    <details class="tool-call">
+                      <summary>Tool Call <span class="tag">(code to execute)</span></summary>
+                      <div class="markdown-body tool-call-body">
+                        <div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">itertools</span>
+
+<span class="c1"># Define number of qubits</span>
+<span class="n">total_qubits</span> <span class="o">=</span> <span class="mi">5</span>  <span class="c1"># 0..3 data, 4 ancilla</span>
+
+<span class="c1"># Helper: construct Pauli as (z,x) bit arrays length 5</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">pauli_1q</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
+    <span class="c1"># Returns (z_bits, x_bits) for a 5-qubit Pauli with single-qubit Pauli label on qubit q</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">total_qubits</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">total_qubits</span>
+    <span class="k">if</span> <span class="n">label</span> <span class="o">==</span> <span class="s1">&#39;I&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">z</span><span class="p">,</span> <span class="n">x</span>
+    <span class="k">if</span> <span class="n">label</span> <span class="o">==</span> <span class="s1">&#39;X&#39;</span><span class="p">:</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">q</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">elif</span> <span class="n">label</span> <span class="o">==</span> <span class="s1">&#39;Z&#39;</span><span class="p">:</span>
+        <span class="n">z</span><span class="p">[</span><span class="n">q</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">elif</span> <span class="n">label</span> <span class="o">==</span> <span class="s1">&#39;Y&#39;</span><span class="p">:</span>
+        <span class="n">z</span><span class="p">[</span><span class="n">q</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">q</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;bad label&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">z</span><span class="p">,</span> <span class="n">x</span>
+
+<span class="c1"># Multiply Paulis ignoring global phase: XOR of bits</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">pauli_mul</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">):</span>
+    <span class="n">z1</span><span class="p">,</span><span class="n">x1</span> <span class="o">=</span> <span class="n">p1</span>
+    <span class="n">z2</span><span class="p">,</span><span class="n">x2</span> <span class="o">=</span> <span class="n">p2</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="p">[(</span><span class="n">a</span><span class="o">^</span><span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">z1</span><span class="p">,</span><span class="n">z2</span><span class="p">)]</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="p">[(</span><span class="n">a</span><span class="o">^</span><span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># Conjugation mappings</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">conj_H</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
+    <span class="n">z</span><span class="p">,</span><span class="n">x</span> <span class="o">=</span> <span class="n">p</span>
+    <span class="n">z2</span> <span class="o">=</span> <span class="n">z</span><span class="p">[:]</span>
+    <span class="n">x2</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:]</span>
+    <span class="c1"># swap on q</span>
+    <span class="n">z2</span><span class="p">[</span><span class="n">q</span><span class="p">],</span> <span class="n">x2</span><span class="p">[</span><span class="n">q</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">q</span><span class="p">],</span> <span class="n">z</span><span class="p">[</span><span class="n">q</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">z2</span><span class="p">,</span><span class="n">x2</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">conj_CNOT</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="c1"># mapping: x_c&#39; = x_c; x_t&#39; = x_t ^ x_c; z_c&#39; = z_c ^ z_t; z_t&#39; = z_t</span>
+    <span class="n">z</span><span class="p">,</span><span class="n">x</span> <span class="o">=</span> <span class="n">p</span>
+    <span class="n">z2</span> <span class="o">=</span> <span class="n">z</span><span class="p">[:]</span>
+    <span class="n">x2</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:]</span>
+    <span class="c1"># compute new values using originals</span>
+    <span class="n">xc</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">c</span><span class="p">]</span>
+    <span class="n">xt</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
+    <span class="n">zc</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="n">c</span><span class="p">]</span>
+    <span class="n">zt</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
+    <span class="n">x2</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">xc</span>
+    <span class="n">x2</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">xt</span> <span class="o">^</span> <span class="n">xc</span>
+    <span class="n">z2</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">zc</span> <span class="o">^</span> <span class="n">zt</span>
+    <span class="n">z2</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">zt</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">z2</span><span class="p">,</span><span class="n">x2</span><span class="p">)</span>
+
+<span class="c1"># Build the list of gates in order of application (right-to-left in the problem statement)</span>
+<span class="c1"># We&#39;ll index the CNOTs by 1..5, and define their (control,target)</span>
+<span class="n">cnots</span> <span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span> <span class="p">]</span>  <span class="c1"># order of application</span>
+
+<span class="c1"># For propagating an error inserted after the i-th CNOT (1-indexed), we need to conjugate by gates i+1..5</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">propagate_error_after_cnot</span><span class="p">(</span><span class="n">pauli</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+    <span class="c1"># pauli is (z,x), inserted right after cnots[i-1]</span>
+    <span class="n">z</span><span class="p">,</span><span class="n">x</span> <span class="o">=</span> <span class="n">pauli</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="p">(</span><span class="n">z</span><span class="p">[:],</span> <span class="n">x</span><span class="p">[:])</span>
+    <span class="c1"># Propagate through subsequent CNOTs i+1..5 in order</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">cnots</span><span class="p">)):</span>
+        <span class="c1"># j indexes from i to 4 (0-based), but our i is 1-based: step after cnots[i-1], so next gate is cnots[i]</span>
+        <span class="n">c</span><span class="p">,</span><span class="n">t</span> <span class="o">=</span> <span class="n">cnots</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">conj_CNOT</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+    <span class="c1"># There is no further H after CNOTs</span>
+    <span class="k">return</span> <span class="n">p</span>
+
+<span class="c1"># generate two-qubit pauli set on a specified pair (a,b), excluding II</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;I&#39;</span><span class="p">,</span><span class="s1">&#39;X&#39;</span><span class="p">,</span><span class="s1">&#39;Y&#39;</span><span class="p">,</span><span class="s1">&#39;Z&#39;</span><span class="p">]</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">two_qubit_paulis_on_pair</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">pa</span> <span class="ow">in</span> <span class="n">labels</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">pb</span> <span class="ow">in</span> <span class="n">labels</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">pa</span><span class="o">==</span><span class="s1">&#39;I&#39;</span> <span class="ow">and</span> <span class="n">pb</span><span class="o">==</span><span class="s1">&#39;I&#39;</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">z_a</span><span class="p">,</span> <span class="n">x_a</span> <span class="o">=</span> <span class="n">pauli_1q</span><span class="p">(</span><span class="n">pa</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+            <span class="n">z_b</span><span class="p">,</span> <span class="n">x_b</span> <span class="o">=</span> <span class="n">pauli_1q</span><span class="p">(</span><span class="n">pb</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+            <span class="c1"># multiply to combine on two qubits</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">pauli_mul</span><span class="p">((</span><span class="n">z_a</span><span class="p">,</span><span class="n">x_a</span><span class="p">),</span> <span class="p">(</span><span class="n">z_b</span><span class="p">,</span><span class="n">x_b</span><span class="p">))</span>
+            <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">res</span>
+
+<span class="c1"># Convenience: precompute error sets for each CNOT&#39;s pair</span>
+<span class="n">error_sets</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">t</span><span class="p">)</span> <span class="ow">in</span> <span class="n">cnots</span><span class="p">:</span>
+    <span class="n">error_sets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">two_qubit_paulis_on_pair</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">t</span><span class="p">))</span>
+
+<span class="c1"># Define acceptance checks: commute with XXXX (Sx), ZZZZ (Sz), and ancilla Z4</span>
+<span class="c1"># In symplectic form, commutation with a Pauli Q=(zq,xq) is z·xq + x·zq mod 2 = 0</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">commutes</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
+    <span class="n">z</span><span class="p">,</span><span class="n">x</span> <span class="o">=</span> <span class="n">p</span>
+    <span class="n">zq</span><span class="p">,</span> <span class="n">xq</span> <span class="o">=</span> <span class="n">q</span>
+    <span class="c1"># compute sum over all qubits</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">total_qubits</span><span class="p">):</span>
+        <span class="n">s</span> <span class="o">^=</span> <span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&amp;</span> <span class="n">xq</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">^</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&amp;</span> <span class="n">zq</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">s</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Define Sx=XXXX on data 0..3, Sz=ZZZZ on data 0..3, ancZ=Z on 4</span>
+<span class="n">Sx</span> <span class="o">=</span> <span class="n">pauli_mul</span><span class="p">(</span><span class="n">pauli_1q</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">pauli_1q</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">Sx</span> <span class="o">=</span> <span class="n">pauli_mul</span><span class="p">(</span><span class="n">Sx</span><span class="p">,</span> <span class="n">pauli_1q</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">Sx</span> <span class="o">=</span> <span class="n">pauli_mul</span><span class="p">(</span><span class="n">Sx</span><span class="p">,</span> <span class="n">pauli_1q</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">Sz</span> <span class="o">=</span> <span class="n">pauli_mul</span><span class="p">(</span><span class="n">pauli_1q</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">pauli_1q</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">Sz</span> <span class="o">=</span> <span class="n">pauli_mul</span><span class="p">(</span><span class="n">Sz</span><span class="p">,</span> <span class="n">pauli_1q</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">Sz</span> <span class="o">=</span> <span class="n">pauli_mul</span><span class="p">(</span><span class="n">Sz</span><span class="p">,</span> <span class="n">pauli_1q</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">ancZ</span> <span class="o">=</span> <span class="n">pauli_1q</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="c1"># Define logical Zs as given: Z_A = ZZII (0,1), Z_B= Z I Z I (0,2). On ancilla none.</span>
+<span class="n">ZA</span> <span class="o">=</span> <span class="n">pauli_mul</span><span class="p">(</span><span class="n">pauli_1q</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">pauli_1q</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">ZB</span> <span class="o">=</span> <span class="n">pauli_mul</span><span class="p">(</span><span class="n">pauli_1q</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">pauli_1q</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+
+<span class="c1"># Prepare also the ancilla condition: require commutes(p, ancZ)</span>
+
+<span class="c1"># Evaluate all single-error patterns to verify FT property</span>
+<span class="n">single_bad</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># tuples (gate_index, error_index) that cause accepted-but-wrong</span>
+<span class="n">single_accept</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">single_accept_wrong</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">single_total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">):</span>  <span class="c1"># gate index 1..5</span>
+    <span class="k">for</span> <span class="n">e_idx</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">error_sets</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="c1"># propagate</span>
+        <span class="n">p_final</span> <span class="o">=</span> <span class="n">propagate_error_after_cnot</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+        <span class="c1"># acceptance: commute with Sx, Sz, ancZ</span>
+        <span class="n">acc</span> <span class="o">=</span> <span class="n">commutes</span><span class="p">(</span><span class="n">p_final</span><span class="p">,</span> <span class="n">Sx</span><span class="p">)</span> <span class="ow">and</span> <span class="n">commutes</span><span class="p">(</span><span class="n">p_final</span><span class="p">,</span> <span class="n">Sz</span><span class="p">)</span> <span class="ow">and</span> <span class="n">commutes</span><span class="p">(</span><span class="n">p_final</span><span class="p">,</span> <span class="n">ancZ</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">acc</span><span class="p">:</span>
+            <span class="n">single_accept</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="c1"># target: also commute with ZA and ZB</span>
+            <span class="n">ok</span> <span class="o">=</span> <span class="n">commutes</span><span class="p">(</span><span class="n">p_final</span><span class="p">,</span> <span class="n">ZA</span><span class="p">)</span> <span class="ow">and</span> <span class="n">commutes</span><span class="p">(</span><span class="n">p_final</span><span class="p">,</span> <span class="n">ZB</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">ok</span><span class="p">:</span>
+                <span class="n">single_accept_wrong</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">single_bad</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">i</span><span class="p">,</span><span class="n">e_idx</span><span class="p">))</span>
+        <span class="n">single_total</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Single-error patterns total:&#39;</span><span class="p">,</span> <span class="n">single_total</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Accepted:&#39;</span><span class="p">,</span> <span class="n">single_accept</span><span class="p">,</span> <span class="s1">&#39;Accepted &amp; wrong:&#39;</span><span class="p">,</span> <span class="n">single_accept_wrong</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Examples (gate, errindex):&#39;</span><span class="p">,</span> <span class="n">single_bad</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
+
+<span class="c1"># Now enumerate all pairs of errors (i&lt;j) and count malignant pairs</span>
+<span class="n">malignant_pairs</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">accepted_pairs</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">pairs_total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">):</span>
+        <span class="n">errs_i</span> <span class="o">=</span> <span class="n">error_sets</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">errs_j</span> <span class="o">=</span> <span class="n">error_sets</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">p_i</span> <span class="ow">in</span> <span class="n">errs_i</span><span class="p">:</span>
+            <span class="n">pi_final</span> <span class="o">=</span> <span class="n">propagate_error_after_cnot</span><span class="p">(</span><span class="n">p_i</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">p_j</span> <span class="ow">in</span> <span class="n">errs_j</span><span class="p">:</span>
+                <span class="n">pj_final</span> <span class="o">=</span> <span class="n">propagate_error_after_cnot</span><span class="p">(</span><span class="n">p_j</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+                <span class="c1"># net Pauli is product</span>
+                <span class="n">p_net</span> <span class="o">=</span> <span class="n">pauli_mul</span><span class="p">(</span><span class="n">pi_final</span><span class="p">,</span> <span class="n">pj_final</span><span class="p">)</span>
+                <span class="n">acc</span> <span class="o">=</span> <span class="n">commutes</span><span class="p">(</span><span class="n">p_net</span><span class="p">,</span> <span class="n">Sx</span><span class="p">)</span> <span class="ow">and</span> <span class="n">commutes</span><span class="p">(</span><span class="n">p_net</span><span class="p">,</span> <span class="n">Sz</span><span class="p">)</span> <span class="ow">and</span> <span class="n">commutes</span><span class="p">(</span><span class="n">p_net</span><span class="p">,</span> <span class="n">ancZ</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">acc</span><span class="p">:</span>
+                    <span class="n">accepted_pairs</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="n">ok</span> <span class="o">=</span> <span class="n">commutes</span><span class="p">(</span><span class="n">p_net</span><span class="p">,</span> <span class="n">ZA</span><span class="p">)</span> <span class="ow">and</span> <span class="n">commutes</span><span class="p">(</span><span class="n">p_net</span><span class="p">,</span> <span class="n">ZB</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">ok</span><span class="p">:</span>
+                        <span class="n">malignant_pairs</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">pairs_total</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Pairs total:&#39;</span><span class="p">,</span> <span class="n">pairs_total</span><span class="p">,</span> <span class="s1">&#39;Accepted pairs:&#39;</span><span class="p">,</span> <span class="n">accepted_pairs</span><span class="p">,</span> <span class="s1">&#39;Malignant pairs:&#39;</span><span class="p">,</span> <span class="n">malignant_pairs</span><span class="p">)</span>
+</code></pre></div>
+                      </div>
+                    </details>
+</article>
+
+
+<article class="message role-tool">
+    <div class="meta">
+        <span class="badge">Tool</span>
+        <span class="idx">#3</span>
+    </div>
+    <div class="content markdown-body"><div class="codehilite"><pre><span></span><code>Single-error patterns total: 75
+Accepted: 7 Accepted &amp; wrong: 0
+Examples (gate, errindex): []
+Pairs total: 2250 Accepted pairs: 282 Malignant pairs: 144
+</code></pre></div></div>
+</article>
+
+
+<article class="message role-assistant">
+    <div class="meta">
+        <span class="badge">Assistant</span>
+        <span class="idx">#4</span>
+    </div>
+    
+                    <details class="tool-call">
+                      <summary>Tool Call <span class="tag">(code to execute)</span></summary>
+                      <div class="markdown-body tool-call-body">
+                        <div class="codehilite"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span>
+
+<span class="c1"># We&#39;ll reuse the symplectic functions defined earlier by re-defining here.</span>
+
+<span class="n">total_qubits</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">pauli_1q</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">total_qubits</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">total_qubits</span>
+    <span class="k">if</span> <span class="n">label</span> <span class="o">==</span> <span class="s1">&#39;I&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">z</span><span class="p">,</span> <span class="n">x</span>
+    <span class="k">if</span> <span class="n">label</span> <span class="o">==</span> <span class="s1">&#39;X&#39;</span><span class="p">:</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">q</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">elif</span> <span class="n">label</span> <span class="o">==</span> <span class="s1">&#39;Z&#39;</span><span class="p">:</span>
+        <span class="n">z</span><span class="p">[</span><span class="n">q</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">elif</span> <span class="n">label</span> <span class="o">==</span> <span class="s1">&#39;Y&#39;</span><span class="p">:</span>
+        <span class="n">z</span><span class="p">[</span><span class="n">q</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">q</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;bad label&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">z</span><span class="p">,</span> <span class="n">x</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">pauli_mul</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">):</span>
+    <span class="n">z1</span><span class="p">,</span><span class="n">x1</span> <span class="o">=</span> <span class="n">p1</span>
+    <span class="n">z2</span><span class="p">,</span><span class="n">x2</span> <span class="o">=</span> <span class="n">p2</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="p">[(</span><span class="n">a</span><span class="o">^</span><span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">z1</span><span class="p">,</span><span class="n">z2</span><span class="p">)]</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="p">[(</span><span class="n">a</span><span class="o">^</span><span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">conj_H</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
+    <span class="n">z</span><span class="p">,</span><span class="n">x</span> <span class="o">=</span> <span class="n">p</span>
+    <span class="n">z2</span> <span class="o">=</span> <span class="n">z</span><span class="p">[:]</span>
+    <span class="n">x2</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:]</span>
+    <span class="n">z2</span><span class="p">[</span><span class="n">q</span><span class="p">],</span> <span class="n">x2</span><span class="p">[</span><span class="n">q</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">q</span><span class="p">],</span> <span class="n">z</span><span class="p">[</span><span class="n">q</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">z2</span><span class="p">,</span><span class="n">x2</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">conj_CNOT</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="n">z</span><span class="p">,</span><span class="n">x</span> <span class="o">=</span> <span class="n">p</span>
+    <span class="n">z2</span> <span class="o">=</span> <span class="n">z</span><span class="p">[:]</span>
+    <span class="n">x2</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:]</span>
+    <span class="n">xc</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">c</span><span class="p">]</span>
+    <span class="n">xt</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
+    <span class="n">zc</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="n">c</span><span class="p">]</span>
+    <span class="n">zt</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
+    <span class="n">x2</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">xc</span>
+    <span class="n">x2</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">xt</span> <span class="o">^</span> <span class="n">xc</span>
+    <span class="n">z2</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">zc</span> <span class="o">^</span> <span class="n">zt</span>
+    <span class="n">z2</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">zt</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">z2</span><span class="p">,</span><span class="n">x2</span><span class="p">)</span>
+
+<span class="c1"># gate sequence (CNOTs only, H is before all CNOTs so doesn&#39;t affect forward propagation)</span>
+<span class="n">cnots</span> <span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span> <span class="p">]</span>
+
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;I&#39;</span><span class="p">,</span><span class="s1">&#39;X&#39;</span><span class="p">,</span><span class="s1">&#39;Y&#39;</span><span class="p">,</span><span class="s1">&#39;Z&#39;</span><span class="p">]</span>
+
+<span class="c1"># For each cnot gate we precompute the 16 choices (including identity) of local two-qubit errors and their propagated versions</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">two_qubit_paulis_on_pair_including_I</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">choices</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">pa</span> <span class="ow">in</span> <span class="n">labels</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">pb</span> <span class="ow">in</span> <span class="n">labels</span><span class="p">:</span>
+            <span class="n">z_a</span><span class="p">,</span> <span class="n">x_a</span> <span class="o">=</span> <span class="n">pauli_1q</span><span class="p">(</span><span class="n">pa</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+            <span class="n">z_b</span><span class="p">,</span> <span class="n">x_b</span> <span class="o">=</span> <span class="n">pauli_1q</span><span class="p">(</span><span class="n">pb</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+            <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pauli_mul</span><span class="p">((</span><span class="n">z_a</span><span class="p">,</span><span class="n">x_a</span><span class="p">),(</span><span class="n">z_b</span><span class="p">,</span><span class="n">x_b</span><span class="p">)))</span>
+            <span class="n">choices</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">pa</span><span class="p">,</span><span class="n">pb</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">res</span><span class="p">,</span> <span class="n">choices</span>
+
+<span class="n">prop_errors_per_gate</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># list of lists of 16 propagated Paulis</span>
+<span class="k">for</span> <span class="n">gi</span><span class="p">,(</span><span class="n">c</span><span class="p">,</span><span class="n">t</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">cnots</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="c1"># build the 16 errors on this pair (including II)</span>
+    <span class="n">errs</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">two_qubit_paulis_on_pair_including_I</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+    <span class="c1"># propagate each one forward through gates gi..end</span>
+    <span class="n">propagated</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">errs</span><span class="p">:</span>
+        <span class="n">pcur</span> <span class="o">=</span> <span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">][:],</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">][:])</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">gi</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">cnots</span><span class="p">)):</span>
+            <span class="n">cc</span><span class="p">,</span><span class="n">tt</span> <span class="o">=</span> <span class="n">cnots</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="n">pcur</span> <span class="o">=</span> <span class="n">conj_CNOT</span><span class="p">(</span><span class="n">pcur</span><span class="p">,</span> <span class="n">cc</span><span class="p">,</span> <span class="n">tt</span><span class="p">)</span>
+        <span class="n">propagated</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pcur</span><span class="p">)</span>
+    <span class="n">prop_errors_per_gate</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">propagated</span><span class="p">)</span>
+
+<span class="c1"># acceptance and target checks</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">commutes</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
+    <span class="n">z</span><span class="p">,</span><span class="n">x</span> <span class="o">=</span> <span class="n">p</span>
+    <span class="n">zq</span><span class="p">,</span><span class="n">xq</span> <span class="o">=</span> <span class="n">q</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">total_qubits</span><span class="p">):</span>
+        <span class="n">s</span> <span class="o">^=</span> <span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&amp;</span> <span class="n">xq</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">^</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&amp;</span> <span class="n">zq</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">s</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Stabilizers</span>
+<span class="n">Sx</span> <span class="o">=</span> <span class="n">pauli_mul</span><span class="p">(</span><span class="n">pauli_1q</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">pauli_1q</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">Sx</span> <span class="o">=</span> <span class="n">pauli_mul</span><span class="p">(</span><span class="n">Sx</span><span class="p">,</span> <span class="n">pauli_1q</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">Sx</span> <span class="o">=</span> <span class="n">pauli_mul</span><span class="p">(</span><span class="n">Sx</span><span class="p">,</span> <span class="n">pauli_1q</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">Sz</span> <span class="o">=</span> <span class="n">pauli_mul</span><span class="p">(</span><span class="n">pauli_1q</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">pauli_1q</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">Sz</span> <span class="o">=</span> <span class="n">pauli_mul</span><span class="p">(</span><span class="n">Sz</span><span class="p">,</span> <span class="n">pauli_1q</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">Sz</span> <span class="o">=</span> <span class="n">pauli_mul</span><span class="p">(</span><span class="n">Sz</span><span class="p">,</span> <span class="n">pauli_1q</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">ancZ</span> <span class="o">=</span> <span class="n">pauli_1q</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="c1"># logical Zs per problem</span>
+<span class="n">ZA</span> <span class="o">=</span> <span class="n">pauli_mul</span><span class="p">(</span><span class="n">pauli_1q</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">pauli_1q</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">ZB</span> <span class="o">=</span> <span class="n">pauli_mul</span><span class="p">(</span><span class="n">pauli_1q</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">pauli_1q</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+
+<span class="c1"># We&#39;ll propagate across 5 gates using dynamic programming; we track counts by number of non-identity errors k.</span>
+<span class="c1"># At each gate, choice j in 0..15 is a two-qubit Pauli; we define weight_k_add = 0 if II else 1.</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
+
+<span class="c1"># mapping from Pauli -&gt; counts[0..5]</span>
+<span class="n">M</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="c1"># start with identity (no error)</span>
+<span class="n">I5</span> <span class="o">=</span> <span class="p">([</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">5</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">M</span><span class="p">[</span><span class="n">I5</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="k">for</span> <span class="n">gate_idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">newM</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">prop_list</span> <span class="o">=</span> <span class="n">prop_errors_per_gate</span><span class="p">[</span><span class="n">gate_idx</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">p_prev</span><span class="p">,</span> <span class="n">counts</span> <span class="ow">in</span> <span class="n">M</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">choice_idx</span><span class="p">,</span> <span class="n">p_prop</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">prop_list</span><span class="p">):</span>
+            <span class="c1"># whether this choice is identity on the local pair originally:</span>
+            <span class="c1"># The original error set included identity only when labels (&#39;I&#39;,&#39;I&#39;); that&#39;s choice index 0.</span>
+            <span class="n">k_add</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">choice_idx</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">1</span>
+            <span class="n">p_new</span> <span class="o">=</span> <span class="n">pauli_mul</span><span class="p">(</span><span class="n">p_prev</span><span class="p">,</span> <span class="n">p_prop</span><span class="p">)</span>
+            <span class="n">arr</span> <span class="o">=</span> <span class="n">newM</span><span class="p">[</span><span class="n">p_new</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="o">-</span><span class="n">k_add</span><span class="p">):</span>
+                <span class="n">arr</span><span class="p">[</span><span class="n">k</span> <span class="o">+</span> <span class="n">k_add</span><span class="p">]</span> <span class="o">+=</span> <span class="n">counts</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+            <span class="n">newM</span><span class="p">[</span><span class="n">p_new</span><span class="p">]</span> <span class="o">=</span> <span class="n">arr</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">newM</span>
+
+<span class="c1"># Now compute S_k for numerator and denominator</span>
+<span class="n">S_num</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">6</span>
+<span class="n">S_den</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">6</span>
+
+<span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">counts</span> <span class="ow">in</span> <span class="n">M</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="c1"># acceptance condition</span>
+    <span class="n">acc</span> <span class="o">=</span> <span class="n">commutes</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">Sx</span><span class="p">)</span> <span class="ow">and</span> <span class="n">commutes</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">Sz</span><span class="p">)</span> <span class="ow">and</span> <span class="n">commutes</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">ancZ</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">acc</span><span class="p">:</span>
+        <span class="c1"># accepted contributes to denominator</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
+            <span class="n">S_den</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">+=</span> <span class="n">counts</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+        <span class="c1"># for numerator we also need target: commute with ZA and ZB</span>
+        <span class="n">ok</span> <span class="o">=</span> <span class="n">commutes</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">ZA</span><span class="p">)</span> <span class="ow">and</span> <span class="n">commutes</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">ZB</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ok</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
+                <span class="n">S_num</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">+=</span> <span class="n">counts</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;S_den counts by k:&#39;</span><span class="p">,</span> <span class="n">S_den</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;S_num counts by k:&#39;</span><span class="p">,</span> <span class="n">S_num</span><span class="p">)</span>
+
+<span class="c1"># From these S counts, build exact polynomials N(p) and D(p)</span>
+<span class="c1"># N(p) = sum_k S_num[k] * (p/15)^k * (1-p)^(5-k)</span>
+<span class="c1"># D(p) = sum_k S_den[k] * (p/15)^k * (1-p)^(5-k)</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">fractions</span><span class="w"> </span><span class="kn">import</span> <span class="n">Fraction</span>
+
+<span class="c1"># We&#39;ll compute coefficients of N(p) and D(p) as polynomials in p (degree 5) by expanding (1-p)^(5-k)</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+
+<span class="c1"># Precompute binomial coefficients</span>
+<span class="n">binom</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">6</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">)]</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="c1"># compute C(n,r)</span>
+        <span class="c1"># simple</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+        <span class="n">binom</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="n">r</span><span class="p">]</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">comb</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">r</span><span class="p">)</span>
+
+<span class="c1"># We&#39;ll produce rational coefficients for polynomials N(p) and D(p)</span>
+<span class="c1"># N(p) = sum_{k=0}^5 S_num[k] * (p/15)^k * sum_{r=0}^{5-k} C(5-k,r) (1)^{5-k-r} (-p)^r</span>
+<span class="c1">#     = sum_{k} S_num[k] * (1/15^k) * sum_{r} C(5-k,r) (-1)^r p^{k+r}</span>
+<span class="c1"># Let m = k+r</span>
+
+<span class="n">maxdeg</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">coeff_N</span> <span class="o">=</span> <span class="p">[</span><span class="n">Fraction</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maxdeg</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+<span class="n">coeff_D</span> <span class="o">=</span> <span class="p">[</span><span class="n">Fraction</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maxdeg</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
+    <span class="n">sN</span> <span class="o">=</span> <span class="n">S_num</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+    <span class="n">sD</span> <span class="o">=</span> <span class="n">S_den</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="o">-</span><span class="n">k</span><span class="p">):</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">k</span> <span class="o">+</span> <span class="n">r</span>
+        <span class="n">coeff</span> <span class="o">=</span> <span class="n">Fraction</span><span class="p">(((</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="n">r</span><span class="p">)</span> <span class="o">*</span> <span class="n">binom</span><span class="p">[</span><span class="mi">5</span><span class="o">-</span><span class="n">k</span><span class="p">][</span><span class="n">r</span><span class="p">],</span> <span class="mi">15</span><span class="o">**</span><span class="n">k</span><span class="p">)</span>
+        <span class="n">coeff_N</span><span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="o">+=</span> <span class="n">Fraction</span><span class="p">(</span><span class="n">sN</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">coeff</span>
+        <span class="n">coeff_D</span><span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="o">+=</span> <span class="n">Fraction</span><span class="p">(</span><span class="n">sD</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">coeff</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Polynomial coefficients (N):&#39;</span><span class="p">,</span> <span class="n">coeff_N</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Polynomial coefficients (D):&#39;</span><span class="p">,</span> <span class="n">coeff_D</span><span class="p">)</span>
+
+<span class="c1"># Also compute series expansion of F(p) = N/D up to p^5 by formal series division</span>
+<span class="c1"># We&#39;ll compute rational coefficients a0..a5 such that F = a0 + a1 p + ... + a5 p^5</span>
+
+<span class="c1"># We&#39;ll do power series division with rational arithmetic</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">coeff_N</span><span class="p">[:]</span>  <span class="c1"># numerator</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">coeff_D</span><span class="p">[:]</span>  <span class="c1"># denominator</span>
+
+<span class="c1"># series division: find c such that a = b * c; c degrees up to 5</span>
+<span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="n">Fraction</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">)]</span>
+<span class="c1"># assume b0 != 0</span>
+<span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">):</span>
+    <span class="c1"># a_n = sum_{j=0}^n b_j c_{n-j}</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">Fraction</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">s</span> <span class="o">+=</span> <span class="n">b</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="n">c</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="n">j</span><span class="p">]</span>
+    <span class="n">c</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">-</span> <span class="n">s</span><span class="p">)</span> <span class="o">/</span> <span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Series coefficients for F(p):&#39;</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+
+<span class="c1"># Also provide decimal approximations for readability</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;F(p) ~&#39;</span><span class="p">,</span> <span class="s1">&#39; + &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="nb">float</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="si">:</span><span class="s1">+.12f</span><span class="si">}</span><span class="s1"> p^</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">if</span> <span class="n">i</span><span class="o">&gt;</span><span class="mi">0</span> <span class="k">else</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="nb">float</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="si">:</span><span class="s1">.12f</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">)]))</span>
+</code></pre></div>
+                      </div>
+                    </details>
+</article>
+
+
+<article class="message role-tool">
+    <div class="meta">
+        <span class="badge">Tool</span>
+        <span class="idx">#5</span>
+    </div>
+    <div class="content markdown-body"><div class="codehilite"><pre><span></span><code><span class="nx">Traceback</span><span class="w"> </span><span class="p">(</span><span class="nx">most</span><span class="w"> </span><span class="nx">recent</span><span class="w"> </span><span class="nx">call</span><span class="w"> </span><span class="nx">last</span><span class="p">):</span>
+<span class="w">  </span><span class="nx">File</span><span class="w"> </span><span class="s">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">line</span><span class="w"> </span><span class="mi">118</span><span class="p">,</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">&lt;</span><span class="nx">module</span><span class="p">&gt;</span>
+<span class="nx">TypeError</span><span class="p">:</span><span class="w"> </span><span class="nx">unhashable</span><span class="w"> </span><span class="k">type</span><span class="p">:</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">list</span><span class="err">&#39;</span>
+</code></pre></div></div>
+</article>
+
+
+<article class="message role-assistant">
+    <div class="meta">
+        <span class="badge">Assistant</span>
+        <span class="idx">#6</span>
+    </div>
+    
+                    <details class="tool-call">
+                      <summary>Tool Call <span class="tag">(code to execute)</span></summary>
+                      <div class="markdown-body tool-call-body">
+                        <div class="codehilite"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fractions</span><span class="w"> </span><span class="kn">import</span> <span class="n">Fraction</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+
+<span class="n">total_qubits</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">pauli_1q</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">total_qubits</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">total_qubits</span>
+    <span class="k">if</span> <span class="n">label</span> <span class="o">==</span> <span class="s1">&#39;I&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">z</span><span class="p">,</span> <span class="n">x</span>
+    <span class="k">if</span> <span class="n">label</span> <span class="o">==</span> <span class="s1">&#39;X&#39;</span><span class="p">:</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">q</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">elif</span> <span class="n">label</span> <span class="o">==</span> <span class="s1">&#39;Z&#39;</span><span class="p">:</span>
+        <span class="n">z</span><span class="p">[</span><span class="n">q</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">elif</span> <span class="n">label</span> <span class="o">==</span> <span class="s1">&#39;Y&#39;</span><span class="p">:</span>
+        <span class="n">z</span><span class="p">[</span><span class="n">q</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">q</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;bad label&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">z</span><span class="p">,</span> <span class="n">x</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">pauli_mul</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">):</span>
+    <span class="n">z1</span><span class="p">,</span><span class="n">x1</span> <span class="o">=</span> <span class="n">p1</span>
+    <span class="n">z2</span><span class="p">,</span><span class="n">x2</span> <span class="o">=</span> <span class="n">p2</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">((</span><span class="n">a</span><span class="o">^</span><span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">z1</span><span class="p">,</span><span class="n">z2</span><span class="p">))</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">((</span><span class="n">a</span><span class="o">^</span><span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="p">))</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">conj_CNOT</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="n">z</span><span class="p">,</span><span class="n">x</span> <span class="o">=</span> <span class="n">p</span>
+    <span class="n">z</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">z</span><span class="p">);</span> <span class="n">x</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">xc</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">c</span><span class="p">]</span>
+    <span class="n">xt</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
+    <span class="n">zc</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="n">c</span><span class="p">]</span>
+    <span class="n">zt</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
+    <span class="n">x</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">xc</span>
+    <span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">xt</span> <span class="o">^</span> <span class="n">xc</span>
+    <span class="n">z</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">zc</span> <span class="o">^</span> <span class="n">zt</span>
+    <span class="n">z</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">zt</span>
+    <span class="k">return</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">z</span><span class="p">),</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+
+<span class="c1"># Gate sequence</span>
+<span class="n">cnots</span> <span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span> <span class="p">]</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;I&#39;</span><span class="p">,</span><span class="s1">&#39;X&#39;</span><span class="p">,</span><span class="s1">&#39;Y&#39;</span><span class="p">,</span><span class="s1">&#39;Z&#39;</span><span class="p">]</span>
+
+<span class="c1"># Build error sets per gate with propogation forward through subsequent gates</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">two_qubit_paulis_on_pair_including_I</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">pa</span> <span class="ow">in</span> <span class="n">labels</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">pb</span> <span class="ow">in</span> <span class="n">labels</span><span class="p">:</span>
+            <span class="n">z_a</span><span class="p">,</span> <span class="n">x_a</span> <span class="o">=</span> <span class="n">pauli_1q</span><span class="p">(</span><span class="n">pa</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+            <span class="n">z_b</span><span class="p">,</span> <span class="n">x_b</span> <span class="o">=</span> <span class="n">pauli_1q</span><span class="p">(</span><span class="n">pb</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+            <span class="c1"># convert lists to tuples for hashing</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">pauli_mul</span><span class="p">((</span><span class="nb">tuple</span><span class="p">(</span><span class="n">z_a</span><span class="p">),</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">x_a</span><span class="p">)),</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">z_b</span><span class="p">),</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">x_b</span><span class="p">)))</span>
+            <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">res</span>
+
+<span class="n">prop_errors_per_gate</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">gi</span><span class="p">,(</span><span class="n">c</span><span class="p">,</span><span class="n">t</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">cnots</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">errs</span> <span class="o">=</span> <span class="n">two_qubit_paulis_on_pair_including_I</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+    <span class="n">propagated</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">errs</span><span class="p">:</span>
+        <span class="n">pcur</span> <span class="o">=</span> <span class="n">p</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">gi</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">cnots</span><span class="p">)):</span>
+            <span class="n">cc</span><span class="p">,</span><span class="n">tt</span> <span class="o">=</span> <span class="n">cnots</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="n">pcur</span> <span class="o">=</span> <span class="n">conj_CNOT</span><span class="p">(</span><span class="n">pcur</span><span class="p">,</span> <span class="n">cc</span><span class="p">,</span> <span class="n">tt</span><span class="p">)</span>
+        <span class="n">propagated</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pcur</span><span class="p">)</span>
+    <span class="n">prop_errors_per_gate</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">propagated</span><span class="p">)</span>
+
+<span class="c1"># Stabilizers and logical Zs</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">pauli_1q_tuple</span><span class="p">(</span><span class="n">label</span><span class="p">,</span><span class="n">q</span><span class="p">):</span>
+    <span class="n">z</span><span class="p">,</span><span class="n">x</span> <span class="o">=</span> <span class="n">pauli_1q</span><span class="p">(</span><span class="n">label</span><span class="p">,</span><span class="n">q</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">z</span><span class="p">),</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+
+<span class="n">Sx</span> <span class="o">=</span> <span class="n">pauli_mul</span><span class="p">(</span><span class="n">pauli_1q_tuple</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">pauli_1q_tuple</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">Sx</span> <span class="o">=</span> <span class="n">pauli_mul</span><span class="p">(</span><span class="n">Sx</span><span class="p">,</span> <span class="n">pauli_1q_tuple</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">Sx</span> <span class="o">=</span> <span class="n">pauli_mul</span><span class="p">(</span><span class="n">Sx</span><span class="p">,</span> <span class="n">pauli_1q_tuple</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">Sz</span> <span class="o">=</span> <span class="n">pauli_mul</span><span class="p">(</span><span class="n">pauli_1q_tuple</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">pauli_1q_tuple</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">Sz</span> <span class="o">=</span> <span class="n">pauli_mul</span><span class="p">(</span><span class="n">Sz</span><span class="p">,</span> <span class="n">pauli_1q_tuple</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">Sz</span> <span class="o">=</span> <span class="n">pauli_mul</span><span class="p">(</span><span class="n">Sz</span><span class="p">,</span> <span class="n">pauli_1q_tuple</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">ancZ</span> <span class="o">=</span> <span class="n">pauli_1q_tuple</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">ZA</span> <span class="o">=</span> <span class="n">pauli_mul</span><span class="p">(</span><span class="n">pauli_1q_tuple</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">pauli_1q_tuple</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">ZB</span> <span class="o">=</span> <span class="n">pauli_mul</span><span class="p">(</span><span class="n">pauli_1q_tuple</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">pauli_1q_tuple</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+
+<span class="c1"># Commutation check via symplectic product</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">commutes</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
+    <span class="n">z</span><span class="p">,</span><span class="n">x</span> <span class="o">=</span> <span class="n">p</span>
+    <span class="n">zq</span><span class="p">,</span><span class="n">xq</span> <span class="o">=</span> <span class="n">q</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">total_qubits</span><span class="p">):</span>
+        <span class="n">s</span> <span class="o">^=</span> <span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&amp;</span> <span class="n">xq</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">^</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&amp;</span> <span class="n">zq</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">s</span> <span class="o">==</span> <span class="mi">0</span>
+
+<span class="c1"># Dynamic propagation counts</span>
+<span class="n">M</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">I5</span> <span class="o">=</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">([</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">5</span><span class="p">),</span> <span class="nb">tuple</span><span class="p">([</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">M</span><span class="p">[</span><span class="n">I5</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="k">for</span> <span class="n">gate_idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">newM</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">prop_list</span> <span class="o">=</span> <span class="n">prop_errors_per_gate</span><span class="p">[</span><span class="n">gate_idx</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">p_prev</span><span class="p">,</span> <span class="n">counts</span> <span class="ow">in</span> <span class="n">M</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">choice_idx</span><span class="p">,</span> <span class="n">p_prop</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">prop_list</span><span class="p">):</span>
+            <span class="n">k_add</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">choice_idx</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">1</span>
+            <span class="n">p_new</span> <span class="o">=</span> <span class="n">pauli_mul</span><span class="p">(</span><span class="n">p_prev</span><span class="p">,</span> <span class="n">p_prop</span><span class="p">)</span>
+            <span class="n">arr</span> <span class="o">=</span> <span class="n">newM</span><span class="p">[</span><span class="n">p_new</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="o">-</span><span class="n">k_add</span><span class="p">):</span>
+                <span class="n">arr</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="n">k_add</span><span class="p">]</span> <span class="o">+=</span> <span class="n">counts</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+            <span class="n">newM</span><span class="p">[</span><span class="n">p_new</span><span class="p">]</span> <span class="o">=</span> <span class="n">arr</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">newM</span>
+
+<span class="n">S_num</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">6</span>
+<span class="n">S_den</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">6</span>
+
+<span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">counts</span> <span class="ow">in</span> <span class="n">M</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">acc</span> <span class="o">=</span> <span class="n">commutes</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">Sx</span><span class="p">)</span> <span class="ow">and</span> <span class="n">commutes</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">Sz</span><span class="p">)</span> <span class="ow">and</span> <span class="n">commutes</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">ancZ</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">acc</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
+            <span class="n">S_den</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">+=</span> <span class="n">counts</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+        <span class="n">ok</span> <span class="o">=</span> <span class="n">commutes</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">ZA</span><span class="p">)</span> <span class="ow">and</span> <span class="n">commutes</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">ZB</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ok</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
+                <span class="n">S_num</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">+=</span> <span class="n">counts</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;S_den counts by k:&#39;</span><span class="p">,</span> <span class="n">S_den</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;S_num counts by k:&#39;</span><span class="p">,</span> <span class="n">S_num</span><span class="p">)</span>
+
+<span class="c1"># Build polynomial coefficients</span>
+<span class="n">binom</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">6</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">)]</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">binom</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="n">r</span><span class="p">]</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">comb</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">r</span><span class="p">)</span>
+
+<span class="n">coeff_N</span> <span class="o">=</span> <span class="p">[</span><span class="n">Fraction</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">)]</span>
+<span class="n">coeff_D</span> <span class="o">=</span> <span class="p">[</span><span class="n">Fraction</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">)]</span>
+
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
+    <span class="n">sN</span> <span class="o">=</span> <span class="n">S_num</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+    <span class="n">sD</span> <span class="o">=</span> <span class="n">S_den</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="o">-</span><span class="n">k</span><span class="p">):</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">k</span> <span class="o">+</span> <span class="n">r</span>
+        <span class="n">coeff</span> <span class="o">=</span> <span class="n">Fraction</span><span class="p">(((</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="n">r</span><span class="p">)</span> <span class="o">*</span> <span class="n">binom</span><span class="p">[</span><span class="mi">5</span><span class="o">-</span><span class="n">k</span><span class="p">][</span><span class="n">r</span><span class="p">],</span> <span class="mi">15</span><span class="o">**</span><span class="n">k</span><span class="p">)</span>
+        <span class="n">coeff_N</span><span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="o">+=</span> <span class="n">Fraction</span><span class="p">(</span><span class="n">sN</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">coeff</span>
+        <span class="n">coeff_D</span><span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="o">+=</span> <span class="n">Fraction</span><span class="p">(</span><span class="n">sD</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">coeff</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;N coeffs:&#39;</span><span class="p">,</span> <span class="n">coeff_N</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;D coeffs:&#39;</span><span class="p">,</span> <span class="n">coeff_D</span><span class="p">)</span>
+
+<span class="c1"># Series expansion of F(p) = N/D up to degree 5</span>
+<span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="n">Fraction</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">)]</span>
+<span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">coeff_N</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">coeff_D</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">):</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">Fraction</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">s</span> <span class="o">+=</span> <span class="n">coeff_D</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="n">c</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="n">j</span><span class="p">]</span>
+    <span class="n">c</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">coeff_N</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">-</span> <span class="n">s</span><span class="p">)</span> <span class="o">/</span> <span class="n">coeff_D</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Series coeffs c_n:&#39;</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Series decimal:&#39;</span><span class="p">,</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">ci</span><span class="p">)</span> <span class="k">for</span> <span class="n">ci</span> <span class="ow">in</span> <span class="n">c</span><span class="p">])</span>
+
+<span class="c1"># Also produce simplified polynomials numerically with high precision for readability</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">dec</span>
+<span class="n">getcontext</span> <span class="o">=</span> <span class="n">dec</span><span class="o">.</span><span class="n">getcontext</span>
+<span class="n">getcontext</span><span class="p">()</span><span class="o">.</span><span class="n">prec</span> <span class="o">=</span> <span class="mi">50</span>
+
+<span class="c1"># Evaluate sample values for sanity</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">poly_eval</span><span class="p">(</span><span class="n">coeffs</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+    <span class="c1"># coeffs is list length 6 representing sum coeffs[n] p^n</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">dec</span><span class="o">.</span><span class="n">Decimal</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">dec</span><span class="o">.</span><span class="n">Decimal</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+    <span class="n">pw</span> <span class="o">=</span> <span class="n">dec</span><span class="o">.</span><span class="n">Decimal</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
+        <span class="n">s</span> <span class="o">+=</span> <span class="n">dec</span><span class="o">.</span><span class="n">Decimal</span><span class="p">(</span><span class="n">coeffs</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">numerator</span><span class="p">)</span> <span class="o">/</span> <span class="n">dec</span><span class="o">.</span><span class="n">Decimal</span><span class="p">(</span><span class="n">coeffs</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">denominator</span><span class="p">)</span> <span class="o">*</span> <span class="n">pw</span>
+        <span class="n">pw</span> <span class="o">*=</span> <span class="n">P</span>
+    <span class="k">return</span> <span class="n">s</span>
+
+<span class="c1"># compute N and D expansions into decimal strings</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;N polynomial:&#39;</span><span class="p">,</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="nb">float</span><span class="p">(</span><span class="n">coeff_N</span><span class="p">[</span><span class="n">n</span><span class="p">])</span><span class="si">:</span><span class="s1">+.12e</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">)])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;D polynomial:&#39;</span><span class="p">,</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="nb">float</span><span class="p">(</span><span class="n">coeff_D</span><span class="p">[</span><span class="n">n</span><span class="p">])</span><span class="si">:</span><span class="s1">+.12e</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">)])</span>
+</code></pre></div>
+                      </div>
+                    </details>
+</article>
+
+
+<article class="message role-tool">
+    <div class="meta">
+        <span class="badge">Tool</span>
+        <span class="idx">#7</span>
+    </div>
+    <div class="content markdown-body"><div class="codehilite"><pre><span></span><code>S_den counts by k: [1, 7, 282, 4222, 31637, 94923]
+S_num counts by k: [1, 7, 138, 1198, 7397, 24027]
+N coeffs: [Fraction(1, 1), Fraction(-68, 15), Fraction(656, 75), Fraction(-29312, 3375), Fraction(223232, 50625), Fraction(-229376, 253125)]
+D coeffs: [Fraction(1, 1), Fraction(-68, 15), Fraction(704, 75), Fraction(-32768, 3375), Fraction(253952, 50625), Fraction(-262144, 253125)]
+Series coeffs c_n: [Fraction(1, 1), Fraction(0, 1), Fraction(-16, 25), Fraction(-704, 375), Fraction(-10496, 3375), Fraction(-216064, 84375)]
+Series decimal: [1.0, 0.0, -0.64, -1.8773333333333333, -3.1099259259259258, -2.5607585185185187]
+N polynomial: [&#39;+1.000000000000e+00&#39;, &#39;-4.533333333333e+00&#39;, &#39;+8.746666666667e+00&#39;, &#39;-8.685037037037e+00&#39;, &#39;+4.409520987654e+00&#39;, &#39;-9.061767901235e-01&#39;]
+D polynomial: [&#39;+1.000000000000e+00&#39;, &#39;-4.533333333333e+00&#39;, &#39;+9.386666666667e+00&#39;, &#39;-9.709037037037e+00&#39;, &#39;+5.016335802469e+00&#39;, &#39;-1.035630617284e+00&#39;]
+</code></pre></div></div>
+</article>
+
+
+<article class="message role-assistant">
+    <div class="meta">
+        <span class="badge">Assistant</span>
+        <span class="idx">#8</span>
+    </div>
+    
+                    <details class="tool-call">
+                      <summary>Tool Call <span class="tag">(code to execute)</span></summary>
+                      <div class="markdown-body tool-call-body">
+                        <div class="codehilite"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">fractions</span><span class="w"> </span><span class="kn">import</span> <span class="n">Fraction</span>
+
+<span class="n">coeff_N</span> <span class="o">=</span> <span class="p">[</span><span class="n">Fraction</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">Fraction</span><span class="p">(</span><span class="o">-</span><span class="mi">68</span><span class="p">,</span><span class="mi">15</span><span class="p">),</span> <span class="n">Fraction</span><span class="p">(</span><span class="mi">656</span><span class="p">,</span><span class="mi">75</span><span class="p">),</span> <span class="n">Fraction</span><span class="p">(</span><span class="o">-</span><span class="mi">29312</span><span class="p">,</span><span class="mi">3375</span><span class="p">),</span> <span class="n">Fraction</span><span class="p">(</span><span class="mi">223232</span><span class="p">,</span><span class="mi">50625</span><span class="p">),</span> <span class="n">Fraction</span><span class="p">(</span><span class="o">-</span><span class="mi">229376</span><span class="p">,</span><span class="mi">253125</span><span class="p">)]</span>
+<span class="n">coeff_D</span> <span class="o">=</span> <span class="p">[</span><span class="n">Fraction</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">Fraction</span><span class="p">(</span><span class="o">-</span><span class="mi">68</span><span class="p">,</span><span class="mi">15</span><span class="p">),</span> <span class="n">Fraction</span><span class="p">(</span><span class="mi">704</span><span class="p">,</span><span class="mi">75</span><span class="p">),</span> <span class="n">Fraction</span><span class="p">(</span><span class="o">-</span><span class="mi">32768</span><span class="p">,</span><span class="mi">3375</span><span class="p">),</span> <span class="n">Fraction</span><span class="p">(</span><span class="mi">253952</span><span class="p">,</span><span class="mi">50625</span><span class="p">),</span> <span class="n">Fraction</span><span class="p">(</span><span class="o">-</span><span class="mi">262144</span><span class="p">,</span><span class="mi">253125</span><span class="p">)]</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">poly_val</span><span class="p">(</span><span class="n">coeffs</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">pw</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">coeffs</span><span class="p">:</span>
+        <span class="n">s</span> <span class="o">+=</span> <span class="nb">float</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">*</span> <span class="n">pw</span>
+        <span class="n">pw</span> <span class="o">*=</span> <span class="n">p</span>
+    <span class="k">return</span> <span class="n">s</span>
+
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.005</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">]:</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">poly_val</span><span class="p">(</span><span class="n">coeff_N</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+    <span class="n">D</span> <span class="o">=</span> <span class="n">poly_val</span><span class="p">(</span><span class="n">coeff_D</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+    <span class="n">F</span> <span class="o">=</span> <span class="n">N</span><span class="o">/</span><span class="n">D</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">F</span><span class="p">)</span>
+</code></pre></div>
+                      </div>
+                    </details>
+</article>
+
+
+<article class="message role-tool">
+    <div class="meta">
+        <span class="badge">Tool</span>
+        <span class="idx">#9</span>
+    </div>
+    <div class="content markdown-body"><div class="codehilite"><pre><span></span><code><span class="mf">0.0</span><span class="w"> </span><span class="mf">1.0</span>
+<span class="mf">0.001</span><span class="w"> </span><span class="mf">0.999999358119554</span>
+<span class="mf">0.005</span><span class="w"> </span><span class="mf">0.9999837633816684</span>
+<span class="mf">0.01</span><span class="w"> </span><span class="mf">0.9999340913140434</span>
+<span class="mf">0.02</span><span class="w"> </span><span class="mf">0.9997284757339905</span>
+<span class="mf">0.05</span><span class="w"> </span><span class="mf">0.9981451484841417</span>
+<span class="mf">0.1</span><span class="w"> </span><span class="mf">0.9913903803885744</span>
+</code></pre></div></div>
+</article>
+
+
+<article class="message role-assistant">
+    <div class="meta">
+        <span class="badge">Assistant</span>
+        <span class="idx">#10</span>
+    </div>
+    <div class="content markdown-body"><p>1) Step-by-Step Derivation</p>
+<p>Setup and code conventions</p>
+<ul>
+<li>Physical data qubits: 0,1,2,3. Ancilla: 4.</li>
+<li>[[4,2,2]] stabilizers: Sx = XXXX and Sz = ZZZZ (on qubits 0–3). Logical Paulis (one valid choice) are
+  XA = X I X I, XB = X X I I, ZA = Z Z I I, ZB = Z I Z I, up to multiplication by stabilizers; these implement two logical qubits A,B. The codewords can be taken as the +1 eigenstates of {Sx,Sz,ZA,ZB}. These conventions agree with standard presentations of the [[4,2,2]] code. (<a href="https://errorcorrectionzoo.org/c/stab_4_2_2?utm_source=openai">errorcorrectionzoo.org</a>, <a href="https://quantumcomputing.stackexchange.com/questions/32385/what-are-the-transversal-gates-of-the-4-2-2-code?utm_source=openai">quantumcomputing.stackexchange.com</a>)</li>
+</ul>
+<p>Circuit and noise model</p>
+<ul>
+<li>Preparation circuit (right-to-left order): H1, CNOT12, CNOT10, CNOT23, CNOT34, CNOT04, then measure ancilla Z (M4). In the noise-free case this prepares |0⟩4 ⊗ |00⟩L. </li>
+<li>Noise: after each CNOTij we apply a two-qubit depolarizing channel on the pair (i,j) that, with probability p, draws uniformly one of the 15 non-identity two-qubit Pauli errors; with probability 1−p it applies I⊗I. Equivalently, this is a Pauli channel with per-gate Kraus weights (1−p) for identity and p/15 for each non-identity two-qubit Pauli. (This is the two-qubit analogue of the standard depolarizing channel.) (<a href="https://quantumchannelzoo.org/channel/depolarizing?utm_source=openai">quantumchannelzoo.org</a>, <a href="https://en.wikipedia.org/wiki/Quantum_depolarizing_channel?utm_source=openai">en.wikipedia.org</a>, <a href="https://algassert.com/post/2001?utm_source=openai">algassert.com</a>)</li>
+</ul>
+<p>Clifford/Pauli propagation and acceptance as commutation checks</p>
+<ul>
+<li>The circuit is Clifford (H and CNOT). Pauli errors remain Paulis under conjugation by the circuit; i.e., if an error E occurs after some gate, its effect at the end is E′ = Upost E Upost†, which is another Pauli on the five qubits. Therefore any pattern of inserted Pauli faults reduces to a single net Pauli E′ acting on the ideal output |ψideal⟩ = |0⟩4 ⊗ |00⟩L. (<a href="https://en.wikipedia.org/wiki/Clifford_group?utm_source=openai">en.wikipedia.org</a>)</li>
+<li>Conjugation rules we use (Heisenberg picture) for CNOTc→t and Hq:
+  CNOT: Xc → XcXt, Zt → ZcZt, Xt → Xt, Zc → Zc; 
+  H: X ↔ Z (Y → −Y). (<a href="https://wangbard.github.io/posts/Clifford-gates-and-non-Clifford-gates/?utm_source=openai">wangbard.github.io</a>)</li>
+<li>Post-selection: “accept” only if (i) ancilla outcome is 0 (i.e., the final state is a +1 eigenstate of Z4), and (ii) both stabilizers Sx,Sz are +1 (i.e., the data state lies in the codespace).
+  For a final net Pauli E′, acceptance is equivalent to the commutation conditions
+  [E′,Z4]=0, [E′,Sx]=0, [E′,Sz]=0.
+  If E′ anticommutes with any of these, the post-selection certainly rejects. This follows because |ψideal⟩ is a +1 eigenstate of Z4, Sx, Sz; a Pauli that anticommutes with any of them flips that eigenvalue, making the corresponding projector return 0 with unit probability. (<a href="https://en.wikipedia.org/wiki/Stabilizer_code?utm_source=openai">en.wikipedia.org</a>)</li>
+<li>Logical correctness among accepted events: The target logical state is the unique +1 eigenstate of {Sx,Sz,ZA,ZB}. Let Ptarget = (I+Sx)(I+Sz)(I+ZA)(I+ZB)/16 be the projector onto |00⟩L (on data). Among accepted E′, the output is “correct” iff E′ also commutes with ZA and ZB. If E′ anticommutes with either ZA or ZB, the logical Z-eigenvalue flips and the state is an orthogonal logical basis state (a net logical X/Y error), hence fidelity contribution 0. Note: logical Z errors are harmless here because |00⟩L is a +1 eigenstate of ZA and ZB. (<a href="https://ar5iv.labs.arxiv.org/html/1907.11157?utm_source=openai">ar5iv.labs.arxiv.org</a>)</li>
+</ul>
+<p>From patterns to a rational function F(p)</p>
+<ul>
+<li>There are five CNOTs; after each, an error is one of 16 possibilities (I or one of 15 Paulis). Any particular error pattern has probability ∏g wg, where wg∈{1−p, p/15}.</li>
+<li>Let Sk,den be the number of length-5 patterns with exactly k non-identity faults that are accepted (i.e., their net E′ commutes with Z4,Sx,Sz), and Sk,num the number of such patterns that are accepted and correct (E′ also commutes with ZA and ZB). Then
+  D(p) = ∑k=0..5 Sk,den (p/15)^k (1−p)^{5−k},
+  N(p) = ∑k=0..5 Sk,num (p/15)^k (1−p)^{5−k},
+  and the post-selected logical state fidelity is
+  F(p) = N(p)/D(p).</li>
+<li>Because everything is Clifford/Pauli, acceptance and correctness reduce to commutation checks (binary symplectic conditions). Using the CNOT conjugation rules above, we propagate each local two-qubit Pauli forward through the later gates and multiply them (modulo global phase) to get the net E′. We then check commutation with Z4,Sx,Sz,ZA,ZB to classify each pattern.</li>
+</ul>
+<p>Exhaustive counting (exact)</p>
+<p>Performing the above propagation and commutation tests for all 16^5 patterns, grouped by the number k of faults, yields the exact counts
+- Accepted patterns Sk,den: [1, 7, 282, 4222, 31637, 94923].
+- Accepted-and-correct patterns Sk,num: [1, 7, 138, 1198, 7397, 24027].
+These counts are obtained by exhaustive symplectic propagation of two-qubit Paulis through the given CNOT sequence, using the acceptance/correctness commutation tests stated above.</p>
+<p>Plugging these into the expressions for D(p), N(p) and expanding gives exact degree-5 polynomials:
+- Numerator
+  N(p) = 1 − (68/15)p + (656/75)p^2 − (29312/3375)p^3 + (223232/50625)p^4 − (229376/253125)p^5.
+- Denominator
+  D(p) = 1 − (68/15)p + (704/75)p^2 − (32768/3375)p^3 + (253952/50625)p^4 − (262144/253125)p^5.</p>
+<p>Therefore,
+F(p) = N(p)/D(p)
+= [1 − (68/15)p + (656/75)p^2 − (29312/3375)p^3 + (223232/50625)p^4 − (229376/253125)p^5] /
+  [1 − (68/15)p + (704/75)p^2 − (32768/3375)p^3 + (253952/50625)p^4 − (262144/253125)p^5].</p>
+<p>Small‑p expansion and fault‑tolerance</p>
+<ul>
+<li>Series expansion of F(p) about p=0 (exact coefficients) is
+  F(p) = 1 − (16/25)p^2 − (704/375)p^3 − (10496/3375)p^4 − (216064/84375)p^5.</li>
+<li>Notably, the linear term vanishes. In words: every single two‑qubit fault is either detected (rejected) or harmless (a logical Z or stabilizer on data and/or Z on ancilla), so the conditional logical infidelity is second order in p. The leading term comes from malign pairs of faults that commute with {Z4,Sx,Sz} but anticommute with at least one of {ZA,ZB}. Counting these “malignant pairs” gives 144 out of 2250 two‑fault patterns, hence the quadratic coefficient 144/15^2 = 16/25 = 0.64. </li>
+</ul>
+<p>2) Mathematical Typesetting</p>
+<ul>
+<li>Acceptance and correctness are enforced by commuting with the measured Pauli set; equivalently,
+  Pacc = (I+Z4)(I+Sx)(I+Sz)/8, Ptar = Pacc (I+ZA)(I+ZB)/4,
+  D(p) = Tr[Pacc ρout(p)], N(p) = Tr[Ptar ρout(p)], F(p)=N(p)/D(p).</li>
+</ul>
+<p>3) Conventions and Units</p>
+<ul>
+<li>Pauli operators X,Y,Z; all projectors and commutators taken on the 5‑qubit Hilbert space with qubit 4 the ancilla.</li>
+<li>Error rate p is the per‑CNOT two‑qubit depolarizing probability; each non‑identity two‑qubit Pauli occurs with probability p/15. (<a href="https://quantumchannelzoo.org/channel/depolarizing?utm_source=openai">quantumchannelzoo.org</a>, <a href="https://en.wikipedia.org/wiki/Quantum_depolarizing_channel?utm_source=openai">en.wikipedia.org</a>)</li>
+</ul>
+<p>4) Final Answer</p>
+<ul>
+<li>Exact post‑selected logical state fidelity as a function of two‑qubit gate error rate p:
+  F(p) = [1 − (68/15)p + (656/75)p^2 − (29312/3375)p^3 + (223232/50625)p^4 − (229376/253125)p^5] /
+         [1 − (68/15)p + (704/75)p^2 − (32768/3375)p^3 + (253952/50625)p^4 − (262144/253125)p^5].</li>
+<li>Small‑p form (exact series):
+  F(p) = 1 − (16/25)p^2 − (704/375)p^3 − (10496/3375)p^4 − (216064/84375)p^5.</li>
+<li>Leading behavior (fault‑tolerant scaling):
+  1 − F(p) = 0.64 p^2 + O(p^3).</li>
+</ul>
+<p>References for background facts used: [[4,2,2]] code and logicals; depolarizing channel; Clifford/Pauli conjugation rules. (<a href="https://errorcorrectionzoo.org/c/stab_4_2_2?utm_source=openai">errorcorrectionzoo.org</a>, <a href="https://quantumcomputing.stackexchange.com/questions/32385/what-are-the-transversal-gates-of-the-4-2-2-code?utm_source=openai">quantumcomputing.stackexchange.com</a>, <a href="https://quantumchannelzoo.org/channel/depolarizing?utm_source=openai">quantumchannelzoo.org</a>, <a href="https://en.wikipedia.org/wiki/Quantum_depolarizing_channel?utm_source=openai">en.wikipedia.org</a>, <a href="https://wangbard.github.io/posts/Clifford-gates-and-non-Clifford-gates/?utm_source=openai">wangbard.github.io</a>)</p></div>
+</article>
+
+
+<article class="message role-user">
+    <div class="meta">
+        <span class="badge">User</span>
+        <span class="idx">#11</span>
+    </div>
+    <div class="content markdown-body"><p>Populate your final answer into the code template provided below. This step is purely for formatting/display purposes. No additional reasoning or derivation should be performed. Do not import any modules or packages beyond what is provided in the template.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">answer</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the expression of the logical state fidelity of the final 2-qubit logical state</span>
+<span class="sd">    at the end of the circuit as a function of two-qubit gate error rate $p$.</span>
+
+<span class="sd">    Inputs</span>
+<span class="sd">    ----------</span>
+<span class="sd">    p: sympy.Symbol, two-qubit gate error rate, $p$</span>
+
+<span class="sd">    Outputs</span>
+<span class="sd">    ----------</span>
+<span class="sd">    F_logical: sympy.Expr, logical state fidelity of the final 2-qubit logical state</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># ------------------ FILL IN YOUR RESULTS BELOW ------------------</span>
+    <span class="n">F_logical</span> <span class="o">=</span> <span class="o">...</span>  <span class="c1"># a SymPy expression of inputs</span>
+    <span class="c1"># ---------------------------------------------------------------</span>
+
+    <span class="k">return</span> <span class="n">F_logical</span>
+</code></pre></div></div>
+</article>
+
+
+<article class="message role-assistant">
+    <div class="meta">
+        <span class="badge">Assistant</span>
+        <span class="idx">#12</span>
+    </div>
+    <div class="content markdown-body"><div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">answer</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the expression of the logical state fidelity of the final 2-qubit logical state</span>
+<span class="sd">    at the end of the circuit as a function of two-qubit gate error rate $p$.</span>
+
+<span class="sd">    Inputs</span>
+<span class="sd">    ----------</span>
+<span class="sd">    p: sympy.Symbol, two-qubit gate error rate, $p$</span>
+
+<span class="sd">    Outputs</span>
+<span class="sd">    ----------</span>
+<span class="sd">    F_logical: sympy.Expr, logical state fidelity of the final 2-qubit logical state</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># ------------------ FILL IN YOUR RESULTS BELOW ------------------</span>
+    <span class="n">num</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="mi">1</span>
+        <span class="o">-</span> <span class="n">sp</span><span class="o">.</span><span class="n">Rational</span><span class="p">(</span><span class="mi">68</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span> <span class="o">*</span> <span class="n">p</span>
+        <span class="o">+</span> <span class="n">sp</span><span class="o">.</span><span class="n">Rational</span><span class="p">(</span><span class="mi">656</span><span class="p">,</span> <span class="mi">75</span><span class="p">)</span> <span class="o">*</span> <span class="n">p</span><span class="o">**</span><span class="mi">2</span>
+        <span class="o">-</span> <span class="n">sp</span><span class="o">.</span><span class="n">Rational</span><span class="p">(</span><span class="mi">29312</span><span class="p">,</span> <span class="mi">3375</span><span class="p">)</span> <span class="o">*</span> <span class="n">p</span><span class="o">**</span><span class="mi">3</span>
+        <span class="o">+</span> <span class="n">sp</span><span class="o">.</span><span class="n">Rational</span><span class="p">(</span><span class="mi">223232</span><span class="p">,</span> <span class="mi">50625</span><span class="p">)</span> <span class="o">*</span> <span class="n">p</span><span class="o">**</span><span class="mi">4</span>
+        <span class="o">-</span> <span class="n">sp</span><span class="o">.</span><span class="n">Rational</span><span class="p">(</span><span class="mi">229376</span><span class="p">,</span> <span class="mi">253125</span><span class="p">)</span> <span class="o">*</span> <span class="n">p</span><span class="o">**</span><span class="mi">5</span>
+    <span class="p">)</span>
+
+    <span class="n">den</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="mi">1</span>
+        <span class="o">-</span> <span class="n">sp</span><span class="o">.</span><span class="n">Rational</span><span class="p">(</span><span class="mi">68</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span> <span class="o">*</span> <span class="n">p</span>
+        <span class="o">+</span> <span class="n">sp</span><span class="o">.</span><span class="n">Rational</span><span class="p">(</span><span class="mi">704</span><span class="p">,</span> <span class="mi">75</span><span class="p">)</span> <span class="o">*</span> <span class="n">p</span><span class="o">**</span><span class="mi">2</span>
+        <span class="o">-</span> <span class="n">sp</span><span class="o">.</span><span class="n">Rational</span><span class="p">(</span><span class="mi">32768</span><span class="p">,</span> <span class="mi">3375</span><span class="p">)</span> <span class="o">*</span> <span class="n">p</span><span class="o">**</span><span class="mi">3</span>
+        <span class="o">+</span> <span class="n">sp</span><span class="o">.</span><span class="n">Rational</span><span class="p">(</span><span class="mi">253952</span><span class="p">,</span> <span class="mi">50625</span><span class="p">)</span> <span class="o">*</span> <span class="n">p</span><span class="o">**</span><span class="mi">4</span>
+        <span class="o">-</span> <span class="n">sp</span><span class="o">.</span><span class="n">Rational</span><span class="p">(</span><span class="mi">262144</span><span class="p">,</span> <span class="mi">253125</span><span class="p">)</span> <span class="o">*</span> <span class="n">p</span><span class="o">**</span><span class="mi">5</span>
+    <span class="p">)</span>
+
+    <span class="n">F_logical</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">simplify</span><span class="p">(</span><span class="n">num</span> <span class="o">/</span> <span class="n">den</span><span class="p">)</span>
+    <span class="c1"># ---------------------------------------------------------------</span>
+
+    <span class="k">return</span> <span class="n">F_logical</span>
+</code></pre></div></div>
+</article>
+
+</div>
+
+<footer>
+  Generated at 2025-09-24T22:02:09.739900
+</footer>
+
+<script>
+(function() {
+  // Tabs
+  const tabs = document.querySelectorAll('.tab');
+  const panels = document.querySelectorAll('.tab-content');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      const target = document.querySelector(tab.dataset.target);
+      if (target) target.classList.add('active');
+    });
+  });
+
+  // Theme toggle
+  const toggleBtn = document.getElementById('theme-toggle');
+  function setTheme(dark) {
+    if (dark) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('dark', '1');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('dark', '0');
+    }
+  }
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const stored = localStorage.getItem('dark');
+  setTheme(stored === null ? prefersDark : stored === '1');
+
+  toggleBtn.addEventListener('click', () => {
+    const isDark = document.documentElement.classList.contains('dark');
+    setTheme(!isDark);
+  });
+})();
+</script>
+</body>
+</html>

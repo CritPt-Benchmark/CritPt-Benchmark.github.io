@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - CritPt</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        body {
+            font-family: 'Aptos', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        /* Timeline Styles */
+        .timeline {
+            position: fixed;
+            left: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 30;
+        }
+
+        @media (max-width: 1500px) {
+            .timeline-label {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 1350px) {
+            .timeline-label {
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 1250px) {
+            .timeline {
+                display: none;
+            }
+
+            .main-with-timeline {
+                margin-left: 0 !important;
+            }
+        }
+
+        .timeline-line {
+            width: 2px;
+            height: 500px;
+            background: #e5e5e5;
+            position: relative;
+            border-radius: 1px;
+        }
+
+        .timeline-progress {
+            width: 100%;
+            background: rgb(15, 76, 129);
+            position: absolute;
+            top: 0;
+            border-radius: 1px;
+            transition: height 0.3s ease-out;
+        }
+
+        .timeline-item {
+            position: absolute;
+            left: -6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .timeline-item:hover .timeline-label {
+            opacity: 0.8;
+        }
+
+        .timeline-item:hover .timeline-dot {
+            transform: scale(1.2);
+        }
+
+        .timeline-label {
+            font-size: 16px;
+            color: rgb(89, 89, 89);
+            opacity: 0.5;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .timeline-label.active {
+            opacity: 1;
+            font-weight: 600;
+            color: rgb(15, 76, 129);
+        }
+
+        .timeline-dot {
+            width: 12px;
+            height: 12px;
+            background: #fdf6e3;
+            border: 2px solid #e5e5e5;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .timeline-dot.active {
+            background: rgb(15, 76, 129);
+            border-color: rgb(15, 76, 129);
+        }
+
+        /* Add margin to main content */
+        .main-with-timeline {
+            margin-left: 60px;
+        }
+
+        /* Add padding to header to align with timeline-offset content */
+        .header-with-timeline {
+            padding-left: 60px;
+        }
+
+        @media (max-width: 1250px) {
+            .header-with-timeline {
+                padding-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        // Icons
+        const BoltLogo = (props) => (
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" {...props}>
+                <path d="M13 2L3 14h7l-1 8 11-14h-7l0-6Z" fill="currentColor"/>
+            </svg>
+        );
+
+        // Components
+        function Pill({ children, onClick, active = false, href }) {
+            if (href) {
+                return (
+                    <a
+                        href={href}
+                        className={`px-4 py-2 rounded-full font-medium text-lg transition-transform duration-200 hover:font-semibold hover:scale-110 ${active ? 'font-semibold scale-110' : ''}`}
+                        style={{color: 'rgb(240, 237, 228)'}}
+                    >
+                        {children}
+                    </a>
+                );
+            }
+            return (
+                <button
+                    onClick={onClick}
+                    className={`px-4 py-2 rounded-full font-medium text-lg transition-transform duration-200 hover:font-semibold hover:scale-110 ${active ? 'font-semibold scale-110' : ''}`}
+                    style={{color: 'rgb(240, 237, 228)'}}
+                >
+                    {children}
+                </button>
+            );
+        }
+
+        function BrandMark() {
+            return (
+                <a href="index.html" className="flex items-center gap-2 cursor-pointer no-underline">
+                    <img src="figures/CritPt_Cavolini.png" alt="CritPt" style={{height: '80px', marginLeft: '-16px'}} />
+                </a>
+            );
+        }
+
+        // Contributor Component
+        function Contributor({ name, link, position }) {
+            if (link) {
+                return (
+                    <a
+                        href={link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-start p-3 -mx-3 rounded-lg hover:bg-[#FAF8F3] transition-colors duration-200 no-underline group"
+                    >
+                        <div className="min-w-[180px] mr-4">
+                            <span className="text-lg group-hover:underline font-medium" style={{color: 'rgb(89, 89, 89)'}}>{name}</span>
+                        </div>
+                        <div className="text-lg" style={{color: 'rgb(89, 89, 89)'}}>{position}</div>
+                    </a>
+                );
+            }
+            return (
+                <div className="flex items-start p-3 -mx-3 rounded-lg">
+                    <div className="min-w-[180px] mr-4">
+                        <span className="text-lg font-medium" style={{color: 'rgb(89, 89, 89)'}}>{name}</span>
+                    </div>
+                    <div className="text-lg" style={{color: 'rgb(89, 89, 89)'}}>{position}</div>
+                </div>
+            );
+        }
+
+        // Timeline Component
+        function Timeline({ sections, activeSection, onSectionClick }) {
+            // Calculate progress based on active section
+            const progress = activeSection === 0 ? 0 : ((activeSection) / (sections.length - 1)) * 100;
+
+            return (
+                <div className="timeline">
+                    <div className="timeline-line">
+                        <div className="timeline-progress" style={{ height: `${progress}%` }}></div>
+                        {sections.map((section, index) => (
+                            <div
+                                key={index}
+                                className="timeline-item"
+                                style={{ top: `${(index / (sections.length - 1)) * 100}%`, transform: 'translateY(-50%)' }}
+                                onClick={() => onSectionClick(index)}
+                                title={section}
+                            >
+                                <div className={`timeline-dot ${activeSection >= index ? 'active' : ''}`}></div>
+                                <span className={`timeline-label ${activeSection === index ? 'active' : ''}`}>
+                                    {section}
+                                </span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+        }
+
+        // Main App Component
+        function App() {
+            const [activeSection, setActiveSection] = useState(0);
+            const sectionRefs = useRef([]);
+            const sections = ['Contact', 'Our Researchers', 'Benchmark Coordinators', 'Physics Experts', 'Review & Pipeline Team', 'Senior Authors'];
+            const isClickScrolling = useRef(false);
+            const clickedSection = useRef(null);
+
+            const scrollToSection = (index) => {
+                const ref = sectionRefs.current[index];
+                if (ref) {
+                    isClickScrolling.current = true;
+                    clickedSection.current = index;
+                    setActiveSection(index);
+
+                    const headerOffset = 100; // Offset for sticky header
+                    const elementPosition = ref.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+
+                    // Reset after scroll completes
+                    setTimeout(() => {
+                        isClickScrolling.current = false;
+                        clickedSection.current = null;
+                    }, 1000);
+                }
+            };
+
+            useEffect(() => {
+                const handleScroll = () => {
+                    // Don't update during click-initiated scrolling
+                    if (isClickScrolling.current) {
+                        return;
+                    }
+
+                    const scrollY = window.pageYOffset;
+                    const windowHeight = window.innerHeight;
+                    const documentHeight = document.documentElement.scrollHeight;
+
+                    // If we're near the top of the page, activate the first section
+                    if (scrollY < 100) {
+                        setActiveSection(0);
+                        return;
+                    }
+
+                    // If we're at the bottom of the page, activate the last section
+                    if (scrollY + windowHeight >= documentHeight - 50) {
+                        setActiveSection(sections.length - 1);
+                        return;
+                    }
+
+                    let currentSection = 0;
+                    sectionRefs.current.forEach((ref, index) => {
+                        if (ref && scrollY + windowHeight * 0.3 >= ref.offsetTop) {
+                            currentSection = index;
+                        }
+                    });
+                    setActiveSection(currentSection);
+                };
+
+                window.addEventListener('scroll', handleScroll);
+                handleScroll(); // Initial call
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+
+            const leadAuthors = [
+                { name: "Minhui Zhu", link: "https://scholar.google.com/citations?user=QPcB69UAAAAJ&hl=en", position: "Postdoc in AI for Science, Argonne National Lab. PhD in Physics from University of Illinois Urbana-Champaign" },
+                { name: "Minyang Tian", link: "https://scholar.google.com/citations?user=Bzl5qN8AAAAJ&hl=en", position: "PhD Candidate in Physics, University of Illinois Urbana-Champaign" }
+            ];
+
+            const reviewTeam = [
+                { name: "Xiaocheng Yang", link: "https://orcid.org/0009-0004-5142-9760", position: "PhD Student in Physics, University of Illinois Urbana-Champaign" },
+                { name: "Yufeng Du", link: "", position: "PhD Candidate in CS, University of Illinois Urbana-Champaign" },
+                { name: "Lifan Yuan", link: "https://lifan-yuan.github.io/", position: "PhD Student in CS, University of Illinois Urbana-Champaign" },
+                { name: "Luyu Gao", link: "https://scholar.google.com/citations?user=TAIJcewAAAAJ&hl=en", position: "PhD Candidate in CS, Carnegie Mellon University" },
+                { name: "Ze Yang", link: "https://scholar.google.com/citations?user=vj_J-vMAAAAJ&hl=en", position: "MS in ECE from University of Illinois Urbana-Champaign" },
+                { name: "Daniel Inafuku", link: "https://scholar.google.com/citations?user=UJ6T6EsAAAAJ&hl=en", position: "PhD in Physics from University of Illinois Urbana-Champaign" },
+                { name: "Hao Tong", link: "https://scholar.google.com/citations?user=y3mahjoAAAAJ&hl=en", position: "PhD in Physics from University of Illinois Urbana-Champaign" }
+            ];
+
+            const challengeContributors = [
+                { name: "Tianci Zhou", link: "https://sites.google.com/view/tzhou", position: "Assistant Professor in Physics, Virginia Tech" },
+                { name: "Penghao Zhu", link: "https://scholar.google.com/citations?user=Ri6YUOoAAAAJ&hl=en", position: "CEM John Wilkins Postdoctoral Fellow in Physics, Ohio State University" },
+                { name: "Eli Chertkov", link: "https://scholar.google.com/citations?user=S3B9pvEAAAAJ&hl=en", position: "PhD in Physics from University of Illinois Urbana-Champaign" },
+                { name: "Shengyan Liu", link: "https://scholar.google.com/citations?user=Za8-L-sAAAAJ", position: "PhD Candidate in ECE, University of Illinois Urbana-Champaign" },
+                { name: "Ziming Ji", link: "https://scholar.google.com/citations?user=vmPdsHQAAAAJ&hl=en", position: "Postdoc in Physics, Northeastern University" },
+                { name: "Indranil Das", link: "https://inspirehep.net/authors/2948222", position: "PhD Candidate in Physics, University of Illinois Urbana-Champaign" },
+                { name: "Junyi Cao", link: "", position: "PhD Candidate in Physics, University of Illinois Urbana-Champaign" },
+                { name: "Yufeng Du", link: "https://inspirehep.net/authors/2659189", position: "PhD Candidate in Physics, Caltech" },
+                { name: "Jinchen He", link: "https://jinchen.space/", position: "PhD Candidate in Physics, University of Maryland, College Park" },
+                { name: "Yifan Su", link: "https://scholar.google.com/citations?user=R_1yjlQAAAAJ&hl=en", position: "Postdoc in Physics, Columbia University" },
+                { name: "Jiabin Yu", link: "https://scholar.google.com/citations?user=lAkcQZ0AAAAJ&hl=en", position: "Assistant Professor in Physics, University of Florida" },
+                { name: "Yikun Jiang", link: "https://scholar.google.com/citations?user=rZb2KWQAAAAJ&hl=zh-CN", position: "Postdoc in Physics, Northeastern University" },
+                { name: "Yujie Zhang", link: "https://scholar.google.com/citations?user=nbA1QlUAAAAJ&hl=en", position: "Postdoctoral Fellow in Physics, Perimeter Institute for Theoretical Physics and University of Waterloo" },
+                { name: "Chang Liu", link: "https://changliulab.engineering.uconn.edu/", position: "Assistant Professor in Mechanical Engineering, University of Connecticut" },
+                { name: "Ze-Min Huang", link: "https://inspirehep.net/authors/1922327", position: "Postdoc in Physics, University of Cologne" },
+                { name: "Weizhen Jia", link: "https://inspirehep.net/authors/2086336", position: "Postdoc in Physics, The Chinese University of Hong Kong" },
+                { name: "Xinan Chen", link: "https://scholar.google.com/citations?user=rBfwuygAAAAJ&hl=en", position: "PhD Candidate in ECE, University of Illinois Urbana-Champaign" },
+                { name: "Peixue Wu", link: "https://pxwu24.github.io/academic/", position: "Postdoc in Physics and Mathematics, University of Waterloo" },
+                { name: "Yunkai Wang", link: "https://scholar.google.com/citations?user=MHPWbLwAAAAJ&hl=en", position: "Joint Postdoctoral Fellow, Perimeter Institute for Theoretical Physics and University of Waterloo" },
+                { name: "Juntai Zhou", link: "", position: "PhD Candidate in Mathematics, University of Illinois Urbana-Champaign" },
+                { name: "Yong Zhao", link: "https://scholar.google.com/citations?user=Xu15dQkAAAAJ&hl=en", position: "Assistant Physicist, Argonne National Laboratory" },
+                { name: "Farshid Jafarpour", link: "https://www.uu.nl/staff/FJafarpour", position: "Assistant Professor in Physics, Utrecht University" },
+                { name: "Jessie Shelton", link: "https://inspirehep.net/authors/1040460", position: "Professor in Physics, University of Illinois Urbana-Champaign" },
+                { name: "Aaron W. Young", link: "https://scholar.google.com/citations?user=g4-UayUAAAAJ&hl=en", position: "Postdoctoral Fellow in Physics, Harvard University" },
+                { name: "John Bartolotta", link: "https://scholar.google.com/citations?user=XmKW06kAAAAJ&hl=en", position: "PhD in Physics from University of Colorado Boulder" },
+                { name: "Wenchao Xu", link: "https://orcid.org/0000-0002-2183-4659", position: "Assistant Professor in Physics, ETH Zürich; group leader at Paul Scherrer Institute" },
+                { name: "Yue Sun", link: "https://scholar.google.com/citations?user=YpbhJlsAAAAJ&hl=en", position: "Postdoc in Physics, University of Washington Seattle" },
+                { name: "Anjun Chu", link: "https://scholar.google.com/citations?user=VVRdSYkAAAAJ&hl=zh-CN", position: "Chicago Prize Postdoctoral Fellow, University of Chicago" },
+                { name: "Victor Colussi", link: "https://sites.google.com/view/victor-colussi", position: "PhD in Physics from University of Colorado Boulder" },
+                { name: "Chris Akers", link: "https://scholar.google.com/citations?user=DO63QG8AAAAJ&hl=en", position: "Assistant Professor in Physics, University of Colorado Boulder" },
+                { name: "Nathan Brooks", link: "https://scholar.google.com/citations?user=fW1mS-4AAAAJ&hl=en", position: "Physicist, Chi 3 Optics" },
+                { name: "Wenbo Fu", link: "https://scholar.google.com/citations?user=gTaGTFcAAAAJ&hl=en", position: "PhD in Physics from Harvard University" },
+                { name: "Christopher Wilson", link: "https://inspirehep.net/authors/2710406", position: "Postdoc in Physics, University of Colorado Boulder" },
+                { name: "Jinchao Zhao", link: "https://scholar.google.com/citations?user=bJDs-FQAAAAJ&hl=en", position: "Postdoc in Physics, Hong Kong University of Science and Technology" },
+                { name: "Marvin Qi", link: "https://scholar.google.com/citations?user=Qa5cjBoAAAAJ&hl=en", position: "Kadanoff Postdoctoral Fellow in Physics, University of Chicago" },
+                { name: "Anqi Mu", link: "", position: "PhD Candidate in Physics, Columbia University" },
+                { name: "Yubo Yang", link: "https://paul-st-young.github.io/research/", position: "Assistant Professor in Physics, Hofstra University" },
+                { name: "Allen Zang", link: "https://scholar.google.com/citations?user=lgL9pWsAAAAJ&hl=en", position: "PhD Candidate in Quantum Science and Engineering, University of Chicago" },
+                { name: "Yang Lyu", link: "https://scholar.google.com/citations?user=z9kw0n8AAAAJ&hl=en", position: "PhD in Physics from University of California, Berkeley" },
+                { name: "Peizhi Mai", link: "https://scholar.google.com/citations?user=xKu_W-AAAAAJ&hl=en", position: "Moore Postdoctoral Fellow in Physics, University of Illinois Urbana-Champaign" },
+                { name: "Xuefei Guo", link: "https://scholar.google.com/citations?user=JPzMgNsAAAAJ&hl=en", position: "Research Associate, Brookhaven National Laboratory" },
+                { name: "Chi Xue", link: "https://scholar.google.com/citations?user=GkDQfSkAAAAJ&hl=en", position: "PhD in Physics from University of Illinois Urbana-Champaign" },
+                { name: "Dmytro Bandak", link: "https://scholar.google.com/citations?user=qTAhUkQAAAAJ&hl=en", position: "PhD in Physics from University of Illinois Urbana-Champaign" },
+                { name: "Yaïr Hein", link: "", position: "PhD Candidate in Physics, Utrecht University" },
+                { name: "Yonatan Kahn", link: "https://kahn-group.physics.utoronto.ca/", position: "Assistant Professor of Physics, University of Toronto and Vector Institute" },
+                { name: "Kevin Zhou", link: "https://knzhou.github.io/", position: "Postdoc in Physics, University of California, Berkeley" },
+                { name: "John Drew Wilson", link: "https://scholar.google.com/citations?user=lqBUf6EAAAAJ&hl=en", position: "PhD Candidate in Physics, University of Colorado Boulder" },
+                { name: "Jarrod T. Reilly", link: "https://scholar.google.com/citations?user=uBRkU1sAAAAJ&hl=en", position: "PhD Candidate in Physics, University of Colorado Boulder" },
+                { name: "Di Luo", link: "https://diluo28.github.io/diluo.github.io/", position: "Assistant Professor in ECE, University of California, Los Angeles" },
+                { name: "Liang Yang", link: "https://scholar.google.com/citations?user=yVyVBKoAAAAJ&hl=en", position: "Professor in Physics, University of California San Diego" },
+                { name: "Ruixing Zhang", link: "https://sites.google.com/view/ruixingzhang/home", position: "Assistant Professor in Physics, University of Tennessee, Knoxville" },
+                { name: "Xueying Wang", link: "https://xueyingw.notion.site/Xueying-Wang-Ph-D-16511d8b2ab3807ca930ef159dd5e66d", position: "Postdoctoral Fellow, National Institute of Theory and Mathematics in Biology" }
+            ];
+
+            const seniorAuthors = [
+                { name: "Ofir Press", link: "https://ofir.io/about/", position: "Postdoc in CS, Princeton University" },
+                { name: "Nicolas Chia", link: "https://www.anl.gov/profile/nicholas-leeping-chia", position: "Computational Biologist, Argonne National Laboratory" },
+                { name: "Eliu Huerta", link: "https://www.anl.gov/profile/eliu-a-huerta", position: "Theoretical Physicist, Argonne National Laboratory" },
+                { name: "Hao Peng", link: "https://haopeng-nlp.github.io/", position: "Assistant Professor in CS, University of Illinois Urbana-Champaign" }
+            ];
+
+            return (
+                <div className="min-h-screen" style={{backgroundColor: 'rgb(240, 237, 228)', color: 'rgb(89, 89, 89)'}}>
+                    <Timeline sections={sections} activeSection={activeSection} onSectionClick={scrollToSection} />
+                    {/* Top Nav */}
+                    <header className="sticky top-0 z-40 w-full border-b border-black/5 backdrop-blur" style={{backgroundColor: 'rgb(15, 76, 129)'}}>
+                        <div className="mx-auto max-w-6xl px-4 header-with-timeline">
+                            <div className="flex h-20 items-center justify-between gap-4">
+                                <BrandMark />
+                                <nav className="hidden md:flex items-center gap-2">
+                                    <Pill onClick={() => window.location.href = 'index.html'}>Overview</Pill>
+                                    <Pill onClick={() => window.location.href = 'benchmark-coverage.html'}>Coverage</Pill>
+                                    <Pill onClick={() => window.location.href = 'performance-details.html'}>Performance</Pill>
+                                    <Pill onClick={() => window.location.href = 'example.html'}>Example</Pill>
+                                    <Pill active>About</Pill>
+                                </nav>
+                            </div>
+                        </div>
+                    </header>
+
+                    {/* Main Content */}
+                    <main className="mx-auto max-w-6xl px-4 py-16 main-with-timeline">
+                        <div className="prose prose-zinc max-w-none">
+                            <section className="mb-16" ref={el => sectionRefs.current[0] = el}>
+                                <h2 className="text-4xl font-semibold mb-4" style={{color: 'rgb(89, 89, 89)'}}>Contact</h2>
+                                <p className="text-lg leading-relaxed" style={{color: 'rgb(89, 89, 89)'}}>
+                                    For inquiries or collbarations, please contact <a href="mailto:minhui.zhu@anl.gov" className="hover:underline" style={{color: 'rgb(15, 76, 129)'}}>minhui.zhu@anl.gov</a>, <a href="mailto:mtian8@illinois.edu" className="hover:underline" style={{color: 'rgb(15, 76, 129)'}}>mtian8@illinois.edu</a>.
+                                </p>
+                            </section>
+
+                            <section className="mb-12 mt-12" ref={el => sectionRefs.current[1] = el}>
+                                <h2 className="text-4xl font-semibold mb-4" style={{color: 'rgb(89, 89, 89)'}}>Our Researchers</h2>
+                                <p className="text-lg leading-relaxed mb-6" style={{color: 'rgb(89, 89, 89)'}}>
+                                    <i>CritPt</i> is developed by a team of 50+ physics experts and 10 AI researchers from 30+ leading institutions worldwide, including Ph.D. students, postdocs, and professors.
+                                </p>
+
+                                <div className="mt-8" ref={el => sectionRefs.current[2] = el}>
+                                    <h3 className="text-2xl font-semibold mb-4" style={{color: 'rgb(89, 89, 89)'}}>Benchmark Coordinators:</h3>
+                                    <div className="space-y-1">
+                                        {leadAuthors.map((author, i) => (
+                                            <Contributor key={i} {...author} />
+                                        ))}
+                                    </div>
+
+                                    <div ref={el => sectionRefs.current[3] = el}>
+                                        <h3 className="text-2xl font-semibold mb-4 mt-12" style={{color: 'rgb(89, 89, 89)'}}>Physics Experts:</h3>
+                                        <div className="space-y-1">
+                                            {challengeContributors.map((author, i) => (
+                                                <Contributor key={i} {...author} />
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    <div ref={el => sectionRefs.current[4] = el}>
+                                        <h3 className="text-2xl font-semibold mb-4 mt-12" style={{color: 'rgb(89, 89, 89)'}}>Review & Pipeline Team:</h3>
+                                        <div className="space-y-1">
+                                            {reviewTeam.map((author, i) => (
+                                                <Contributor key={i} {...author} />
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    <div ref={el => sectionRefs.current[5] = el}>
+                                        <h3 className="text-2xl font-semibold mb-4 mt-12" style={{color: 'rgb(89, 89, 89)'}}>Senior Authors:</h3>
+                                        <div className="space-y-1">
+                                            {seniorAuthors.map((author, i) => (
+                                                <Contributor key={i} {...author} />
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </main>
+
+                </div>
+            );
+        }
+
+        // Render the app
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>

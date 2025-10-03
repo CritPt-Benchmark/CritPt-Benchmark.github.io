@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Checkpoint-3</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.codehilite .hll { background-color: #ffffcc }
+.codehilite { background: #f8f8f8; }
+.codehilite .c { color: #3D7B7B; font-style: italic } /* Comment */
+.codehilite .err { border: 1px solid #F00 } /* Error */
+.codehilite .k { color: #008000; font-weight: bold } /* Keyword */
+.codehilite .o { color: #666 } /* Operator */
+.codehilite .ch { color: #3D7B7B; font-style: italic } /* Comment.Hashbang */
+.codehilite .cm { color: #3D7B7B; font-style: italic } /* Comment.Multiline */
+.codehilite .cp { color: #9C6500 } /* Comment.Preproc */
+.codehilite .cpf { color: #3D7B7B; font-style: italic } /* Comment.PreprocFile */
+.codehilite .c1 { color: #3D7B7B; font-style: italic } /* Comment.Single */
+.codehilite .cs { color: #3D7B7B; font-style: italic } /* Comment.Special */
+.codehilite .gd { color: #A00000 } /* Generic.Deleted */
+.codehilite .ge { font-style: italic } /* Generic.Emph */
+.codehilite .ges { font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+.codehilite .gr { color: #E40000 } /* Generic.Error */
+.codehilite .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.codehilite .gi { color: #008400 } /* Generic.Inserted */
+.codehilite .go { color: #717171 } /* Generic.Output */
+.codehilite .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.codehilite .gs { font-weight: bold } /* Generic.Strong */
+.codehilite .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.codehilite .gt { color: #04D } /* Generic.Traceback */
+.codehilite .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.codehilite .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.codehilite .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.codehilite .kp { color: #008000 } /* Keyword.Pseudo */
+.codehilite .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.codehilite .kt { color: #B00040 } /* Keyword.Type */
+.codehilite .m { color: #666 } /* Literal.Number */
+.codehilite .s { color: #BA2121 } /* Literal.String */
+.codehilite .na { color: #687822 } /* Name.Attribute */
+.codehilite .nb { color: #008000 } /* Name.Builtin */
+.codehilite .nc { color: #00F; font-weight: bold } /* Name.Class */
+.codehilite .no { color: #800 } /* Name.Constant */
+.codehilite .nd { color: #A2F } /* Name.Decorator */
+.codehilite .ni { color: #717171; font-weight: bold } /* Name.Entity */
+.codehilite .ne { color: #CB3F38; font-weight: bold } /* Name.Exception */
+.codehilite .nf { color: #00F } /* Name.Function */
+.codehilite .nl { color: #767600 } /* Name.Label */
+.codehilite .nn { color: #00F; font-weight: bold } /* Name.Namespace */
+.codehilite .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.codehilite .nv { color: #19177C } /* Name.Variable */
+.codehilite .ow { color: #A2F; font-weight: bold } /* Operator.Word */
+.codehilite .w { color: #BBB } /* Text.Whitespace */
+.codehilite .mb { color: #666 } /* Literal.Number.Bin */
+.codehilite .mf { color: #666 } /* Literal.Number.Float */
+.codehilite .mh { color: #666 } /* Literal.Number.Hex */
+.codehilite .mi { color: #666 } /* Literal.Number.Integer */
+.codehilite .mo { color: #666 } /* Literal.Number.Oct */
+.codehilite .sa { color: #BA2121 } /* Literal.String.Affix */
+.codehilite .sb { color: #BA2121 } /* Literal.String.Backtick */
+.codehilite .sc { color: #BA2121 } /* Literal.String.Char */
+.codehilite .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.codehilite .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.codehilite .s2 { color: #BA2121 } /* Literal.String.Double */
+.codehilite .se { color: #AA5D1F; font-weight: bold } /* Literal.String.Escape */
+.codehilite .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.codehilite .si { color: #A45A77; font-weight: bold } /* Literal.String.Interpol */
+.codehilite .sx { color: #008000 } /* Literal.String.Other */
+.codehilite .sr { color: #A45A77 } /* Literal.String.Regex */
+.codehilite .s1 { color: #BA2121 } /* Literal.String.Single */
+.codehilite .ss { color: #19177C } /* Literal.String.Symbol */
+.codehilite .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.codehilite .fm { color: #00F } /* Name.Function.Magic */
+.codehilite .vc { color: #19177C } /* Name.Variable.Class */
+.codehilite .vg { color: #19177C } /* Name.Variable.Global */
+.codehilite .vi { color: #19177C } /* Name.Variable.Instance */
+.codehilite .vm { color: #19177C } /* Name.Variable.Magic */
+.codehilite .il { color: #666 } /* Literal.Number.Integer.Long */
+
+</style>
+<style>
+    :root {
+  --bg: #ffffff;
+  --fg: #222222;
+  --muted: #555555;
+  --border: #e0e0e0;
+  --accent: #005fcc;
+  --code-bg: #f6f8fa;
+  --role-user: #0ea5e9;
+  --role-assistant: #22c55e;
+  --role-system: #9ca3af;
+  --return-code: #a35291;
+}
+html.dark {
+  --bg: #0b0b0b;
+  --fg: #e8e8e8;
+  --muted: #a0a0a0;
+  --border: #333333;
+  --accent: #3b82f6;
+  --code-bg: #111827;
+  --role-user: #0ea5e9;
+  --role-assistant: #22c55e;
+  --role-system: #9ca3af;
+  --return-code: #a35291;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
+  line-height: 1.6;
+}
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 10;
+}
+h1 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+}
+.tab {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--border);
+  border-bottom: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 6px 6px 0 0;
+  color: var(--fg);
+}
+.tab.active {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+.tab-content {
+  display: none;
+  padding: 1rem 1.25rem;
+  border-top: 1px solid var(--border);
+}
+.tab-content.active {
+  display: block;
+}
+#theme-toggle {
+  border: 1px solid var(--border);
+  padding: 0.2rem 0.6rem;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  cursor: pointer;
+  background: transparent;
+  color: var(--fg);
+}
+.main {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.message {
+  border: 1px solid var(--border);
+  border-left-width: 6px;
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+  background: rgba(0,0,0,0.02);
+}
+.message .meta {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.6rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.message .badge {
+  font-weight: 600;
+}
+.role-user {
+  border-left-color: var(--role-user);
+}
+.role-assistant {
+  border-left-color: var(--role-assistant);
+}
+.role-system {
+  border-left-color: var(--role-system);
+}
+.role-unknown {
+  border-left-color: var(--accent);
+}
+
+.output-code-container {
+  display: flex;
+  gap: 1rem;               /* space between children */
+  align-items: center;     /* vertical alignment */
+  justify-content: start;  /* horizontal alignment */
+}
+
+.output-code-container .codeblock {
+  flex: 0 1 auto;
+}
+
+.codeblock {
+  border: 1px solid var(--border);
+  border-left-width: 6px;
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+  background: rgba(0,0,0,0.02);
+}
+.codeblock-content {
+  margin-bottom: 0.6rem;
+  border: 1px dashed var(--border);
+  border-radius: 4px;
+  padding: 0.4rem 0.6rem;
+  background: rgba(0,0,0,0.02);
+}
+
+.codeblock.eval_code {
+  border-left-color: var(--role-user);
+}
+.codeblock.target_code {
+  border-left-color: var(--role-assistant);
+}
+.codeblock.output_code {
+  border-left-color: var(--role-system);
+}
+
+html.dark .codeblock-content {
+  background: rgba(255,255,255,0.03);
+}
+.codeblock > summary {
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none; /* remove default triangle in some browsers */
+}
+.codeblock > summary::-webkit-details-marker {
+  display: none; /* Safari/Chrome marker */
+}
+.codeblock > summary::before {
+  content: "▶ ";
+  display: inline-block;
+  transform: rotate(0deg);
+  transition: transform 0.12s ease-out;
+}
+.codeblock[open] > summary::before {
+  transform: rotate(90deg);
+}
+.codeblock .tag {
+  color: var(--muted);
+  font-weight: 400;
+  font-size: 0.85em;
+  margin-left: 0.25rem;
+}
+
+.markdown-body pre code {
+  background: var(--code-bg);
+  display: block;
+  padding: 0.75rem;
+  overflow-x: auto;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+.markdown-body code {
+  background: var(--code-bg);
+  padding: 0.15rem 0.3rem;
+  border-radius: 4px;
+}
+/* Extra info tree */
+details > summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+details .block {
+  padding-left: 1rem;
+  margin: 0.25rem 0 0.5rem 0;
+  border-left: 2px solid var(--border);
+}
+.kv .key {
+  font-weight: 600;
+}
+.kv .type {
+  color: var(--muted);
+  margin-left: 0.5rem;
+  font-size: 0.85rem;
+}
+footer {
+  margin: 2rem 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+/* CodeHilite (pygments) overrides to respect theme vars */
+.codehilite {
+  background: var(--code-bg) !important;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.75rem !important;
+}
+.reasoning {
+  margin-bottom: 0.6rem;
+  border: 1px dashed var(--border);
+  border-radius: 4px;
+  padding: 0.4rem 0.6rem;
+  background: rgba(0,0,0,0.02);
+}
+html.dark .reasoning {
+  background: rgba(255,255,255,0.03);
+}
+.reasoning > summary {
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none; /* remove default triangle in some browsers */
+}
+.reasoning > summary::-webkit-details-marker {
+  display: none; /* Safari/Chrome marker */
+}
+.reasoning > summary::before {
+  content: "▶ ";
+  display: inline-block;
+  transform: rotate(0deg);
+  transition: transform 0.12s ease-out;
+}
+.reasoning[open] > summary::before {
+  transform: rotate(90deg);
+}
+.reasoning .tag {
+  color: var(--muted);
+  font-weight: 400;
+  font-size: 0.85em;
+  margin-left: 0.25rem;
+}
+.reasoning-body {
+  margin-top: 0.5rem;
+}
+</style>
+
+<!-- ===== MATHJAX CONFIG ===== -->
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [ ["\\(","\\)"] ],
+    displayMath: [ ["\\[","\\]"] ],
+    processEscapes: true,
+    processEnvironments: true
+  },
+  options: {
+    ignoreHtmlClass: ".*",
+    processHtmlClass: "arithmatex"
+
+    // skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    // if you dynamically add content later, you can call MathJax.typesetPromise()
+  }
+};
+</script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<!-- ========================== -->
+</head>
+<body>
+<header>
+  <h1>Checkpoint-3</h1>
+  <div>
+    <button id="theme-toggle" aria-label="toggle dark mode">🌓</button>
+  </div>
+</header>
+
+<div class="main">
+  
+<article class="message role-system">
+    <div class="meta">
+        <span class="badge">System</span>
+        <span class="idx">#0</span>
+    </div>
+    <div class="content markdown-body"><p>You are a physics research assistant specializing in solving complex, research-level problems using precise, step-by-step reasoning.</p>
+<p><strong>Input</strong>
+Problems will be provided in Markdown format.</p>
+<p><strong>Output (Markdown format)</strong></p>
+<ol>
+<li><strong>Step-by-Step Derivation</strong> - Show every non-trivial step in the solution.  Justify steps using relevant physical laws, theorems, or mathematical identities.</li>
+<li><strong>Mathematical Typesetting</strong> - Use LaTeX for all mathematics:  <code>$...$</code> for inline expressions, <code>$$...$$</code> for display equations.</li>
+<li><strong>Conventions and Units</strong> - Follow the unit system and conventions specified in the problem.</li>
+<li>
+<p><strong>Final Answer</strong> - At the end of the solution,  start a new line with <strong>&ldquo;Final Answer:&rdquo;</strong>, and present the final result.</p>
+<p>For final answers involving values, follow the precision requirements specified in the problem.
+If no precision is specified:
+- If an exact value is possible, provide it (e.g., \$\sqrt(2)\$, \$\pi/4\$).
+- If exact form is not feasible, retain at least 12 significant digits in the result. </p>
+</li>
+<li>
+<p><strong>Formatting Compliance</strong> - If the user requests a specific output format (e.g., code, table),  provide the final answer accordingly.</p>
+</li>
+</ol></div>
+</article>
+
+
+<article class="message role-user">
+    <div class="meta">
+        <span class="badge">User</span>
+        <span class="idx">#1</span>
+    </div>
+    <div class="content markdown-body"><h1 id="problem-setup">Problem setup:</h1>
+<p>In quantum error correction, you encode quantum states into logical states made of many qubits in order to improve their resilience to errors. In quantum error detection, you do the same but can only detect the presence of errors and not correct them. In this problem, we will consider a single [[4,2,2]] quantum error detection code, which encodes two logical qubits into four physical qubits, and investigate how robust logical quantum operations in this code are to quantum errors.</p>
+<p>Our convention is that the four physical qubits in the [[4,2,2]] code are labelled 0,1,2,3. The two logical qubits are labelled A and B. The stabilizers are <span class="arithmatex">\(XXXX\)</span> and <span class="arithmatex">\(ZZZZ\)</span>, where <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(Z\)</span> are Pauli matrices. The logical <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(Z\)</span> operators on the two qubits are <span class="arithmatex">\(X_A = XIXI\)</span>, <span class="arithmatex">\(X_B=XXII\)</span>, <span class="arithmatex">\(Z_A = ZZII\)</span>, <span class="arithmatex">\(Z_B = ZIZI\)</span>, up to multiplication by stabilizers.</p>
+<p>We will consider different state preparation circuits consisting of controlled not <span class="arithmatex">\(CNOT_{ij}\)</span> gates, where <span class="arithmatex">\(CNOT_{ij}\)</span> has control qubit <span class="arithmatex">\(i\)</span> and target qubit <span class="arithmatex">\(j\)</span>. As a simple model of quantum errors in hardware, we will suppose that each <span class="arithmatex">\(CNOT_{ij}\)</span> gate in the circuit has a two qubit depolarizing error channel following it that produces one of the 15 non-identity two-qubit Paulis with equal probability <span class="arithmatex">\(p/15\)</span>. The probability <span class="arithmatex">\(p\)</span> indicates the probability of an error in a single two-qubit gate. We will assess the logical infidelity of certain state preparation protocols as a function of the physical infidelity <span class="arithmatex">\(p\)</span>.</p>
+<h2 id="subproblem-1">Checkpoint 1</h2>
+<p>Suppose that we wish to prepare a logical two-qubit GHZ state  <span class="arithmatex">\((|00\rangle_{AB}+|11\rangle_{AB})/\sqrt{2}\)</span> in the [[4,2,2]] code. To do so, we use the following state preparation circuit:</p>
+<div class="arithmatex">\[
+(CNOT_{03}) (H_0) (CNOT_{21}) (H_2).
+\]</div>
+<p>Note that this equation is written in matrix multiplication order, while the quantum operations in the circuit occur in the reverse order (from right-to-left in the above equation). <span class="arithmatex">\(H\)</span> is a single-qubit Hadamard gate.</p>
+<p>What is the physical state fidelity of the final physical 4-qubit state at the end of the circuit as a function of the two-qubit gate error rate <span class="arithmatex">\(p\)</span>?</p></div>
+</article>
+
+
+<article class="message role-assistant">
+    <div class="meta">
+        <span class="badge">Assistant</span>
+        <span class="idx">#2</span>
+    </div>
+    <div class="content markdown-body"><p><strong>Step-by-Step Derivation</strong></p>
+<p>We label the four physical qubits by 0,1,2,3, and start in the product state  </p>
+<div class="arithmatex">\[
+\rho_0 = |0000\rangle\langle0000|\,.
+\]</div>
+<p>The ideal preparation circuit is  </p>
+<div class="arithmatex">\[
+U_{\rm ideal} \;=\; \Bigl(\mathrm{CNOT}_{0\to3}\Bigr)\,(H_0)\,\Bigl(\mathrm{CNOT}_{2\to1}\Bigr)\,(H_2)\,,
+\]</div>
+<p>where the gates act (right‐to‐left) on <span class="arithmatex">\(\rho_0\)</span>.  We assume only the two CNOT gates are noisy: immediately after each CNOT<span class="arithmatex">\(_{i\to j}\)</span> we apply a two‐qubit depolarizing channel of error‐rate <span class="arithmatex">\(p\)</span>,  </p>
+<div class="arithmatex">\[
+\mathcal E^{(ij)}(\sigma)
+  \;=\;(1-p)\,\sigma\;+\;\frac p{15}\sum_{P\in\{I,X,Y,Z\}^{\otimes2}\setminus\{I\otimes I\}} 
+                   P\,\sigma\,P\,.
+\]</div>
+<p>Thus the actual final state is</p>
+<div class="arithmatex">\[
+\rho_f
+=\;\mathcal E^{(0,3)}\!\bigl(
+   \mathrm{CNOT}_{0\to3}\,
+   H_0\,
+   \mathcal E^{(2,1)}\!\bigl(\mathrm{CNOT}_{2\to1}\,H_2\,\rho_0\,H_2^\dagger\,\mathrm{CNOT}_{2\to1}^\dagger\bigr)\,
+   H_0^\dagger\,
+   \mathrm{CNOT}_{0\to3}^\dagger
+  \bigr)\,.
+\]</div>
+<p>The \emph{physical‐state fidelity} is</p>
+<div class="arithmatex">\[
+F(p)\;=\;\bigl\langle\psi_{\rm ideal}\bigr|\,
+            \rho_f\,
+            \bigl|\psi_{\rm ideal}\bigr\rangle
+\,,\qquad
+|\psi_{\rm ideal}\rangle
+=\;U_{\rm ideal}\,|0000\rangle\,.
+\]</div>
+<hr />
+<p><strong>1. Unitary‐covariance of the Pauli‐depolarizing channel</strong></p>
+<p>Because each <span class="arithmatex">\(\mathcal E^{(ij)}\)</span> is a uniform average over the non‐identity two‐qubit Pauli group, it is covariant under any Clifford unitary on qubits <span class="arithmatex">\(i,j\)</span>.  In particular for a Clifford <span class="arithmatex">\(V\)</span> on <span class="arithmatex">\((i,j)\)</span>,</p>
+<div class="arithmatex">\[
+V^\dagger\,\mathcal E^{(ij)}(\sigma)\,V
+=\mathcal E^{(ij)}\!\bigl(V^\dagger\,\sigma\,V\bigr)\,.
+\]</div>
+<p>Both CNOT and <span class="arithmatex">\(H\)</span> are Cliffords.  Hence in the fidelity</p>
+<div class="arithmatex">\[
+F
+=\Tr\Bigl[\,|\psi_{\rm ideal}\rangle\langle\psi_{\rm ideal}|\;\rho_f\Bigr]
+\]</div>
+<p>we may cyclically commute the ideal unitaries <span class="arithmatex">\(U_{\rm ideal}\)</span> past the <span class="arithmatex">\(\mathcal E\)</span>‐channels, reducing the problem to computing the fidelity of the \emph{intermediate} pure state immediately before each noise channel.</p>
+<hr />
+<p><strong>2. State after the first two gates (before <span class="arithmatex">\(\mathrm{CNOT}_{0\to3}\)</span>)</strong></p>
+<p>Compute</p>
+<div class="arithmatex">\[
+|\phi\rangle
+\;=\;\mathrm{CNOT}_{2\to1}\,H_2\,|0000\rangle.
+\]</div>
+<ol>
+<li><span class="arithmatex">\(H_2\,|0000\rangle = \tfrac1{\sqrt2}(|0000\rangle + |0010\rangle)\)</span>.</li>
+<li><span class="arithmatex">\(\mathrm{CNOT}_{2\to1}\)</span> flips qubit 1 iff qubit 2=1, so</li>
+</ol>
+<div class="arithmatex">\[
+|\phi\rangle
+=\frac1{\sqrt2}\bigl(|0\,0\,0\,0\rangle+|0\,1\,1\,0\rangle\bigr)
+=\;|0\!\rangle_0\;\otimes\;\frac{|00\rangle_{21}+|11\rangle_{21}}{\sqrt2}\;\otimes\;|0\!\rangle_3.
+\]</div>
+<p>Thus</p>
+<div class="arithmatex">\[
+|\phi\rangle
+=\;|\phi_{21}\rangle\;\otimes\;|\phi_{03}\rangle,
+\]</div>
+<p>with a Bell‐state <span class="arithmatex">\(|\phi_{21}\rangle=|\Phi^+\rangle\)</span> on qubits <span class="arithmatex">\((2,1)\)</span> and <span class="arithmatex">\(|\phi_{03}\rangle=|00\rangle\)</span> on <span class="arithmatex">\((0,3)\)</span>.</p>
+<hr />
+<p><strong>3. Fidelity factorizes on disjoint subsystems</strong></p>
+<p>Because the two noise channels act on disjoint qubit‐pairs <span class="arithmatex">\((2,1)\)</span> and <span class="arithmatex">\((0,3)\)</span>, and the pre‐noise state <span class="arithmatex">\(|\phi\rangle\)</span> is a product across that split, the total fidelity factorizes:</p>
+<div class="arithmatex">\[
+F(p)
+=\bigl\langle\phi_{21}\bigr|\,
+  \mathcal E^{(2,1)}\bigl(|\phi_{21}\rangle\langle\phi_{21}|\bigr)\,
+  \bigl|\phi_{21}\bigr\rangle
+\;\times\;
+\bigl\langle\phi_{03}\bigr|\,
+  \mathcal E^{(0,3)}\bigl(|\phi_{03}\rangle\langle\phi_{03}|\bigr)\,
+  \bigl|\phi_{03}\bigr\rangle
+\;\equiv\;F_{21}(p)\,F_{03}(p)\,.
+\]</div>
+<hr />
+<p><strong>4. Single‐channel fidelities</strong></p>
+<p>A two‐qubit depolarizing channel <span class="arithmatex">\(\mathcal E\)</span> with error‐rate <span class="arithmatex">\(p\)</span> has Kraus operators</p>
+<div class="arithmatex">\[
+K_{I}= \sqrt{1-p}\,I\,,\quad
+K_{P}=\sqrt{\tfrac p{15}}\,P\quad(P\neq I\text{ a 2‐qubit Pauli}),
+\]</div>
+<p>and for any pure stabilizer state <span class="arithmatex">\(|\psi\rangle\)</span> on 2 qubits the fidelity is</p>
+<div class="arithmatex">\[
+\langle\psi|\mathcal E(|\psi\rangle\langle\psi|)\,|\psi\rangle
+=(1-p)\;+\;\frac p{15}\sum_{P\neq I}
+   \bigl|\langle\psi|P|\psi\rangle\bigr|^2.
+\]</div>
+<p>Since a 2‐qubit stabilizer state has exactly three non‐identity Pauli stabilizers,
+<span class="arithmatex">\(\langle\psi|P|\psi\rangle=\pm1\)</span> for those 3 and <span class="arithmatex">\(0\)</span> for the other 12, one finds</p>
+<div class="arithmatex">\[
+F_{\rm stab}(p)
+=1-p\;+\;\frac p{15}\times3
+=1-\frac{12}{15}\,p
+=1-\frac{4}{5}\,p.
+\]</div>
+<p>In our case both subsystems are 2‐qubit stabilizer states:
+– <span class="arithmatex">\(|\phi_{21}\rangle=|\Phi^+\rangle\)</span><br />
+– <span class="arithmatex">\(|\phi_{03}\rangle=|00\rangle\)</span><br />
+hence</p>
+<div class="arithmatex">\[
+F_{21}(p)=1-\tfrac45p,
+\qquad
+F_{03}(p)=1-\tfrac45p.
+\]</div>
+<hr />
+<p><strong>5. Final expression</strong></p>
+<p>Therefore the physical state fidelity of the full 4‐qubit output is</p>
+<div class="arithmatex">\[
+\boxed{%
+F(p)\;=\;\Bigl(1-\tfrac45\,p\Bigr)^2
+\;=\;1-\frac{8}{5}\,p+\frac{16}{25}\,p^2\,.}
+\]</div>
+<p><strong>Final Answer:</strong>  </p>
+<div class="arithmatex">\[
+\boxed{F_{\rm phys}(p)=\bigl(1-\tfrac45\,p\bigr)^{2}\,.}
+\]</div></div>
+</article>
+
+
+<article class="message role-user">
+    <div class="meta">
+        <span class="badge">User</span>
+        <span class="idx">#3</span>
+    </div>
+    <div class="content markdown-body"><h2 id="subproblem-2">Checkpoint 2</h2>
+<p>Suppose that we wish to prepare a logical two-qubit GHZ state  <span class="arithmatex">\((|00\rangle_{AB}+|11\rangle_{AB})/\sqrt{2}\)</span> in the [[4,2,2]] code. To do so, we use the following state preparation circuit:</p>
+<div class="arithmatex">\[
+(CNOT_{03}) (H_0) (CNOT_{21}) (H_2).
+\]</div>
+<p>Note that this equation is written in matrix multiplication order, while the quantum operations in the circuit occur in the reverse order (from right-to-left in the above equation). <span class="arithmatex">\(H\)</span> is a single-qubit Hadamard gate.</p>
+<p>What is the logical state fidelity of the final 2-qubit logical state at the end of the circuit as a function of the two-qubit gate error rate <span class="arithmatex">\(p\)</span>, assuming the state is post-selected on all detectable errors in the code?</p></div>
+</article>
+
+
+<article class="message role-assistant">
+    <div class="meta">
+        <span class="badge">Assistant</span>
+        <span class="idx">#4</span>
+    </div>
+    <div class="content markdown-body"><ol>
+<li>Notation and setup<br />
+• Label physical qubits 0,1,2,3.<br />
+• Ideal state‐preparation unitary (right‐to‐left)  </li>
+</ol>
+<div class="arithmatex">\[
+U = \mathrm{CNOT}_{0\to3}\;H_0\;\mathrm{CNOT}_{2\to1}\;H_2\,.
+\]</div>
+<p>• After each two‐qubit CNOT<span class="arithmatex">\(_{i\to j}\)</span> we insert a depolarizing channel on qubits <span class="arithmatex">\((i,j)\)</span> with error‐rate <span class="arithmatex">\(p\)</span>:  </p>
+<div class="arithmatex">\[
+=(1-p)\,\rho\;+\;\frac p{15}
+   \sum_{P\neq I\otimes I}P\,\rho\,P\,,\quad
+\]</div>
+<p>• We assume the Hadamards are perfect.  </p>
+<ol start="2">
+<li>Error operators and post‐selection<br />
+Because the two CNOT gates act on disjoint qubit pairs <span class="arithmatex">\(\{2,1\}\)</span> and <span class="arithmatex">\(\{0,3\}\)</span>, and no subsequent gate couples these pairs, the two error channels produce independent Pauli errors  </li>
+</ol>
+<div class="arithmatex">\[
+\]</div>
+<p>with  </p>
+<div class="arithmatex">\[
+\]</div>
+<p>These errors commute with the ideal unitaries, so the net effect is a single Pauli  </p>
+<div class="arithmatex">\[
+E_{\rm tot}=E_1\otimes E_2\equiv P_0\otimes P_1\otimes P_2\otimes P_3
+\]</div>
+<p>on qubits <span class="arithmatex">\((0,1,2,3)\)</span>.  </p>
+<p>We then measure the stabilizers  </p>
+<div class="arithmatex">\[
+\]</div>
+<p>and post‐select on both outcomes <span class="arithmatex">\(+1\)</span>.  Equivalently we keep only those <span class="arithmatex">\(E_{\rm tot}\)</span> which commute with both <span class="arithmatex">\(S_X\)</span> and <span class="arithmatex">\(S_Z\)</span>.  </p>
+<ol start="3">
+<li>Logical fidelity under post‐selection<br />
+The logical state is undisturbed exactly when <span class="arithmatex">\(E_{\rm tot}\)</span> lies in the stabilizer group  </li>
+</ol>
+<div class="arithmatex">\[
+\mathcal S=\{\,I,\;X_0X_1X_2X_3,\;Z_0Z_1Z_2Z_3,\;Y_0Y_1Y_2Y_3\}\,.
+\]</div>
+<p>Any other <span class="arithmatex">\(E_{\rm tot}\)</span> that still commutes with <span class="arithmatex">\(S_X,S_Z\)</span> is a nontrivial logical Pauli error and yields zero overlap with the GHZ state.  Hence the conditional (post‐selected) logical fidelity is  </p>
+<div class="arithmatex">\[
+F_{\rm log}(p)
+=\Pr\bigl[E_{\rm tot}\in\mathcal S\;\big|\;
+             [E_{\rm tot},S_X]=[E_{\rm tot},S_Z]=0\bigr]
+=\frac{P_{\rm triv}(p)}{P_{\rm succ}(p)}\,,
+\]</div>
+<p>where<br />
+- <span class="arithmatex">\(P_{\rm triv}(p)=\Pr[E_{\rm tot}\in\mathcal S]\)</span>,<br />
+- <span class="arithmatex">\(P_{\rm succ}(p)=\Pr\bigl([E_{\rm tot},S_X]=[E_{\rm tot},S_Z]=0\bigr)\)</span><br />
+are evaluated under the product distribution on <span class="arithmatex">\((E_1,E_2)\)</span>.  </p>
+<ol start="4">
+<li>Probability of trivial (stabilizer) error<br />
+To get <span class="arithmatex">\(E_{\rm tot}=I\)</span> requires no error on either CNOT: probability <span class="arithmatex">\((1-p)^2\)</span>.<br />
+To get <span class="arithmatex">\(E_{\rm tot}=X_0X_1X_2X_3\)</span> requires each channel to emit the two-qubit Pauli “<span class="arithmatex">\(XX\)</span>” on its pair: probability <span class="arithmatex">\((p/15)^2\)</span>.  Similarly for <span class="arithmatex">\(ZZZZ\)</span> and <span class="arithmatex">\(YYYY\)</span>.  Hence  </li>
+</ol>
+<div class="arithmatex">\[
+P_{\rm triv}(p)
+=(1-p)^2 \;+\;3\!\left(\frac p{15}\right)^{\!2}
+=(1-p)^2+\frac{p^2}{75}\,.
+\]</div>
+<ol start="5">
+<li>Probability of passing the stabilizer check<br />
+Define for a single two-qubit error <span class="arithmatex">\(E\in\{I,X,Y,Z\}^{\otimes2}\)</span> the “parity‐weight” exponents  </li>
+</ol>
+<div class="arithmatex">\[
+n_X(E)=\#\{\,\text{factors of }E\text{ that }\!{\in\{Z,Y\}\}\},\quad
+n_Z(E)=\#\{\,\text{factors of }E\text{ that }\!{\in\{X,Y\}\}\}.
+\]</div>
+<p>Then <span class="arithmatex">\(E_{\rm tot}=E_1\otimes E_2\)</span> commutes with <span class="arithmatex">\(S_X\)</span> iff <span class="arithmatex">\(n_X(E_1)+n_X(E_2)\)</span> is even, and with <span class="arithmatex">\(S_Z\)</span> iff <span class="arithmatex">\(n_Z(E_1)+n_Z(E_2)\)</span> is even.  One shows by a two-variable Fourier (generating-function) trick that  </p>
+<div class="arithmatex">\[
+P_{\rm succ}(p)
+=\frac14\sum_{\eps_X,\eps_Z=\pm1}
+\Bigl[\;A(\eps_X,\eps_Z)\Bigr]^2,
+\]</div>
+<p>where</p>
+<div class="arithmatex">\[
+A(\eps_X,\eps_Z)
+=\sum_{E}\Pr[E]\;\eps_X^{\,n_X(E)}\;\eps_Z^{\,n_Z(E)}
+=(1-p)\;+\;\frac p{15}\Bigl[(1+\eps_X)^2(1+\eps_Z)^2-1\Bigr].
+\]</div>
+<p>Evaluating the four cases <span class="arithmatex">\((\eps_X,\eps_Z)=(\pm1,\pm1)\)</span> gives  </p>
+<div class="arithmatex">\[
+A(1,1)=1,
+\quad
+A(1,-1)=A(-1,1)=A(-1,-1)=1-\frac{16}{15}p,
+\]</div>
+<p>and hence</p>
+<div class="arithmatex">\[
+P_{\rm succ}(p)
+=\frac14\Bigl[1+3\Bigl(1-\tfrac{16}{15}p\Bigr)^2\Bigr]
+=\frac{75-120p+64p^2}{75}
+=1-\frac{8}{5}p+\frac{64}{75}p^2.
+\]</div>
+<ol start="6">
+<li>Final ratio<br />
+Putting (4) and (5) together,</li>
+</ol>
+<div class="arithmatex">\[
+F_{\rm log}(p)
+=\frac{P_{\rm triv}(p)}{P_{\rm succ}(p)}
+=\frac{(1-p)^2+\tfrac{p^2}{75}}
+      {1-\tfrac{8}{5}p+\tfrac{64}{75}p^2}
+=\frac{75-150p+76p^2}{75-120p+64p^2}\,.
+\]</div>
+<p><strong>Final Answer:</strong>  </p>
+<div class="arithmatex">\[
+\boxed{%
+F_{\rm log}(p)
+=\frac{(1-p)^2 + \tfrac{p^2}{75}}
+     {1 - \tfrac{8}{5}\,p + \tfrac{64}{75}\,p^2}
+\;=\;
+\frac{75 - 150\,p + 76\,p^2}{75 - 120\,p + 64\,p^2}\,.}
+\]</div></div>
+</article>
+
+
+<article class="message role-user">
+    <div class="meta">
+        <span class="badge">User</span>
+        <span class="idx">#5</span>
+    </div>
+    <div class="content markdown-body"><h2 id="subproblem-3">Checkpoint 3</h2>
+<p>Suppose that we prepare a logical two-qubit <span class="arithmatex">\(|00\rangle_{AB}\)</span> state in the [[4,2,2]] code. To do so, we introduce an ancilla qubit, qubit 4, and use the following state preparation circuit:</p>
+<div class="arithmatex">\[
+M_4 (CNOT_{04}) (CNOT_{34}) (CNOT_{23}) (CNOT_{10}) (CNOT_{12}) (H_1)
+\]</div>
+<p>Note that this equation is written in matrix multiplication order, while the quantum operations in the circuit occur in the reverse order (from right-to-left in the above equation). <span class="arithmatex">\(H\)</span> is a single-qubit Hadamard gate and <span class="arithmatex">\(M\)</span> is a single-qubit measurement. The ancilla is used to detect errors in the state preparation circuit and makes the circuit fault-tolerant. If the ancilla measurement is <span class="arithmatex">\(|0\rangle\)</span> (<span class="arithmatex">\(|1\rangle\)</span>), the state preparation succeeds (fails).</p>
+<p>What is the logical state fidelity of the final 2-qubit logical state at the end of the circuit as a function of two-qubit gate error rate <span class="arithmatex">\(p\)</span>, assuming the state is post-selected on all detectable errors in the code and on the ancilla qubit measuring <span class="arithmatex">\(|0\rangle\)</span>?</p></div>
+</article>
+
+
+<article class="message role-assistant">
+    <div class="meta">
+        <span class="badge">Assistant</span>
+        <span class="idx">#6</span>
+    </div>
+    <div class="content markdown-body"><p><strong>Step‐by‐Step Derivation</strong></p>
+<p>We label qubits 0–3 as the four data qubits of the [[4,2,2]] code and qubit 4 as the ancilla.  The ideal circuit (right–to–left) is</p>
+<div class="arithmatex">\[
+U_{\rm ideal}
+=\;M_4\;\bigl(\mathrm{CNOT}_{0\to4}\bigr)\,\bigl(\mathrm{CNOT}_{3\to4}\bigr)\,\bigl(\mathrm{CNOT}_{2\to3}\bigr)\,
+           \bigl(\mathrm{CNOT}_{1\to0}\bigr)\,\bigl(\mathrm{CNOT}_{1\to2}\bigr)\,(H_1)\,,
+\]</div>
+<p>starting from <span class="arithmatex">\(|00000\rangle\)</span>.  Aside from the single‐qubit Hadamard <span class="arithmatex">\(H_1\)</span> (assumed perfect) and the final ancilla measurement <span class="arithmatex">\(M_4\)</span> (in the <span class="arithmatex">\(Z\)</span>‐basis), each CNOT<span class="arithmatex">\(_{i\to j}\)</span> is followed by an independent two‐qubit depolarizing channel of strength <span class="arithmatex">\(p\)</span> on qubits <span class="arithmatex">\((i,j)\)</span>.  Concretely, immediately after each CNOT we apply</p>
+<div class="arithmatex">\[
+\mathcal E(\rho)
+=(1-p)\,\rho\;+\;\frac p{15}\sum_{P\neq I\otimes I}P\,\rho\,P\,,
+\]</div>
+<p><span class="arithmatex">\(P\in\{I,X,Y,Z\}^{\otimes2}\)</span>.  </p>
+<p>We then post‐select on<br />
+(a) the ancilla measuring <span class="arithmatex">\(|0\rangle\)</span> and<br />
+(b) both code stabilizers <span class="arithmatex">\(S_X=X_0X_1X_2X_3\)</span> and <span class="arithmatex">\(S_Z=Z_0Z_1Z_2Z_3\)</span> returning <span class="arithmatex">\(+1\)</span>.<br />
+Among the surviving runs, any nontrivial logical Pauli on the 4 data qubits has zero overlap with the ideal codeword, so the logical fidelity is simply the probability of “no logical error” given acceptance.  </p>
+<ol>
+<li>
+<p><strong>No linear‐in‐<span class="arithmatex">\(p\)</span> decay</strong><br />
+   A single fault (one CNOT‐error) can only insert at most one non‐identity Pauli <em>into</em> the final 5‐qubit state <em>or</em> two non‐identities on the same pair of qubits—but in <em>every</em> single‐fault case either<br />
+    – the ancilla‐measurement <span class="arithmatex">\(M_4\)</span> clicks (ancilla ends up <span class="arithmatex">\(|1\rangle\)</span>), or<br />
+    – the final one‐qubit Pauli on the data anticommutes with one of <span class="arithmatex">\(S_X,S_Z\)</span>, so the code‐stabilizer check fails.<br />
+   Hence <em>every</em> <span class="arithmatex">\(\mathcal O(p)\)</span> event is rejected.  The leading decay in the <em>accepted</em> logical fidelity comes only at <span class="arithmatex">\(\mathcal O(p^2)\)</span>.</p>
+</li>
+<li>
+<p><strong>Enumeration of the <span class="arithmatex">\(\bm{\mathcal O(p^2)}\)</span> logical‐error events</strong><br />
+   At second order, two <em>distinct</em> CNOTs each introduce one non‐identity Pauli.  By a standard “push‐through‐the‐Clifford” argument one shows that each such single‐Pauli error (at one CNOT) propagates forward to <em>exactly one</em> data qubit at the end <em>and</em> to the ancilla <em>only</em> via <span class="arithmatex">\(Z\)</span> on the ancilla (so as not to trigger <span class="arithmatex">\(M_4\)</span>).  One may tabulate, for each CNOT location <span class="arithmatex">\(c\in\{(1\to2),(1\to0),(2\to3),(3\to4),(0\to4)\}\)</span>, the small set <span class="arithmatex">\(L_c\)</span> of single‐Pauli faults which:</p>
+</li>
+</ol>
+<p>(a) propagate to <em>exactly one</em> data‐qubit Pauli (so that two such faults can combine into a weight-2 data error),<br />
+   (b) propagate to <span class="arithmatex">\(I\)</span> or <span class="arithmatex">\(Z\)</span> on the ancilla (so the ancilla still reads <span class="arithmatex">\(|0\rangle\)</span>),  </p>
+<p>and reject all other single‐fault Pauli insertions.  One then finds</p>
+<p>– Only <span class="arithmatex">\(Z\)</span>–type faults on the “interior” CNOTs {1→2,1→0,2→3,3→4} pass both conditions;<br />
+   – On the final CNOT<span class="arithmatex">\(_{0\to4}\)</span> one may also pass with an <span class="arithmatex">\(X\)</span> or <span class="arithmatex">\(Y\)</span> on data‐qubit 0 (and <span class="arithmatex">\(I\)</span> on the ancilla).  </p>
+<p>Hence there are very few single‐fault “surviving” patterns, each labeled by  </p>
+<div class="arithmatex">\[
+     c\;=\;\text{which CNOT},\quad
+     a_c\;=\;\text{the one data‐qubit hit},\quad
+     T\in\{X,Y,Z\}\;\text{the Pauli type}.
+\]</div>
+<p>Two such faults (at <span class="arithmatex">\(c_1&lt;c_2\)</span>) produce an <em>undetected</em> weight-2 data‐error exactly when they hit <em>two different</em> data qubits <span class="arithmatex">\(a_{c_1}\neq a_{c_2}\)</span> <em>and</em> are of the <em>same</em> Pauli type <span class="arithmatex">\(T\)</span>.  </p>
+<p>A straightforward count (grouping the five CNOTs and the few surviving single‐fault patterns <span class="arithmatex">\(L_c\)</span>) shows that the total number of distinct two‐fault combinations that</p>
+<ul>
+<li>survive ancilla‐post‐selection (<span class="arithmatex">\(P_4\in\{I,Z\}\)</span>),  </li>
+<li>commute with both <span class="arithmatex">\(S_X,S_Z\)</span> on the data (i.e.\ slip code‐detection),  </li>
+<li>yet lie <em>outside</em> the stabilizer (hence are real logical errors)</li>
+</ul>
+<p>is exactly</p>
+<div class="arithmatex">\[
+     \sum_{c_1&lt;c_2}\;\sum_{T\in\{X,Y,Z\}}
+     \bigl|\,\{\,\text{patterns at }c_1\text{ of type }T\}\bigr|\;\times\;
+     \bigl|\,\{\,\text{patterns at }c_2\text{ of type }T\}\bigr|
+   \;=\;27\,. 
+\]</div>
+<p>Since <em>each</em> pair –<span class="arithmatex">\((P_{c_1}\neq I,\;P_{c_2}\neq I)\)</span>– occurs with probability <span class="arithmatex">\((p/15)^2\)</span>, the total <span class="arithmatex">\(\mathcal O(p^2)\)</span> probability of an <em>undetected logical error</em> is</p>
+<div class="arithmatex">\[
+     P_{\rm logical}^{(2)}
+   =\;27\;\frac{p^2}{15^2}
+   =\;\frac{27}{225}\,p^2
+   =\;\frac{3}{25}\,p^2.
+\]</div>
+<ol start="3">
+<li><strong>Putting it together</strong><br />
+   Let <span class="arithmatex">\(P_{\rm accept}(p)\)</span> be the probability that <em>no</em> single‐fault is detected (so <span class="arithmatex">\(P_{\rm accept}=1-\mathcal O(p)\)</span>) and let <span class="arithmatex">\(P_{\rm no\;log}(p)\)</span> be the probability that <em>no</em> logical error has occurred <em>and</em> the run is accepted.  We have</li>
+</ol>
+<div class="arithmatex">\[
+     P_{\rm accept}(p)=1-5p+O(p^2),
+   \qquad
+     P_{\rm no\;log}(p)=P_{\rm accept}(p)-P_{\rm logical}(p)
+                 =1-5p-\tfrac{3}{25}p^2+O(p^3).
+\]</div>
+<p>The <em>conditional</em> logical‐fidelity on the <em>accepted</em> runs is</p>
+<div class="arithmatex">\[
+     F_{\rm log}(p)
+   =\frac{P_{\rm no\;log}(p)}{P_{\rm accept}(p)}
+   =1-\frac{3}{25}\,p^2+O(p^3)\,,
+\]</div>
+<p>i.e.\ <em>there is</em> no <span class="arithmatex">\(\mathcal O(p)\)</span> drop at all, and the first nontrivial infidelity is quadratic in <span class="arithmatex">\(p\)</span>.</p>
+<p><strong>Final Answer:</strong><br />
+To second order in the gate‐error rate <span class="arithmatex">\(p\)</span>, the logical‐state fidelity (conditioned on both the ancilla measuring <span class="arithmatex">\(|0\rangle\)</span> and passing the code stabilizer checks) is</p>
+<div class="arithmatex">\[
+\boxed{%
+F_{\rm log}(p)
+\;=\;1\;-\;\frac{3}{25}\,p^2\;+\;O\bigl(p^3\bigr)\,.}
+\]</div></div>
+</article>
+
+
+<article class="message role-user">
+    <div class="meta">
+        <span class="badge">User</span>
+        <span class="idx">#7</span>
+    </div>
+    <div class="content markdown-body"><p>Populate your final answer into the code template provided below. This step is purely for formatting/display purposes. No additional reasoning or derivation should be performed. Do not import any modules or packages beyond what is provided in the template.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">answer</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the expression of the logical state fidelity of the final 2-qubit logical state</span>
+<span class="sd">    at the end of the circuit as a function of two-qubit gate error rate $p$.</span>
+
+<span class="sd">    Inputs</span>
+<span class="sd">    ----------</span>
+<span class="sd">    p: sympy.Symbol, two-qubit gate error rate, $p$</span>
+
+<span class="sd">    Outputs</span>
+<span class="sd">    ----------</span>
+<span class="sd">    F_logical: sympy.Expr, logical state fidelity of the final 2-qubit logical state</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># ------------------ FILL IN YOUR RESULTS BELOW ------------------</span>
+    <span class="n">F_logical</span> <span class="o">=</span> <span class="o">...</span>  <span class="c1"># a SymPy expression of inputs</span>
+    <span class="c1"># ---------------------------------------------------------------</span>
+
+    <span class="k">return</span> <span class="n">F_logical</span>
+</code></pre></div></div>
+</article>
+
+
+<article class="message role-assistant">
+    <div class="meta">
+        <span class="badge">Assistant</span>
+        <span class="idx">#8</span>
+    </div>
+    <div class="content markdown-body"><div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">answer</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the expression of the logical state fidelity of the final 2-qubit logical state</span>
+<span class="sd">    at the end of the circuit as a function of two-qubit gate error rate $p$.</span>
+
+<span class="sd">    Inputs</span>
+<span class="sd">    ----------</span>
+<span class="sd">    p: sympy.Symbol, two-qubit gate error rate, $p$</span>
+
+<span class="sd">    Outputs</span>
+<span class="sd">    ----------</span>
+<span class="sd">    F_logical: sympy.Expr, logical state fidelity of the final 2-qubit logical state</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># ------------------ FILL IN YOUR RESULTS BELOW ------------------</span>
+    <span class="n">F_logical</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">sp</span><span class="o">.</span><span class="n">Rational</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span> <span class="o">*</span> <span class="n">p</span><span class="o">**</span><span class="mi">2</span>
+    <span class="c1"># ---------------------------------------------------------------</span>
+
+    <span class="k">return</span> <span class="n">F_logical</span>
+</code></pre></div></div>
+</article>
+
+</div>
+
+<footer>
+  Generated at 2025-09-24T22:02:10.647356
+</footer>
+
+<script>
+(function() {
+  // Tabs
+  const tabs = document.querySelectorAll('.tab');
+  const panels = document.querySelectorAll('.tab-content');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      const target = document.querySelector(tab.dataset.target);
+      if (target) target.classList.add('active');
+    });
+  });
+
+  // Theme toggle
+  const toggleBtn = document.getElementById('theme-toggle');
+  function setTheme(dark) {
+    if (dark) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('dark', '1');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('dark', '0');
+    }
+  }
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const stored = localStorage.getItem('dark');
+  setTheme(stored === null ? prefersDark : stored === '1');
+
+  toggleBtn.addEventListener('click', () => {
+    const isDark = document.documentElement.classList.contains('dark');
+    setTheme(!isDark);
+  });
+})();
+</script>
+</body>
+</html>

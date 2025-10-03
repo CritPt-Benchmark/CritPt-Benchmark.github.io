@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Checkpoint-1</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.codehilite .hll { background-color: #ffffcc }
+.codehilite { background: #f8f8f8; }
+.codehilite .c { color: #3D7B7B; font-style: italic } /* Comment */
+.codehilite .err { border: 1px solid #F00 } /* Error */
+.codehilite .k { color: #008000; font-weight: bold } /* Keyword */
+.codehilite .o { color: #666 } /* Operator */
+.codehilite .ch { color: #3D7B7B; font-style: italic } /* Comment.Hashbang */
+.codehilite .cm { color: #3D7B7B; font-style: italic } /* Comment.Multiline */
+.codehilite .cp { color: #9C6500 } /* Comment.Preproc */
+.codehilite .cpf { color: #3D7B7B; font-style: italic } /* Comment.PreprocFile */
+.codehilite .c1 { color: #3D7B7B; font-style: italic } /* Comment.Single */
+.codehilite .cs { color: #3D7B7B; font-style: italic } /* Comment.Special */
+.codehilite .gd { color: #A00000 } /* Generic.Deleted */
+.codehilite .ge { font-style: italic } /* Generic.Emph */
+.codehilite .ges { font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+.codehilite .gr { color: #E40000 } /* Generic.Error */
+.codehilite .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.codehilite .gi { color: #008400 } /* Generic.Inserted */
+.codehilite .go { color: #717171 } /* Generic.Output */
+.codehilite .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.codehilite .gs { font-weight: bold } /* Generic.Strong */
+.codehilite .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.codehilite .gt { color: #04D } /* Generic.Traceback */
+.codehilite .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.codehilite .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.codehilite .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.codehilite .kp { color: #008000 } /* Keyword.Pseudo */
+.codehilite .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.codehilite .kt { color: #B00040 } /* Keyword.Type */
+.codehilite .m { color: #666 } /* Literal.Number */
+.codehilite .s { color: #BA2121 } /* Literal.String */
+.codehilite .na { color: #687822 } /* Name.Attribute */
+.codehilite .nb { color: #008000 } /* Name.Builtin */
+.codehilite .nc { color: #00F; font-weight: bold } /* Name.Class */
+.codehilite .no { color: #800 } /* Name.Constant */
+.codehilite .nd { color: #A2F } /* Name.Decorator */
+.codehilite .ni { color: #717171; font-weight: bold } /* Name.Entity */
+.codehilite .ne { color: #CB3F38; font-weight: bold } /* Name.Exception */
+.codehilite .nf { color: #00F } /* Name.Function */
+.codehilite .nl { color: #767600 } /* Name.Label */
+.codehilite .nn { color: #00F; font-weight: bold } /* Name.Namespace */
+.codehilite .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.codehilite .nv { color: #19177C } /* Name.Variable */
+.codehilite .ow { color: #A2F; font-weight: bold } /* Operator.Word */
+.codehilite .w { color: #BBB } /* Text.Whitespace */
+.codehilite .mb { color: #666 } /* Literal.Number.Bin */
+.codehilite .mf { color: #666 } /* Literal.Number.Float */
+.codehilite .mh { color: #666 } /* Literal.Number.Hex */
+.codehilite .mi { color: #666 } /* Literal.Number.Integer */
+.codehilite .mo { color: #666 } /* Literal.Number.Oct */
+.codehilite .sa { color: #BA2121 } /* Literal.String.Affix */
+.codehilite .sb { color: #BA2121 } /* Literal.String.Backtick */
+.codehilite .sc { color: #BA2121 } /* Literal.String.Char */
+.codehilite .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.codehilite .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.codehilite .s2 { color: #BA2121 } /* Literal.String.Double */
+.codehilite .se { color: #AA5D1F; font-weight: bold } /* Literal.String.Escape */
+.codehilite .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.codehilite .si { color: #A45A77; font-weight: bold } /* Literal.String.Interpol */
+.codehilite .sx { color: #008000 } /* Literal.String.Other */
+.codehilite .sr { color: #A45A77 } /* Literal.String.Regex */
+.codehilite .s1 { color: #BA2121 } /* Literal.String.Single */
+.codehilite .ss { color: #19177C } /* Literal.String.Symbol */
+.codehilite .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.codehilite .fm { color: #00F } /* Name.Function.Magic */
+.codehilite .vc { color: #19177C } /* Name.Variable.Class */
+.codehilite .vg { color: #19177C } /* Name.Variable.Global */
+.codehilite .vi { color: #19177C } /* Name.Variable.Instance */
+.codehilite .vm { color: #19177C } /* Name.Variable.Magic */
+.codehilite .il { color: #666 } /* Literal.Number.Integer.Long */
+
+</style>
+<style>
+    :root {
+  --bg: #ffffff;
+  --fg: #222222;
+  --muted: #555555;
+  --border: #e0e0e0;
+  --accent: #005fcc;
+  --code-bg: #f6f8fa;
+  --role-user: #0ea5e9;
+  --role-assistant: #22c55e;
+  --role-system: #9ca3af;
+  --return-code: #a35291;
+}
+html.dark {
+  --bg: #0b0b0b;
+  --fg: #e8e8e8;
+  --muted: #a0a0a0;
+  --border: #333333;
+  --accent: #3b82f6;
+  --code-bg: #111827;
+  --role-user: #0ea5e9;
+  --role-assistant: #22c55e;
+  --role-system: #9ca3af;
+  --return-code: #a35291;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
+  line-height: 1.6;
+}
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 10;
+}
+h1 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+}
+.tab {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--border);
+  border-bottom: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 6px 6px 0 0;
+  color: var(--fg);
+}
+.tab.active {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+.tab-content {
+  display: none;
+  padding: 1rem 1.25rem;
+  border-top: 1px solid var(--border);
+}
+.tab-content.active {
+  display: block;
+}
+#theme-toggle {
+  border: 1px solid var(--border);
+  padding: 0.2rem 0.6rem;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  cursor: pointer;
+  background: transparent;
+  color: var(--fg);
+}
+.main {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.message {
+  border: 1px solid var(--border);
+  border-left-width: 6px;
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+  background: rgba(0,0,0,0.02);
+}
+.message .meta {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.6rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.message .badge {
+  font-weight: 600;
+}
+.role-user {
+  border-left-color: var(--role-user);
+}
+.role-assistant {
+  border-left-color: var(--role-assistant);
+}
+.role-system {
+  border-left-color: var(--role-system);
+}
+.role-unknown {
+  border-left-color: var(--accent);
+}
+
+.output-code-container {
+  display: flex;
+  gap: 1rem;               /* space between children */
+  align-items: center;     /* vertical alignment */
+  justify-content: start;  /* horizontal alignment */
+}
+
+.output-code-container .codeblock {
+  flex: 0 1 auto;
+}
+
+.codeblock {
+  border: 1px solid var(--border);
+  border-left-width: 6px;
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+  background: rgba(0,0,0,0.02);
+}
+.codeblock-content {
+  margin-bottom: 0.6rem;
+  border: 1px dashed var(--border);
+  border-radius: 4px;
+  padding: 0.4rem 0.6rem;
+  background: rgba(0,0,0,0.02);
+}
+
+.codeblock.eval_code {
+  border-left-color: var(--role-user);
+}
+.codeblock.target_code {
+  border-left-color: var(--role-assistant);
+}
+.codeblock.output_code {
+  border-left-color: var(--role-system);
+}
+
+html.dark .codeblock-content {
+  background: rgba(255,255,255,0.03);
+}
+.codeblock > summary {
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none; /* remove default triangle in some browsers */
+}
+.codeblock > summary::-webkit-details-marker {
+  display: none; /* Safari/Chrome marker */
+}
+.codeblock > summary::before {
+  content: "▶ ";
+  display: inline-block;
+  transform: rotate(0deg);
+  transition: transform 0.12s ease-out;
+}
+.codeblock[open] > summary::before {
+  transform: rotate(90deg);
+}
+.codeblock .tag {
+  color: var(--muted);
+  font-weight: 400;
+  font-size: 0.85em;
+  margin-left: 0.25rem;
+}
+
+.markdown-body pre code {
+  background: var(--code-bg);
+  display: block;
+  padding: 0.75rem;
+  overflow-x: auto;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+.markdown-body code {
+  background: var(--code-bg);
+  padding: 0.15rem 0.3rem;
+  border-radius: 4px;
+}
+/* Extra info tree */
+details > summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+details .block {
+  padding-left: 1rem;
+  margin: 0.25rem 0 0.5rem 0;
+  border-left: 2px solid var(--border);
+}
+.kv .key {
+  font-weight: 600;
+}
+.kv .type {
+  color: var(--muted);
+  margin-left: 0.5rem;
+  font-size: 0.85rem;
+}
+footer {
+  margin: 2rem 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+/* CodeHilite (pygments) overrides to respect theme vars */
+.codehilite {
+  background: var(--code-bg) !important;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.75rem !important;
+}
+.reasoning {
+  margin-bottom: 0.6rem;
+  border: 1px dashed var(--border);
+  border-radius: 4px;
+  padding: 0.4rem 0.6rem;
+  background: rgba(0,0,0,0.02);
+}
+html.dark .reasoning {
+  background: rgba(255,255,255,0.03);
+}
+.reasoning > summary {
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none; /* remove default triangle in some browsers */
+}
+.reasoning > summary::-webkit-details-marker {
+  display: none; /* Safari/Chrome marker */
+}
+.reasoning > summary::before {
+  content: "▶ ";
+  display: inline-block;
+  transform: rotate(0deg);
+  transition: transform 0.12s ease-out;
+}
+.reasoning[open] > summary::before {
+  transform: rotate(90deg);
+}
+.reasoning .tag {
+  color: var(--muted);
+  font-weight: 400;
+  font-size: 0.85em;
+  margin-left: 0.25rem;
+}
+.reasoning-body {
+  margin-top: 0.5rem;
+}
+</style>
+
+<!-- ===== MATHJAX CONFIG ===== -->
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [ ["\\(","\\)"] ],
+    displayMath: [ ["\\[","\\]"] ],
+    processEscapes: true,
+    processEnvironments: true
+  },
+  options: {
+    ignoreHtmlClass: ".*",
+    processHtmlClass: "arithmatex"
+
+    // skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    // if you dynamically add content later, you can call MathJax.typesetPromise()
+  }
+};
+</script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<!-- ========================== -->
+</head>
+<body>
+<header>
+  <h1>Checkpoint-1</h1>
+  <div>
+    <button id="theme-toggle" aria-label="toggle dark mode">🌓</button>
+  </div>
+</header>
+
+<div class="main">
+  
+<article class="message role-system">
+    <div class="meta">
+        <span class="badge">System</span>
+        <span class="idx">#0</span>
+    </div>
+    <div class="content markdown-body"><p>You are a physics research assistant specializing in solving complex, research-level problems using precise, step-by-step reasoning.</p>
+<p><strong>Input</strong>
+Problems will be provided in Markdown format.</p>
+<p><strong>Output (Markdown format)</strong></p>
+<ol>
+<li><strong>Step-by-Step Derivation</strong> - Show every non-trivial step in the solution.  Justify steps using relevant physical laws, theorems, or mathematical identities.</li>
+<li><strong>Mathematical Typesetting</strong> - Use LaTeX for all mathematics:  <code>$...$</code> for inline expressions, <code>$$...$$</code> for display equations.</li>
+<li><strong>Conventions and Units</strong> - Follow the unit system and conventions specified in the problem.</li>
+<li>
+<p><strong>Final Answer</strong> - At the end of the solution,  start a new line with <strong>&ldquo;Final Answer:&rdquo;</strong>, and present the final result.</p>
+<p>For final answers involving values, follow the precision requirements specified in the problem.
+If no precision is specified:
+- If an exact value is possible, provide it (e.g., \$\sqrt(2)\$, \$\pi/4\$).
+- If exact form is not feasible, retain at least 12 significant digits in the result. </p>
+</li>
+<li>
+<p><strong>Formatting Compliance</strong> - If the user requests a specific output format (e.g., code, table),  provide the final answer accordingly.</p>
+</li>
+</ol></div>
+</article>
+
+
+<article class="message role-user">
+    <div class="meta">
+        <span class="badge">User</span>
+        <span class="idx">#1</span>
+    </div>
+    <div class="content markdown-body"><h1 id="problem-setup">Problem setup:</h1>
+<p>In quantum error correction, you encode quantum states into logical states made of many qubits in order to improve their resilience to errors. In quantum error detection, you do the same but can only detect the presence of errors and not correct them. In this problem, we will consider a single [[4,2,2]] quantum error detection code, which encodes two logical qubits into four physical qubits, and investigate how robust logical quantum operations in this code are to quantum errors.</p>
+<p>Our convention is that the four physical qubits in the [[4,2,2]] code are labelled 0,1,2,3. The two logical qubits are labelled A and B. The stabilizers are <span class="arithmatex">\(XXXX\)</span> and <span class="arithmatex">\(ZZZZ\)</span>, where <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(Z\)</span> are Pauli matrices. The logical <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(Z\)</span> operators on the two qubits are <span class="arithmatex">\(X_A = XIXI\)</span>, <span class="arithmatex">\(X_B=XXII\)</span>, <span class="arithmatex">\(Z_A = ZZII\)</span>, <span class="arithmatex">\(Z_B = ZIZI\)</span>, up to multiplication by stabilizers.</p>
+<p>We will consider different state preparation circuits consisting of controlled not <span class="arithmatex">\(CNOT_{ij}\)</span> gates, where <span class="arithmatex">\(CNOT_{ij}\)</span> has control qubit <span class="arithmatex">\(i\)</span> and target qubit <span class="arithmatex">\(j\)</span>. As a simple model of quantum errors in hardware, we will suppose that each <span class="arithmatex">\(CNOT_{ij}\)</span> gate in the circuit has a two qubit depolarizing error channel following it that produces one of the 15 non-identity two-qubit Paulis with equal probability <span class="arithmatex">\(p/15\)</span>. The probability <span class="arithmatex">\(p\)</span> indicates the probability of an error in a single two-qubit gate. We will assess the logical infidelity of certain state preparation protocols as a function of the physical infidelity <span class="arithmatex">\(p\)</span>.</p>
+<h1 id="subproblems">Checkpoints</h1>
+<h2 id="subproblem-1">Checkpoint 1</h2>
+<p>Suppose that we wish to prepare a logical two-qubit GHZ state  <span class="arithmatex">\((|00\rangle_{AB}+|11\rangle_{AB})/\sqrt{2}\)</span> in the [[4,2,2]] code. To do so, we use the following state preparation circuit:</p>
+<div class="arithmatex">\[
+(CNOT_{03}) (H_0) (CNOT_{21}) (H_2).
+\]</div>
+<p>Note that this equation is written in matrix multiplication order, while the quantum operations in the circuit occur in the reverse order (from right-to-left in the above equation). <span class="arithmatex">\(H\)</span> is a single-qubit Hadamard gate.</p>
+<p>What is the physical state fidelity of the final physical 4-qubit state at the end of the circuit as a function of the two-qubit gate error rate <span class="arithmatex">\(p\)</span>?</p></div>
+</article>
+
+
+<article class="message role-assistant">
+    <div class="meta">
+        <span class="badge">Assistant</span>
+        <span class="idx">#2</span>
+    </div>
+    
+                    <details class="reasoning">
+                      <summary>Reasoning <span class="tag">(model)</span></summary>
+                      <div class="markdown-body reasoning-body">
+                        <p>Let me work through this quantum error correction problem step by step.</p>
+<p>First, let me understand the [[4,2,2]] code:
+- 4 physical qubits (labeled 0,1,2,3)
+- 2 logical qubits (labeled A,B)
+- Stabilizers: <span class="arithmatex">\(XXXX\)</span> and <span class="arithmatex">\(ZZZZ\)</span>
+- Logical operators: <span class="arithmatex">\(X_A = XIXI\)</span>, <span class="arithmatex">\(X_B=XXII\)</span>, <span class="arithmatex">\(Z_A = ZZII\)</span>, <span class="arithmatex">\(Z_B = ZIZI\)</span></p>
+<p>The circuit is: <span class="arithmatex">\((CNOT_{03}) (H_0) (CNOT_{21}) (H_2)\)</span></p>
+<p>Starting from right to left:</p>
+<ol>
+<li>Apply <span class="arithmatex">\(H_2\)</span></li>
+<li>Apply <span class="arithmatex">\(CNOT_{21}\)</span></li>
+<li>Apply <span class="arithmatex">\(H_0\)</span></li>
+<li>Apply <span class="arithmatex">\(CNOT_{03}\)</span></li>
+</ol>
+<p>Each CNOT gate is followed by a two-qubit depolarizing channel that applies one of the 15 non-identity two-qubit Paulis with probability <span class="arithmatex">\(p/15\)</span> each.</p>
+<p>Let me first compute what the ideal circuit does (without errors).</p>
+<p>Starting state: <span class="arithmatex">\(|0000\rangle\)</span></p>
+<p>After <span class="arithmatex">\(H_2\)</span>: <span class="arithmatex">\(\frac{1}{\sqrt{2}}(|00\rangle + |01\rangle) \otimes |00\rangle = \frac{1}{\sqrt{2}}(|0000\rangle + |0010\rangle)\)</span></p>
+<p>After <span class="arithmatex">\(CNOT_{21}\)</span>: 
+- <span class="arithmatex">\(|0000\rangle \rightarrow |0000\rangle\)</span>
+- <span class="arithmatex">\(|0010\rangle \rightarrow |0110\rangle\)</span>
+So we get: <span class="arithmatex">\(\frac{1}{\sqrt{2}}(|0000\rangle + |0110\rangle)\)</span></p>
+<p>After <span class="arithmatex">\(H_0\)</span>: <span class="arithmatex">\(\frac{1}{2}(|0000\rangle + |1000\rangle + |0110\rangle + |1110\rangle)\)</span></p>
+<p>After the final <span class="arithmatex">\(CNOT_{03}\)</span>, the state transforms with specific mappings:
+- <span class="arithmatex">\(|0000\rangle\)</span> remains <span class="arithmatex">\(|0000\rangle\)</span>
+- <span class="arithmatex">\(|1000\rangle\)</span> becomes <span class="arithmatex">\(|1001\rangle\)</span>
+- <span class="arithmatex">\(|0110\rangle\)</span> stays <span class="arithmatex">\(|0110\rangle\)</span>
+- <span class="arithmatex">\(|1110\rangle\)</span> changes to <span class="arithmatex">\(|1111\rangle\)</span></p>
+<p>The resulting ideal quantum state is a superposition of these four basis states, equally weighted at <span class="arithmatex">\(\frac{1}{2}\)</span> amplitude.</p>
+<p>I&rsquo;ll verify if this represents a valid logical GHZ state by examining the codewords and stabilizer symmetries. The key stabilizers <span class="arithmatex">\(XXXX\)</span> and <span class="arithmatex">\(ZZZZ\)</span> define the logical computational basis states across two qubits, with specific eigenvalue relationships that characterize the logical encoding.</p>
+<p>The logical operators reveal fascinating symmetries: <span class="arithmatex">\(X_A\)</span> and <span class="arithmatex">\(X_B\)</span> enable logical qubit flips, while <span class="arithmatex">\(Z_A\)</span> and <span class="arithmatex">\(Z_B\)</span> control phase transformations. I&rsquo;m focusing on the <span class="arithmatex">\(|00\rangle_{AB}\)</span> state, which must be a simultaneous +1 eigenstate under specific stabilizer conditions.</p>
+<p>I&rsquo;ll investigate the eigenvalue relationships for <span class="arithmatex">\(Z_A\)</span> and <span class="arithmatex">\(Z_B\)</span> on this foundational logical state, tracking how the stabilizers constrain the quantum information representation.</p>
+<p>The [[4,2,2]] quantum error correction code presents an intriguing structural framework for encoding logical qubits, with carefully designed stabilizer generators that protect quantum information against potential errors.</p>
+<p>The logical computational basis states reveal a symmetric superposition pattern, where each logical state is an equal-weight superposition of four specific four-qubit basis states. These states demonstrate a precise quantum encoding strategy that distributes quantum information across multiple physical qubits to enhance error resilience.</p>
+<p>The states exhibit a balanced probabilistic representation, with each logical qubit state composed of four equally probable four-qubit configurations, suggesting a robust mechanism for quantum information preservation.</p>
+<p>I&rsquo;ll verify the computational properties by applying stabilizer operators like <span class="arithmatex">\(Z_A\)</span> and <span class="arithmatex">\(Z_B\)</span> to confirm the state&rsquo;s invariance under these transformations, which is crucial for maintaining quantum coherence and logical state integrity.</p>
+<p>The ideal state appears to deviate from standard logical encodings. I&rsquo;m investigating whether this represents a non-standard quantum error correction configuration or potentially a unique entanglement pattern that doesn&rsquo;t conform to typical GHZ state representations.</p>
+<p>The state&rsquo;s symmetry suggests complex quantum information encoding, potentially involving intricate multi-qubit interactions that require careful computational analysis to fully characterize.</p>
+<p>I&rsquo;m systematically exploring the stabilizer group&rsquo;s properties, focusing on how <span class="arithmatex">\(XXXX\)</span> and <span class="arithmatex">\(ZZZZ\)</span> generators might reveal underlying quantum state characteristics.</p>
+<p>The calculation reveals complex interactions between Pauli operators. Multiplying <span class="arithmatex">\(XXXX\)</span> and <span class="arithmatex">\(ZZZZ\)</span> produces interesting phase and symmetry relationships, particularly noting how <span class="arithmatex">\(XZ\)</span> relates to <span class="arithmatex">\(iY\)</span>.</p>
+<p>I&rsquo;m investigating the codespace by examining <span class="arithmatex">\(|0000\rangle\)</span>&rsquo;s behavior under different stabilizer transformations. The state shows asymmetric eigenvalue responses to <span class="arithmatex">\(XXXX\)</span> and <span class="arithmatex">\(ZZZZ\)</span>, suggesting a nuanced quantum mechanical structure.</p>
+<p>My next step involves carefully projecting states to identify a consistent basis within this quantum code&rsquo;s eigenspace. I&rsquo;ll project the computational basis states to find the code space basis, systematically checking each state&rsquo;s transformation under the stabilizer projector. The zero states like |0001⟩ and |0010⟩ get mapped to zero, indicating they&rsquo;re not part of the code space. The |0000⟩ and |0011⟩ states seem to have interesting projections, with some states surviving the projection and others canceling out.</p>
+<p>The code space contains four key orthonormal states, each representing a symmetric superposition of computational basis states. These states represent a 4-dimensional logical qubit subspace, where the quantum information is protected against certain types of errors through clever state construction.</p>
+<p>I&rsquo;ll now investigate how these states transform under logical Z operators to understand their underlying logical state representations.</p>
+<p>For <span class="arithmatex">\(Z_A\)</span> operator, two states remain unchanged with +1 eigenvalue, while two states flip sign with -1 eigenvalue. This suggests a systematic pattern of logical state encoding that preserves or inverts quantum information under specific transformations.</p>
+<p>The <span class="arithmatex">\(Z_B\)</span> operator reveals a similar symmetry, with some states maintaining their original configuration while others experience sign inversions. These transformations provide insights into the quantum error correction mechanism embedded within the code space.</p>
+<p>The logical basis states <span class="arithmatex">\(|00\rangle_L\)</span>, <span class="arithmatex">\(|01\rangle_L\)</span>, and <span class="arithmatex">\(|10\rangle_L\)</span> demonstrate a carefully constructed quantum encoding strategy. Each state&rsquo;s eigenvalue characteristics under different operators reveal the intricate design of this quantum error correction approach.</p>
+<p>The final logical basis state <span class="arithmatex">\(|11\rangle_L\)</span> completes the set, exhibiting a symmetric quantum superposition with specific eigenvalue properties. The subsequent GHZ state construction demonstrates a sophisticated quantum state preparation technique, leveraging the carefully constructed logical basis states.</p>
+<p>The ideal circuit&rsquo;s quantum state appears to be in the process of being calculated, suggesting a nuanced quantum computation strategy that builds upon these precisely engineered logical basis states.</p>
+<p>A critical insight emerges: the logical qubit labeling requires careful reconsideration. By shifting from numerical indices to alphabetical labels A and B, a more precise representation of the quantum system becomes possible. This relabeling allows for a more accurate mapping of quantum operations and state transformations.</p>
+<p>The logical basis states are now being systematically defined using these new labels, revealing a structured approach to quantum state representation that emphasizes the intrinsic symmetries and computational properties of the system.</p>
+<p>The discrepancy between the ideal GHZ state and the actual circuit output suggests a fundamental misalignment that demands further investigation and precise computational verification.</p>
+<p>I&rsquo;ll carefully trace the circuit&rsquo;s quantum gates, paying close attention to qubit indexing and transformation sequences. The initial state and subsequent Hadamard operation on qubit 2 require meticulous examination to identify potential computational errors.</p>
+<p>The indexing notation seems critical - ensuring each qubit&rsquo;s precise transformation will help resolve the state mismatch. I&rsquo;ll methodically track each quantum gate&rsquo;s effect on the initial quantum state.</p>
+<p>After applying <span class="arithmatex">\(CNOT_{21}\)</span>, the quantum state evolves with controlled bit flips between qubits 2 and 1. The Hadamard gate on qubit 0 introduces superposition, potentially creating entangled quantum states.</p>
+<p>The quantum circuit&rsquo;s complexity demands precise tracking of each quantum operation&rsquo;s impact on the overall system state.</p>
+<p>Subsequent <span class="arithmatex">\(CNOT_{03}\)</span> operation reveals intricate interactions between qubits 0 and 3, generating a final quantum state with four distinct basis states. The probabilistic nature of quantum gates transforms the initial quantum configuration into a nuanced superposition.</p>
+<p>The resulting quantum state represents a carefully orchestrated quantum computation, demonstrating the subtle transformations possible through strategic quantum gate applications.</p>
+<p>I can map these computational basis states to logical basis states, revealing an elegant representation of quantum information encoding across two-qubit logical subspaces.</p>
+<p>The logical states span four distinct computational configurations, each symmetrically superposed between complementary bit patterns. These mappings demonstrate how quantum error correction encodes quantum information across multiple physical qubits, creating robust logical states that can tolerate potential errors.</p>
+<p>By systematically expressing computational basis states through logical basis states, I&rsquo;m developing a precise transformation between different quantum representations, which will help analyze the quantum error correction mechanism&rsquo;s fundamental structure.</p>
+<p>The ideal quantum state reveals an elegant symmetry, combining four specific bit configurations with equal amplitude, suggesting a balanced error-resilient encoding strategy.</p>
+<p>By carefully manipulating the state representation, I&rsquo;ve discovered a normalized superposition of two basis states: <span class="arithmatex">\((|00\rangle_{AB} + |10\rangle_{AB})/\sqrt{2}\)</span>. This configuration differs critically from the initial GHZ state hypothesis, highlighting the nuanced nature of quantum error correction encoding.</p>
+<p>The state&rsquo;s structure implies a deliberate symmetry that could potentially enhance quantum information preservation across computational transformations. <span class="arithmatex">\(Z_A\)</span> applies <span class="arithmatex">\(Z_0 Z_1\)</span> to the state, resulting in a sign change to <span class="arithmatex">\(-|0110\rangle - |1001\rangle\)</span>, confirming a -1 eigenvalue. </p>
+<p>For <span class="arithmatex">\(Z_B\)</span>, I&rsquo;ll continue the calculation by completing the partial thought from the next thinking: <span class="arithmatex">\(Z_0 Z_2 |1001\rangle)\)</span>, which suggests the next step in the <span class="arithmatex">\(Z_B\)</span> eigenvalue computation.</p>
+<p>The state <span class="arithmatex">\(\frac{1}{\sqrt{2}}(|0110\rangle + |1001\rangle)\)</span> appears to be <span class="arithmatex">\(|10\rangle_{AB}\)</span>, not the intended GHZ state. This indicates a potential circuit implementation error.</p>
+<p>I&rsquo;ll need to carefully review the original problem statement to understand the intended quantum state preparation.</p>
+<p>The circuit involves <span class="arithmatex">\((CNOT_{03}) (H_0) (CNOT_{21}) (H_2)\)</span>, applied right-to-left, starting from <span class="arithmatex">\(|0000\rangle\)</span>. The first Hadamard gate on qubit 2 transforms the initial state, creating a superposition.</p>
+<p>After applying the CNOT gate between qubits 2 and 1, the state evolves, with the control-target relationship causing conditional bit flips. The subsequent Hadamard gate on qubit 0 further complicates the quantum state, generating additional superposition components.</p>
+<p>I&rsquo;m carefully tracking each quantum gate&rsquo;s impact, noting how the transformations progressively modify the quantum state&rsquo;s configuration.</p>
+<p>The final state reveals a specific quantum circuit outcome that differs from the intended GHZ state. This suggests a potential discrepancy between the circuit&rsquo;s actual preparation and the theoretical target state.</p>
+<p>My analysis indicates the circuit generates a specific four-qubit entangled state with four basis states, which requires careful examination to understand its precise quantum mechanical properties.</p>
+<p>The key focus now shifts to understanding how depolarizing noise might impact the quantum state&rsquo;s fidelity, specifically examining how two-qubit gate errors could modify the quantum circuit&rsquo;s output.</p>
+<p>I&rsquo;ll need to calculate the state&rsquo;s transformation under depolarizing noise, tracking how each CNOT gate introduces potential quantum information degradation.</p>
+<p>The depolarizing channel introduces randomness through a probabilistic mixture of quantum states, with a specific mathematical formulation involving 15 distinct two-qubit Pauli transformations. This means each quantum gate interaction has a chance of introducing random quantum errors.</p>
+<p>My initial state starts as <span class="arithmatex">\(|0000\rangle\)</span>, and I&rsquo;ll systematically track how Hadamard and CNOT gates, combined with depolarizing noise, might alter the quantum information.</p>
+<p>The mathematical description involves tracking the density matrix <span class="arithmatex">\(\rho\)</span> through each quantum operation, carefully modeling how the two-qubit depolarizing channel could probabilistically modify the quantum state.</p>
+<p>I&rsquo;m tracing the quantum circuit&rsquo;s evolution, observing how each gate and noise channel transforms the initial quantum state, with the ultimate goal of calculating the final state&rsquo;s fidelity compared to an ideal quantum computation.</p>
+<p>The complexity suggests I might need to simplify my approach to understand the quantum noise&rsquo;s precise impact on the quantum computation.</p>
+<p>For the two-qubit depolarizing channel, I recognize a nuanced mathematical representation involving a weighted mixture of the original state and Pauli error projections, where the probability parameter <span class="arithmatex">\(p\)</span> controls the noise intensity.</p>
+<p>The key insight is how the channel mixes the original density matrix with a uniform distribution across all possible two-qubit Pauli errors, systematically modeling quantum decoherence and gate imperfections.</p>
+<p>Specifically, the channel transforms the quantum state by preserving <span class="arithmatex">\((1-p)\)</span> of the original state while introducing controlled randomness through Pauli error projections scaled by <span class="arithmatex">\(p/15\)</span>.</p>
+<p>By leveraging the property that Pauli operators sum to the identity, I derive a refined channel representation that scales the original state and adds a small identity-based correction term.</p>
+<p>The final expression captures the probabilistic nature of two-qubit depolarization, with the coefficient <span class="arithmatex">\((1 - \frac{16p}{15})\)</span> modulating the original state&rsquo;s preservation and <span class="arithmatex">\(\frac{4p}{15} \cdot \frac{I}{4}\)</span> representing the noise-induced transformation.</p>
+<p>I recognize this computational path might become intricate, prompting me to explore alternative analytical strategies for tracking quantum state evolution through noisy channels.</p>
+<p>My focus shifts to understanding how depolarizing noise affects pure states, particularly considering the interplay between gate operations and probabilistic error mechanisms.</p>
+<p>The circuit&rsquo;s structure involves Hadamard transformations and controlled-NOT gates with subsequent noise channels, suggesting a nuanced approach to state tracking will be necessary.</p>
+<p>I&rsquo;ll methodically trace the quantum state&rsquo;s transformation, paying close attention to how errors propagate through each computational step, with particular emphasis on the CNOT gate interactions and associated depolarizing noise parameters.</p>
+<p>The initial state represents a carefully constructed superposition across a four-qubit system, indicating a complex quantum computational scenario that demands precise error characterization.</p>
+<p>Tracking the state evolution reveals critical transformations: Hadamard gates introduce quantum superposition, while CNOT gates establish entanglement, and depolarizing channels inject probabilistic noise into specific qubit interactions.</p>
+<p>The key computational stages involve systematic state modifications through unitary operations and stochastic noise channels, requiring a detailed quantum mechanical analysis of each transformation.</p>
+<p>I&rsquo;m focusing on decomposing the circuit into fundamental operations, identifying how <span class="arithmatex">\(U_1\)</span> and <span class="arithmatex">\(U_2\)</span> components interact to generate the final quantum state representation.</p>
+<p>The fidelity calculation will critically depend on tracking these precise quantum state transitions, mapping ideal versus actual quantum circuit behaviors.</p>
+<p>I&rsquo;ll trace how the initial <span class="arithmatex">\(|0000\rangle\)</span> state transforms through sequential unitary operations and depolarizing channels, carefully tracking state evolution and potential error propagation.</p>
+<p>The key steps involve applying <span class="arithmatex">\(U_1\)</span>, then a first depolarizing channel on qubits 2 and 1, followed by <span class="arithmatex">\(U_2\)</span> and a second depolarizing channel on qubits 0 and 3, ultimately computing the fidelity against the ideal state projection.</p>
+<p>After <span class="arithmatex">\(U_1\)</span>, the state becomes <span class="arithmatex">\(|\phi\rangle = \frac{1}{2}(|0000\rangle + |1000\rangle + |0110\rangle + |1110\rangle)\)</span>, which then experiences noise characterized by a mixed state representation involving both the pure state projection and a scaled identity term.</p>
+<p>The complexity emerges from the channel&rsquo;s selective qubit interactions, introducing nuanced error dynamics across different quantum subsystems.</p>
+<p>I&rsquo;ll explore a direct computational approach by explicitly modeling the depolarizing channel&rsquo;s probabilistic transformations, focusing on how local noise affects the quantum state&rsquo;s coherence and entanglement.</p>
+<p>The channel&rsquo;s mathematical structure involves preserving the original state with probability <span class="arithmatex">\((1-p)\)</span> while introducing controlled random perturbations across specific qubit pairs, systematically mapping the quantum information through a set of predefined permutation operators.</p>
+<p>For small noise probabilities, the fidelity exhibits a linear degradation characterized by coefficients representing error propagation pathways. The first-order correction emerges from single-error scenarios distributed across different circuit stages, suggesting a nuanced relationship between noise introduction points and overall quantum state preservation.</p>
+<p>The error analysis involves systematically tracking how depolarizing noise transforms the initial quantum state through a sequence of quantum operations. By decomposing the final state into ideal and error-perturbed components, we can quantify the fidelity&rsquo;s sensitivity to noise at specific circuit locations.</p>
+<p>The mathematical framework allows for a precise first-order expansion, revealing how individual error contributions accumulate and potentially interfere during quantum circuit evolution.</p>
+<p>Exploring the two-qubit depolarizing channel provides insights into how random quantum errors probabilistically modify the quantum state&rsquo;s coherence and overall quantum information preservation.</p>
+<p>The fidelity calculation reveals that most Pauli operators generate zero contribution when applied to typical quantum states, as they fundamentally alter state phases or flip quantum amplitudes. This means the channel&rsquo;s error mechanism predominantly preserves the original quantum information for carefully chosen states.</p>
+<p>The depolarizing channel&rsquo;s simple linear model breaks down when multiple quantum gates introduce complex error interactions. The state becomes increasingly mixed after each operation, preventing straightforward multiplicative error propagation. Quantum error dynamics emerge from intricate interference between noise processes across sequential transformations.</p>
+<p>Examining the specific quantum circuit requires tracking how the state evolves through <span class="arithmatex">\(H_2\)</span> and <span class="arithmatex">\(CNOT_{21}\)</span> gates, revealing nuanced error propagation mechanisms that challenge naive error models.</p>
+<p>The density matrix representation captures these subtle quantum noise effects, showing how depolarizing noise transforms the initial pure state into a mixed quantum state with probabilistic error contributions.</p>
+<p>I&rsquo;ll systematically track how different Pauli operators modify the quantum state, noting the probabilistic transformations. The <span class="arithmatex">\(XI\)</span> Pauli operator demonstrates this by mapping <span class="arithmatex">\(|00\rangle\)</span> to <span class="arithmatex">\(|01\rangle\)</span> and <span class="arithmatex">\(|11\rangle\)</span> to <span class="arithmatex">\(|10\rangle\)</span>, revealing the intricate state modifications.</p>
+<p>The physical state fidelity calculation requires careful consideration of how depolarizing channels introduce quantum errors, suggesting a nuanced approach to quantifying quantum state degradation.</p>
+<p>For small, independent errors, the fidelity might approximately multiply across channels, but this simplistic view overlooks critical quantum error propagation dynamics through sequential gates.</p>
+<p>The circuit&rsquo;s complex structure - involving Hadamard gates, CNOT operations, and depolarizing channels at specific qubit locations - demands a sophisticated analysis beyond naive error multiplication.</p>
+<p>I&rsquo;ll explore a quantum information theory approach, examining the channel&rsquo;s fidelity by computing how errors transform the initial quantum state through each unitary and noisy operation. The key challenge involves tracking how depolarizing channels at different stages interact with the quantum gates&rsquo; transformations.</p>
+<p>The mathematical strategy involves expressing the overall channel as a composition of specific quantum operations, where each step introduces potential error and state modification. This requires carefully tracking how errors propagate and compound across the quantum circuit&rsquo;s sequence of transformations.</p>
+<p>By systematically tracking state evolution through <span class="arithmatex">\(|\psi_0\rangle\)</span>, <span class="arithmatex">\(|\psi_1\rangle\)</span>, and subsequent states, I can map out how small perturbative errors modify the quantum computation&rsquo;s final output. The goal is to understand how these localized errors accumulate and impact the overall quantum computation&rsquo;s fidelity.</p>
+<p>The perturbative expansion allows me to quantify how each potential error contributes to state deviation, providing a precise mechanism for analyzing quantum noise&rsquo;s impact on computational reliability.</p>
+<p>I&rsquo;ll trace the state transformations through key quantum gates and depolarizing channels, identifying critical points where errors might significantly alter the quantum information processing.</p>
+<p>The circuit involves controlled operations and noise channels that could disrupt the delicate quantum state. I&rsquo;m tracking how these transformations impact the quantum system&rsquo;s fidelity, particularly focusing on how Pauli errors interact with the stabilizer state.</p>
+<p>The [[4,2,2]] code&rsquo;s stabilizer state suggests unique error resilience properties. Pauli errors have specific interactions with this quantum code that could provide insights into maintaining quantum coherence.</p>
+<p>I want to understand how the depolarizing noise at different stages affects the quantum state&rsquo;s integrity, potentially revealing patterns in error propagation through this quantum circuit. I&rsquo;ll trace the error propagation through the quantum circuit, calculating how a Pauli error transforms the initial state and impacts the final fidelity. By applying the Pauli error <span class="arithmatex">\(P\)</span> to the intermediate state <span class="arithmatex">\(|\psi_2\rangle\)</span>, I can track its evolution through subsequent gates like <span class="arithmatex">\(H_0\)</span> and <span class="arithmatex">\(CNOT_{03}\)</span>. The key is quantifying the deviation from the ideal quantum state, which determines the infidelity contribution.</p>
+<p>The error&rsquo;s impact involves transforming <span class="arithmatex">\(|\psi_2\rangle\)</span> and analyzing how this modified state differs from the intended quantum computation pathway. I&rsquo;ll compute the overlap between the error-affected state and the ideal state to measure the quantum information loss.</p>
+<p>When errors occur at different circuit locations, their contributions aggregate. For the second error location, any non-identity Pauli error completely disrupts the quantum state, contributing maximum infidelity. This means each alternative error configuration fundamentally alters the quantum computation&rsquo;s outcome.</p>
+<p>The total first-order infidelity captures these error propagation mechanisms, summing the contributions from different Pauli error configurations across specific qubit locations. The mathematical expression integrates these error pathways, providing a comprehensive quantification of quantum computation reliability.</p>
+<p>The depolarizing channel model reveals a critical insight: as noise probability increases, the quantum state progressively degrades. When pure input states encounter such noise, the fidelity decays proportionally, with maximum deviation occurring when Pauli errors systematically displace the state into orthogonal configurations.</p>
+<p>In a two-channel circuit, error propagation becomes intricate. While naive independence suggests quadratic fidelity reduction, actual error dynamics involve complex interference mechanisms. The proposed approximation introduces a quadratic error model, capturing nuanced state degradation beyond linear assumptions.</p>
+<p>The emerging pattern suggests fidelity depends on noise probability through a non-linear relationship, where first and second-order terms capture fundamental error characteristics. This approach provides a flexible framework for understanding quantum noise&rsquo;s systematic impact on computational reliability.</p>
+<p>Critically, the circuit&rsquo;s specific CNOT gate configuration introduces unique error spreading dynamics. With two distinct error locations - <span class="arithmatex">\(CNOT_{21}\)</span> and <span class="arithmatex">\(CNOT_{03}\)</span> - the total fidelity reduction reflects a compound noise process where each gate contributes to state impurity.</p>
+<p>The coefficient range between 1 and 2 reflects the cumulative error potential across multiple quantum gates, highlighting how sequential operations can amplify quantum noise&rsquo;s destructive potential.</p>
+<p>I&rsquo;ll systematically decompose the circuit&rsquo;s unitary evolution, tracking how depolarizing channels modify the quantum state&rsquo;s coherence. By defining ideal and noisy transformations, I can precisely map the error propagation mechanism.</p>
+<p>The key insight involves tracking how each depolarizing channel <span class="arithmatex">\(\mathcal{E}_{21}\)</span> and <span class="arithmatex">\(\mathcal{E}_{03}\)</span> transforms the quantum state, revealing the intricate interplay between gate operations and noise introduction.</p>
+<p>I recognize the final state computation requires carefully tracing error contributions through the circuit&rsquo;s sequential transformations, with each noise channel potentially introducing distinct infidelity characteristics.</p>
+<p>The computational complexity suggests I&rsquo;ll need to develop approximation strategies that capture the essential error dynamics without exhaustive numerical evaluation.</p>
+<p>By examining the depolarizing channel&rsquo;s probabilistic error model, I can see two key insights emerge: error contributions appear roughly linear for small probabilities, and the specific gate sequence influences error propagation.</p>
+<p>The fidelity calculation reveals a nuanced relationship between noise probability and circuit performance, with the formula <span class="arithmatex">\(F \approx 1 - 2p\)</span> providing a first-order approximation for small error rates.</p>
+<p>However, the precise error definition requires careful scrutiny, particularly regarding the 15 possible non-identity two-qubit Pauli error modes introduced by each channel.</p>
+<p>The probabilistic nature suggests that with <span class="arithmatex">\((1-p)\)</span> chance of no error and <span class="arithmatex">\(p\)</span> chance of a random Pauli error, the system&rsquo;s quantum state experiences a complex degradation mechanism that depends critically on error interference patterns.</p>
+<p>The key insight emerges from the disjoint CNOT operations on separate qubit pairs, which allows independent error analysis. This structural separation means Pauli errors occurring at different circuit locations can be treated as essentially uncoupled events.</p>
+<p>Consequently, the fidelity calculation simplifies to <span class="arithmatex">\((1-p)^2\)</span>, reflecting the multiplicative effect of independent error probabilities across the two quantum gates. The mathematical elegance stems from the stabilizer state&rsquo;s orthogonality properties under Pauli perturbations.</p>
+                      </div>
+                    </details>
+<div class="content markdown-body"><p>Looking at this problem, I need to analyze how the quantum circuit prepares a state and how depolarizing errors affect the final state fidelity.</p>
+<h2 id="step-1-understand-the-circuit-and-ideal-state">Step 1: Understand the Circuit and Ideal State</h2>
+<p>The circuit is: <span class="arithmatex">\((CNOT_{03})(H_0)(CNOT_{21})(H_2)\)</span>, applied from right to left on initial state <span class="arithmatex">\(|0000\rangle\)</span>.</p>
+<p>Let me trace through the ideal circuit:</p>
+<p><strong>After <span class="arithmatex">\(H_2\)</span>:</strong></p>
+<div class="arithmatex">\[
+|0000\rangle \to |00\rangle_{01} \otimes \frac{|0\rangle + |1\rangle}{\sqrt{2}}_2 \otimes |0\rangle_3 = \frac{1}{\sqrt{2}}(|0000\rangle + |0010\rangle)
+\]</div>
+<p><strong>After <span class="arithmatex">\(CNOT_{21}\)</span> (control 2, target 1):</strong>
+- <span class="arithmatex">\(|0000\rangle \to |0000\rangle\)</span><br />
+- <span class="arithmatex">\(|0010\rangle \to |0110\rangle\)</span></p>
+<p>Result: <span class="arithmatex">\(\frac{1}{\sqrt{2}}(|0000\rangle + |0110\rangle)\)</span></p>
+<p><strong>After <span class="arithmatex">\(H_0\)</span>:</strong></p>
+<div class="arithmatex">\[
+\frac{1}{\sqrt{2}}(|0000\rangle + |0110\rangle) \to \frac{1}{2}(|0000\rangle + |1000\rangle + |0110\rangle + |1110\rangle)
+\]</div>
+<p><strong>After <span class="arithmatex">\(CNOT_{03}\)</span> (control 0, target 3):</strong>
+- <span class="arithmatex">\(|0000\rangle \to |0000\rangle\)</span>
+- <span class="arithmatex">\(|1000\rangle \to |1001\rangle\)</span><br />
+- <span class="arithmatex">\(|0110\rangle \to |0110\rangle\)</span>
+- <span class="arithmatex">\(|1110\rangle \to |1111\rangle\)</span></p>
+<p><strong>Ideal final state:</strong></p>
+<div class="arithmatex">\[
+|\psi_{ideal}\rangle = \frac{1}{2}(|0000\rangle + |1001\rangle + |0110\rangle + |1111\rangle)
+\]</div>
+<h2 id="step-2-model-the-depolarizing-errors">Step 2: Model the Depolarizing Errors</h2>
+<p>The two-qubit depolarizing channel after each CNOT gate is defined as:
+- With probability <span class="arithmatex">\((1-p)\)</span>: no error (identity operation)
+- With probability <span class="arithmatex">\(p/15\)</span> each: one of the 15 non-identity two-qubit Paulis</p>
+<p>This can be written as:</p>
+<div class="arithmatex">\[
+\mathcal{E}(\rho) = (1-p)\rho + \frac{p}{15}\sum_{P \in \mathcal{P}} P\rho P
+\]</div>
+<p>where <span class="arithmatex">\(\mathcal{P}\)</span> is the set of 15 non-identity two-qubit Paulis on the relevant qubit pair.</p>
+<h2 id="step-3-analyze-error-propagation">Step 3: Analyze Error Propagation</h2>
+<p>The circuit has two CNOT gates with errors:</p>
+<ol>
+<li><span class="arithmatex">\(CNOT_{21}\)</span> followed by depolarizing on qubits (2,1)  </li>
+<li><span class="arithmatex">\(CNOT_{03}\)</span> followed by depolarizing on qubits (0,3)</li>
+</ol>
+<p>Key observations:
+- The two error channels act on disjoint qubit pairs: (2,1) and (0,3)
+- Each Pauli error <span class="arithmatex">\(P \neq I\)</span> on a stabilizer state typically produces an orthogonal state
+- For our state <span class="arithmatex">\(|\psi_{ideal}\rangle\)</span>, most Pauli errors will map it to orthogonal states</p>
+<h2 id="step-4-calculate-fidelity">Step 4: Calculate Fidelity</h2>
+<p>For a two-qubit depolarizing channel acting on a pure state <span class="arithmatex">\(|\phi\rangle\)</span>, if all non-identity Pauli errors map the state to orthogonal states, then:</p>
+<div class="arithmatex">\[
+F_{single} = (1-p)\langle\phi|\phi\rangle + \frac{p}{15}\sum_{P \neq I}|\langle\phi|P|\phi\rangle|^2 = (1-p)
+\]</div>
+<p>Since the two depolarizing channels act on disjoint qubit pairs and errors propagate independently through the unitary gates between them, the total fidelity is approximately:</p>
+<div class="arithmatex">\[
+F = F_1 \cdot F_2 = (1-p) \cdot (1-p) = (1-p)^2
+\]</div>
+<h2 id="step-5-verify-the-result">Step 5: Verify the Result</h2>
+<p>Expanding for small <span class="arithmatex">\(p\)</span>:</p>
+<div class="arithmatex">\[
+F = (1-p)^2 = 1 - 2p + p^2
+\]</div>
+<p>This shows linear decrease in fidelity for small error rates, with coefficient 2 reflecting the two error locations.</p>
+<p><strong>Final Answer:</strong> <span class="arithmatex">\(F = (1-p)^2\)</span></p></div>
+</article>
+
+
+<article class="message role-user">
+    <div class="meta">
+        <span class="badge">User</span>
+        <span class="idx">#3</span>
+    </div>
+    <div class="content markdown-body"><p>Populate your final answer into the code template provided below. This step is purely for formatting/display purposes. No additional reasoning or derivation should be performed. Do not import any modules or packages beyond what is provided in the template.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">answer</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the expression of the physical state fidelity of the final physical 4-qubit state</span>
+<span class="sd">    at the end of the circuit as a function of the two-qubit gate error rate $p$.</span>
+
+<span class="sd">    Inputs</span>
+<span class="sd">    ----------</span>
+<span class="sd">    p: sympy.Symbol, two-qubit gate error rate $p$</span>
+
+<span class="sd">    Outputs</span>
+<span class="sd">    ----------</span>
+<span class="sd">    F_physical: sympy.Expr, the physical state fidelity of the final physical 4-qubit state</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># ------------------ FILL IN YOUR RESULTS BELOW ------------------</span>
+    <span class="n">F_physical</span> <span class="o">=</span> <span class="o">...</span>  <span class="c1"># a SymPy expression of inputs</span>
+    <span class="c1"># ---------------------------------------------------------------</span>
+
+    <span class="k">return</span> <span class="n">F_physical</span>
+</code></pre></div></div>
+</article>
+
+
+<article class="message role-assistant">
+    <div class="meta">
+        <span class="badge">Assistant</span>
+        <span class="idx">#4</span>
+    </div>
+    
+                    <details class="reasoning">
+                      <summary>Reasoning <span class="tag">(model)</span></summary>
+                      <div class="markdown-body reasoning-body">
+                        <p>The user wants me to fill in the code template with my final answer. From my solution, I found that the physical state fidelity is <span class="arithmatex">\(F = (1-p)^2\)</span>.</p>
+<p>I need to express this as a SymPy expression. This is simply (1-p)**2 in SymPy notation.</p>
+                      </div>
+                    </details>
+<div class="content markdown-body"><div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">answer</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the expression of the physical state fidelity of the final physical 4-qubit state</span>
+<span class="sd">    at the end of the circuit as a function of the two-qubit gate error rate $p$.</span>
+
+<span class="sd">    Inputs</span>
+<span class="sd">    ----------</span>
+<span class="sd">    p: sympy.Symbol, two-qubit gate error rate $p$</span>
+
+<span class="sd">    Outputs</span>
+<span class="sd">    ----------</span>
+<span class="sd">    F_physical: sympy.Expr, the physical state fidelity of the final physical 4-qubit state</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># ------------------ FILL IN YOUR RESULTS BELOW ------------------</span>
+    <span class="n">F_physical</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>  <span class="c1"># a SymPy expression of inputs</span>
+    <span class="c1"># ---------------------------------------------------------------</span>
+
+    <span class="k">return</span> <span class="n">F_physical</span>
+</code></pre></div></div>
+</article>
+
+</div>
+
+<footer>
+  Generated at 2025-09-24T22:02:09.434658
+</footer>
+
+<script>
+(function() {
+  // Tabs
+  const tabs = document.querySelectorAll('.tab');
+  const panels = document.querySelectorAll('.tab-content');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      const target = document.querySelector(tab.dataset.target);
+      if (target) target.classList.add('active');
+    });
+  });
+
+  // Theme toggle
+  const toggleBtn = document.getElementById('theme-toggle');
+  function setTheme(dark) {
+    if (dark) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('dark', '1');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('dark', '0');
+    }
+  }
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const stored = localStorage.getItem('dark');
+  setTheme(stored === null ? prefersDark : stored === '1');
+
+  toggleBtn.addEventListener('click', () => {
+    const isDark = document.documentElement.classList.contains('dark');
+    setTheme(!isDark);
+  });
+})();
+</script>
+</body>
+</html>

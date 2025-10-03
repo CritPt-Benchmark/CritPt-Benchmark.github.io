@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Challenge</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.codehilite .hll { background-color: #ffffcc }
+.codehilite { background: #f8f8f8; }
+.codehilite .c { color: #3D7B7B; font-style: italic } /* Comment */
+.codehilite .err { border: 1px solid #F00 } /* Error */
+.codehilite .k { color: #008000; font-weight: bold } /* Keyword */
+.codehilite .o { color: #666 } /* Operator */
+.codehilite .ch { color: #3D7B7B; font-style: italic } /* Comment.Hashbang */
+.codehilite .cm { color: #3D7B7B; font-style: italic } /* Comment.Multiline */
+.codehilite .cp { color: #9C6500 } /* Comment.Preproc */
+.codehilite .cpf { color: #3D7B7B; font-style: italic } /* Comment.PreprocFile */
+.codehilite .c1 { color: #3D7B7B; font-style: italic } /* Comment.Single */
+.codehilite .cs { color: #3D7B7B; font-style: italic } /* Comment.Special */
+.codehilite .gd { color: #A00000 } /* Generic.Deleted */
+.codehilite .ge { font-style: italic } /* Generic.Emph */
+.codehilite .ges { font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+.codehilite .gr { color: #E40000 } /* Generic.Error */
+.codehilite .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.codehilite .gi { color: #008400 } /* Generic.Inserted */
+.codehilite .go { color: #717171 } /* Generic.Output */
+.codehilite .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.codehilite .gs { font-weight: bold } /* Generic.Strong */
+.codehilite .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.codehilite .gt { color: #04D } /* Generic.Traceback */
+.codehilite .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.codehilite .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.codehilite .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.codehilite .kp { color: #008000 } /* Keyword.Pseudo */
+.codehilite .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.codehilite .kt { color: #B00040 } /* Keyword.Type */
+.codehilite .m { color: #666 } /* Literal.Number */
+.codehilite .s { color: #BA2121 } /* Literal.String */
+.codehilite .na { color: #687822 } /* Name.Attribute */
+.codehilite .nb { color: #008000 } /* Name.Builtin */
+.codehilite .nc { color: #00F; font-weight: bold } /* Name.Class */
+.codehilite .no { color: #800 } /* Name.Constant */
+.codehilite .nd { color: #A2F } /* Name.Decorator */
+.codehilite .ni { color: #717171; font-weight: bold } /* Name.Entity */
+.codehilite .ne { color: #CB3F38; font-weight: bold } /* Name.Exception */
+.codehilite .nf { color: #00F } /* Name.Function */
+.codehilite .nl { color: #767600 } /* Name.Label */
+.codehilite .nn { color: #00F; font-weight: bold } /* Name.Namespace */
+.codehilite .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.codehilite .nv { color: #19177C } /* Name.Variable */
+.codehilite .ow { color: #A2F; font-weight: bold } /* Operator.Word */
+.codehilite .w { color: #BBB } /* Text.Whitespace */
+.codehilite .mb { color: #666 } /* Literal.Number.Bin */
+.codehilite .mf { color: #666 } /* Literal.Number.Float */
+.codehilite .mh { color: #666 } /* Literal.Number.Hex */
+.codehilite .mi { color: #666 } /* Literal.Number.Integer */
+.codehilite .mo { color: #666 } /* Literal.Number.Oct */
+.codehilite .sa { color: #BA2121 } /* Literal.String.Affix */
+.codehilite .sb { color: #BA2121 } /* Literal.String.Backtick */
+.codehilite .sc { color: #BA2121 } /* Literal.String.Char */
+.codehilite .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.codehilite .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.codehilite .s2 { color: #BA2121 } /* Literal.String.Double */
+.codehilite .se { color: #AA5D1F; font-weight: bold } /* Literal.String.Escape */
+.codehilite .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.codehilite .si { color: #A45A77; font-weight: bold } /* Literal.String.Interpol */
+.codehilite .sx { color: #008000 } /* Literal.String.Other */
+.codehilite .sr { color: #A45A77 } /* Literal.String.Regex */
+.codehilite .s1 { color: #BA2121 } /* Literal.String.Single */
+.codehilite .ss { color: #19177C } /* Literal.String.Symbol */
+.codehilite .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.codehilite .fm { color: #00F } /* Name.Function.Magic */
+.codehilite .vc { color: #19177C } /* Name.Variable.Class */
+.codehilite .vg { color: #19177C } /* Name.Variable.Global */
+.codehilite .vi { color: #19177C } /* Name.Variable.Instance */
+.codehilite .vm { color: #19177C } /* Name.Variable.Magic */
+.codehilite .il { color: #666 } /* Literal.Number.Integer.Long */
+
+</style>
+<style>
+    :root {
+  --bg: #ffffff;
+  --fg: #222222;
+  --muted: #555555;
+  --border: #e0e0e0;
+  --accent: #005fcc;
+  --code-bg: #f6f8fa;
+  --role-user: #0ea5e9;
+  --role-assistant: #22c55e;
+  --role-system: #9ca3af;
+  --return-code: #a35291;
+}
+html.dark {
+  --bg: #0b0b0b;
+  --fg: #e8e8e8;
+  --muted: #a0a0a0;
+  --border: #333333;
+  --accent: #3b82f6;
+  --code-bg: #111827;
+  --role-user: #0ea5e9;
+  --role-assistant: #22c55e;
+  --role-system: #9ca3af;
+  --return-code: #a35291;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
+  line-height: 1.6;
+}
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 10;
+}
+h1 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+}
+.tab {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--border);
+  border-bottom: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 6px 6px 0 0;
+  color: var(--fg);
+}
+.tab.active {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+.tab-content {
+  display: none;
+  padding: 1rem 1.25rem;
+  border-top: 1px solid var(--border);
+}
+.tab-content.active {
+  display: block;
+}
+#theme-toggle {
+  border: 1px solid var(--border);
+  padding: 0.2rem 0.6rem;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  cursor: pointer;
+  background: transparent;
+  color: var(--fg);
+}
+.main {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.message {
+  border: 1px solid var(--border);
+  border-left-width: 6px;
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+  background: rgba(0,0,0,0.02);
+}
+.message .meta {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.6rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.message .badge {
+  font-weight: 600;
+}
+.role-user {
+  border-left-color: var(--role-user);
+}
+.role-assistant {
+  border-left-color: var(--role-assistant);
+}
+.role-system {
+  border-left-color: var(--role-system);
+}
+.role-unknown {
+  border-left-color: var(--accent);
+}
+
+.output-code-container {
+  display: flex;
+  gap: 1rem;               /* space between children */
+  align-items: center;     /* vertical alignment */
+  justify-content: start;  /* horizontal alignment */
+}
+
+.output-code-container .codeblock {
+  flex: 0 1 auto;
+}
+
+.codeblock {
+  border: 1px solid var(--border);
+  border-left-width: 6px;
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+  background: rgba(0,0,0,0.02);
+}
+.codeblock-content {
+  margin-bottom: 0.6rem;
+  border: 1px dashed var(--border);
+  border-radius: 4px;
+  padding: 0.4rem 0.6rem;
+  background: rgba(0,0,0,0.02);
+}
+
+.codeblock.eval_code {
+  border-left-color: var(--role-user);
+}
+.codeblock.target_code {
+  border-left-color: var(--role-assistant);
+}
+.codeblock.output_code {
+  border-left-color: var(--role-system);
+}
+
+html.dark .codeblock-content {
+  background: rgba(255,255,255,0.03);
+}
+.codeblock > summary {
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none; /* remove default triangle in some browsers */
+}
+.codeblock > summary::-webkit-details-marker {
+  display: none; /* Safari/Chrome marker */
+}
+.codeblock > summary::before {
+  content: "▶ ";
+  display: inline-block;
+  transform: rotate(0deg);
+  transition: transform 0.12s ease-out;
+}
+.codeblock[open] > summary::before {
+  transform: rotate(90deg);
+}
+.codeblock .tag {
+  color: var(--muted);
+  font-weight: 400;
+  font-size: 0.85em;
+  margin-left: 0.25rem;
+}
+
+.markdown-body pre code {
+  background: var(--code-bg);
+  display: block;
+  padding: 0.75rem;
+  overflow-x: auto;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+.markdown-body code {
+  background: var(--code-bg);
+  padding: 0.15rem 0.3rem;
+  border-radius: 4px;
+}
+/* Extra info tree */
+details > summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+details .block {
+  padding-left: 1rem;
+  margin: 0.25rem 0 0.5rem 0;
+  border-left: 2px solid var(--border);
+}
+.kv .key {
+  font-weight: 600;
+}
+.kv .type {
+  color: var(--muted);
+  margin-left: 0.5rem;
+  font-size: 0.85rem;
+}
+footer {
+  margin: 2rem 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+/* CodeHilite (pygments) overrides to respect theme vars */
+.codehilite {
+  background: var(--code-bg) !important;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.75rem !important;
+}
+.reasoning {
+  margin-bottom: 0.6rem;
+  border: 1px dashed var(--border);
+  border-radius: 4px;
+  padding: 0.4rem 0.6rem;
+  background: rgba(0,0,0,0.02);
+}
+html.dark .reasoning {
+  background: rgba(255,255,255,0.03);
+}
+.reasoning > summary {
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none; /* remove default triangle in some browsers */
+}
+.reasoning > summary::-webkit-details-marker {
+  display: none; /* Safari/Chrome marker */
+}
+.reasoning > summary::before {
+  content: "▶ ";
+  display: inline-block;
+  transform: rotate(0deg);
+  transition: transform 0.12s ease-out;
+}
+.reasoning[open] > summary::before {
+  transform: rotate(90deg);
+}
+.reasoning .tag {
+  color: var(--muted);
+  font-weight: 400;
+  font-size: 0.85em;
+  margin-left: 0.25rem;
+}
+.reasoning-body {
+  margin-top: 0.5rem;
+}
+</style>
+
+<!-- ===== MATHJAX CONFIG ===== -->
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [ ["\\(","\\)"] ],
+    displayMath: [ ["\\[","\\]"] ],
+    processEscapes: true,
+    processEnvironments: true
+  },
+  options: {
+    ignoreHtmlClass: ".*",
+    processHtmlClass: "arithmatex"
+
+    // skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    // if you dynamically add content later, you can call MathJax.typesetPromise()
+  }
+};
+</script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<!-- ========================== -->
+</head>
+<body>
+<header>
+  <h1>Challenge</h1>
+  <div>
+    <button id="theme-toggle" aria-label="toggle dark mode">🌓</button>
+  </div>
+</header>
+
+<div class="main">
+  
+<article class="message role-system">
+    <div class="meta">
+        <span class="badge">System</span>
+        <span class="idx">#0</span>
+    </div>
+    <div class="content markdown-body"><p>You are a physics research assistant specializing in solving complex, research-level problems using precise, step-by-step reasoning.</p>
+<p><strong>Input</strong>
+Problems will be provided in Markdown format.</p>
+<p><strong>Output (Markdown format)</strong></p>
+<ol>
+<li><strong>Step-by-Step Derivation</strong> - Show every non-trivial step in the solution.  Justify steps using relevant physical laws, theorems, or mathematical identities.</li>
+<li><strong>Mathematical Typesetting</strong> - Use LaTeX for all mathematics:  <code>$...$</code> for inline expressions, <code>$$...$$</code> for display equations.</li>
+<li><strong>Conventions and Units</strong> - Follow the unit system and conventions specified in the problem.</li>
+<li>
+<p><strong>Final Answer</strong> - At the end of the solution,  start a new line with <strong>&ldquo;Final Answer:&rdquo;</strong>, and present the final result.</p>
+<p>For final answers involving values, follow the precision requirements specified in the problem.
+If no precision is specified:
+- If an exact value is possible, provide it (e.g., \$\sqrt(2)\$, \$\pi/4\$).
+- If exact form is not feasible, retain at least 12 significant digits in the result. </p>
+</li>
+<li>
+<p><strong>Formatting Compliance</strong> - If the user requests a specific output format (e.g., code, table),  provide the final answer accordingly.</p>
+</li>
+</ol></div>
+</article>
+
+
+<article class="message role-user">
+    <div class="meta">
+        <span class="badge">User</span>
+        <span class="idx">#1</span>
+    </div>
+    <div class="content markdown-body"><h1 id="problem-setup">Problem setup:</h1>
+<p>In quantum error correction, you encode quantum states into logical states made of many qubits in order to improve their resilience to errors. In quantum error detection, you do the same but can only detect the presence of errors and not correct them. In this problem, we will consider a single [[4,2,2]] quantum error detection code, which encodes two logical qubits into four physical qubits, and investigate how robust logical quantum operations in this code are to quantum errors.</p>
+<p>Our convention is that the four physical qubits in the [[4,2,2]] code are labelled 0,1,2,3. The two logical qubits are labelled A and B. The stabilizers are <span class="arithmatex">\(XXXX\)</span> and <span class="arithmatex">\(ZZZZ\)</span>, where <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(Z\)</span> are Pauli matrices. The logical <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(Z\)</span> operators on the two qubits are <span class="arithmatex">\(X_A = XIXI\)</span>, <span class="arithmatex">\(X_B=XXII\)</span>, <span class="arithmatex">\(Z_A = ZZII\)</span>, <span class="arithmatex">\(Z_B = ZIZI\)</span>, up to multiplication by stabilizers.</p>
+<p>We will consider different state preparation circuits consisting of controlled not <span class="arithmatex">\(CNOT_{ij}\)</span> gates, where <span class="arithmatex">\(CNOT_{ij}\)</span> has control qubit <span class="arithmatex">\(i\)</span> and target qubit <span class="arithmatex">\(j\)</span>. As a simple model of quantum errors in hardware, we will suppose that each <span class="arithmatex">\(CNOT_{ij}\)</span> gate in the circuit has a two qubit depolarizing error channel following it that produces one of the 15 non-identity two-qubit Paulis with equal probability <span class="arithmatex">\(p/15\)</span>. The probability <span class="arithmatex">\(p\)</span> indicates the probability of an error in a single two-qubit gate. We will assess the logical infidelity of certain state preparation protocols as a function of the physical infidelity <span class="arithmatex">\(p\)</span>.</p>
+<h1 id="main-problem">Challenge</h1>
+<p>Suppose that we prepare a logical two-qubit <span class="arithmatex">\(|00\rangle_{AB}\)</span> state in the [[4,2,2]] code. To do so, we introduce an ancilla qubit, qubit 4, and use the following state preparation circuit:</p>
+<div class="arithmatex">\[
+M_4 (CNOT_{04}) (CNOT_{34}) (CNOT_{23}) (CNOT_{10}) (CNOT_{12}) (H_1)
+\]</div>
+<p>Note that this equation is written in matrix multiplication order, while the quantum operations in the circuit occur in the reverse order (from right-to-left in the above equation).  <span class="arithmatex">\(H\)</span> is a single-qubit Hadamard gate and <span class="arithmatex">\(M\)</span> is a single-qubit measurement. The ancilla is used to detect errors in the state preparation circuit and makes the circuit fault-tolerant. If the ancilla measurement is <span class="arithmatex">\(|0\rangle\)</span> (<span class="arithmatex">\(|1\rangle\)</span>), the state preparation succeeds (fails).</p>
+<p>What is the logical state fidelity of the final 2-qubit logical state at the end of the circuit as a function of two-qubit gate error rate <span class="arithmatex">\(p\)</span>, assuming the state is post-selected on all detectable errors in the code and on the ancilla qubit measuring <span class="arithmatex">\(|0\rangle\)</span>?</p></div>
+</article>
+
+
+<article class="message role-assistant">
+    <div class="meta">
+        <span class="badge">Assistant</span>
+        <span class="idx">#2</span>
+    </div>
+    
+                    <details class="reasoning">
+                      <summary>Reasoning <span class="tag">(model)</span></summary>
+                      <div class="markdown-body reasoning-body">
+                        <p><strong>My Calculation of Logical State Fidelity for a [4,2,2] Quantum Code under Two-Qubit Depolarizing Noise</strong></p>
+<p>Alright, let&rsquo;s break this down. The objective is to figure out the fidelity of a prepared <span class="arithmatex">\(|00\rangle_{AB}\)</span> state using a specific circuit, considering the impact of two-qubit depolarizing errors after each CNOT gate. We&rsquo;re also post-selecting on the absence of detectable errors in the code and the ancilla qubit measuring <span class="arithmatex">\(|0\rangle\)</span>.</p>
+<p>First, I need to define what exactly this [[4,2,2]] code entails.  It uses four physical qubits (0, 1, 2, 3) to encode two logical qubits (A, B). The stabilizers are <span class="arithmatex">\(S_1 = X_0 X_1 X_2 X_3\)</span> and <span class="arithmatex">\(S_2 = Z_0 Z_1 Z_2 Z_3\)</span>. The logical operators were a bit unclear at first, as the problem statement&rsquo;s initial definitions didn&rsquo;t seem to align with standard code constructions. However, after carefully considering the concept of &ldquo;up to multiplication by stabilizers,&rdquo; I&rsquo;m assuming that the logical operators provided are the representative operators and will use them in the calculation.</p>
+<p>With that, it&rsquo;s a standard process. Initially, I will assume a standard implementation of the [[4,2,2]] code. I can then construct the gates and analyze the error terms. The post-selection, of course, means that any error that causes the ancilla to measure in the <span class="arithmatex">\(|1\rangle\)</span> state or takes the output state outside the code space will be discarded.  This is a good way to simplify the analysis. The error channel is a two-qubit depolarizing channel after each CNOT. This makes the math tractable.</p>
+<p>Then, there is the circuit to consider, which is straightforward. The challenge is in the fact that the post-selection and the depolarizing errors will affect the calculation.</p>
+<p>I identified the ideal final state by tracing the circuit without errors. Ideally, the state after the circuit is a 4-qubit GHZ state (a superposition of <span class="arithmatex">\(|0000\rangle\)</span> and <span class="arithmatex">\(|1111\rangle\)</span>), tensored with <span class="arithmatex">\(|0\rangle\)</span> ancilla. Because the problem statement refers to a [[4,2,2]] code, I assumed the ideal output is logical <span class="arithmatex">\(|00\rangle_{AB}\)</span> state for the ideal case.</p>
+<p>Here&rsquo;s the approach:</p>
+<p>I&rsquo;m considering errors up to the first order. This is for small <span class="arithmatex">\(p\)</span> (probability of an error).</p>
+<ul>
+<li>Calculate the ideal output.</li>
+<li>Consider no-error, single-error, and double-error cases.</li>
+<li>Calculate fidelity for each and sum them.</li>
+</ul>
+<p>I identified two logical errors that are undetectable in my model: the two-qubit Paulis <span class="arithmatex">\(X_0X_1\)</span> and <span class="arithmatex">\(Y_0Y_1\)</span>.
+Then, I used the calculation above to arrive at the final fidelity which is <span class="arithmatex">\(1 - \frac{2p}{15}\)</span> in my model.</p>
+                      </div>
+                    </details>
+<div class="content markdown-body"><p>The problem asks for the logical state fidelity of a prepared logical <span class="arithmatex">\(|00\rangle_{AB}\)</span> state, post-selected on no detectable errors in the code and the ancilla qubit measuring <span class="arithmatex">\(|0\rangle\)</span>. We are given the circuit, the [[4,2,2]] code definition (stabilizers and logical operators), and an error model.</p>
+<p><strong>1. Ideal State Preparation</strong></p>
+<p>First, let&rsquo;s determine the ideal final state of the 5-qubit system. The initial state is <span class="arithmatex">\(|00000\rangle_{01234}\)</span>. The circuit operations are applied from right to left:</p>
+<ol>
+<li><span class="arithmatex">\(H_1\)</span>: Hadamard on qubit 1.
+    <span class="arithmatex">\(|\psi_1\rangle = |0\rangle_0 \frac{1}{\sqrt{2}}(|0\rangle_1+|1\rangle_1) |0\rangle_2 |0\rangle_3 |0\rangle_4 = |0+\rangle|000\rangle\)</span>.</li>
+<li><span class="arithmatex">\(CNOT_{12}\)</span>: Control 1, Target 2.
+    <span class="arithmatex">\(|\psi_2\rangle = |0\rangle_0 \frac{1}{\sqrt{2}}(|0\rangle_1|0\rangle_2+|1\rangle_1|1\rangle_2) |0\rangle_3 |0\rangle_4\)</span>.</li>
+<li><span class="arithmatex">\(CNOT_{10}\)</span>: Control 1, Target 0.
+    <span class="arithmatex">\(|\psi_3\rangle = \frac{1}{\sqrt{2}}(|0\rangle_0|0\rangle_1|0\rangle_2 + |1\rangle_0|1\rangle_1|1\rangle_2) |0\rangle_3 |0\rangle_4\)</span>.</li>
+<li><span class="arithmatex">\(CNOT_{23}\)</span>: Control 2, Target 3.
+    <span class="arithmatex">\(|\psi_4\rangle = \frac{1}{\sqrt{2}}(|0000\rangle_{0123} + |1111\rangle_{0123}) |0\rangle_4\)</span>.</li>
+<li><span class="arithmatex">\(CNOT_{34}\)</span>: Control 3, Target 4.
+    <span class="arithmatex">\(|\psi_5\rangle = \frac{1}{\sqrt{2}}(|0000\rangle_{0123}|0\rangle_4 + |1111\rangle_{0123}|1\rangle_4)\)</span>.</li>
+<li><span class="arithmatex">\(CNOT_{04}\)</span>: Control 0, Target 4.
+    <span class="arithmatex">\(|\psi_6\rangle = \frac{1}{\sqrt{2}}(|0000\rangle_{0123}|0\rangle_4 + |1111\rangle_{0123}|0\rangle_4) = \frac{1}{\sqrt{2}}(|0000\rangle + |1111\rangle)_{0123} |0\rangle_4\)</span>.
+    Let&rsquo;s denote <span class="arithmatex">\(|\phi\rangle_{C} = \frac{1}{\sqrt{2}}(|0000\rangle + |1111\rangle)_{0123}\)</span>. The ideal state is <span class="arithmatex">\(|\phi\rangle = |\phi\rangle_{C} \otimes |0\rangle_4\)</span>.</li>
+<li><span class="arithmatex">\(M_4\)</span>: Measurement of ancilla qubit 4. Post-selection on <span class="arithmatex">\(|0\rangle_4\)</span>.
+    Since the ideal state already has qubit 4 in <span class="arithmatex">\(|0\rangle_4\)</span>, this measurement always succeeds ideally.</li>
+</ol>
+<p>Now, we verify if <span class="arithmatex">\(|\phi\rangle_{C}\)</span> is the logical <span class="arithmatex">\(|00\rangle_{AB}\)</span> state.
+The stabilizers are <span class="arithmatex">\(S_1 = X_0 X_1 X_2 X_3\)</span> and <span class="arithmatex">\(S_2 = Z_0 Z_1 Z_2 Z_3\)</span>.
+The logical Z operators for qubits A and B are <span class="arithmatex">\(Z_A = Z_0 Z_1 I_2 I_3\)</span> and <span class="arithmatex">\(Z_B = Z_0 I_1 Z_2 I_3\)</span>.
+A logical <span class="arithmatex">\(|00\rangle_{AB}\)</span> state is a <span class="arithmatex">\(+1\)</span> eigenstate of both <span class="arithmatex">\(Z_A\)</span> and <span class="arithmatex">\(Z_B\)</span>.
+<span class="arithmatex">\(Z_A |\phi\rangle_{C} = (Z_0 Z_1 I_2 I_3) \frac{1}{\sqrt{2}}(|0000\rangle + |1111\rangle) = \frac{1}{\sqrt{2}}(|0000\rangle + (-1)(-1)|1111\rangle) = |\phi\rangle_{C}\)</span>.
+<span class="arithmatex">\(Z_B |\phi\rangle_{C} = (Z_0 I_1 Z_2 I_3) \frac{1}{\sqrt{2}}(|0000\rangle + |1111\rangle) = \frac{1}{\sqrt{2}}(|0000\rangle + (-1)(1)(-1)(1)|1111\rangle) = |\phi\rangle_{C}\)</span>.
+Also, <span class="arithmatex">\(|\phi\rangle_{C}\)</span> is in the code space:
+<span class="arithmatex">\(S_1 |\phi\rangle_{C} = (X_0 X_1 X_2 X_3) \frac{1}{\sqrt{2}}(|0000\rangle + |1111\rangle) = \frac{1}{\sqrt{2}}(|1111\rangle + |0000\rangle) = |\phi\rangle_{C}\)</span>.
+<span class="arithmatex">\(S_2 |\phi\rangle_{C} = (Z_0 Z_1 Z_2 Z_3) \frac{1}{\sqrt{2}}(|0000\rangle + |1111\rangle) = \frac{1}{\sqrt{2}}(|0000\rangle + (-1)^4|1111\rangle) = |\phi\rangle_{C}\)</span>.
+So, <span class="arithmatex">\(|\phi\rangle = |\phi\rangle_{C} \otimes |0\rangle_4\)</span> is indeed the ideal target state.</p>
+<p><strong>2. Error Model and Fidelity Calculation</strong></p>
+<p>There are 5 CNOT gates in the circuit. After each CNOT gate, a two-qubit depolarizing error channel is applied. This means with probability <span class="arithmatex">\(1-p\)</span> the identity operator acts, and with probability <span class="arithmatex">\(p/15\)</span> one of the 15 non-identity two-qubit Pauli operators acts on the qubits involved in that CNOT. We consider terms up to <span class="arithmatex">\(O(p)\)</span>.</p>
+<p>Let <span class="arithmatex">\(U_{ideal}\)</span> be the unitary corresponding to the full circuit (including <span class="arithmatex">\(H_1\)</span>).
+The initial state is <span class="arithmatex">\(|0\rangle^{\otimes 5}\)</span>. The ideal final state is <span class="arithmatex">\(|\phi\rangle = U_{ideal}|0\rangle^{\otimes 5}\)</span>.</p>
+<p>The final state density matrix, up to <span class="arithmatex">\(O(p)\)</span>, is:</p>
+<div class="arithmatex">\[
+\rho_{total} \approx (1-5p) |\phi\rangle\langle\phi| + \sum_{k=1}^5 \sum_{P_k \ne I \otimes I} \frac{p}{15} E_k |\phi\rangle\langle\phi| E_k^\dagger
+\]</div>
+<p>Here, <span class="arithmatex">\(k\)</span> labels the CNOT gate (starting from <span class="arithmatex">\(CNOT_{12}\)</span> as <span class="arithmatex">\(k=1\)</span>, up to <span class="arithmatex">\(CNOT_{04}\)</span> as <span class="arithmatex">\(k=5\)</span>). <span class="arithmatex">\(P_k\)</span> is a two-qubit Pauli error, and <span class="arithmatex">\(E_k\)</span> is the effective 5-qubit Pauli error resulting from propagating <span class="arithmatex">\(P_k\)</span> through the rest of the circuit after its insertion point.</p>
+<p>We need to calculate the fidelity <span class="arithmatex">\(F\)</span>. The state is post-selected on qubit 4 being <span class="arithmatex">\(|0\rangle\)</span> and code qubits 0-3 being in the code space (i.e., being a <span class="arithmatex">\(+1\)</span> eigenstate of <span class="arithmatex">\(S_1\)</span> and <span class="arithmatex">\(S_2\)</span>). Let <span class="arithmatex">\(\Pi_{ps} = (\Pi_C \otimes |0\rangle_4\langle0|)\)</span> be the projector onto the post-selected subspace.
+The fidelity is <span class="arithmatex">\(F = \frac{\langle\phi|\Pi_{ps}\rho_{total}\Pi_{ps}|\phi\rangle}{\text{Tr}(\Pi_{ps}\rho_{total})}\)</span>.
+Since <span class="arithmatex">\(|\phi\rangle\)</span> is already in the post-selected subspace, <span class="arithmatex">\(\Pi_{ps}|\phi\rangle = |\phi\rangle\)</span>.</p>
+<p><span class="arithmatex">\(F_{num} = \langle\phi|\rho_{total}|\phi\rangle \approx (1-5p) \langle\phi|\phi\rangle + \sum_{k=1}^5 \sum_{P_k \ne I \otimes I} \frac{p}{15} \langle\phi|E_k |\phi\rangle\langle\phi| E_k^\dagger |\phi\rangle\)</span>.
+<span class="arithmatex">\(F_{den} = \text{Tr}(\Pi_{ps}\rho_{total}) \approx (1-5p) \text{Tr}(\Pi_{ps}|\phi\rangle\langle\phi|) + \sum_{k=1}^5 \sum_{P_k \ne I \otimes I} \frac{p}{15} \text{Tr}(\Pi_{ps} E_k |\phi\rangle\langle\phi| E_k^\dagger)\)</span>.</p>
+<p>An error <span class="arithmatex">\(E_k\)</span> contributes to <span class="arithmatex">\(F_{den}\)</span> if <span class="arithmatex">\(E_k |\phi\rangle\)</span> is in the post-selected subspace. This means:</p>
+<ol>
+<li><span class="arithmatex">\(E_k\)</span> must have <span class="arithmatex">\(I_4\)</span> on qubit 4 (ancilla measurement success).</li>
+<li><span class="arithmatex">\(E_k\)</span> must commute with <span class="arithmatex">\(S_1\)</span> and <span class="arithmatex">\(S_2\)</span> (code detection success).
+If <span class="arithmatex">\(E_k\)</span> satisfies these, it is an undetected error. If <span class="arithmatex">\(E_k = I\)</span>, it&rsquo;s the no-error case. If <span class="arithmatex">\(E_k \ne I\)</span>, it&rsquo;s an undetected logical error.
+An error <span class="arithmatex">\(E_k\)</span> contributes to <span class="arithmatex">\(F_{num}\)</span> only if <span class="arithmatex">\(E_k |\phi\rangle\)</span> projects onto <span class="arithmatex">\(|\phi\rangle\)</span>. That is, <span class="arithmatex">\(\langle\phi|E_k|\phi\rangle \ne 0\)</span>. For Pauli errors, this means <span class="arithmatex">\(E_k = I\)</span> or <span class="arithmatex">\(E_k\)</span> is a stabilizer. Since <span class="arithmatex">\(E_k\)</span> is a two-qubit error, it cannot be a stabilizer. So only <span class="arithmatex">\(E_k=I\)</span> (no error) contributes to <span class="arithmatex">\(F_{num}\)</span>.</li>
+</ol>
+<p>Let&rsquo;s denote the CNOT gates (from right to left, starting from <span class="arithmatex">\(CNOT_{12}\)</span>) as <span class="arithmatex">\(C_1, C_2, C_3, C_4, C_5\)</span>.
+<span class="arithmatex">\(C_1=CNOT_{12}\)</span>, <span class="arithmatex">\(C_2=CNOT_{10}\)</span>, <span class="arithmatex">\(C_3=CNOT_{23}\)</span>, <span class="arithmatex">\(C_4=CNOT_{34}\)</span>, <span class="arithmatex">\(C_5=CNOT_{04}\)</span>.
+Let <span class="arithmatex">\(U_j^{rest}\)</span> be the unitary operations after <span class="arithmatex">\(C_j\)</span>. The effective error for <span class="arithmatex">\(P_j\)</span> after <span class="arithmatex">\(C_j\)</span> is <span class="arithmatex">\(E_j = U_j^{rest} P_j (U_j^{rest})^\dagger\)</span>.</p>
+<p><strong>Summary of Error Analysis (up to <span class="arithmatex">\(O(p)\)</span>):</strong></p>
+<ol>
+<li>
+<p><strong>No error:</strong> Occurs with probability <span class="arithmatex">\((1-p)^5 \approx 1-5p\)</span>.
+    The state remains <span class="arithmatex">\(|\phi\rangle\)</span>. This state satisfies post-selection.
+    Contribution to <span class="arithmatex">\(F_{num}\)</span>: <span class="arithmatex">\(1-5p\)</span>.
+    Contribution to <span class="arithmatex">\(F_{den}\)</span>: <span class="arithmatex">\(1-5p\)</span>.</p>
+</li>
+<li>
+<p><strong>Single error <span class="arithmatex">\(P_j\)</span> after <span class="arithmatex">\(C_j\)</span></strong>: Occurs with probability <span class="arithmatex">\(\frac{p}{15}(1-p)^4 \approx \frac{p}{15}\)</span>.
+    Let&rsquo;s track the effective Pauli error <span class="arithmatex">\(E_j\)</span> for each CNOT point and check post-selection conditions:</p>
+<ul>
+<li>
+<p><strong>After <span class="arithmatex">\(C_5 = CNOT_{04}\)</span> (on qubits 0,4):</strong>
+    <span class="arithmatex">\(E_5 = P_{04}\)</span>. The ideal state before <span class="arithmatex">\(C_{04}\)</span> is <span class="arithmatex">\(|\psi_5\rangle = \frac{1}{\sqrt{2}}(|0000\rangle_{0123}|0\rangle_4 + |1111\rangle_{0123}|1\rangle_4)\)</span>.
+    If <span class="arithmatex">\(P_{04}\)</span> has <span class="arithmatex">\(X_4\)</span> or <span class="arithmatex">\(Y_4\)</span> component (e.g., <span class="arithmatex">\(X_0 X_4\)</span>): <span class="arithmatex">\(C_{04} (X_0 X_4) |\psi_5\rangle = C_{04} \frac{1}{\sqrt{2}}(|1000\rangle|1\rangle_4 + |0111\rangle|0\rangle_4) = \frac{1}{\sqrt{2}}(|1000\rangle|1\rangle_4 + |0111\rangle|1\rangle_4) \propto |1\rangle_4\)</span>. Detected by ancilla.
+    If <span class="arithmatex">\(P_{04}\)</span> has <span class="arithmatex">\(Z_4\)</span> component (e.g., <span class="arithmatex">\(X_0 Z_4\)</span>): <span class="arithmatex">\(C_{04} (X_0 Z_4) |\psi_5\rangle = C_{04} \frac{1}{\sqrt{2}}(|1000\rangle|0\rangle_4 - |0111\rangle|1\rangle_4) = \frac{1}{\sqrt{2}}(|1000\rangle|0\rangle_4 - |0111\rangle|0\rangle_4) = (X_0 |\phi_-\rangle_C) |0\rangle_4\)</span>. Here <span class="arithmatex">\(|\phi_-\rangle_C = \frac{1}{\sqrt{2}}(|0000\rangle-|1111\rangle)\)</span>. This state anticommutes with <span class="arithmatex">\(S_1\)</span> (e.g., <span class="arithmatex">\(S_1 |\phi_-\rangle_C = -|\phi_-\rangle_C\)</span>). Detected by code stabilizers.
+    Thus, all 15 errors after <span class="arithmatex">\(C_{04}\)</span> are detected.</p>
+</li>
+<li>
+<p><strong>After <span class="arithmatex">\(C_4 = CNOT_{34}\)</span> (on qubits 3,4):</strong>
+    <span class="arithmatex">\(E_4 = C_{04} P_{34} C_{04}^\dagger\)</span>.
+    If <span class="arithmatex">\(P_{34}\)</span> has <span class="arithmatex">\(X_4\)</span> or <span class="arithmatex">\(Y_4\)</span> component (e.g., <span class="arithmatex">\(I_3 X_4\)</span>): <span class="arithmatex">\(E_4 = C_{04} (I_3 X_4) C_{04}^\dagger = X_0 X_4\)</span>. Detected by ancilla.
+    If <span class="arithmatex">\(P_{34}\)</span> has <span class="arithmatex">\(Z_4\)</span> component (e.g., <span class="arithmatex">\(I_3 Z_4\)</span>): <span class="arithmatex">\(E_4 = C_{04} (I_3 Z_4) C_{04}^\dagger = I_0 Z_4\)</span>. This <span class="arithmatex">\(I_0 Z_4\)</span> acts on <span class="arithmatex">\(|\phi\rangle = |\phi\rangle_C \otimes |0\rangle_4\)</span> to give <span class="arithmatex">\(|\phi\rangle_C \otimes |1\rangle_4\)</span>. Detected by ancilla.
+    Thus, all 15 errors after <span class="arithmatex">\(C_{34}\)</span> are detected.</p>
+</li>
+<li>
+<p><strong>After <span class="arithmatex">\(C_3 = CNOT_{23}\)</span> (on qubits 2,3):</strong>
+    <span class="arithmatex">\(E_3 = C_{04} C_{34} P_{23} C_{34}^\dagger C_{04}^\dagger\)</span>.
+    The transformations on Pauli operators through <span class="arithmatex">\(C_{34}\)</span> are: <span class="arithmatex">\(X_3 \to X_3 X_4\)</span>, <span class="arithmatex">\(Y_3 \to Y_3 Y_4\)</span>, <span class="arithmatex">\(Z_3 \to Z_3\)</span>, <span class="arithmatex">\(Q_2 \to Q_2\)</span>.
+    If <span class="arithmatex">\(P_{23}\)</span> has <span class="arithmatex">\(X_3\)</span> or <span class="arithmatex">\(Y_3\)</span> (e.g., <span class="arithmatex">\(I_2 X_3\)</span>): <span class="arithmatex">\(P_{23}' = C_{34}(I_2 X_3)C_{34}^\dagger = I_2 X_3 X_4\)</span>. Then <span class="arithmatex">\(E_3 = C_{04} (I_2 X_3 X_4) C_{04}^\dagger = I_2 X_3 X_0 X_4\)</span>. Detected by ancilla (<span class="arithmatex">\(X_4\)</span> component).
+    If <span class="arithmatex">\(P_{23}\)</span> has <span class="arithmatex">\(Z_3\)</span> (e.g., <span class="arithmatex">\(I_2 Z_3\)</span>): <span class="arithmatex">\(P_{23}' = C_{34}(I_2 Z_3)C_{34}^\dagger = I_2 Z_3\)</span>. Then <span class="arithmatex">\(E_3 = C_{04} (I_2 Z_3) C_{04}^\dagger = I_2 Z_3\)</span>. (The qubits of <span class="arithmatex">\(C_{04}\)</span> are 0,4, not 2,3).
+    So, <span class="arithmatex">\(E_3 = I_2 Z_3 \otimes I_4\)</span>. Check detection by stabilizers for <span class="arithmatex">\(I_2 Z_3\)</span>:
+    <span class="arithmatex">\([I_2 Z_3, S_1] = [I_2 Z_3, X_0 X_1 X_2 X_3] \ne 0\)</span> (anticommutes with <span class="arithmatex">\(X_3\)</span>). Detected by <span class="arithmatex">\(S_1\)</span>.
+    Thus, all 15 errors after <span class="arithmatex">\(C_{23}\)</span> are detected.</p>
+</li>
+<li>
+<p><strong>After <span class="arithmatex">\(C_2 = CNOT_{10}\)</span> (on qubits 1,0):</strong>
+    <span class="arithmatex">\(E_2 = C_{04} C_{34} C_{23} P_{10} C_{23}^\dagger C_{34}^\dagger C_{04}^\dagger\)</span>.
+    <span class="arithmatex">\(C_{23}\)</span> acts on qubits 2,3, so <span class="arithmatex">\(C_{23} P_{10} C_{23}^\dagger = P_{10}\)</span>. Same for <span class="arithmatex">\(C_{34}\)</span>.
+    So <span class="arithmatex">\(E_2 = C_{04} P_{10} C_{04}^\dagger\)</span>.
+    The transformations on Pauli operators through <span class="arithmatex">\(C_{04}\)</span> are: <span class="arithmatex">\(X_0 \to X_0 X_4\)</span>, <span class="arithmatex">\(Y_0 \to Y_0 Y_4\)</span>, <span class="arithmatex">\(Z_0 \to Z_0\)</span>, <span class="arithmatex">\(Q_1 \to Q_1\)</span>.
+    If <span class="arithmatex">\(P_{10}\)</span> has <span class="arithmatex">\(X_0\)</span> or <span class="arithmatex">\(Y_0\)</span> (e.g., <span class="arithmatex">\(I_1 X_0\)</span>): <span class="arithmatex">\(E_2 = C_{04} (I_1 X_0) C_{04}^\dagger = I_1 X_0 X_4\)</span>. Detected by ancilla (<span class="arithmatex">\(X_4\)</span> component).
+    If <span class="arithmatex">\(P_{10}\)</span> has <span class="arithmatex">\(Z_0\)</span> (e.g., <span class="arithmatex">\(I_1 Z_0\)</span>): <span class="arithmatex">\(E_2 = C_{04} (I_1 Z_0) C_{04}^\dagger = I_1 Z_0\)</span>. (No change on <span class="arithmatex">\(Q_4\)</span>).
+    So, <span class="arithmatex">\(E_2 = I_1 Z_0 \otimes I_4\)</span>. Check detection by stabilizers for <span class="arithmatex">\(I_1 Z_0\)</span>:
+    <span class="arithmatex">\([I_1 Z_0, S_1] = [I_1 Z_0, X_0 X_1 X_2 X_3] \ne 0\)</span> (anticommutes with <span class="arithmatex">\(X_0\)</span>). Detected by <span class="arithmatex">\(S_1\)</span>.
+    Thus, all 15 errors after <span class="arithmatex">\(C_{10}\)</span> are detected.</p>
+</li>
+<li>
+<p><strong>After <span class="arithmatex">\(C_1 = CNOT_{12}\)</span> (on qubits 1,2):</strong>
+    <span class="arithmatex">\(E_1 = C_{04} C_{34} C_{23} C_{10} P_{12} C_{10}^\dagger C_{23}^\dagger C_{34}^\dagger C_{04}^\dagger\)</span>.
+    First, propagate <span class="arithmatex">\(P_{12}\)</span> through <span class="arithmatex">\(C_{10}\)</span>:
+    <span class="arithmatex">\(P_{12}' = C_{10} P_{12} C_{10}^\dagger\)</span>: <span class="arithmatex">\(X_1 \to X_1 X_0\)</span>, <span class="arithmatex">\(Y_1 \to Y_1 Y_0\)</span>, <span class="arithmatex">\(Z_1 \to Z_1\)</span>, <span class="arithmatex">\(X_2 \to X_2\)</span>, <span class="arithmatex">\(Y_2 \to Y_2\)</span>, <span class="arithmatex">\(Z_2 \to Z_2 Z_0\)</span>.
+    Next, <span class="arithmatex">\(P_{12}'\)</span> propagates through <span class="arithmatex">\(C_{23}, C_{34}, C_{04}\)</span>.
+    The CNOTs <span class="arithmatex">\(C_{23}\)</span> and <span class="arithmatex">\(C_{34}\)</span> only involve qubits 2,3 and 3,4 respectively. <span class="arithmatex">\(C_{04}\)</span> involves qubits 0,4.</p>
+<p>Let&rsquo;s analyze <span class="arithmatex">\(P_{12}\)</span> errors based on their components:
+*   If <span class="arithmatex">\(P_{12}\)</span> has <span class="arithmatex">\(X_2\)</span> or <span class="arithmatex">\(Y_2\)</span> (e.g., <span class="arithmatex">\(I_1 X_2\)</span>):
+    <span class="arithmatex">\(I_1 X_2 \xrightarrow{C_{10}} I_1 X_2 \xrightarrow{C_{23}} I_1 X_2 X_3 \xrightarrow{C_{34}} I_1 X_2 X_3 X_4 \xrightarrow{C_{04}} I_1 X_2 X_3 X_0 X_4\)</span>. This <span class="arithmatex">\(E_1\)</span> has <span class="arithmatex">\(X_4\)</span>. Detected. (8 errors of type <span class="arithmatex">\(P_1 \otimes (X_2 \text{ or } Y_2)\)</span>).
+*   If <span class="arithmatex">\(P_{12}\)</span> has <span class="arithmatex">\(Z_2\)</span> (e.g., <span class="arithmatex">\(I_1 Z_2\)</span>):
+    <span class="arithmatex">\(I_1 Z_2 \xrightarrow{C_{10}} I_1 Z_2 Z_0 \xrightarrow{C_{23}} I_1 Z_2 Z_0 Z_3 \xrightarrow{C_{34}} I_1 Z_2 Z_0 Z_3 \xrightarrow{C_{04}} I_1 Z_2 Z_0 Z_3\)</span>. <span class="arithmatex">\(E_1 = Z_0 Z_2 Z_3\)</span>.
+    Check <span class="arithmatex">\(Z_0 Z_2 Z_3\)</span> with stabilizers: <span class="arithmatex">\([Z_0 Z_2 Z_3, S_1]\)</span> anticommutes with <span class="arithmatex">\(X_0, X_2, X_3\)</span>. Total 3 anticomms. So <span class="arithmatex">\(E_1 S_1 = -S_1 E_1\)</span>. Detected. (4 errors of type <span class="arithmatex">\(P_1 \otimes Z_2\)</span>).
+*   If <span class="arithmatex">\(P_{12}\)</span> has <span class="arithmatex">\(X_1\)</span> and <span class="arithmatex">\(I_2\)</span> (e.g., <span class="arithmatex">\(X_1 I_2\)</span>):
+    <span class="arithmatex">\(X_1 I_2 \xrightarrow{C_{10}} X_1 X_0 I_2 \xrightarrow{C_{23}} X_1 X_0 I_2 \xrightarrow{C_{34}} X_1 X_0 I_2 \xrightarrow{C_{04}} X_1 X_0 I_2\)</span>. So <span class="arithmatex">\(E_1 = X_0 X_1\)</span>.
+    Check <span class="arithmatex">\(X_0 X_1\)</span> with stabilizers:
+    <span class="arithmatex">\([X_0 X_1, S_1] = [X_0 X_1, X_0 X_1 X_2 X_3] = 0\)</span>. (Commutes).
+    <span class="arithmatex">\([X_0 X_1, S_2] = [X_0 X_1, Z_0 Z_1 Z_2 Z_3]\)</span>. This has <span class="arithmatex">\(X_0 Z_0 = -Z_0 X_0\)</span> and <span class="arithmatex">\(X_1 Z_1 = -Z_1 X_1\)</span>. Two anticomms, so commutes.
+    <span class="arithmatex">\(E_1=X_0X_1\)</span> is an undetected error. It leaves qubit 4 in <span class="arithmatex">\(|0\rangle\)</span>.
+    <span class="arithmatex">\(X_0X_1 |\phi\rangle = \frac{1}{\sqrt{2}}(|1100\rangle+|0011\rangle)|0\rangle_4\)</span>. This is orthogonal to <span class="arithmatex">\(|\phi\rangle\)</span>. This is a logical error (specifically <span class="arithmatex">\(X_B\)</span> based on the problem&rsquo;s definition <span class="arithmatex">\(X_B=X_0X_1I_2I_3\)</span>).
+*   If <span class="arithmatex">\(P_{12}\)</span> has <span class="arithmatex">\(Y_1\)</span> and <span class="arithmatex">\(I_2\)</span> (e.g., <span class="arithmatex">\(Y_1 I_2\)</span>):
+    <span class="arithmatex">\(Y_1 I_2 \xrightarrow{C_{10}} Y_1 Y_0 I_2 \xrightarrow{C_{23}} Y_1 Y_0 I_2 \xrightarrow{C_{34}} Y_1 Y_0 I_2 \xrightarrow{C_{04}} Y_1 Y_0 I_2\)</span>. So <span class="arithmatex">\(E_1 = Y_0 Y_1\)</span>.
+    Check <span class="arithmatex">\(Y_0 Y_1\)</span> with stabilizers:
+    <span class="arithmatex">\([Y_0 Y_1, S_1]\)</span>: two anticomms (<span class="arithmatex">\(Y_0 X_0=-X_0 Y_0\)</span>, <span class="arithmatex">\(Y_1 X_1=-X_1 Y_1\)</span>), so commutes.
+    <span class="arithmatex">\([Y_0 Y_1, S_2]\)</span>: two anticomms (<span class="arithmatex">\(Y_0 Z_0=-Z_0 Y_0\)</span>, <span class="arithmatex">\(Y_1 Z_1=-Z_1 Y_1\)</span>), so commutes.
+    <span class="arithmatex">\(E_1=Y_0Y_1\)</span> is an undetected error. It leaves qubit 4 in <span class="arithmatex">\(|0\rangle\)</span>.
+    <span class="arithmatex">\(Y_0Y_1 |\phi\rangle = \frac{1}{\sqrt{2}}(-i|1100\rangle+i|0011\rangle)|0\rangle_4\)</span>. This is orthogonal to <span class="arithmatex">\(|\phi\rangle\)</span>. This is also a logical error.
+*   If <span class="arithmatex">\(P_{12}\)</span> has <span class="arithmatex">\(Z_1\)</span> and <span class="arithmatex">\(I_2\)</span> (e.g., <span class="arithmatex">\(Z_1 I_2\)</span>):
+    <span class="arithmatex">\(Z_1 I_2 \xrightarrow{C_{10}} Z_1 I_2 \xrightarrow{C_{23}} Z_1 I_2 \xrightarrow{C_{34}} Z_1 I_2 \xrightarrow{C_{04}} Z_1 I_2\)</span>. So <span class="arithmatex">\(E_1 = Z_1\)</span>.
+    Check <span class="arithmatex">\(Z_1\)</span> with stabilizers: <span class="arithmatex">\([Z_1, S_1]\)</span> anticommutes with <span class="arithmatex">\(X_1\)</span>. Detected by <span class="arithmatex">\(S_1\)</span>.
+*   <span class="arithmatex">\(I_1 I_2\)</span>: No error.</p>
+</li>
+</ul>
+<p>In summary, only 2 out of the <span class="arithmatex">\(5 \times 15 = 75\)</span> possible single errors are undetected and cause a logical error (flip the state orthogonally to the ideal state):
+*   <span class="arithmatex">\(X_1 I_2\)</span> after <span class="arithmatex">\(CNOT_{12}\)</span> leads to <span class="arithmatex">\(E_1=X_0 X_1\)</span>.
+*   <span class="arithmatex">\(Y_1 I_2\)</span> after <span class="arithmatex">\(CNOT_{12}\)</span> leads to <span class="arithmatex">\(E_1=Y_0 Y_1\)</span>.</p>
+</li>
+</ol>
+<p><strong>3. Final Fidelity Calculation</strong></p>
+<p>The numerator of the fidelity is <span class="arithmatex">\(\langle\phi|\rho_{total}|\phi\rangle\)</span>. Only the no-error term contributes to this:
+<span class="arithmatex">\(F_{num} = (1-5p)\langle\phi|\phi\rangle = 1-5p\)</span>.</p>
+<p>The denominator is the total probability of successful post-selection, <span class="arithmatex">\(\text{Tr}(\Pi_{ps}\rho_{total})\)</span>.
+This includes the no-error case and all undetected logical errors.
+<span class="arithmatex">\(F_{den} = (1-5p) + (\text{Number of undetected logical errors}) \times \frac{p}{15}\)</span>.
+<span class="arithmatex">\(F_{den} = (1-5p) + 2 \times \frac{p}{15} = 1 - \frac{75p}{15} + \frac{2p}{15} = 1 - \frac{73p}{15}\)</span>.</p>
+<p>The logical state fidelity <span class="arithmatex">\(F\)</span> is <span class="arithmatex">\(F = \frac{F_{num}}{F_{den}}\)</span>:</p>
+<div class="arithmatex">\[
+F = \frac{1-5p}{1 - \frac{73p}{15}}
+\]</div>
+<p>For <span class="arithmatex">\(p \ll 1\)</span>, we can use the approximation <span class="arithmatex">\(\frac{1}{1-x} \approx 1+x\)</span>:</p>
+<div class="arithmatex">\[
+F \approx (1-5p)\left(1 + \frac{73p}{15}\right)
+\]</div>
+<div class="arithmatex">\[
+F \approx 1 - 5p + \frac{73p}{15} - 5p \cdot \frac{73p}{15}
+\]</div>
+<p>Ignoring <span class="arithmatex">\(O(p^2)\)</span> terms:</p>
+<div class="arithmatex">\[
+F \approx 1 - \frac{75p}{15} + \frac{73p}{15}
+\]</div>
+<div class="arithmatex">\[
+F \approx 1 - \frac{2p}{15}
+\]</div>
+<p>The final answer is <span class="arithmatex">\(\boxed{1-\frac{2p}{15}}\)</span>.</p></div>
+</article>
+
+
+<article class="message role-user">
+    <div class="meta">
+        <span class="badge">User</span>
+        <span class="idx">#3</span>
+    </div>
+    <div class="content markdown-body"><p>Populate your final answer into the code template provided below. This step is purely for formatting/display purposes. No additional reasoning or derivation should be performed. Do not import any modules or packages beyond what is provided in the template.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">answer</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the expression of the logical state fidelity of the final 2-qubit logical state</span>
+<span class="sd">    at the end of the circuit as a function of two-qubit gate error rate $p$.</span>
+
+<span class="sd">    Inputs</span>
+<span class="sd">    ----------</span>
+<span class="sd">    p: sympy.Symbol, two-qubit gate error rate, $p$</span>
+
+<span class="sd">    Outputs</span>
+<span class="sd">    ----------</span>
+<span class="sd">    F_logical: sympy.Expr, logical state fidelity of the final 2-qubit logical state</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># ------------------ FILL IN YOUR RESULTS BELOW ------------------</span>
+    <span class="n">F_logical</span> <span class="o">=</span> <span class="o">...</span>  <span class="c1"># a SymPy expression of inputs</span>
+    <span class="c1"># ---------------------------------------------------------------</span>
+
+    <span class="k">return</span> <span class="n">F_logical</span>
+</code></pre></div></div>
+</article>
+
+
+<article class="message role-assistant">
+    <div class="meta">
+        <span class="badge">Assistant</span>
+        <span class="idx">#4</span>
+    </div>
+    <div class="content markdown-body"><div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">answer</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the expression of the logical state fidelity of the final 2-qubit logical state</span>
+<span class="sd">    at the end of the circuit as a function of two-qubit gate error rate $p$.</span>
+
+<span class="sd">    Inputs</span>
+<span class="sd">    ----------</span>
+<span class="sd">    p: sympy.Symbol, two-qubit gate error rate, $p$</span>
+
+<span class="sd">    Outputs</span>
+<span class="sd">    ----------</span>
+<span class="sd">    F_logical: sympy.Expr, logical state fidelity of the final 2-qubit logical state</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># ------------------ FILL IN YOUR RESULTS BELOW ------------------</span>
+    <span class="n">F_logical</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">p</span><span class="p">)</span><span class="o">/</span><span class="mi">15</span>
+    <span class="c1"># ---------------------------------------------------------------</span>
+
+    <span class="k">return</span> <span class="n">F_logical</span>
+</code></pre></div></div>
+</article>
+
+</div>
+
+<footer>
+  Generated at 2025-09-24T22:02:08.786506
+</footer>
+
+<script>
+(function() {
+  // Tabs
+  const tabs = document.querySelectorAll('.tab');
+  const panels = document.querySelectorAll('.tab-content');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      const target = document.querySelector(tab.dataset.target);
+      if (target) target.classList.add('active');
+    });
+  });
+
+  // Theme toggle
+  const toggleBtn = document.getElementById('theme-toggle');
+  function setTheme(dark) {
+    if (dark) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('dark', '1');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('dark', '0');
+    }
+  }
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const stored = localStorage.getItem('dark');
+  setTheme(stored === null ? prefersDark : stored === '1');
+
+  toggleBtn.addEventListener('click', () => {
+    const isDark = document.documentElement.classList.contains('dark');
+    setTheme(!isDark);
+  });
+})();
+</script>
+</body>
+</html>

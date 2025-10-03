@@ -1,0 +1,2713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example Challenge</title>
+
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+                processEnvironments: true
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            },
+            startup: {
+                pageReady: () => {
+                    return MathJax.startup.defaultPageReady();
+                }
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" async></script>
+
+    <!-- Prism.js for syntax highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+
+    <style>
+        /* 1) Define the title height once */
+        :root {
+            --title-height: 200px;   /* navbar (80px) + title content (~120px) */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Aptos', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: rgb(240, 237, 228);
+            color: rgb(89, 89, 89);
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Navigation Bar Styles */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            background: rgb(15, 76, 129);
+            backdrop-filter: blur(8px);
+        }
+
+        /* 2) Keep the page title sticky */
+        .page-title {
+            position: sticky;
+            top: 0;
+            z-index: 1400;          /* above the content */
+            width: 100%;
+            background: rgb(240, 237, 228);    /* your page bg */
+            padding: 64px 0 20px 0;
+        }
+
+        .page-title-content {
+            max-width: 2100px;
+            margin: 0;
+            margin-left: 0;
+            padding: 0 20px 0 100px;
+            text-align: left;
+        }
+
+        .page-title h1 {
+            font-size: 2.8rem;
+            font-weight: 600;
+            color: rgb(89, 89, 89);
+            margin: 0;
+            letter-spacing: -0.02em;
+        }
+
+        @media (min-width: 768px) {
+            .page-title h1 {
+                font-size: 2.8rem;
+            }
+        }
+
+        .navbar-container {
+            max-width: 2100px;
+            margin: 0;
+            margin-left: 0;
+            padding: 0 20px;
+        }
+
+        .navbar-content {
+            display: flex;
+            height: 80px;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .brand img {
+            height: 80px;
+            margin-left: 70px;
+            margin-top: 16px;
+        }
+
+        .nav-links {
+            display: none;
+            align-items: center;
+            gap: 8px;
+        }
+
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex;
+            }
+        }
+
+        .nav-pill {
+            padding: 8px 16px;
+            border-radius: 9999px;
+            font-size: 18px;
+            font-weight: 500;
+            transition: all 0.2s;
+            color: rgb(240, 237, 228);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .nav-pill:hover {
+            font-weight: 600;
+            transform: scale(1.1);
+        }
+
+        .nav-pill.active {
+            background: transparent;
+            color: rgb(240, 237, 228);
+            font-weight: 600;
+            transform: scale(1.1);
+        }
+
+        .container {
+            max-width: 2100px;
+            margin: 0;
+            margin-left: 0;
+            padding: 60px 20px;
+            padding-top: 40px;
+            position: relative;
+            display: grid;
+            grid-template-columns: minmax(auto, 850px) minmax(400px, 950px);
+            gap: 50px;
+        }
+
+        @media (max-width: 1400px) {
+            .container {
+                grid-template-columns: 1fr;
+                max-width: 900px;
+                margin: 0 auto;
+            }
+        }
+
+        .main-content-area {
+            /* Main content takes up the left side */
+        }
+
+        .sidebar {
+            /* Right sidebar for model results */
+            position: sticky;
+            top: 164px;
+            height: fit-content;
+            z-index: 800;
+        }
+
+        /* Timeline Styles */
+        .timeline {
+            position: fixed;
+            left: 60px;
+            top: 55%;
+            transform: translateY(-50%);
+            z-index: 100;
+        }
+
+        @media (max-width: 1400px) {
+            .timeline {
+                left: 10px;
+                transform: translateY(-50%) scale(0.7);
+                transform-origin: left center;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .timeline {
+                left: 20px;
+                transform: translateY(-50%) scale(1);
+            }
+        }
+
+        .timeline-line {
+            width: 2px;
+            height: 350px;
+            background: #e5e5e5;
+            position: relative;
+            border-radius: 1px;
+        }
+
+        .timeline-progress {
+            width: 100%;
+            background: rgb(15, 76, 129);
+            position: absolute;
+            top: 0;
+            border-radius: 1px;
+            transition: height 0.3s ease-out;
+        }
+
+        .timeline-dot {
+            width: 12px;
+            height: 12px;
+            background: #fdf6e3;
+            border: 2px solid #e5e5e5;
+            border-radius: 50%;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-dot.active {
+            background: rgb(15, 76, 129);
+            border-color: rgb(15, 76, 129);
+        }
+
+        /* Position dots using their actual position in DOM */
+        .timeline-dot:nth-child(2) { top: 0; }
+        .timeline-dot:nth-child(3) { top: 25%; }
+        .timeline-dot:nth-child(4) { top: 50%; }
+        .timeline-dot:nth-child(5) { top: 75%; }
+        .timeline-dot:nth-child(6) { top: 100%; }
+
+        /* Content Sections */
+        .section {
+            margin-left: 100px;
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease-out;
+        }
+
+        @media (max-width: 1200px) {
+            .section {
+                margin-left: 50px;
+            }
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .main-content {
+            background: #FAF8F3;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            padding: 40px;
+            margin-bottom: 60px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            max-width: 850px;
+        }
+
+        .checkpoint {
+            background: #FAF8F3;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            padding: 35px;
+            margin-bottom: 50px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            transition: box-shadow 0.2s ease;
+            max-width: 850px;
+        }
+
+        .checkpoint:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 24px;
+            color: rgb(89, 89, 89);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            font-size: 1.4em;
+            margin-bottom: 20px;
+            color: rgb(15, 76, 129);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: -0.01em;
+        }
+
+        h2::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: rgb(15, 76, 129);
+            border-radius: 2px;
+        }
+
+        h3.answer-title {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            margin-top: 25px;
+            color: rgb(89, 89, 89);
+            font-weight: 600;
+        }
+
+        /* LaTeX display equations */
+        .MathJax_Display {
+            margin: 20px 0 !important;
+            overflow-x: auto;
+            overflow-y: hidden;
+        }
+
+        /* Inline math styling */
+        mjx-container[jax="CHTML"][display="false"] {
+            display: inline !important;
+            margin: 0 2px;
+        }
+
+        /* Display math styling */
+        mjx-container[jax="CHTML"][display="true"] {
+            display: block !important;
+            margin: 20px 0 !important;
+        }
+
+        .circuit-equation {
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .answer-box {
+            background: transparent;
+            border: 1px solid rgb(89, 89, 89);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 25px;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            color: rgb(89, 89, 89);
+            font-size: 1.25em;
+            font-weight: 300;
+            font-family: 'Aptos', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+        }
+
+        p {
+            line-height: 1.7;
+            margin-bottom: 16px;
+            color: rgb(89, 89, 89);
+        }
+
+        strong {
+            font-weight: 600;
+            color: rgb(89, 89, 89);
+        }
+
+        /* Loading animation */
+        .loading-text {
+            opacity: 0;
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .timeline-line {
+                height: 300px;
+            }
+
+            .main-content,
+            .checkpoint {
+                padding: 25px;
+            }
+
+            h1 {
+                font-size: 1.6em;
+            }
+
+            h2 {
+                font-size: 1.2em;
+            }
+
+            /* Make equations responsive */
+            mjx-container {
+                font-size: 85% !important;
+            }
+
+            .sidebar {
+                position: static;
+                margin-top: 40px;
+            }
+
+            .model-results-container {
+                padding: 15px;
+            }
+
+            .results-table {
+                font-size: 0.8em;
+            }
+
+            .results-table th,
+            .results-table td {
+                padding: 6px 8px;
+            }
+
+            .model-name {
+                max-width: 100px;
+            }
+        }
+
+        /* Selection color */
+        ::selection {
+            background: #f0d5c9;
+            color: rgb(89, 89, 89);
+        }
+
+        /* 3) Make right-pane sticky elements at top of their container */
+        .tab-buttons {
+            position: sticky;
+            top: 0;   /* stick to top of box */
+            z-index: 1500;
+            background: #FAF8F3;           /* avoids see-through while overlapping */
+        }
+
+        .model-results-title {
+            position: sticky;
+            top: 0;   /* stick to top of box */
+            z-index: 1300;
+            background: #FAF8F3;           /* avoids see-through while overlapping */
+        }
+
+        .results-table thead {
+            position: sticky;
+            top: 0;   /* stick to top of the scroll container */
+            z-index: 1300;
+            background: #FAF8F3;           /* avoids see-through while overlapping */
+        }
+
+        /* Optional: if your rounded card is clipping oddly */
+        .tabs-container {
+            overflow: clip;             /* or hidden, to keep borders clean while sticking */
+        }
+
+        /* Model Outputs Styles */
+        .models-container {
+            background: #FAF8F3;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            padding: 35px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .model-item {
+            margin-bottom: 12px;
+            border: 1px solid #e5e5e5;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .model-header {
+            padding: 16px 20px;
+            background: #FAF8F3;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.2s ease;
+        }
+
+        .model-header:hover {
+            background: rgba(15, 76, 129, 0.1);
+        }
+
+        .model-name {
+            font-weight: 600;
+            color: rgb(89, 89, 89);
+        }
+
+        .model-toggle {
+            color: rgb(15, 76, 129);
+            transition: transform 0.3s ease;
+            font-size: 0.9em;
+        }
+
+        .model-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: #FAF8F3;
+        }
+
+        .model-content.expanded {
+            max-height: 300px;
+            border-top: 1px solid #e5e5e5;
+        }
+
+        .attempt-selector {
+            padding: 15px 20px;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .attempt-label {
+            color: rgb(89, 89, 89);
+            font-size: 0.95em;
+            margin-right: 5px;
+        }
+
+        .attempt-btn {
+            width: 32px;
+            height: 32px;
+            border: 1px solid #e5e5e5;
+            background: #FAF8F3;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+            color: rgb(89, 89, 89);
+            transition: all 0.2s ease;
+        }
+
+        .attempt-btn:hover {
+            border-color: rgb(15, 76, 129);
+            color: rgb(15, 76, 129);
+        }
+
+        .attempt-btn.active {
+            background: rgb(15, 76, 129);
+            color: white;
+            border-color: rgb(15, 76, 129);
+        }
+
+        .attempt-content {
+            padding: 20px;
+            min-height: 80px;
+            position: relative;
+        }
+
+        .attempt-text {
+            display: none;
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+            font-size: 1.1em;
+            color: rgb(89, 89, 89);
+            position: relative;
+        }
+
+        .attempt-text.active {
+            display: block;
+        }
+
+        .correctness-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-left: 15px;
+            padding: 3px 10px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .correctness-indicator.correct {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .correctness-indicator.incorrect {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* Model Performance Table Styles */
+        /* Tab container styles */
+        .tabs-container {
+            background: #FAF8F3;
+            border: 1px solid #e5e5e5;
+            border-radius: 16px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .tab-buttons {
+            display: flex;
+            border-bottom: 1px solid #e5e5e5;
+            background: #FAF8F3;
+            border-radius: 16px 16px 0 0;
+        }
+
+        .tab-button {
+            padding: 12px 24px;
+            background: none;
+            border: none;
+            font-size: 0.9em;
+            font-weight: 600;
+            color: rgb(89, 89, 89);
+            cursor: pointer;
+            position: relative;
+            transition: color 0.2s;
+        }
+
+        .tab-button:hover {
+            color: rgb(15, 76, 129);
+        }
+
+        .tab-button.active {
+            color: rgb(15, 76, 129);
+        }
+
+        .tab-button.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: rgb(15, 76, 129);
+        }
+
+        .tab-content {
+            display: none;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .model-results-container {
+            background: #FAF8F3;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .expert-solution-container {
+            padding: 20px;
+            max-width: 100%;
+            overflow-y: auto;
+            height: 100%;
+        }
+
+        .expert-solution-container h1 {
+            font-size: 1.5em;
+            color: rgb(15, 76, 129);
+            margin-bottom: 20px;
+        }
+
+        .expert-solution-container h3 {
+            font-size: 1.1em;
+            color: rgb(89, 89, 89);
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .expert-solution-container p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .model-results-inner {
+            padding: 20px;
+        }
+
+        /* Optional: Style the scrollbar */
+        .model-results-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .model-results-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        .model-results-container::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+
+        .model-results-container::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        .model-results-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            padding: 20px 20px 15px 20px;
+            margin: 0;
+            color: rgb(15, 76, 129);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #FAF8F3;
+            position: sticky;
+            top: 0;
+            z-index: 950;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .model-results-title::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: rgb(15, 76, 129);
+            border-radius: 2px;
+        }
+
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.8em;
+            table-layout: fixed;
+            position: relative;
+            margin: 0;
+            padding: 0 20px 20px 20px;
+        }
+
+        /* Make table header sticky */
+        .results-table thead {
+            position: sticky;
+            top: 0;
+            background: #FAF8F3;
+            z-index: 940;
+        }
+
+        .results-table thead tr {
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .results-table thead th {
+            background: #FAF8F3;
+            position: relative;
+            padding-top: 12px;
+            padding-bottom: 12px;
+        }
+
+        .results-table th,
+        .results-table td {
+            padding: 8px 12px;
+            text-align: center;
+            border-bottom: 1px solid #f0f0f0;
+            vertical-align: middle;
+        }
+
+        .results-table tbody tr {
+            background: #FAF8F3;
+        }
+
+        .results-table th {
+            background: #FAF8F3;
+            font-weight: 600;
+            color: rgb(89, 89, 89);
+            font-size: 0.95em;
+        }
+
+        .results-table .model-name {
+            font-weight: 500;
+            white-space: nowrap;
+            min-width: 170px;
+            text-align: left;
+            max-width: 180px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .score-cell {
+            text-align: center;
+            font-weight: 600;
+            white-space: nowrap;
+            min-width: 85px;
+            padding: 8px 12px;
+        }
+
+        .score-fraction {
+            font-size: 0.9em;
+        }
+
+        /* Color scheme matching LaTeX table */
+        .score-high {
+            background-color: rgb(179, 217, 217);
+            color: #1f2937;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.9em;
+            display: inline-block;
+            min-width: 32px;
+            text-align: center;
+        }
+
+        .score-medium {
+            background-color: rgb(240, 229, 179);
+            color: #1f2937;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.9em;
+            display: inline-block;
+            min-width: 32px;
+            text-align: center;
+        }
+
+        .score-low {
+            background-color: rgb(226, 178, 168);
+            color: #1f2937;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.9em;
+            display: inline-block;
+            min-width: 32px;
+            text-align: center;
+        }
+
+        .checkpoint-header {
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.8em;
+            color: rgb(89, 89, 89);
+            border-bottom: 1px solid #ddd;
+        }
+
+        .checkpoint-subheader {
+            font-size: 0.75em;
+            color: rgb(89, 89, 89);
+            font-weight: 500;
+            text-align: center;
+            padding: 6px 12px;
+            line-height: 1.3;
+            min-width: 85px;
+            vertical-align: middle;
+        }
+
+        .results-table tr:hover {
+            background: rgba(15, 76, 129, 0.075);
+        }
+
+        /* Epoch detail styles */
+        .toggle-btn {
+            border: 1px solid #ddd;
+            background: #FAF8F3;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: transform 0.2s;
+        }
+
+        .toggle-btn:hover {
+            background: #f5f5f5;
+        }
+
+        .toggle-btn.expanded {
+            transform: rotate(90deg);
+        }
+
+        .detail-row {
+            background: #FAF8F3;
+            display: none !important;
+        }
+
+        .detail-row.visible {
+            display: table-row !important;
+        }
+
+        .epoch-details {
+            padding: 0;
+            background: rgb(240, 237, 228);
+        }
+
+        .epoch-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgb(240, 237, 228);
+            margin: 0;
+            table-layout: fixed;
+        }
+
+        .epoch-table th {
+            background: rgb(240, 237, 228);
+            font-weight: 600;
+            font-size: 0.9em;
+            color: rgb(89, 89, 89);
+            border-bottom: 2px solid #e0e0e0;
+            padding: 8px;
+        }
+
+        .epoch-table td {
+            border-bottom: none;
+            color: rgb(89, 89, 89);
+        }
+
+        /* Match column widths with main table (excluding Details column) */
+        .epoch-table td.epoch-name,
+        .epoch-table td:nth-child(1) {
+            min-width: 170px;
+            max-width: 180px;
+            text-align: right !important;
+            padding: 6px 50px 6px 12px !important;
+        }
+
+        /* Challenge column - shift left */
+        .epoch-table td:nth-child(2) {
+            text-align: center !important;
+            min-width: 80px !important;
+            padding: 6px 12px 6px 4px !important;
+        }
+
+        /* Checkpoint 1 column - shift right a bit */
+        .epoch-table td:nth-child(3) {
+            text-align: center !important;
+            min-width: 85px !important;
+            padding: 6px 12px 6px 10px !important;
+        }
+
+        /* Checkpoint 2 Self Carryover - shift left more */
+        .epoch-table td:nth-child(4) {
+            text-align: center !important;
+            font-weight: 600 !important;
+            white-space: nowrap !important;
+            min-width: 85px !important;
+            padding: 6px 8px 6px 12px !important;
+        }
+
+        /* Checkpoint 2 Oracle Carryover - shift right a bit */
+        .epoch-table td:nth-child(5) {
+            text-align: center !important;
+            font-weight: 600 !important;
+            white-space: nowrap !important;
+            min-width: 85px !important;
+            padding: 6px 8px 6px 16px !important;
+        }
+
+        /* Checkpoint 3 Self Carryover - shift right */
+        .epoch-table td:nth-child(6) {
+            text-align: center !important;
+            font-weight: 600 !important;
+            white-space: nowrap !important;
+            min-width: 85px !important;
+            padding: 6px 6px 6px 18px !important;
+        }
+
+        /* Checkpoint 3 Oracle Carryover - shift right more */
+        .epoch-table td:nth-child(7) {
+            text-align: center !important;
+            font-weight: 600 !important;
+            white-space: nowrap !important;
+            min-width: 85px !important;
+            padding: 6px 6px 6px 24px !important;
+        }
+
+        /* Details column (8th) should be narrower */
+        .epoch-table td:nth-child(8) {
+            min-width: 60px;
+            max-width: 60px;
+            padding: 6px !important;
+        }
+
+        .epoch-table tbody tr {
+            background: rgb(240, 237, 228);
+        }
+
+        .epoch-table a {
+            color: rgb(89, 89, 89);
+            text-decoration: none;
+            font-size: 1.35em;
+            display: inline-block;
+            min-width: 32px;
+            padding: 3px 6px;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .epoch-table a:hover {
+            transform: scale(1.2);
+        }
+
+        .epoch-container {
+            padding: 8px;
+            background: #FAF8F3;
+        }
+
+        .epoch-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 6px;
+        }
+
+        .epoch-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            background: #FAF8F3;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .epoch-header {
+            background: #FAF8F3;
+            padding: 4px 6px;
+            font-weight: 600;
+            font-size: 0.85em;
+            border-bottom: 1px solid #e0e0e0;
+            text-align: center;
+        }
+
+        .epoch-scores {
+            padding: 4px;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            background: #FAF8F3;
+        }
+
+        .epoch-scores a {
+            font-size: 0.9em;
+            padding: 2px 4px;
+            border-radius: 3px;
+            background: #FAF8F3;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            min-height: 18px;
+            width: 150px;
+            color: rgb(89, 89, 89);
+            text-decoration: none;
+            transition: background-color 0.2s;
+            margin-bottom: 1px;
+            border: 1px solid transparent;
+        }
+
+        .epoch-scores a:hover {
+            background: rgb(240, 237, 228);
+            text-decoration: none;
+        }
+
+        .epoch-scores .score-icon {
+            font-weight: 600;
+        }
+
+        @media (max-width: 1000px) {
+            .epoch-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 900px) {
+            .epoch-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .epoch-card:nth-child(1),
+            .epoch-card:nth-child(2) {
+                grid-column: span 2;
+            }
+
+            .epoch-card:nth-child(3) {
+                grid-column: 2 / span 2;
+            }
+
+            .epoch-card:nth-child(4) {
+                grid-column: 1 / span 2;
+            }
+
+            .epoch-card:nth-child(5) {
+                grid-column: 3 / span 2;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .epoch-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .epoch-card:nth-child(1),
+            .epoch-card:nth-child(2),
+            .epoch-card:nth-child(3),
+            .epoch-card:nth-child(4),
+            .epoch-card:nth-child(5) {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-content">
+                <div class="brand">
+                    <a href="index.html">
+                        <img src="figures/CritPt_Cavolini.png" alt="CritPt">
+                    </a>
+                </div>
+                <nav class="nav-links">
+                    <a href="index.html" class="nav-pill">Overview</a>
+                    <a href="benchmark-coverage.html" class="nav-pill">Coverage</a>
+                    <a href="performance-details.html" class="nav-pill">Performance</a>
+                    <a href="example.html" class="nav-pill active">Example</a>
+                    <a href="about.html" class="nav-pill">About</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Title -->
+    <div class="page-title">
+        <div class="page-title-content">
+            <h1>Example Challenge: Quantum Error Detection</h1>
+        </div>
+    </div>
+
+    <div class="timeline">
+        <div class="timeline-line">
+            <div class="timeline-progress" id="progress"></div>
+            <div class="timeline-dot active"></div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-dot"></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="main-content-area">
+
+        <!-- Setup Section -->
+        <div class="section visible" id="setup">
+            <div class="checkpoint">
+                <h2>Setup</h2>
+                <p>
+                    In quantum error correction, you encode quantum states into logical states made of many qubits in order to improve their resilience to errors. In quantum error detection, you do the same but can only detect the presence of errors and not correct them. In this problem, we will consider a single [[4,2,2]] quantum error detection code, which encodes two logical qubits into four physical qubits, and investigate how robust logical quantum operations in this code are to quantum errors.
+                </p>
+                <p>
+                    Our convention is that the four physical qubits in the [[4,2,2]] code are labelled 0,1,2,3. The two logical qubits are labelled A and B. The stabilizers are $XXXX$ and $ZZZZ$, where $X$ and $Z$ are Pauli matrices. The logical $X$ and $Z$ operators on the two qubits are $X_A = XIXI$, $X_B=XXII$, $Z_A = ZZII$, $Z_B = ZIZI$, up to multiplication by stabilizers.
+                </p>
+                <p>
+                    We will consider different state preparation circuits consisting of controlled not $CNOT_{ij}$ gates, where $CNOT_{ij}$ has control qubit $i$ and target qubit $j$. As a simple model of quantum errors in hardware, we will suppose that each $CNOT_{ij}$ gate in the circuit has a two qubit depolarizing error channel following it that produces one of the 15 non-identity two-qubit Paulis with equal probability $p/15$. The probability $p$ indicates the probability of an error in a single two-qubit gate. We will assess the logical infidelity of certain state preparation protocols as a function of the physical infidelity $p$.
+                </p>
+            </div>
+        </div>
+
+        <!-- Challenge Section (formerly Quantum Circuit State Preparation) -->
+        <div class="section" id="main">
+            <div class="checkpoint">
+                <h2>Challenge Question</h2>
+                <p>
+                    Suppose that we prepare a logical two-qubit $|00\rangle_{AB}$ state in the [[4,2,2]] code.
+                    To do so, we introduce an ancilla qubit, qubit 4, and use the following state preparation circuit:
+                </p>
+                <div class="circuit-equation">
+                    $$M_4 (CNOT_{04}) (CNOT_{34}) (CNOT_{23}) (CNOT_{10}) (CNOT_{12}) (H_1)$$
+                </div>
+                <p>
+                    Note that this equation is written in matrix multiplication order, while the quantum operations
+                    in the circuit occur in the reverse order (from right-to-left in the above equation).
+                    $H$ is a single-qubit Hadamard gate and $M$ is a single-qubit measurement.
+                </p>
+                <p>
+                    The ancilla is used to detect errors in the state preparation circuit and makes the circuit
+                    fault-tolerant. If the ancilla measurement is $|0\rangle$ ($|1\rangle$), the state preparation succeeds (fails).
+                </p>
+                <p>
+                    What is the logical state fidelity of the final 2-qubit logical state
+                    at the end of the circuit as a function of two-qubit gate error rate $p$, assuming the state is
+                    post-selected on all detectable errors in the code and on the ancilla qubit measuring $|0\rangle$?
+                </p>
+
+                <h3 class="answer-title">Answer:</h3>
+                <div class="answer-box">
+                    $$F_{\rm{logical}} = 1-\frac{\tfrac{16}{25} p^2 - \tfrac{128}{125} p^3 + \tfrac{2048}{3375} p^4 - \tfrac{32768}{253125} p^5}{1 - \tfrac{68}{15} p + \tfrac{704}{75} p^2 - \tfrac{32768}{3375} p^3 + \tfrac{253952}{50625} p^4 - \tfrac{262144}{253125} p^5}$$
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="checkpoint1">
+            <div class="checkpoint">
+                <h2>Checkpoint 1</h2>
+                <p>
+                    Suppose that we wish to prepare a logical two-qubit GHZ state $(|00\rangle_{AB}+|11\rangle_{AB})/\sqrt{2}$
+                    in the [[4,2,2]] code. To do so, we use the following state preparation circuit:
+                </p>
+                <div class="circuit-equation">
+                    $$(CNOT_{03}) (H_0) (CNOT_{21}) (H_2)$$
+                </div>
+                <p>
+                    Note that this equation is written in matrix multiplication order, while the quantum operations
+                    in the circuit occur in the reverse order (from right-to-left in the above equation).
+                    $H$ is a single-qubit Hadamard gate.
+                </p>
+                <p>
+                    What is the physical state fidelity of the final physical 4-qubit state
+                    at the end of the circuit as a function of the two-qubit gate error rate $p$?
+                </p>
+                <h3 class="answer-title">Answer:</h3>
+                <div class="answer-box">
+                    $$F_{\rm{physical}} = (1-\tfrac{12}{15}p)^2$$
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="checkpoint2">
+            <div class="checkpoint">
+                <h2>Checkpoint 2</h2>
+                <p>
+                    Suppose that we wish to prepare a logical two-qubit GHZ state $(|00\rangle_{AB}+|11\rangle_{AB})/\sqrt{2}$
+                    in the [[4,2,2]] code. To do so, we use the following state preparation circuit:
+                </p>
+                <div class="circuit-equation">
+                    $$(CNOT_{03}) (H_0) (CNOT_{21}) (H_2)$$
+                </div>
+                <p>
+                    Note that this equation is written in matrix multiplication order, while the quantum operations
+                    in the circuit occur in the reverse order (from right-to-left in the above equation).
+                    $H$ is a single-qubit Hadamard gate.
+                </p>
+                <p>
+                    What is the logical state fidelity of the final 2-qubit logical state
+                    at the end of the circuit as a function of the two-qubit gate error rate $p$, assuming the state is
+                    post-selected on all detectable errors in the code?
+                </p>
+                <h3 class="answer-title">Answer:</h3>
+                <div class="answer-box">
+                    $$F_{\rm{logical}} = 1 - \frac{\tfrac{16}{75}p^2}{1-\tfrac{8}{5}p + \tfrac{64}{75}p^2}$$
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="checkpoint3">
+            <div class="checkpoint">
+                <h2>Checkpoint 3</h2>
+                <p>
+                    Suppose that we prepare a logical two-qubit $|00\rangle_{AB}$ state in the [[4,2,2]] code.
+                    To do so, we introduce an ancilla qubit, qubit 4, and use the following state preparation circuit:
+                </p>
+                <div class="circuit-equation">
+                    $$M_4 (CNOT_{04}) (CNOT_{34}) (CNOT_{23}) (CNOT_{10}) (CNOT_{12}) (H_1)$$
+                </div>
+                <p>
+                    Note that this equation is written in matrix multiplication order, while the quantum operations
+                    in the circuit occur in the reverse order (from right-to-left in the above equation).
+                    $H$ is a single-qubit Hadamard gate and $M$ is a single-qubit measurement.
+                </p>
+                <p>
+                    The ancilla is used to detect errors in the state preparation circuit and makes the circuit
+                    fault-tolerant. If the ancilla measurement is $|0\rangle$ ($|1\rangle$), the state preparation succeeds (fails).
+                </p>
+                <p>
+                    What is the logical state fidelity of the final 2-qubit logical state
+                    at the end of the circuit as a function of two-qubit gate error rate $p$, assuming the state is
+                    post-selected on all detectable errors in the code and on the ancilla qubit measuring $|0\rangle$?
+                </p>
+                <h3 class="answer-title">Answer:</h3>
+                <div class="answer-box">
+                    $$F_{\rm{logical}} = 1-\frac{\tfrac{16}{25} p^2 - \tfrac{128}{125} p^3 + \tfrac{2048}{3375} p^4 - \tfrac{32768}{253125} p^5}{1 - \tfrac{68}{15} p + \tfrac{704}{75} p^2 - \tfrac{32768}{3375} p^3 + \tfrac{253952}{50625} p^4 - \tfrac{262144}{253125} p^5}$$
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <!-- Sidebar with Tabbed Content -->
+        <div class="sidebar">
+            <div class="tabs-container">
+                <div class="tab-buttons">
+                    <button class="tab-button active" onclick="switchTab('model-outputs')">Model Outputs</button>
+                    <button class="tab-button" onclick="switchTab('expert-solution')">Expert Solution</button>
+                </div>
+
+                <!-- Expert Solution Tab -->
+                <div id="expert-solution" class="tab-content">
+                    <div class="expert-solution-container">
+                        <h1>Detailed solution:</h1>
+
+                        <h3>Checkpoint 1</h3>
+                        <p>There are $15$ two-qubit Paulis that occur with probability $p/15$ in the depolarizing error model after both of the two-qubit CNOT gates. The described quantum circuit prepares two independent GHZ states $(|00\rangle+|11\rangle)/\sqrt{2}$ on disconnected qubit pairs, qubits 0,3 and qubits 1,2. These GHZ states are $+1$ eigenstates of the $XX$, $YY$, and $ZZ$ Paulis on those qubits. Therefore, those $3$ Paulis in the depolarizing error model do not affect the state while the other $15-3=12$ Paulis when applied to the state take it to a different orthogonal state. Since with probability $12p/15$ each depolarizing error model results in a state orthogonal to the ideal state, the density matrix produced by the circuit is</p>
+                        <p>$\rho = \left(1-\frac{12p}{15}\right)^2 |\psi\rangle\langle \psi| + \left[1-\left(1-\frac{12p}{15}\right)^2\right]\rho_\perp$</p>
+                        <p>where $|\psi\rangle = \frac{1}{2}(|00\rangle+|11\rangle)_{03}(|00\rangle+|11\rangle)_{12}$ is the ideal state produced by the circuit and $\rho_{\perp}$ is a quantum state orthogonal to the ideal state. The state fidelity of this physical qubit state is then</p>
+                        <p>$\begin{align}
+F_{\rm{physical}} &= \langle \psi | \rho | \psi \rangle = \left(1-\frac{12p}{15}\right)^2 \langle \psi|\psi\rangle\langle \psi |\psi\rangle+  \left[1-\left(1-\frac{12p}{15}\right)^2\right]\langle \psi| \rho_\perp | \psi \rangle \\
+&= \left(1-\frac{12p}{15}\right)^2.
+\end{align}$</p>
+
+                        <h3>Checkpoint 2</h3>
+                        <p>Let us consider all possible combinations of errors that can occur in the two noisy $CNOT$ gates in the circuit. There are three situations that can occur: (1) neither gate has an error (occurs with probability $(1-p)^2$), (2) one gate has an error (occurs with probability $2p(1-p)$), (3) or both gates have an error (occurs with probability $p^2$). In situation (1), no detectable errors have occured. In situation (2), $3$ of the $15$ Pauli errors (again $XX$,$YY$,$ZZ$) are not detectable errors. Situation (3) is a bit more complicated. When both gates have an error, there are $15^2=225$ possible Pauli errors that can occur in total. Enumerating the Pauli errors, we can check how many of them commute with the stabilizers $XXXX$ and $ZZZZ$. The result is that $57$ out of $225$ Pauli errors commute with the stabilizers and are therefore undetectable.</p>
+                        <p>Altogether, one then sees that the probability of not observing any detectable errors is</p>
+                        <p>$\begin{align}
+P_{\rm{no\, detected\, errors}} &= (1-p)^2 \cdot 1+ 2p(1-p) \cdot \frac{3}{15} + p^2 \cdot \frac{57}{225} \\
+&= 1-\frac{8}{5}p + \frac{64}{75}p^2
+\end{align}$</p>
+                        <p>Let us consider the final density matrix produced at the end of the circuit. When both gates have an error, there are $225$ possible Pauli errors, $57$ of which are undetectable. These undetectable errors commute with the stabilizers and so are logical operators or logical operators multiplied by stabilizers. Importantly, the final logical GHZ state being produced by the circuit $(|00\rangle_{AB}+|11\rangle_{AB})/\sqrt{2}$ is a $+1$ eigenstate of the logical $X_A X_B = IXXI$ and $Z_A Z_B=IZZI$ operators. Therefore, any Pauli errors that are logically equivalent to these operators, up to multiplication by stabilizers, do not affect the logical state. By going through the $57$ undetectable Pauli errors, we find that $9$ of them are logically equivalent to $X_A X_B$ and $Z_A Z_B$ (up to stabilizers) and so do not affect the logical state. In summary, when both gates have errors there are $225$ possible Pauli errors, $225-57=168$ of which are detectable, $57-9=48$ of which are undetectable and cause logical errors, and $9$ of which are undetectable and cause no logical error.</p>
+                        <p>Now we know enough information to express the final density matrix. It takes the form</p>
+                        <p>$\begin{align}
+\rho &= (1-p)^2 \rho_0 \\
+&\quad +2p(1-p)\left[\frac{12}{15}\rho_{\rm{det}}^{(1)} + \frac{3}{15}\rho_0\right] \\
+&\quad +p^2\left[\frac{168}{225}\rho_{\rm{det}}^{(2)} + \frac{48}{225}\rho_{\rm{logical\, error}} + \frac{9}{225}\rho_{0}\right]
+\end{align}$</p>
+                        <p>where $\rho_0\equiv |\psi\rangle \langle \psi|$ is the ideal output state of the circuit, $\rho_{\rm{det}}^{(1)}$ is the density matrix post-selected on detectable errors from a single gate error, $\rho_{\rm{det}}^{(2)}$ is the density matrix post-selected on detectable errors from two gate errors, and $\rho_{\rm{logical\, error}}$ is the density matrix post-selected on logical errors (and no detectable errors) from two gate errors.</p>
+                        <p>To compute the logical fidelity post-selected on no detected errors, we need to compute the final state's *logical* density matrix, which is the physical density matrix above projected onto the $+1$ eigenstates of the $XXXX$ and $ZZZZ$ stabilizers. This logical density matrix is</p>
+                        <p>$\begin{align}
+\rho_{\rm{logical}} &= \frac{1}{P_{\rm{no\, detected\, errors}}}\left\{ (1-p)^2\rho_0 +\frac{6}{15}p(1-p)\rho_0 +p^2\left[\frac{48}{225}\rho_{\rm{logical\, error}} + \frac{9}{225}\rho_{0}\right] \right\} \\
+&= \frac{1}{P_{\rm{no\, detected\, errors}}}\left\{ \left[(1-p)^2 +\frac{6}{15}p(1-p)+\frac{9}{225}p^2\right]\rho_0 + \frac{16}{75}p^2\rho_{\rm{logical\, error}} \right\} \\
+&= \left(1-\frac{\frac{16}{75}p^2}{P_{\rm{no\, detected\, errors}}}\right)\rho_0 + \frac{\frac{16}{75}p^2}{P_{\rm{no\, detected\, errors}}}\rho_{\rm{logical\, error}}
+\end{align}$</p>
+                        <p>where $P_{\rm{no\, detected\, errors}}=1-\frac{8}{5}p + \frac{64}{75}p^2$ is a normalization constant that ensures that $\textrm{tr}(\rho_{\rm{logical}})=1$ is a valid normalized state. Note that $\rho_{\rm{logical\, error}}$ is orthogonal to $\rho_0$.</p>
+                        <p>The logical state fidelity is then</p>
+                        <p>$\begin{align}
+F_{\rm{logical}} &= \langle \psi |\rho_{\rm{logical}}|\psi\rangle = 1-\frac{\frac{16}{75}p^2}{P_{\rm{no\, detected\, errors}}} \\
+&=1-\frac{\frac{16}{75}p^2}{1-\frac{8}{5}p + \frac{64}{75}p^2}.
+\end{align}$</p>
+
+                        <h3>Checkpoint 3</h3>
+                        <p>For the state preparation circuit for the $|00\rangle_{AB}$ logical state, the $CNOT$ gates are not simply at the end of the circuit as for the earlier subproblems, so the analysis is more complicated. In order to determine the effects of the errors on the logical state, we need to enumerate all possible $16^5=1048576$ Pauli errors and analyze how they propagate through the circuit. This is feasible because the entire circuit is a Clifford circuit, and the propagation of Pauli operators through Clifford circuits can be efficiently simulated classically.</p>
+                        <p>We solve this problem algorithmically with the Python script attached below. The script applies the transformation rules for how the Clifford $CNOT$ gates in the circuit transform Pauli strings into other Pauli strings for each of the possible $16^5$ Pauli error configuration. For each error configuration, we count how many (non-identity) gate errors occurred $n=0,1,2,3,4,$ or $5$ and propagate the Pauli errors through the circuit to obtain a final Pauli string $P$. We then assess if that Pauli string leads to an error detection event (or ancilla check event) and if the Pauli string leads to a logical error. We check if $P$ triggers an error detection event by checking if it is in the stabilizer group generated by $\{XXXXI, ZZZZI, IIIIZ, ZZIII, ZIZII, XIXII, XXIII\}$, which defines a valid logical state that does not trigger an error detection or ancilla check event. We check if $P$ causes a logical error by checking if is in the stabilizer group generated by $\{XXXXI, ZZZZI, IIIIZ, ZZIII, ZIZII\}$, which defines the logical $|00\rangle_{AB}$ state. The number of undetected error configurations with $n$ errors we call $u_n$; the number of undetected error configurations with $n$ errors that cause logical errors we call $e_n$.</p>
+                        <p>From the Python script, we obtain the results that<br>
+$u_n = [1, 7, 282, 4222, 31637, 94923]$<br>
+and<br>
+$e_n = [0, 0, 144, 3024, 24240, 70896]$.</p>
+                        <p>Note that a configuration with $n$ errors occurs with probability $(1-p)^{5-n}\left(\frac{p}{15}\right)^n$. Therefore, the probability of detecting no errors (or ancilla check events) at the end of the circuit is</p>
+                        <p>$\begin{align}
+P_{\rm{no\, detected\, errors}} &= \sum_{n=0}^5 u_n (1-p)^{5-n}\left(\frac{p}{15}\right)^n\\
+&=(1-p)^5 + 7(1-p)^4\left(\frac{p}{15}\right)+ 282(1-p)^3\left(\frac{p}{15}\right)^2 + 4222(1-p)^2\left(\frac{p}{15}\right)^3 + 31637(1-p)\left(\frac{p}{15}\right)^4 + 94923\left(\frac{p}{15}\right)^5 \\
+&= 1 - \frac{68}{15} p + \frac{704}{75} p^2 - \frac{32768}{3375} p^3 + \frac{253952}{50625} p^4 - \frac{262144}{253125} p^5.
+\end{align}$</p>
+                        <p>Similarly, the probability of detecting no errors and a logical error occuring is</p>
+                        <p>$\begin{align}
+P_{\rm{no\, detected\, errors; logical\, error}} &= \sum_{n=0}^5 e_n (1-p)^{5-n}\left(\frac{p}{15}\right)^n\\
+&=144(1-p)^3\left(\frac{p}{15}\right)^2 + 3024(1-p)^2\left(\frac{p}{15}\right)^3 + 24240(1-p)\left(\frac{p}{15}\right)^4 + 70896\left(\frac{p}{15}\right)^5 \\
+&= \frac{16}{25} p^2 - \frac{128}{125} p^3 + \frac{2048}{3375} p^4 - \frac{32768}{253125} p^5.
+\end{align}$</p>
+                        <p>If we post-select on no error detection events, then the logical fidelity of the $|00\rangle_{AB}$ state is</p>
+                        <p>$\begin{align}
+F_{\rm{logical}}&=1-\frac{P_{\rm{no\, detected\, errors; logical\, error}}}{P_{\rm{no\, detected\, errors}}} \\
+&=1-\frac{\frac{16}{25} p^2 - \frac{128}{125} p^3 + \frac{2048}{3375} p^4 - \frac{32768}{253125} p^5}{1 - \frac{68}{15} p + \frac{704}{75} p^2 - \frac{32768}{3375} p^3 + \frac{253952}{50625} p^4 - \frac{262144}{253125} p^5}.
+\end{align}$</p>
+
+                        <pre class="language-python" style="margin-top: 30px; border: 1px solid #ddd; border-radius: 5px;"><code class="language-python">import numpy as np
+import itertools as it
+
+# Represent single-qubit Pauli matrices I, X, Y, Z either as python strings or integers.
+pauli_to_index = {"I" : 0, "X" : 1, "Y" : 2, "Z" : 3}
+index_to_pauli = ["I", "X", "Y", "Z"]
+
+# A matrix defining how to multiply single-qubit Paulis (represented as integers).
+pauli_multi_mat = np.array([
+[0,1,2,3],
+[1,0,3,2],
+[2,3,0,1],
+[3,2,1,0]
+], dtype=int)
+
+# Multiply multi-qubit Pauli strings P1 and P2 to create new Pauli string P1*P2
+# (up to a phase that is ignored). Here Pauli strings are represented as python strings.
+def multiply(pauli_string1, pauli_string2):
+    new_paulis = []
+    for q in range(5):
+        ind_new_p = pauli_multi_mat[pauli_to_index[pauli_string1[q]], pauli_to_index[pauli_string2[q]]]
+        new_paulis.append(index_to_pauli[ind_new_p])
+    return "".join(new_paulis)
+
+# Rules for how two-qubit Pauli strings
+# propagate through a CNOT gate, with the first qubit as
+# the control qubit and the second as the target.
+cnot_rules = {
+    "II" : "II",
+    "IX" : "IX",
+    "IY" : "ZY",
+    "IZ" : "ZZ",
+    "XI" : "XX",
+    "XX" : "XI",
+    "XY" : "YZ",
+    "XZ" : "YY",
+    "YI" : "YX",
+    "YX" : "YI",
+    "YY" : "XZ",
+    "YZ" : "XY",
+    "ZI" : "ZI",
+    "ZX" : "ZX",
+    "ZY" : "IY",
+    "ZZ" : "IZ"
+}
+
+# A list of all 16 two-qubit Pauli matrices.
+tq_paulis = ["II",
+    "IX",
+    "IY",
+    "IZ",
+    "XI",
+    "XX",
+    "XY",
+    "XZ",
+    "YI",
+    "YX",
+    "YY",
+    "YZ",
+    "ZI",
+    "ZX",
+    "ZY",
+    "ZZ"]
+
+# Embed a two-qubit Pauli on sites i and j into
+# a five-qubit Pauli string (tensor around those sites with identity).
+def tq_pauli_qubits(tq_pauli, i, j):
+    pauli_string = "IIIII"
+    if i < j:
+        return f"{pauli_string[0:i]}{tq_pauli[0]}{pauli_string[(i+1):j]}{tq_pauli[1]}{pauli_string[(j+1):]}"
+    else:
+        return f"{pauli_string[0:j]}{tq_pauli[1]}{pauli_string[(j+1):i]}{tq_pauli[0]}{pauli_string[(i+1):]}"
+
+# The stabilizer generators that generate a stabilizer group that define a valid logical state of the [[4,2,2]] code.
+# Any valid logical state is as +1 eigenstates of these operators or any product of them.
+# Note: that IIIIZ is included to indicate that the ancilla qubit must be |0> to have a valid logical state.
+error_detection_stabilizer_generators = ["XXXXI", "ZZZZI", "IIIIZ", "ZZIII", "ZIZII", "XIXII", "XXIII"]
+
+# The stabilizer group generated by the above operators.
+error_detection_stabilizer_group = set()
+for s1 in ["IIIII", error_detection_stabilizer_generators[0]]:
+    for s2 in ["IIIII", error_detection_stabilizer_generators[1]]:
+        for s3 in ["IIIII", error_detection_stabilizer_generators[2]]:
+            for s4 in ["IIIII", error_detection_stabilizer_generators[3]]:
+                for s5 in ["IIIII", error_detection_stabilizer_generators[4]]:
+                    for s6 in ["IIIII", error_detection_stabilizer_generators[5]]:
+                        for s7 in ["IIIII", error_detection_stabilizer_generators[6]]:
+                            error_detection_stabilizer_group.add(multiply(s1, multiply(s2, multiply(s3, multiply(s4, multiply(s5, multiply(s6, s7)))))))
+
+# The stabilizer generators that generate a stabilizer group that defines the particular
+# logical state of interest, |00>_AB for the [[4,2,2]] code.
+# Note: that IIIIZ is included to indicate that the ancilla qubit must be |0> to have a valid logical state.
+logical_state_stabilizer_generators = ["XXXXI", "ZZZZI", "IIIIZ", "ZZIII", "ZIZII"]
+
+# The stabilizer group generated by the above operators.
+logical_state_stabilizer_group = set()
+for s1 in ["IIIII", logical_state_stabilizer_generators[0]]:
+    for s2 in ["IIIII", logical_state_stabilizer_generators[1]]:
+        for s3 in ["IIIII", logical_state_stabilizer_generators[2]]:
+            for s4 in ["IIIII", logical_state_stabilizer_generators[3]]:
+                for s5 in ["IIIII", logical_state_stabilizer_generators[4]]:
+                    logical_state_stabilizer_group.add(multiply(s1, multiply(s2, multiply(s3, multiply(s4, s5)))))
+
+# Propagates a multi-qubit Pauli string through a CNOT_{ij} gate with control qubit i and target qubit j.
+def cnot(i,j,pauli_string):
+    sij     = f"{pauli_string[i]}{pauli_string[j]}"
+    new_sij = cnot_rules[sij]
+
+    if i < j:
+        return f"{pauli_string[0:i]}{new_sij[0]}{pauli_string[(i+1):j]}{new_sij[1]}{pauli_string[(j+1):]}"
+    else:
+        return f"{pauli_string[0:j]}{new_sij[1]}{pauli_string[(j+1):i]}{new_sij[0]}{pauli_string[(i+1):]}"
+
+# For each number of Pauli errors after two-qubit gates (between 0 to 6), keeps track of:
+
+# how many Pauli error configurations were undetected by the error detection and ancilla check.
+num_undetected_configurations                      = np.zeros(6, dtype=int)
+# how many Pauli error configurations were undetected by the error detection and ancilla check
+# AND lead to an invalid |00>_AB logical state (i.e., had an undetected logical error).
+num_undetected_logical_invalidstate_configurations = np.zeros(6, dtype=int)
+
+# After each of the five two-qubit gates, pick one of the 16 possible
+# two-qubit Paulis as the error. This defines a Pauli error configuration.
+for i1 in range(len(tq_paulis)):
+    for i2 in range(len(tq_paulis)):
+        for i3 in range(len(tq_paulis)):
+            for i4 in range(len(tq_paulis)):
+                for i5 in range(len(tq_paulis)):
+                    # Count how many errors are in the configuration. (i=0 corresponds to the identity Pauli II)
+                    num_errors = (i1 != 0) + (i2 != 0) + (i3 != 0) + (i4 != 0) + (i5 != 0)
+
+                    # Initialize the Pauli string of identities.
+                    pauli_string = "IIIII"
+
+                    # For each CNOTs in the circuit,
+                    for (i,j, ind_tq_pauli) in [(1,2,i1), (1,0,i2), (2,3,i3), (3,4,i4), (0,4,i5)]:
+                        # propagate the Pauli string through the CNOT
+                        pauli_string = cnot(i, j, pauli_string)
+                        # Pick a two-qubit Pauli error if it is in the chosen configuration
+                        tq_pauli     = tq_pauli_qubits(tq_paulis[ind_tq_pauli], i, j)
+                        # Apply the error to the current Pauli string
+                        pauli_string = multiply(pauli_string, tq_pauli)
+
+                    # After the Pauli string has been propagated through the circuit,
+
+                    # check if it causes an error detection event
+                    no_error_detected    = (pauli_string in error_detection_stabilizer_group)
+                    # check if it causes the state to be a valid logical |00>_AB state
+                    valid_logical_state  = (pauli_string in logical_state_stabilizer_group)
+
+                    # Update the configuration tracking with this info.
+                    num_undetected_configurations[num_errors]                      += no_error_detected
+                    num_undetected_logical_invalidstate_configurations[num_errors] += (no_error_detected and not valid_logical_state)
+
+# Print the final results
+print(f"Number of Pauli error configurations that were undetected:\n{num_undetected_configurations}")
+print(f"Number of Pauli error configurations that were undetected and caused a logical error:\n{num_undetected_logical_invalidstate_configurations}")</code></pre>
+                    </div>
+                </div>
+
+                <!-- Model Outputs Tab -->
+                <div id="model-outputs" class="tab-content" style="display: block;">
+                    <div class="model-results-container">
+                        <table class="results-table">
+                    <colgroup>
+                        <col style="width: 24.5%;">
+                        <col style="width: 10.9%;">
+                        <col style="width: 11.6%;">
+                        <col style="width: 11.6%;">
+                        <col style="width: 11.6%;">
+                        <col style="width: 11.6%;">
+                        <col style="width: 11.6%;">
+                        <col style="width: 6.6%;">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th rowspan="2" style="vertical-align: middle; font-weight: 600; padding: 8px 12px; min-width: 170px; max-width: 180px; text-align: left;">Model Name</th>
+                            <th rowspan="2" style="vertical-align: middle; text-align: center; padding: 8px; min-width: 80px;">Challenge</th>
+                            <th rowspan="2" style="vertical-align: middle; text-align: center; padding: 8px; min-width: 85px; white-space: nowrap;">Checkpoint 1</th>
+                            <th colspan="2" class="checkpoint-header" style="text-align: center; padding: 6px; min-width: 170px;">Checkpoint 2</th>
+                            <th colspan="2" class="checkpoint-header" style="text-align: center; padding: 6px; min-width: 170px;">Checkpoint 3</th>
+                            <th rowspan="2" style="vertical-align: middle; text-align: center; padding: 8px; min-width: 60px;">Details</th>
+                        </tr>
+                        <tr>
+                            <th class="checkpoint-subheader">Self<br>Carryover</th>
+                            <th class="checkpoint-subheader">Oracle<br>Carryover</th>
+                            <th class="checkpoint-subheader">Self<br>Carryover</th>
+                            <th class="checkpoint-subheader">Oracle<br>Carryover</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="summary-row" data-model="gpt-5-code-web">
+                            <td class="model-name">GPT-5 (high, code & web)</td>
+                            <td class="score-cell"><span class="score-medium">2/5</span></td>
+                            <td class="score-cell"><span class="score-high">5/5</span></td>
+                            <td class="score-cell"><span class="score-high">5/5</span></td>
+                            <td class="score-cell"><span class="score-high">5/5</span></td>
+                            <td class="score-cell"><span class="score-medium">3/5</span></td>
+                            <td class="score-cell"><span class="score-medium">3/5</span></td>
+                            <td class="score-cell"><button class="toggle-btn" onclick="toggleEpochDetails('gpt-5-code-web')">▸</button></td>
+                        </tr>
+                        <tr id="epochs-gpt-5-code-web" class="detail-row" style="display: none;">
+                            <td colspan="8" class="epoch-details">
+                                <table class="epoch-table">
+                                    <colgroup>
+                                        <col style="width: 24.5%;">
+                                        <col style="width: 10.9%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 6.6%;">
+                                    </colgroup>
+                                    <tbody>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 0</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/python+search/0/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/python+search/0/Checkpoint-1.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gpt-5/python+search/0/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/python+search/0/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gpt-5/python+search/0/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/python+search/0/Checkpoint-3.html" target="_blank">✅</a></td>
+                                            <td></td></tr>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 1</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/python+search/1/Challenge.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/python+search/1/Checkpoint-1.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gpt-5/python+search/1/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/python+search/1/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gpt-5/python+search/1/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/python+search/1/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 2</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/python+search/2/Challenge.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/python+search/2/Checkpoint-1.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gpt-5/python+search/2/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/python+search/2/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gpt-5/python+search/2/Checkpoint-3.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/python+search/2/Checkpoint-3.html" target="_blank">✅</a></td>
+                                            <td></td></tr>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 3</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/python+search/3/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/python+search/3/Checkpoint-1.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gpt-5/python+search/3/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/python+search/3/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gpt-5/python+search/3/Checkpoint-3.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/python+search/3/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 4</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/python+search/4/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/python+search/4/Checkpoint-1.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gpt-5/python+search/4/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/python+search/4/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gpt-5/python+search/4/Checkpoint-3.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/python+search/4/Checkpoint-3.html" target="_blank">✅</a></td>
+                                            <td></td></tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr class="summary-row" data-model="gpt-5-code">
+                            <td class="model-name">GPT-5 (high, code)</td>
+                            <td class="score-cell"><span class="score-high">4/5</span></td>
+                            <td class="score-cell"><span class="score-high">5/5</span></td>
+                            <td class="score-cell"><span class="score-high">5/5</span></td>
+                            <td class="score-cell"><span class="score-high">5/5</span></td>
+                            <td class="score-cell"><span class="score-high">5/5</span></td>
+                            <td class="score-cell"><span class="score-high">4/5</span></td>
+                            <td class="score-cell"><button class="toggle-btn" onclick="toggleEpochDetails('gpt-5-code')">▸</button></td>
+                        </tr>
+                                                <tr id="epochs-gpt-5-code" class="detail-row" style="display: none;">
+                            <td colspan="8" class="epoch-details">
+                                <table class="epoch-table">
+                                    <colgroup>
+                                        <col style="width: 24.5%;">
+                                        <col style="width: 10.9%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 6.6%;">
+                                    </colgroup>
+                                    <tbody>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 0</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/python/0/Challenge.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/python/0/Checkpoint-1.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gpt-5/python/0/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/python/0/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gpt-5/python/0/Checkpoint-3.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/python/0/Checkpoint-3.html" target="_blank">✅</a></td>
+                                            <td></td></tr>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 1</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/python/1/Challenge.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/python/1/Checkpoint-1.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gpt-5/python/1/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/python/1/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gpt-5/python/1/Checkpoint-3.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/python/1/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 2</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/python/2/Challenge.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/python/2/Checkpoint-1.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gpt-5/python/2/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/python/2/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gpt-5/python/2/Checkpoint-3.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/python/2/Checkpoint-3.html" target="_blank">✅</a></td>
+                                            <td></td></tr>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 3</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/python/3/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/python/3/Checkpoint-1.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gpt-5/python/3/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/python/3/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gpt-5/python/3/Checkpoint-3.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/python/3/Checkpoint-3.html" target="_blank">✅</a></td>
+                                            <td></td></tr>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 4</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/python/4/Challenge.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/python/4/Checkpoint-1.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gpt-5/python/4/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/python/4/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gpt-5/python/4/Checkpoint-3.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/python/4/Checkpoint-3.html" target="_blank">✅</a></td>
+                                            <td></td></tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr class="summary-row" data-model="gpt-5-high">
+                            <td class="model-name">GPT-5 (high)</td>
+                            <td class="score-cell"><span class="score-low">0/5</span></td>
+                            <td class="score-cell"><span class="score-high">5/5</span></td>
+                            <td class="score-cell"><span class="score-high">5/5</span></td>
+                            <td class="score-cell"><span class="score-high">5/5</span></td>
+                            <td class="score-cell"><span class="score-low">0/5</span></td>
+                            <td class="score-cell"><span class="score-low">0/5</span></td>
+                            <td class="score-cell"><button class="toggle-btn" onclick="toggleEpochDetails('gpt-5-high')">▸</button></td>
+                        </tr>
+                                                <tr id="epochs-gpt-5-high" class="detail-row" style="display: none;">
+                            <td colspan="8" class="epoch-details">
+                                <table class="epoch-table">
+                                    <colgroup>
+                                        <col style="width: 24.5%;">
+                                        <col style="width: 10.9%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 6.6%;">
+                                    </colgroup>
+                                    <tbody>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 0</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/0/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/0/Checkpoint-1.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gpt-5/0/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/0/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gpt-5/0/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/0/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 1</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/1/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/1/Checkpoint-1.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gpt-5/1/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/1/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gpt-5/1/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/1/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 2</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/2/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/2/Checkpoint-1.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gpt-5/2/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/2/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gpt-5/2/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/2/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 3</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/3/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/3/Checkpoint-1.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gpt-5/3/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/3/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gpt-5/3/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/3/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 4</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/4/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/4/Checkpoint-1.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gpt-5/4/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/4/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gpt-5/4/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/4/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr class="summary-row" data-model="gemini-2.5-pro">
+                            <td class="model-name">Gemini-2.5 Pro</td>
+                            <td class="score-cell"><span class="score-low">0/5</span></td>
+                            <td class="score-cell"><span class="score-medium">3/5</span></td>
+                            <td class="score-cell"><span class="score-medium">3/5</span></td>
+                            <td class="score-cell"><span class="score-low">1/5</span></td>
+                            <td class="score-cell"><span class="score-low">0/5</span></td>
+                            <td class="score-cell"><span class="score-low">0/5</span></td>
+                            <td class="score-cell"><button class="toggle-btn" onclick="toggleEpochDetails('gemini-2.5-pro')">▸</button></td>
+                        </tr>
+                                                <tr id="epochs-gemini-2.5-pro" class="detail-row" style="display: none;">
+                            <td colspan="8" class="epoch-details">
+                                <table class="epoch-table">
+                                    <colgroup>
+                                        <col style="width: 24.5%;">
+                                        <col style="width: 10.9%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 6.6%;">
+                                    </colgroup>
+                                    <tbody>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 0</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gemini-2.5-pro/0/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gemini-2.5-pro/0/Checkpoint-1.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gemini-2.5-pro/0/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gemini-2.5-pro/0/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gemini-2.5-pro/0/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gemini-2.5-pro/0/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 1</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gemini-2.5-pro/1/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gemini-2.5-pro/1/Checkpoint-1.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gemini-2.5-pro/1/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gemini-2.5-pro/1/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gemini-2.5-pro/1/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gemini-2.5-pro/1/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 2</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gemini-2.5-pro/2/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gemini-2.5-pro/2/Checkpoint-1.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gemini-2.5-pro/2/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gemini-2.5-pro/2/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gemini-2.5-pro/2/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gemini-2.5-pro/2/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 3</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gemini-2.5-pro/3/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gemini-2.5-pro/3/Checkpoint-1.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gemini-2.5-pro/3/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gemini-2.5-pro/3/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gemini-2.5-pro/3/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gemini-2.5-pro/3/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 4</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gemini-2.5-pro/4/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gemini-2.5-pro/4/Checkpoint-1.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gemini-2.5-pro/4/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gemini-2.5-pro/4/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gemini-2.5-pro/4/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gemini-2.5-pro/4/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr class="summary-row" data-model="o3">
+                            <td class="model-name">o3 (high)</td>
+                            <td class="score-cell"><span class="score-low">0/5</span></td>
+                            <td class="score-cell"><span class="score-high">5/5</span></td>
+                            <td class="score-cell"><span class="score-medium">2/5</span></td>
+                            <td class="score-cell"><span class="score-medium">2/5</span></td>
+                            <td class="score-cell"><span class="score-low">0/5</span></td>
+                            <td class="score-cell"><span class="score-low">0/5</span></td>
+                            <td class="score-cell"><button class="toggle-btn" onclick="toggleEpochDetails('o3')">▸</button></td>
+                        </tr>
+                                                <tr id="epochs-o3" class="detail-row" style="display: none;">
+                            <td colspan="8" class="epoch-details">
+                                <table class="epoch-table">
+                                    <colgroup>
+                                        <col style="width: 24.5%;">
+                                        <col style="width: 10.9%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 6.6%;">
+                                    </colgroup>
+                                    <tbody>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 0</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/o3/0/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/o3/0/Checkpoint-1.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/o3/0/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/o3/0/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/o3/0/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/o3/0/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 1</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/o3/1/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/o3/1/Checkpoint-1.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/o3/1/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/o3/1/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/o3/1/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/o3/1/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 2</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/o3/2/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/o3/2/Checkpoint-1.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/o3/2/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/o3/2/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/o3/2/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/o3/2/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 3</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/o3/3/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/o3/3/Checkpoint-1.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/o3/3/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/o3/3/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/o3/3/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/o3/3/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 4</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/o3/4/Challenge.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/o3/4/Checkpoint-1.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/o3/4/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/o3/4/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/o3/4/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/o3/4/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr class="summary-row" data-model="deepseek-r1">
+                            <td class="model-name">DeepSeek R1</td>
+                            <td class="score-cell"><span class="score-low">0/5</span></td>
+                            <td class="score-cell"><span class="score-medium">3/5</span></td>
+                            <td class="score-cell"><span class="score-medium">3/5</span></td>
+                            <td class="score-cell"><span class="score-medium">2/5</span></td>
+                            <td class="score-cell"><span class="score-low">0/5</span></td>
+                            <td class="score-cell"><span class="score-low">0/5</span></td>
+                            <td class="score-cell"><button class="toggle-btn" onclick="toggleEpochDetails('deepseek-r1')">▸</button></td>
+                        </tr>
+                                                <tr id="epochs-deepseek-r1" class="detail-row" style="display: none;">
+                            <td colspan="8" class="epoch-details">
+                                <table class="epoch-table">
+                                    <colgroup>
+                                        <col style="width: 24.5%;">
+                                        <col style="width: 10.9%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 6.6%;">
+                                    </colgroup>
+                                    <tbody>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 0</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/deepseek/deepseek-reasoner/0/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/deepseek/deepseek-reasoner/0/Checkpoint-1.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/deepseek/deepseek-reasoner/0/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/deepseek/deepseek-reasoner/0/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/deepseek/deepseek-reasoner/0/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/deepseek/deepseek-reasoner/0/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 1</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/deepseek/deepseek-reasoner/1/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/deepseek/deepseek-reasoner/1/Checkpoint-1.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/deepseek/deepseek-reasoner/1/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/deepseek/deepseek-reasoner/1/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/deepseek/deepseek-reasoner/1/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/deepseek/deepseek-reasoner/1/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 2</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/deepseek/deepseek-reasoner/2/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/deepseek/deepseek-reasoner/2/Checkpoint-1.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/deepseek/deepseek-reasoner/2/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/deepseek/deepseek-reasoner/2/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/deepseek/deepseek-reasoner/2/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/deepseek/deepseek-reasoner/2/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 3</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/deepseek/deepseek-reasoner/3/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/deepseek/deepseek-reasoner/3/Checkpoint-1.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/deepseek/deepseek-reasoner/3/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/deepseek/deepseek-reasoner/3/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/deepseek/deepseek-reasoner/3/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/deepseek/deepseek-reasoner/3/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 4</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/deepseek/deepseek-reasoner/4/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/deepseek/deepseek-reasoner/4/Checkpoint-1.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/deepseek/deepseek-reasoner/4/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/deepseek/deepseek-reasoner/4/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/deepseek/deepseek-reasoner/4/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/deepseek/deepseek-reasoner/4/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr class="summary-row" data-model="o4-mini">
+                            <td class="model-name">o4-mini (high)</td>
+                            <td class="score-cell"><span class="score-low">0/5</span></td>
+                            <td class="score-cell"><span class="score-high">5/5</span></td>
+                            <td class="score-cell"><span class="score-low">1/5</span></td>
+                            <td class="score-cell"><span class="score-low">0/5</span></td>
+                            <td class="score-cell"><span class="score-low">0/5</span></td>
+                            <td class="score-cell"><span class="score-low">0/5</span></td>
+                            <td class="score-cell"><button class="toggle-btn" onclick="toggleEpochDetails('o4-mini')">▸</button></td>
+                        </tr>
+                                                <tr id="epochs-o4-mini" class="detail-row" style="display: none;">
+                            <td colspan="8" class="epoch-details">
+                                <table class="epoch-table">
+                                    <colgroup>
+                                        <col style="width: 24.5%;">
+                                        <col style="width: 10.9%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 6.6%;">
+                                    </colgroup>
+                                    <tbody>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 0</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/o4-mini/0/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/o4-mini/0/Checkpoint-1.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/o4-mini/0/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/o4-mini/0/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/o4-mini/0/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/o4-mini/0/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 1</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/o4-mini/1/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/o4-mini/1/Checkpoint-1.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/o4-mini/1/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/o4-mini/1/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/o4-mini/1/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/o4-mini/1/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 2</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/o4-mini/2/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/o4-mini/2/Checkpoint-1.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/o4-mini/2/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/o4-mini/2/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/o4-mini/2/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/o4-mini/2/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 3</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/o4-mini/3/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/o4-mini/3/Checkpoint-1.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/o4-mini/3/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/o4-mini/3/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/o4-mini/3/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/o4-mini/3/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 4</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/o4-mini/4/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/o4-mini/4/Checkpoint-1.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/o4-mini/4/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/o4-mini/4/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/o4-mini/4/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/o4-mini/4/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr class="summary-row" data-model="gemini-2.5-flash">
+                            <td class="model-name">Gemini-2.5 Flash</td>
+                            <td class="score-cell"><span class="score-low">0/5</span></td>
+                            <td class="score-cell"><span class="score-medium">2/5</span></td>
+                            <td class="score-cell"><span class="score-low">0/5</span></td>
+                            <td class="score-cell"><span class="score-low">0/5</span></td>
+                            <td class="score-cell"><span class="score-low">0/5</span></td>
+                            <td class="score-cell"><span class="score-low">0/5</span></td>
+                            <td class="score-cell"><button class="toggle-btn" onclick="toggleEpochDetails('gemini-2.5-flash')">▸</button></td>
+                        </tr>
+                                                <tr id="epochs-gemini-2.5-flash" class="detail-row" style="display: none;">
+                            <td colspan="8" class="epoch-details">
+                                <table class="epoch-table">
+                                    <colgroup>
+                                        <col style="width: 24.5%;">
+                                        <col style="width: 10.9%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 6.6%;">
+                                    </colgroup>
+                                    <tbody>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 0</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gemini-2.5-flash/0/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gemini-2.5-flash/0/Checkpoint-1.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gemini-2.5-flash/0/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gemini-2.5-flash/0/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gemini-2.5-flash/0/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gemini-2.5-flash/0/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 1</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gemini-2.5-flash/1/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gemini-2.5-flash/1/Checkpoint-1.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gemini-2.5-flash/1/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gemini-2.5-flash/1/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gemini-2.5-flash/1/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gemini-2.5-flash/1/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 2</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gemini-2.5-flash/2/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gemini-2.5-flash/2/Checkpoint-1.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gemini-2.5-flash/2/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gemini-2.5-flash/2/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gemini-2.5-flash/2/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gemini-2.5-flash/2/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 3</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gemini-2.5-flash/3/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gemini-2.5-flash/3/Checkpoint-1.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gemini-2.5-flash/3/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gemini-2.5-flash/3/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gemini-2.5-flash/3/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gemini-2.5-flash/3/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 4</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gemini-2.5-flash/4/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gemini-2.5-flash/4/Checkpoint-1.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gemini-2.5-flash/4/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gemini-2.5-flash/4/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gemini-2.5-flash/4/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gemini-2.5-flash/4/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr class="summary-row" data-model="claude-opus-4-20250514">
+                            <td class="model-name">Claude Opus 4</td>
+                            <td class="score-cell"><span class="score-low">0/5</span></td>
+                            <td class="score-cell"><span class="score-low">0/5</span></td>
+                            <td class="score-cell"><span class="score-low">0/5</span></td>
+                            <td class="score-cell"><span class="score-low">0/5</span></td>
+                            <td class="score-cell"><span class="score-low">0/5</span></td>
+                            <td class="score-cell"><span class="score-low">0/5</span></td>
+                            <td class="score-cell"><button class="toggle-btn" onclick="toggleEpochDetails('claude-opus-4-20250514')">▸</button></td>
+                        </tr>
+                                                <tr id="epochs-claude-opus-4-20250514" class="detail-row" style="display: none;">
+                            <td colspan="8" class="epoch-details">
+                                <table class="epoch-table">
+                                    <colgroup>
+                                        <col style="width: 24.5%;">
+                                        <col style="width: 10.9%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 6.6%;">
+                                    </colgroup>
+                                    <tbody>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 0</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/claude-opus-4-20250514/0/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/claude-opus-4-20250514/0/Checkpoint-1.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/claude-opus-4-20250514/0/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/claude-opus-4-20250514/0/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/claude-opus-4-20250514/0/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/claude-opus-4-20250514/0/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 1</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/claude-opus-4-20250514/1/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/claude-opus-4-20250514/1/Checkpoint-1.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/claude-opus-4-20250514/1/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/claude-opus-4-20250514/1/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/claude-opus-4-20250514/1/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/claude-opus-4-20250514/1/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 2</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/claude-opus-4-20250514/2/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/claude-opus-4-20250514/2/Checkpoint-1.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/claude-opus-4-20250514/2/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/claude-opus-4-20250514/2/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/claude-opus-4-20250514/2/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/claude-opus-4-20250514/2/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 3</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/claude-opus-4-20250514/3/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/claude-opus-4-20250514/3/Checkpoint-1.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/claude-opus-4-20250514/3/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/claude-opus-4-20250514/3/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/claude-opus-4-20250514/3/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/claude-opus-4-20250514/3/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 4</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/claude-opus-4-20250514/4/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/claude-opus-4-20250514/4/Checkpoint-1.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/claude-opus-4-20250514/4/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/claude-opus-4-20250514/4/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/claude-opus-4-20250514/4/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/claude-opus-4-20250514/4/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr class="summary-row" data-model="gpt-5-minimal">
+                            <td class="model-name">GPT-5 (minimal)</td>
+                            <td class="score-cell"><span class="score-low">0/5</span></td>
+                            <td class="score-cell"><span class="score-low">0/5</span></td>
+                            <td class="score-cell"><span class="score-low">0/5</span></td>
+                            <td class="score-cell"><span class="score-low">0/5</span></td>
+                            <td class="score-cell"><span class="score-low">0/5</span></td>
+                            <td class="score-cell"><span class="score-low">0/5</span></td>
+                            <td class="score-cell"><button class="toggle-btn" onclick="toggleEpochDetails('gpt-5-minimal')">▸</button></td>
+                        </tr>
+                                                <tr id="epochs-gpt-5-minimal" class="detail-row" style="display: none;">
+                            <td colspan="8" class="epoch-details">
+                                <table class="epoch-table">
+                                    <colgroup>
+                                        <col style="width: 24.5%;">
+                                        <col style="width: 10.9%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 6.6%;">
+                                    </colgroup>
+                                    <tbody>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 0</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/0/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/0/Checkpoint-1.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gpt-5/0/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/0/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gpt-5/0/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/0/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 1</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/1/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/1/Checkpoint-1.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gpt-5/1/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/1/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gpt-5/1/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/1/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 2</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/2/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/2/Checkpoint-1.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gpt-5/2/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/2/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gpt-5/2/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/2/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 3</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/3/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/3/Checkpoint-1.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gpt-5/3/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/3/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gpt-5/3/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/3/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 4</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/4/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/4/Checkpoint-1.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gpt-5/4/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/4/Checkpoint-2.html" target="_blank">✅</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gpt-5/4/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-5/4/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr class="summary-row" data-model="llama-4-maverick">
+                            <td class="model-name">Llama-4 Maverick</td>
+                            <td class="score-cell"><span class="score-low">0/5</span></td>
+                            <td class="score-cell"><span class="score-low">0/5</span></td>
+                            <td class="score-cell"><span class="score-low">0/5</span></td>
+                            <td class="score-cell"><span class="score-low">0/5</span></td>
+                            <td class="score-cell"><span class="score-low">0/5</span></td>
+                            <td class="score-cell"><span class="score-low">0/5</span></td>
+                            <td class="score-cell"><button class="toggle-btn" onclick="toggleEpochDetails('llama-4-maverick')">▸</button></td>
+                        </tr>
+                                                <tr id="epochs-llama-4-maverick" class="detail-row" style="display: none;">
+                            <td colspan="8" class="epoch-details">
+                                <table class="epoch-table">
+                                    <colgroup>
+                                        <col style="width: 24.5%;">
+                                        <col style="width: 10.9%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 6.6%;">
+                                    </colgroup>
+                                    <tbody>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 0</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8/0/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8/0/Checkpoint-1.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8/0/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8/0/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8/0/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8/0/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 1</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8/1/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8/1/Checkpoint-1.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8/1/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8/1/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8/1/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8/1/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 2</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8/2/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8/2/Checkpoint-1.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8/2/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8/2/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8/2/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8/2/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 3</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8/3/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8/3/Checkpoint-1.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8/3/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8/3/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8/3/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8/3/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 4</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8/4/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8/4/Checkpoint-1.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8/4/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8/4/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8/4/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8/4/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr class="summary-row" data-model="gpt-4o">
+                            <td class="model-name">GPT-4o</td>
+                            <td class="score-cell"><span class="score-low">0/5</span></td>
+                            <td class="score-cell"><span class="score-low">0/5</span></td>
+                            <td class="score-cell"><span class="score-low">0/5</span></td>
+                            <td class="score-cell"><span class="score-low">0/5</span></td>
+                            <td class="score-cell"><span class="score-low">0/5</span></td>
+                            <td class="score-cell"><span class="score-low">0/5</span></td>
+                            <td class="score-cell"><button class="toggle-btn" onclick="toggleEpochDetails('gpt-4o')">▸</button></td>
+                        </tr>
+                        <tr id="epochs-gpt-4o" class="detail-row" style="display: none;">
+                            <td colspan="8" class="epoch-details">
+                                <table class="epoch-table">
+                                    <colgroup>
+                                        <col style="width: 24.5%;">
+                                        <col style="width: 10.9%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 11.6%;">
+                                        <col style="width: 6.6%;">
+                                    </colgroup>
+                                    <tbody>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 0</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-4o/0/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-4o/0/Checkpoint-1.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gpt-4o/0/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-4o/0/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gpt-4o/0/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-4o/0/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 1</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-4o/1/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-4o/1/Checkpoint-1.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gpt-4o/1/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-4o/1/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gpt-4o/1/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-4o/1/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 2</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-4o/2/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-4o/2/Checkpoint-1.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gpt-4o/2/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-4o/2/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gpt-4o/2/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-4o/2/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 3</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-4o/3/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-4o/3/Checkpoint-1.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gpt-4o/3/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-4o/3/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gpt-4o/3/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-4o/3/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                        <tr>
+                                            <td class="epoch-name">Epoch 4</td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-4o/4/Challenge.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-4o/4/Checkpoint-1.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gpt-4o/4/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-4o/4/Checkpoint-2.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_False/gpt-4o/4/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td><a href="Critpt Example/quantum_error_correction_v2p/use_golden_for_prev_steps_False/parsing_False/multiturn_with_answer_True/gpt-4o/4/Checkpoint-3.html" target="_blank">❌</a></td>
+                                            <td></td></tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle epoch details functionality
+        function toggleEpochDetails(modelId) {
+            const detailRow = document.getElementById(`epochs-${modelId}`);
+            const toggleBtn = document.querySelector(`[onclick="toggleEpochDetails('${modelId}')"]`);
+            
+            if (!detailRow) {
+                console.log('No detail row found for:', modelId);
+                return;
+            }
+            
+            if (detailRow.classList.contains('visible')) {
+                detailRow.classList.remove('visible');
+                toggleBtn.classList.remove('expanded');
+            } else {
+                detailRow.classList.add('visible');
+                toggleBtn.classList.add('expanded');
+            }
+        }
+
+        // Tab switching functionality
+        function switchTab(tabName) {
+            // Hide all tab content
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.style.display = 'none';
+            });
+
+            // Remove active class from all tab buttons
+            const tabButtons = document.querySelectorAll('.tab-button');
+            tabButtons.forEach(button => {
+                button.classList.remove('active');
+            });
+
+            // Show selected tab content
+            document.getElementById(tabName).style.display = 'block';
+
+            // Add active class to clicked button
+            event.target.classList.add('active');
+
+            // Re-render MathJax and Prism if switching to Expert Solution
+            if (tabName === 'expert-solution') {
+                if (window.MathJax) {
+                    MathJax.typesetPromise();
+                }
+                if (window.Prism) {
+                    Prism.highlightAll();
+                }
+            }
+        }
+
+        // Load model outputs from JSON
+        async function loadModelOutputs() {
+            try {
+                const response = await fetch('model-outputs.json');
+                const data = await response.json();
+                const modelsList = document.getElementById('models-list');
+
+                if (!modelsList) return;
+
+                // Clear existing content
+                modelsList.innerHTML = '';
+
+                // Generate HTML for each model
+                data.models.forEach((model, modelIndex) => {
+                    // Generate attempt buttons
+                    const attemptButtons = model.attempts.map((_, idx) =>
+                        `<button class="attempt-btn ${idx === 0 ? 'active' : ''}" onclick="showAttempt(${modelIndex}, ${idx})">${idx + 1}</button>`
+                    ).join('');
+
+                    // Generate attempt text divs
+                    const attemptTexts = model.attempts.map((attempt, idx) => {
+                        const correctnessClass = attempt.correct ? 'correct' : 'incorrect';
+                        const correctnessText = attempt.correct ? '✓ Correct' : '✗ Incorrect';
+                        return `<div class="attempt-text ${idx === 0 ? 'active' : ''}" data-model="${modelIndex}" data-attempt="${idx}">
+                            ${attempt.formula}
+                            <span class="correctness-indicator ${correctnessClass}">${correctnessText}</span>
+                        </div>`;
+                    }).join('');
+
+                    const modelHTML = `
+                        <div class="model-item">
+                            <div class="model-header" onclick="toggleModel(${modelIndex})">
+                                <span class="model-name">${model.name}</span>
+                                <span class="model-toggle">▶</span>
+                            </div>
+                            <div class="model-content" id="model-content-${modelIndex}">
+                                <div class="attempt-selector">
+                                    <span class="attempt-label">Attempt:</span>
+                                    ${attemptButtons}
+                                </div>
+                                <div class="attempt-content">
+                                    ${attemptTexts}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+
+                    modelsList.innerHTML += modelHTML;
+                });
+
+                // Re-typeset MathJax for the new content
+                if (window.MathJax && window.MathJax.typesetPromise) {
+                    window.MathJax.typesetPromise([modelsList]).catch(function(e) {
+                        console.log('MathJax error:', e);
+                    });
+                }
+            } catch (error) {
+                console.error('Error loading model outputs:', error);
+            }
+        }
+
+        // Model toggle and attempt selection functions
+        function toggleModel(modelId) {
+            const content = document.getElementById('model-content-' + modelId);
+            const header = content.previousElementSibling;
+            const toggle = header.querySelector('.model-toggle');
+
+            if (content.classList.contains('expanded')) {
+                content.classList.remove('expanded');
+                toggle.style.transform = 'rotate(0deg)';
+            } else {
+                content.classList.add('expanded');
+                toggle.style.transform = 'rotate(90deg)';
+
+                // Typeset MathJax for newly visible content
+                if (window.MathJax && window.MathJax.typesetPromise) {
+                    window.MathJax.typesetPromise([content]).catch(function(e) {
+                        console.log('MathJax error:', e);
+                    });
+                }
+            }
+        }
+
+        function showAttempt(modelId, attemptId) {
+            // Update buttons
+            const buttons = document.querySelectorAll('#model-content-' + modelId + ' .attempt-btn');
+            buttons.forEach(function(btn, index) {
+                if (index === attemptId) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            // Update content
+            const attempts = document.querySelectorAll('#model-content-' + modelId + ' .attempt-text');
+            attempts.forEach(function(attempt) {
+                const attemptNum = parseInt(attempt.dataset.attempt);
+                if (attemptNum === attemptId) {
+                    attempt.classList.add('active');
+                } else {
+                    attempt.classList.remove('active');
+                }
+            });
+
+            // Typeset MathJax for the newly visible attempt
+            if (window.MathJax && window.MathJax.typesetPromise) {
+                const activeAttempt = document.querySelector('#model-content-' + modelId + ' .attempt-text.active');
+                if (activeAttempt) {
+                    window.MathJax.typesetPromise([activeAttempt]).catch(function(e) {
+                        console.log('MathJax error:', e);
+                    });
+                }
+            }
+        }
+
+        // Timeline scroll functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load model outputs
+            loadModelOutputs();
+
+            // Initialize Prism syntax highlighting
+            if (window.Prism) {
+                Prism.highlightAll();
+            }
+
+            // Get elements
+            const sections = document.querySelectorAll('.section');
+            const timelineDots = document.querySelectorAll('.timeline-dot');
+            const progressBar = document.getElementById('progress');
+
+            // Calculate positions for scroll triggers
+            let sectionOffsets = [];
+
+            function updateSectionOffsets() {
+                sections.forEach((section, index) => {
+                    sectionOffsets[index] = section.offsetTop - window.innerHeight * 0.7;
+                });
+            }
+
+            function updateScroll() {
+                const scrollY = window.pageYOffset;
+                const windowHeight = window.innerHeight;
+                const documentHeight = document.documentElement.scrollHeight;
+
+                // Update progress bar
+                const scrollPercentage = Math.min(scrollY / (documentHeight - windowHeight), 1);
+                progressBar.style.height = (scrollPercentage * 100) + '%';
+
+                // Show sections and activate timeline dots
+                sections.forEach((section, index) => {
+                    if (scrollY > sectionOffsets[index]) {
+                        if (!section.classList.contains('visible')) {
+                            section.classList.add('visible');
+                            // Re-render MathJax for newly visible sections
+                            if (window.MathJax && window.MathJax.typesetPromise) {
+                                window.MathJax.typesetPromise([section]).catch(function(e) {
+                                    console.log('MathJax error:', e);
+                                });
+                            }
+                        }
+                        if (timelineDots[index]) {
+                            timelineDots[index].classList.add('active');
+                        }
+                    } else {
+                        // Don't hide the first section (main)
+                        if (index > 0) {
+                            section.classList.remove('visible');
+                        }
+                        // Remove active class from dots that haven't been reached
+                        if (index > 0 && timelineDots[index]) {
+                            timelineDots[index].classList.remove('active');
+                        }
+                    }
+                });
+            }
+
+            // Initialize
+            function initialize() {
+                updateSectionOffsets();
+                updateScroll();
+
+                // Try to typeset any math that's already on the page
+                if (window.MathJax && window.MathJax.typesetPromise) {
+                    window.MathJax.typesetPromise().catch(function(e) {
+                        console.log('Initial MathJax typeset error:', e);
+                    });
+                }
+            }
+
+            // Initialize after a short delay to ensure everything is loaded
+            setTimeout(initialize, 100);
+
+            // Update on scroll
+            window.addEventListener('scroll', updateScroll);
+
+            // Update on resize
+            window.addEventListener('resize', function() {
+                updateSectionOffsets();
+                updateScroll();
+            });
+
+            // Smooth scroll
+            document.documentElement.style.scrollBehavior = 'smooth';
+        });
+    </script>
+</body>
+</html>

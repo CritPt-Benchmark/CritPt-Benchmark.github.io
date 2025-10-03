@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Checkpoint-1</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.codehilite .hll { background-color: #ffffcc }
+.codehilite { background: #f8f8f8; }
+.codehilite .c { color: #3D7B7B; font-style: italic } /* Comment */
+.codehilite .err { border: 1px solid #F00 } /* Error */
+.codehilite .k { color: #008000; font-weight: bold } /* Keyword */
+.codehilite .o { color: #666 } /* Operator */
+.codehilite .ch { color: #3D7B7B; font-style: italic } /* Comment.Hashbang */
+.codehilite .cm { color: #3D7B7B; font-style: italic } /* Comment.Multiline */
+.codehilite .cp { color: #9C6500 } /* Comment.Preproc */
+.codehilite .cpf { color: #3D7B7B; font-style: italic } /* Comment.PreprocFile */
+.codehilite .c1 { color: #3D7B7B; font-style: italic } /* Comment.Single */
+.codehilite .cs { color: #3D7B7B; font-style: italic } /* Comment.Special */
+.codehilite .gd { color: #A00000 } /* Generic.Deleted */
+.codehilite .ge { font-style: italic } /* Generic.Emph */
+.codehilite .ges { font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+.codehilite .gr { color: #E40000 } /* Generic.Error */
+.codehilite .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.codehilite .gi { color: #008400 } /* Generic.Inserted */
+.codehilite .go { color: #717171 } /* Generic.Output */
+.codehilite .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.codehilite .gs { font-weight: bold } /* Generic.Strong */
+.codehilite .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.codehilite .gt { color: #04D } /* Generic.Traceback */
+.codehilite .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.codehilite .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.codehilite .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.codehilite .kp { color: #008000 } /* Keyword.Pseudo */
+.codehilite .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.codehilite .kt { color: #B00040 } /* Keyword.Type */
+.codehilite .m { color: #666 } /* Literal.Number */
+.codehilite .s { color: #BA2121 } /* Literal.String */
+.codehilite .na { color: #687822 } /* Name.Attribute */
+.codehilite .nb { color: #008000 } /* Name.Builtin */
+.codehilite .nc { color: #00F; font-weight: bold } /* Name.Class */
+.codehilite .no { color: #800 } /* Name.Constant */
+.codehilite .nd { color: #A2F } /* Name.Decorator */
+.codehilite .ni { color: #717171; font-weight: bold } /* Name.Entity */
+.codehilite .ne { color: #CB3F38; font-weight: bold } /* Name.Exception */
+.codehilite .nf { color: #00F } /* Name.Function */
+.codehilite .nl { color: #767600 } /* Name.Label */
+.codehilite .nn { color: #00F; font-weight: bold } /* Name.Namespace */
+.codehilite .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.codehilite .nv { color: #19177C } /* Name.Variable */
+.codehilite .ow { color: #A2F; font-weight: bold } /* Operator.Word */
+.codehilite .w { color: #BBB } /* Text.Whitespace */
+.codehilite .mb { color: #666 } /* Literal.Number.Bin */
+.codehilite .mf { color: #666 } /* Literal.Number.Float */
+.codehilite .mh { color: #666 } /* Literal.Number.Hex */
+.codehilite .mi { color: #666 } /* Literal.Number.Integer */
+.codehilite .mo { color: #666 } /* Literal.Number.Oct */
+.codehilite .sa { color: #BA2121 } /* Literal.String.Affix */
+.codehilite .sb { color: #BA2121 } /* Literal.String.Backtick */
+.codehilite .sc { color: #BA2121 } /* Literal.String.Char */
+.codehilite .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.codehilite .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.codehilite .s2 { color: #BA2121 } /* Literal.String.Double */
+.codehilite .se { color: #AA5D1F; font-weight: bold } /* Literal.String.Escape */
+.codehilite .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.codehilite .si { color: #A45A77; font-weight: bold } /* Literal.String.Interpol */
+.codehilite .sx { color: #008000 } /* Literal.String.Other */
+.codehilite .sr { color: #A45A77 } /* Literal.String.Regex */
+.codehilite .s1 { color: #BA2121 } /* Literal.String.Single */
+.codehilite .ss { color: #19177C } /* Literal.String.Symbol */
+.codehilite .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.codehilite .fm { color: #00F } /* Name.Function.Magic */
+.codehilite .vc { color: #19177C } /* Name.Variable.Class */
+.codehilite .vg { color: #19177C } /* Name.Variable.Global */
+.codehilite .vi { color: #19177C } /* Name.Variable.Instance */
+.codehilite .vm { color: #19177C } /* Name.Variable.Magic */
+.codehilite .il { color: #666 } /* Literal.Number.Integer.Long */
+
+</style>
+<style>
+    :root {
+  --bg: #ffffff;
+  --fg: #222222;
+  --muted: #555555;
+  --border: #e0e0e0;
+  --accent: #005fcc;
+  --code-bg: #f6f8fa;
+  --role-user: #0ea5e9;
+  --role-assistant: #22c55e;
+  --role-system: #9ca3af;
+  --return-code: #a35291;
+}
+html.dark {
+  --bg: #0b0b0b;
+  --fg: #e8e8e8;
+  --muted: #a0a0a0;
+  --border: #333333;
+  --accent: #3b82f6;
+  --code-bg: #111827;
+  --role-user: #0ea5e9;
+  --role-assistant: #22c55e;
+  --role-system: #9ca3af;
+  --return-code: #a35291;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
+  line-height: 1.6;
+}
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 10;
+}
+h1 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+}
+.tab {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--border);
+  border-bottom: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 6px 6px 0 0;
+  color: var(--fg);
+}
+.tab.active {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+.tab-content {
+  display: none;
+  padding: 1rem 1.25rem;
+  border-top: 1px solid var(--border);
+}
+.tab-content.active {
+  display: block;
+}
+#theme-toggle {
+  border: 1px solid var(--border);
+  padding: 0.2rem 0.6rem;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  cursor: pointer;
+  background: transparent;
+  color: var(--fg);
+}
+.main {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.message {
+  border: 1px solid var(--border);
+  border-left-width: 6px;
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+  background: rgba(0,0,0,0.02);
+}
+.message .meta {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.6rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.message .badge {
+  font-weight: 600;
+}
+.role-user {
+  border-left-color: var(--role-user);
+}
+.role-assistant {
+  border-left-color: var(--role-assistant);
+}
+.role-system {
+  border-left-color: var(--role-system);
+}
+.role-unknown {
+  border-left-color: var(--accent);
+}
+
+.output-code-container {
+  display: flex;
+  gap: 1rem;               /* space between children */
+  align-items: center;     /* vertical alignment */
+  justify-content: start;  /* horizontal alignment */
+}
+
+.output-code-container .codeblock {
+  flex: 0 1 auto;
+}
+
+.codeblock {
+  border: 1px solid var(--border);
+  border-left-width: 6px;
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+  background: rgba(0,0,0,0.02);
+}
+.codeblock-content {
+  margin-bottom: 0.6rem;
+  border: 1px dashed var(--border);
+  border-radius: 4px;
+  padding: 0.4rem 0.6rem;
+  background: rgba(0,0,0,0.02);
+}
+
+.codeblock.eval_code {
+  border-left-color: var(--role-user);
+}
+.codeblock.target_code {
+  border-left-color: var(--role-assistant);
+}
+.codeblock.output_code {
+  border-left-color: var(--role-system);
+}
+
+html.dark .codeblock-content {
+  background: rgba(255,255,255,0.03);
+}
+.codeblock > summary {
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none; /* remove default triangle in some browsers */
+}
+.codeblock > summary::-webkit-details-marker {
+  display: none; /* Safari/Chrome marker */
+}
+.codeblock > summary::before {
+  content: "▶ ";
+  display: inline-block;
+  transform: rotate(0deg);
+  transition: transform 0.12s ease-out;
+}
+.codeblock[open] > summary::before {
+  transform: rotate(90deg);
+}
+.codeblock .tag {
+  color: var(--muted);
+  font-weight: 400;
+  font-size: 0.85em;
+  margin-left: 0.25rem;
+}
+
+.markdown-body pre code {
+  background: var(--code-bg);
+  display: block;
+  padding: 0.75rem;
+  overflow-x: auto;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+.markdown-body code {
+  background: var(--code-bg);
+  padding: 0.15rem 0.3rem;
+  border-radius: 4px;
+}
+/* Extra info tree */
+details > summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+details .block {
+  padding-left: 1rem;
+  margin: 0.25rem 0 0.5rem 0;
+  border-left: 2px solid var(--border);
+}
+.kv .key {
+  font-weight: 600;
+}
+.kv .type {
+  color: var(--muted);
+  margin-left: 0.5rem;
+  font-size: 0.85rem;
+}
+footer {
+  margin: 2rem 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+/* CodeHilite (pygments) overrides to respect theme vars */
+.codehilite {
+  background: var(--code-bg) !important;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.75rem !important;
+}
+.reasoning {
+  margin-bottom: 0.6rem;
+  border: 1px dashed var(--border);
+  border-radius: 4px;
+  padding: 0.4rem 0.6rem;
+  background: rgba(0,0,0,0.02);
+}
+html.dark .reasoning {
+  background: rgba(255,255,255,0.03);
+}
+.reasoning > summary {
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none; /* remove default triangle in some browsers */
+}
+.reasoning > summary::-webkit-details-marker {
+  display: none; /* Safari/Chrome marker */
+}
+.reasoning > summary::before {
+  content: "▶ ";
+  display: inline-block;
+  transform: rotate(0deg);
+  transition: transform 0.12s ease-out;
+}
+.reasoning[open] > summary::before {
+  transform: rotate(90deg);
+}
+.reasoning .tag {
+  color: var(--muted);
+  font-weight: 400;
+  font-size: 0.85em;
+  margin-left: 0.25rem;
+}
+.reasoning-body {
+  margin-top: 0.5rem;
+}
+</style>
+
+<!-- ===== MATHJAX CONFIG ===== -->
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [ ["\\(","\\)"] ],
+    displayMath: [ ["\\[","\\]"] ],
+    processEscapes: true,
+    processEnvironments: true
+  },
+  options: {
+    ignoreHtmlClass: ".*",
+    processHtmlClass: "arithmatex"
+
+    // skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    // if you dynamically add content later, you can call MathJax.typesetPromise()
+  }
+};
+</script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<!-- ========================== -->
+</head>
+<body>
+<header>
+  <h1>Checkpoint-1</h1>
+  <div>
+    <button id="theme-toggle" aria-label="toggle dark mode">🌓</button>
+  </div>
+</header>
+
+<div class="main">
+  
+<article class="message role-system">
+    <div class="meta">
+        <span class="badge">System</span>
+        <span class="idx">#0</span>
+    </div>
+    <div class="content markdown-body"><p>You are a physics research assistant specializing in solving complex, research-level problems using precise, step-by-step reasoning.</p>
+<p><strong>Input</strong>
+Problems will be provided in Markdown format.</p>
+<p><strong>Output (Markdown format)</strong></p>
+<ol>
+<li><strong>Step-by-Step Derivation</strong> - Show every non-trivial step in the solution.  Justify steps using relevant physical laws, theorems, or mathematical identities.</li>
+<li><strong>Mathematical Typesetting</strong> - Use LaTeX for all mathematics:  <code>$...$</code> for inline expressions, <code>$$...$$</code> for display equations.</li>
+<li><strong>Conventions and Units</strong> - Follow the unit system and conventions specified in the problem.</li>
+<li>
+<p><strong>Final Answer</strong> - At the end of the solution,  start a new line with <strong>&ldquo;Final Answer:&rdquo;</strong>, and present the final result.</p>
+<p>For final answers involving values, follow the precision requirements specified in the problem.
+If no precision is specified:
+- If an exact value is possible, provide it (e.g., \$\sqrt(2)\$, \$\pi/4\$).
+- If exact form is not feasible, retain at least 12 significant digits in the result. </p>
+</li>
+<li>
+<p><strong>Formatting Compliance</strong> - If the user requests a specific output format (e.g., code, table),  provide the final answer accordingly.</p>
+</li>
+</ol></div>
+</article>
+
+
+<article class="message role-user">
+    <div class="meta">
+        <span class="badge">User</span>
+        <span class="idx">#1</span>
+    </div>
+    <div class="content markdown-body"><h1 id="problem-setup">Problem setup:</h1>
+<p>In quantum error correction, you encode quantum states into logical states made of many qubits in order to improve their resilience to errors. In quantum error detection, you do the same but can only detect the presence of errors and not correct them. In this problem, we will consider a single [[4,2,2]] quantum error detection code, which encodes two logical qubits into four physical qubits, and investigate how robust logical quantum operations in this code are to quantum errors.</p>
+<p>Our convention is that the four physical qubits in the [[4,2,2]] code are labelled 0,1,2,3. The two logical qubits are labelled A and B. The stabilizers are <span class="arithmatex">\(XXXX\)</span> and <span class="arithmatex">\(ZZZZ\)</span>, where <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(Z\)</span> are Pauli matrices. The logical <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(Z\)</span> operators on the two qubits are <span class="arithmatex">\(X_A = XIXI\)</span>, <span class="arithmatex">\(X_B=XXII\)</span>, <span class="arithmatex">\(Z_A = ZZII\)</span>, <span class="arithmatex">\(Z_B = ZIZI\)</span>, up to multiplication by stabilizers.</p>
+<p>We will consider different state preparation circuits consisting of controlled not <span class="arithmatex">\(CNOT_{ij}\)</span> gates, where <span class="arithmatex">\(CNOT_{ij}\)</span> has control qubit <span class="arithmatex">\(i\)</span> and target qubit <span class="arithmatex">\(j\)</span>. As a simple model of quantum errors in hardware, we will suppose that each <span class="arithmatex">\(CNOT_{ij}\)</span> gate in the circuit has a two qubit depolarizing error channel following it that produces one of the 15 non-identity two-qubit Paulis with equal probability <span class="arithmatex">\(p/15\)</span>. The probability <span class="arithmatex">\(p\)</span> indicates the probability of an error in a single two-qubit gate. We will assess the logical infidelity of certain state preparation protocols as a function of the physical infidelity <span class="arithmatex">\(p\)</span>.</p>
+<h1 id="subproblems">Checkpoints</h1>
+<h2 id="subproblem-1">Checkpoint 1</h2>
+<p>Suppose that we wish to prepare a logical two-qubit GHZ state  <span class="arithmatex">\((|00\rangle_{AB}+|11\rangle_{AB})/\sqrt{2}\)</span> in the [[4,2,2]] code. To do so, we use the following state preparation circuit:</p>
+<div class="arithmatex">\[
+(CNOT_{03}) (H_0) (CNOT_{21}) (H_2).
+\]</div>
+<p>Note that this equation is written in matrix multiplication order, while the quantum operations in the circuit occur in the reverse order (from right-to-left in the above equation). <span class="arithmatex">\(H\)</span> is a single-qubit Hadamard gate.</p>
+<p>What is the physical state fidelity of the final physical 4-qubit state at the end of the circuit as a function of the two-qubit gate error rate <span class="arithmatex">\(p\)</span>?</p></div>
+</article>
+
+
+<article class="message role-assistant">
+    <div class="meta">
+        <span class="badge">Assistant</span>
+        <span class="idx">#2</span>
+    </div>
+    
+                    <details class="reasoning">
+                      <summary>Reasoning <span class="tag">(model)</span></summary>
+                      <div class="markdown-body reasoning-body">
+                        <p>We are given: &ldquo;Suppose that we wish to prepare a logical two-qubit GHZ state  <span class="arithmatex">\((|00\rangle_{AB}+|11\rangle_{AB})/\sqrt{2}\)</span> in the [[4,2,2]] code. To do so, we use the following state preparation circuit:</p>
+<div class="arithmatex">\[
+(CNOT_{03}) (H_0) (CNOT_{21}) (H_2).
+\]</div>
+<p>Note: This equation is written in matrix multiplication order, while the quantum operations in the circuit occur in the reverse order (from right-to-left in the above equation). <span class="arithmatex">\(H\)</span> is a single-qubit Hadamard gate.</p>
+<p>What is the physical state fidelity of the final physical 4-qubit state at the end of the circuit as a function of the two-qubit gate error rate <span class="arithmatex">\(p\)</span>?&rdquo;</p>
+<p>Interpretation: We have a circuit that ideally prepares the logical GHZ state. But each CNOT gate is followed by a two-qubit depolarizing error channel. The error channel: After each CNOT, there is an error that applies one of the 15 non-identity two-qubit Paulis (on the two qubits involved) with probability p/15 each, and with probability 1-p, no error. And we assume that the Hadamard gates are perfect? The problem says: &ldquo;each CNOT_{ij} gate in the circuit has a two qubit depolarizing error channel following it&rdquo;. So only CNOT gates have errors. The circuit has two CNOT gates: CNOT_{21} and CNOT_{03}. Also there are Hadamard gates: H_0 and H_2. They are perfect.</p>
+<p>We want: &ldquo;the physical state fidelity&rdquo; of the final physical 4-qubit state. That is: The fidelity between the actual state (which is mixed due to errors) and the ideal state (which is the pure state that would be produced if no errors occurred). So fidelity F = sqrt( <psi_ideal| ρ_actual |psi_ideal> )? But careful: &ldquo;physical state fidelity&rdquo; might be defined as the overlap between the actual state and the ideal state. Usually fidelity is F(ρ, σ) = Tr( sqrt( sqrt(ρ) σ sqrt(ρ) ) ) but if one is pure, then it&rsquo;s sqrt( &lt;ψ|ρ|ψ&gt; ). So here ideal state is pure. So we want F = sqrt( &lt;ψ_ideal| ρ |ψ_ideal&gt; ). But then it says &ldquo;as a function of the two-qubit gate error rate p&rdquo;. So we need to compute the density matrix after the circuit with errors.</p>
+<p>Let&rsquo;s denote the circuit operations in order (from right to left as per note: &ldquo;the quantum operations in the circuit occur in the reverse order (from right-to-left in the above equation)&rdquo;. So the circuit order is: first apply H_2, then CNOT_{21}, then H_0, then CNOT_{03}. But careful: The given equation: (CNOT_{03}) (H_0) (CNOT_{21}) (H_2). In matrix multiplication order, the rightmost is applied first. So indeed: Step 1: H_2, Step 2: CNOT_{21}, Step 3: H_0, Step 4: CNOT_{03}.</p>
+<p>We assume initial state: All qubits are in |0⟩. So initial state: |0000⟩.</p>
+<p>Ideal circuit:
+Step 1: H_2 on qubit 2. That gives: |0⟩<em>0, |0⟩_1, (|0⟩+|1⟩)/√2 on qubit 2, |0⟩_3. So state: 1/√2 (|0000⟩ + |0100⟩) but careful: qubits: 0,1,2,3. So labeling: qubit0, qubit1, qubit2, qubit3. So after H_2: state = (|00⟩</em>{01} ⊗ (|0⟩+|1⟩)/√2 ⊗ |0⟩_3) = 1/√2 (|0000⟩ + |0100⟩) but careful: qubit2 is the third qubit? Actually: qubits: 0,1,2,3. So if we write state as |q0 q1 q2 q3⟩, then H_2 acts on qubit2. So initial: |0000⟩. After H_2: becomes 1/√2 (|0000⟩ + |0010⟩)? Actually: qubit2 is the third digit? Let&rsquo;s index: qubit0, qubit1, qubit2, qubit3. So initial: |0,0,0,0⟩. H_2 acts on qubit2: becomes (|0,0,0,0⟩ + |0,0,1,0⟩)/√2. So it&rsquo;s |0000⟩ and |0010⟩. So state = 1/√2 (|0000⟩ + |0010⟩).</p>
+<p>Step 2: CNOT_{21}. That is control qubit 2, target qubit 1. So if qubit2 is 1, then flip qubit1. So on |0000⟩: qubit2=0 so no flip: remains |0000⟩.
+On |0010⟩: qubit2=1 so flip qubit1: qubit1 becomes 1 from 0, so becomes |0110⟩.
+So state becomes: 1/√2 (|0000⟩ + |0110⟩).</p>
+<p>Step 3: H_0. H on qubit0. So apply H to qubit0. Then:
+|0000⟩ -&gt; (|0000⟩ + |1000⟩)/√2.
+|0110⟩ -&gt; (|0110⟩ + |1110⟩)/√2.
+So overall: 1/√2 * 1/√2 (|0000⟩+|1000⟩+|0110⟩+|1110⟩) = 1/2 (|0000⟩+|1000⟩+|0110⟩+|1110⟩).</p>
+<p>Step 4: CNOT_{03}. Control qubit 0, target qubit 3.
+On |0000⟩: control=0 so no flip: remains |0000⟩.
+|1000⟩: control=1 so flip qubit3: becomes |1001⟩.
+|0110⟩: control=0 so remains |0110⟩.
+|1110⟩: control=1 so becomes |1111⟩.
+So final ideal state: 1/2 (|0000⟩ + |1001⟩ + |0110⟩ + |1111⟩).</p>
+<p>But wait: That is the physical state. But we want the logical GHZ state: (|00⟩<em>{AB}+|11⟩</em>{AB})/√2. But is this state exactly that? The [[4,2,2]] code encodes two logical qubits. The logical states? They are defined by stabilizers XXXX and ZZZZ. And logical operators: X_A = XIXI, X_B=XXII, Z_A=ZZII, Z_B=ZIZI.
+We want logical GHZ: (|00⟩<em>{AB}+|11⟩</em>{AB})/√2. That state should be a +1 eigenstate of Z_A ⊗ I_B? Actually, GHZ state for two qubits: (|00⟩+|11⟩)/√2. That state is stabilized by Z⊗Z and X⊗X? But here we have two logical qubits. The state we got: 1/2(|0000⟩+|1001⟩+|0110⟩+|1111⟩). Check: Apply Z_A = ZZII. On |0000⟩: Z on qubit0 and qubit1: both 0 so eigenvalue +1. On |1001⟩: qubit0=1 -&gt; -1, qubit1=0 -&gt; +1, so product -1. But wait, then it&rsquo;s not an eigenstate? But maybe it is a logical state? Actually, the code space of [[4,2,2]] is 4-dimensional. The state we have might be a superposition of logical states. Let&rsquo;s check stabilizers: XXXX. Apply XXXX to our state: 
+|0000⟩ -&gt; |1111⟩, but that is not in the superposition? Actually, our state: 1/2(|0000⟩+|1001⟩+|0110⟩+|1111⟩). XXXX on |0000⟩ gives |1111⟩, so that is present. On |1001⟩, XXXX gives |0110⟩, so that is present. On |0110⟩ gives |1001⟩, on |1111⟩ gives |0000⟩. So the state is invariant under XXXX? Actually, it becomes: 1/2(|1111⟩+|0110⟩+|1001⟩+|0000⟩) which is the same. So it is a +1 eigenstate of XXXX. Next, ZZZZ: Apply ZZZZ: on |0000⟩: all +1 so +1. On |1001⟩: qubit0:1 -&gt; -1, qubit1:0 -&gt; +1, qubit2:0 -&gt; +1, qubit3:1 -&gt; -1, product = (-1)<em>(+1)</em>(+1)<em>(-1)=+1. On |0110⟩: qubit0:0 -&gt; +1, qubit1:1 -&gt; -1, qubit2:1 -&gt; -1, qubit3:0 -&gt; +1, product = (+1)</em>(-1)<em>(-1)</em>(+1)=+1. On |1111⟩: all -1, product = (-1)^4=+1. So it is in the code space. So it is a valid logical state. And what is its logical representation? We can compute the logical operators. For logical Z_A = ZZII. On our state: 
+|0000⟩: ZZII gives +1.
+|1001⟩: qubit0:1 -&gt; -1, qubit1:0 -&gt; +1, so product -1.
+|0110⟩: qubit0:0 -&gt; +1, qubit1:1 -&gt; -1, so product -1.
+|1111⟩: qubit0:1 -&gt; -1, qubit1:1 -&gt; -1, product +1.
+So the state is not an eigenstate of Z_A. But it might be a logical Bell state? Actually, (|00⟩+|11⟩)/√2 is an eigenstate of Z⊗Z with eigenvalue +1. But here Z_A ⊗ Z_B? Let&rsquo;s compute Z_B = ZIZI. On our state:
+|0000⟩: Z on qubit0: +1, qubit2: 0 -&gt; +1, so +1.
+|1001⟩: qubit0:1 -&gt; -1, qubit2:0 -&gt; +1, so -1.
+|0110⟩: qubit0:0 -&gt; +1, qubit2:1 -&gt; -1, so -1.
+|1111⟩: qubit0:1 -&gt; -1, qubit2:1 -&gt; -1, so +1.
+So indeed, Z_A ⊗ Z_B? Actually, Z_A Z_B = (ZZII)(ZIZI) =? But careful: They act on different qubits? Actually, logical operators commute with stabilizers. But anyway, it might be that this state is the logical GHZ state. Actually, the logical GHZ state for two qubits is (|00⟩+|11⟩)/√2. That state has the property that if we measure both qubits in the Z basis, they are correlated. Here, if we measure logical Z_A and Z_B, we get either both +1 or both -1? From above, for |0000⟩ and |1111⟩, Z_A and Z_B are both +1? Actually, |0000⟩: Z_A = +1, Z_B = +1. |1111⟩: Z_A =? For |1111⟩, Z_A: qubit0 and qubit1: both 1 -&gt; (-1)<em>(-1)=+1, and Z_B: qubit0 and qubit2: both 1 -&gt; (-1)</em>(-1)=+1. So those give (+1,+1). For |1001⟩: Z_A = -1, Z_B = -1. For |0110⟩: Z_A = -1, Z_B = -1. So indeed, the state is (|00⟩_{logical}? But careful: The logical basis states are usually defined. Actually, the code [[4,2,2]] has two logical qubits. One common basis: 
+|00⟩_L = (|0000⟩+|1111⟩)/√2,
+|01⟩_L = (|0011⟩+|1100⟩)/√2,
+|10⟩_L = (|0101⟩+|1010⟩)/√2,
+|11⟩_L = (|0110⟩+|1001⟩)/√2.
+Check: Our state is 1/2(|0000⟩+|1001⟩+|0110⟩+|1111⟩) = 1/√2 ( (|0000⟩+|1111⟩)/√2 + (|1001⟩+|0110⟩)/√2 ) = 1/√2 (|00⟩_L + |11⟩_L). So indeed it is the logical GHZ state. So that&rsquo;s correct.</p>
+<p>Now, we have errors on CNOT gates. There are two CNOT gates: CNOT_{21} and CNOT_{03}. Each CNOT is followed by a depolarizing error channel on the two qubits involved. The error channel: With probability 1-p, no error. With probability p, an error occurs, and then uniformly among 15 Pauli errors on those two qubits. But careful: The error channel is applied after the CNOT gate. So the circuit with errors becomes:
+Start: |0000⟩.
+Apply H_2 (perfect).
+Then apply CNOT_{21} but then immediately after, an error channel on qubits {2,1} happens. So after step 2, we get a state that is a mixture: with probability 1-p, it&rsquo;s the ideal state after CNOT_{21}; with probability p/15 each, it is the ideal state after CNOT_{21} followed by one of the 15 Pauli errors on qubits 1 and 2.
+Then apply H_0 (perfect).
+Then apply CNOT_{03} but then immediately after, an error channel on qubits {0,3} happens.</p>
+<p>We want the physical state fidelity of the final physical state. That is: F = sqrt( &lt;ψ_ideal| ρ_final |ψ_ideal&gt; ). But careful: &ldquo;physical state fidelity&rdquo; might be defined as the overlap between the actual state and the ideal state. Often fidelity is F(ρ, σ) = Tr( sqrt( sqrt(ρ) σ sqrt(ρ) ) ) but if σ is pure, then F = sqrt( &lt;ψ|ρ|ψ&gt; ). So we want F^2 = &lt;ψ_ideal| ρ_final |ψ_ideal&gt;. So we need to compute the density matrix ρ_final. And then compute the expectation of the projector onto the ideal state.</p>
+<p>Because the errors are independent on the two gates? But careful: The errors occur on different sets of qubits. And the circuit is linear. We can compute the effect of errors on the final state. Alternatively, we can compute the probability that no error occurs that takes the state out of the ideal state? But careful: Some errors might actually be equivalent to a logical error? But we want the physical fidelity, not logical fidelity. Physical fidelity is the overlap between the actual state and the ideal physical state. Even if an error is a stabilizer? But wait: The ideal state is a specific state in the code space. If an error applies a Pauli that is a stabilizer (like XXXX or ZZZZ) on the ideal state, then that state might actually be the same as the ideal state? But careful: The stabilizers: XXXX and ZZZZ. But our ideal state is not necessarily an eigenstate of all stabilizers? Actually, it is: We already checked that it is a +1 eigenstate of XXXX and ZZZZ. So if an error is exactly XXXX, then XXXX|ψ_ideal⟩ = |ψ_ideal⟩? Check: XXXX on |ψ_ideal⟩ = 1/2 (XXXX|0000⟩ + &hellip; = 1/2(|1111⟩+|0110⟩+|1001⟩+|0000⟩) = same. So indeed, XXXX stabilizes the state. Similarly, ZZZZ: we computed that gives +1 on each basis state? Actually, careful: ZZZZ|ψ_ideal⟩ = |ψ_ideal⟩ because each term gets phase? But wait: For |0000⟩, ZZZZ gives +1. For |1001⟩, ZZZZ gives: qubit0: -1, qubit1: +1, qubit2: +1, qubit3: -1, product = (-1)<em>(+1)</em>(+1)<em>(-1)=+1. So yes, so ZZZZ also gives +1. So the ideal state is in the code space and is actually a +1 eigenstate of both stabilizers. So any error that is a stabilizer (like XXXX, ZZZZ, or their products? Actually, the stabilizer group is generated by XXXX and ZZZZ. So the stabilizers are: I, XXXX, ZZZZ, XXXX ZZZZ = (XXXX)(ZZZZ) = (XZ)(XZ)(XZ)(XZ)? Actually, careful: XXXX * ZZZZ = (XZ)(XZ)(XZ)(XZ) but XZ = -iY up to phase? But anyway, the stabilizer group has 4 elements: I, S1, S2, S1S2. But are all these stabilizers? Check: S1 = XXXX, S2 = ZZZZ. Then S1S2 = (XZXZ)(XZXZ)? Actually, careful: On each qubit, we have X and Z. But X and Z anticommute on the same qubit. So S1S2 = (X0Z0)(X1Z1)(X2Z2)(X3Z3) but these commute? Actually, they are not necessarily stabilizers because they might not commute with logical operators? But wait, the stabilizer group is defined as the set of operators that fix the code space. For the [[4,2,2]] code, the stabilizers are indeed XXXX and ZZZZ. Their products are also stabilizers. So the full stabilizer group is {I, XXXX, ZZZZ, XXXX ZZZZ}. But note: XXXX ZZZZ = (X0Z0)(X1Z1)(X2Z2)(X3Z3) but on each qubit, XZ = -iY, so it becomes (-i)^4 (Y0 Y1 Y2 Y3) = YYYY. So indeed, the stabilizer group is {I, XXXX, ZZZZ, YYYY} up to phases? But careful: XXXX and ZZZZ commute. And YYYY = - (XXXX)(ZZZZ)? Actually, check: XXXX * ZZZZ: On each qubit, X Z = -i Y, so product over 4 qubits gives (-i)^4 (Y0Y1Y2Y3) = (1)(Y0Y1Y2Y3) = YYYY. So yes, so the stabilizer group is {I, XXXX, ZZZZ, YYYY} but note that these are not all Hermitian? Actually, XXXX is Hermitian, ZZZZ is Hermitian, and YYYY is Hermitian because Y is Hermitian. So indeed, the stabilizer group has 4 elements. So if an error is one of these stabilizers, then it will leave the ideal state invariant? But careful: The ideal state is a particular state in the code space. But if we apply a stabilizer, it might multiply the state by a phase? But since the ideal state is a +1 eigenstate of both XXXX and ZZZZ, it will also be a +1 eigenstate of their product? Check: For |ψ_ideal⟩, what is YYYY? Y = i? Actually, compute YYYY on |0000⟩: Y|0⟩ = i|1⟩, so YYYY|0000⟩ = (i)^4 |1111⟩ = |1111⟩. On |1001⟩: Y on qubit0: Y|1⟩ = -i|0⟩, qubit1: Y|0⟩ = i|1⟩, qubit2: Y|0⟩ = i|1⟩, qubit3: Y|1⟩ = -i|0⟩, product phase: (-i)</em>(i)<em>(i)</em>(-i) = (-i * i) = 1, (i * -i) = 1? Let&rsquo;s do carefully: For |1001⟩, 
+Y0: gives -i on |0⟩? Actually, careful: Y = i σ_y? Actually, Pauli Y is usually defined as σ_y = 
+[0 -i; i 0]. So Y|0⟩ = i|1⟩, Y|1⟩ = -i|0⟩. So then:
+For |1001⟩:
+qubit0: 1 -&gt; Y gives -i|0⟩
+qubit1: 0 -&gt; Y gives i|1⟩
+qubit2: 0 -&gt; Y gives i|1⟩
+qubit3: 1 -&gt; Y gives -i|0⟩
+So overall phase: (-i)<em>(i)</em>(i)<em>(-i) = (-i * i) = 1, (i * -i) = 1? Actually, multiply step: (-i)</em>(i) = -i^2 = 1, then (1)<em>(i)= i, then (i)</em>(-i)= -i^2 = 1. So phase = 1. So indeed, YYYY gives +1 on all basis states? Check |0110⟩ similarly: 
+qubit0: 0 -&gt; i|1⟩
+qubit1: 1 -&gt; -i|0⟩
+qubit2: 1 -&gt; -i|0⟩
+qubit3: 0 -&gt; i|1⟩
+Phase: (i)<em>(-i)= 1, (-i)</em>(i)= 1. So yes. So indeed, the ideal state is a +1 eigenstate of all stabilizers. So if an error is exactly a stabilizer, then it does not change the state. But wait: The error channel applies a Pauli error on the two qubits. But stabilizers are four-qubit operators. They are not products of Paulis on only two qubits? Except possibly if the two qubits are such that the error is a part of a stabilizer? For example, on qubits {1,2}, what are the Pauli errors that are stabilizers? The stabilizers act on all 4 qubits. So if we only act on qubits 1 and 2, we cannot get a full stabilizer unless the other qubits are identity. But identity on the other qubits is not a stabilizer because stabilizers are non-identity on all qubits. So on a two-qubit error, it&rsquo;s impossible that the error is exactly a stabilizer because stabilizers are weight 4. However, it could be that the error, when propagated through the subsequent gates, becomes a stabilizer? But we are computing the physical state fidelity. That is the overlap between the final state and the ideal state. Even if an error becomes a stabilizer after the circuit, it might still cause a deviation from the ideal state? But careful: The ideal state is a specific state. If an error E is such that E|ψ_ideal⟩ = |ψ_ideal⟩ (up to a phase), then that error does not reduce fidelity. But if E|ψ_ideal⟩ is orthogonal to |ψ_ideal⟩, then it reduces fidelity. So we want to compute the probability that the final state is exactly the ideal state. But wait: The errors occur at different times. They are applied on different sets of qubits. And then the subsequent gates are perfect. So we can compute the effect of each error on the final state. But note: The errors are independent. So we can compute the overall density matrix as a mixture over error patterns on the two CNOT gates. Each CNOT gate error: either no error (with probability 1-p) or a specific Pauli error on the two qubits (with probability p/15). And these errors occur at different steps. So the final state will be a mixture over outcomes from errors on the first CNOT and errors on the second CNOT. And we want the fidelity: F^2 = &lt;ψ_ideal| ρ |ψ_ideal&gt;. That is the weight of the component that is exactly the ideal state.</p>
+<p>So let&rsquo;s denote:
+Step 1: H_2 applied to initial |0000⟩ -&gt; state becomes: |ψ1⟩ = 1/√2 (|0000⟩ + |0010⟩). (I&rsquo;ll denote qubits as: q0, q1, q2, q3)</p>
+<p>Step 2: CNOT_{21} ideal. That gives: |ψ2_ideal⟩ = 1/√2 (|0000⟩ + |0110⟩).</p>
+<p>Then after step 2, we have an error channel on qubits {2,1}. So the state becomes a mixture: 
+With probability 1-p: state remains |ψ2_ideal⟩.
+With probability p/15 for each of the 15 Pauli errors on qubits 1 and 2. But careful: The error is applied after the CNOT gate. So if the error is E (a two-qubit Pauli on qubits 1 and 2), then the state becomes E |ψ2_ideal⟩. But note: These states are not necessarily normalized? But they are since Paulis are unitary. So after step 2, the state is a density matrix: 
+ρ2 = (1-p) |ψ2_ideal⟩⟨ψ2_ideal| + (p/15) * sum_{E in Paulis on {1,2} excluding identity} E |ψ2_ideal⟩⟨ψ2_ideal| E^\dagger.
+But careful: The sum is over all 15 non-identity Paulis on two qubits. But note: Some of these might produce the same state as the ideal? Possibly if E is such that E|ψ2_ideal⟩ is proportional to |ψ2_ideal⟩. That would mean that |ψ2_ideal⟩ is an eigenvector of E. But is that possible? |ψ2_ideal⟩ = 1/√2 (|0000⟩ + |0110⟩). This state involves qubits 1 and 2: In the first term, qubits1,2 are 00; in the second, they are 11. So if E acts on qubits 1 and 2, then E|00⟩ and E|11⟩. For E to leave the state invariant (up to a phase), we need that E|00⟩ = α|00⟩ and E|11⟩ = α|11⟩ with the same phase? Or actually, the state is a superposition. For it to be an eigenvector, we need that E|00⟩ = c|00⟩ and E|11⟩ = c|11⟩, so that then E|ψ2_ideal⟩ = c|ψ2_ideal⟩. Which Paulis on two qubits have that property? The Paulis that are diagonal in the computational basis on both qubits? That is I, Z1, Z2, Z1Z2. But identity is excluded. So Z1, Z2, and Z1Z2. Check: Z1 on qubit1: Z1|00⟩ = |00⟩, Z1|11⟩ = -|11⟩, so that gives phase 1 and -1, so not constant. Z2: similarly, Z2|00⟩ = |00⟩, Z2|11⟩ = -|11⟩. Z1Z2: Z1Z2|00⟩ = |00⟩, Z1Z2|11⟩ = (-1)<em>(-1)=|11⟩. So indeed, Z1Z2 leaves |ψ2_ideal⟩ invariant. Also, what about Paulis that swap? For example, X1 X2? X1X2|00⟩ = |11⟩, X1X2|11⟩ = |00⟩, so that actually swaps the two terms, so then the state becomes the same? Actually, |ψ2_ideal⟩ = 1/√2 (|00⟩ + |11⟩) on qubits 1,2 (and others are 0 on qubits 0,3). So if we apply X1X2, then |00⟩ -&gt; |11⟩ and |11⟩ -&gt; |00⟩, so the state remains the same. So X1X2 also leaves |ψ2_ideal⟩ invariant. What about Y1Y2? Y1Y2|00⟩ = (i)(i)|11⟩? Actually, careful: Y|0⟩ = i|1⟩, Y|1⟩ = -i|0⟩. So Y1Y2|00⟩ = (i|1⟩)(i|1⟩) = -|11⟩? Actually, careful: Y1Y2 acts on two qubits: Y1 ⊗ Y2. On |00⟩, Y1|0⟩ = i|1⟩, Y2|0⟩ = i|1⟩, so product = i</em>i |11⟩ = -|11⟩. On |11⟩, Y1|1⟩ = -i|0⟩, Y2|1⟩ = -i|0⟩, so product = (-i)*(-i)|00⟩ = -|00⟩. So Y1Y2|ψ2_ideal⟩ = 1/√2 (-|11⟩ - |00⟩) = -|ψ2_ideal⟩. So Y1Y2 also gives an eigenvalue of -1. So there are Paulis that leave |ψ2_ideal⟩ unchanged (up to a phase). But careful: When we compute the fidelity later, we want the final state to be exactly the ideal state. Even if an error occurs that is a phase factor on the state at step 2, that phase might get transformed by subsequent gates? But subsequent gates are unitary and perfect. So if at step 2 we have a state that is exactly the ideal state up to a global phase, then after applying the perfect gates H_0 and CNOT_{03}, we will get the ideal final state up to a global phase. But wait: The ideal final state is defined. But if we have a phase factor, that is still the same physical state? Actually, fidelity is defined as |⟨ψ|φ⟩|^2. So if φ = e^(iθ) ψ, then fidelity is 1. So indeed, if an error at step 2 results in a state that is exactly the ideal state at that step (up to a phase), then after applying the rest of the circuit perfectly, we will get the ideal final state (up to phase). So we need to determine which errors on step 2 do not actually cause a deviation from the ideal trajectory. But careful: The errors occur at step 2. Then we apply H_0 and CNOT_{03} perfectly. So if after step 2, the state is exactly the ideal state (up to phase), then the final state will be ideal. So we want to know: For an error E on qubits {1,2} at step 2, what is the resulting state after the full circuit? That is: U_final * E * U_step2_ideal |initial⟩? But actually, it&rsquo;s: The circuit after step 2 is: H_0 and then CNOT_{03}. So if at step 2 we have state |φ⟩, then the final state is U = (CNOT_{03})(H_0) |φ⟩. And the ideal final state is U |ψ2_ideal⟩. So if E|ψ2_ideal⟩ = c|ψ2_ideal⟩ (with |c|=1), then U E|ψ2_ideal⟩ = c U|ψ2_ideal⟩ = c|ψ_final_ideal⟩. So that gives fidelity 1. So we need to identify which errors on step 2 are such that E|ψ2_ideal⟩ is proportional to |ψ2_ideal⟩. And similarly, errors on step 4: After the second CNOT, we have an error on qubits {0,3}. Then the final state becomes E&rsquo; U|ψ? Actually, careful: The second error occurs after the CNOT_{03} gate. So if there is no error from step 2, then after step 3 we have |ψ3_ideal⟩ = (H_0)|ψ2_ideal⟩? Actually, step 3 is H_0. So after step 3, ideal state is |ψ3_ideal⟩ = 1/2 (|0000⟩+|1000⟩+|0110⟩+|1110⟩) as computed. Then step 4: CNOT_{03} ideal gives |ψ_final_ideal⟩. Then after step 4, we have an error channel on qubits {0,3}. So if an error E&rsquo; on qubits {0,3} occurs, then the final state becomes E&rsquo;|ψ_final_ideal⟩. And if E&rsquo;|ψ_final_ideal⟩ is proportional to |ψ_final_ideal⟩, then that error does not reduce fidelity. So we need to compute which errors on each step are &ldquo;harmless&rdquo; in the sense that they leave the state in the ideal state (up to phase) at that step.</p>
+<p>But careful: The errors are independent. So overall, the final density matrix will be a mixture over errors on step 2 and step 4. And we want the fidelity: F^2 = probability that the final state is exactly the ideal state (up to phase). But wait: Could it be that errors from step 2 and step 4 combine to give the ideal state? That is possible if the product of the errors (after conjugation through the subsequent gates) becomes a stabilizer on the final state. But careful: The errors occur at different times. They are applied on different sets of qubits. And the circuit in between is perfect. So if we have an error E on step 2 and an error E&rsquo; on step 4, then the final state is: U_4 * (error on step 4) * U_3 * U_2 * (error on step 2) * U_1 |initial⟩, where U_1 = H_2, U_2 = CNOT_{21}, U_3 = H_0, U_4 = CNOT_{03}. But note that the error on step 2 is applied after U_2. So the overall operation is: U_4 * U_3 * (U_3^\dagger? Actually, let&rsquo;s write it carefully:</p>
+<p>The ideal circuit: U = U_4 U_3 U_2 U_1.
+With errors: After U_2, we apply E (on qubits {1,2}). Then after U_3, we apply nothing? Actually, U_3 is H_0, which is perfect. Then after U_4, we apply E&rsquo; (on qubits {0,3}).
+So the overall operation is: E&rsquo; * U_4 * U_3 * E * U_2 * U_1.
+So if we denote V = U_4 U_3, then the overall is E&rsquo; V E U_2 U_1.
+We want to know when this yields the ideal state up to phase. That is, when does E&rsquo; V E U_2 U_1 |0000⟩ equal e^(iθ) U |0000⟩? That is equivalent to: V E U_2 U_1 |0000⟩ being an eigenvector of E&rsquo; that gives the ideal state? Actually, it&rsquo;s simpler: The ideal state is U|0000⟩. So we want: E&rsquo; V E U_2 U_1 |0000⟩ = c U|0000⟩. But note that U_2 U_1 |0000⟩ = |ψ2_ideal⟩. And V = U_4 U_3, and U_4 U_3 |ψ2_ideal⟩ = |ψ_final_ideal⟩. So we want: E&rsquo; V E |ψ2_ideal⟩ = c V |ψ2_ideal⟩. That is: V E |ψ2_ideal⟩ should be such that when we apply E&rsquo;, it becomes proportional to V |ψ2_ideal⟩. So if E&rsquo; acts as a phase on V E |ψ2_ideal⟩, then that requires that V E |ψ2_ideal⟩ is an eigenvector of E&rsquo; with eigenvalue that is a phase. But note that E&rsquo; acts on qubits {0,3}. And V E |ψ2_ideal⟩ is some state. It might be that even if E is not harmless by itself (i.e., E|ψ2_ideal⟩ is not proportional to |ψ2_ideal⟩), it could be that after V, it becomes a state that is an eigenvector of some E&rsquo;? But then the combination E&rsquo; and E might cancel out? That is like error cancellation. But careful: The errors are independent. They occur with probabilities p/15 each. So the overall probability that the final state is ideal is the sum over all error patterns (E, E&rsquo;) such that E&rsquo; V E |ψ2_ideal⟩ = c V |ψ2_ideal⟩. And then the fidelity squared is that probability. But wait: Is it simply the probability that no error occurs that changes the state from ideal? But because errors are depolarizing, they produce a mixture. And the fidelity is the weight of the ideal component. That weight is the probability that the overall error operator (after moving it through the circuit) is equivalent to the identity on the ideal state. But careful: The errors are applied at different times. We can &ldquo;push&rdquo; the errors to the end? But the circuit is not necessarily Clifford? Actually, it is Clifford because it consists of CNOT and H. So we can compute the effective error on the final state. That is: The overall operation is: E&rsquo; * U_4 * U_3 * E * U_2 * U_1. We want to know when this acting on |0000⟩ gives the ideal state. That is equivalent to: (U^\dagger) (E&rsquo; V E) U_2 U_1 |0000⟩? Alternatively, note that U|0000⟩ = |ψ_final⟩. So we want: E&rsquo; V E U_2 U_1 |0000⟩ = c |ψ_final⟩. But U_2 U_1 |0000⟩ = |ψ2⟩. And V|ψ2⟩ = |ψ_final⟩. So we want: E&rsquo; V E |ψ2⟩ = c V |ψ2⟩. That is: V E |ψ2⟩ is an eigenvector of E&rsquo; with eigenvalue c. But since E&rsquo; is a Pauli on {0,3}, its eigenvectors are determined by the state on qubits 0 and 3. So we need to compute how V acts on errors E on qubits {1,2}? V = U_4 U_3, where U_3 = H_0, U_4 = CNOT_{03}. So V acts on all qubits. It might map Paulis on qubits {1,2} to Paulis on other qubits? Because it&rsquo;s a Clifford circuit. So we can compute the conjugation: For an error E on step 2 (on qubits 1,2), what is V E V^\dagger? That will be a Pauli operator on some qubits. Then the overall effect is: V E |ψ2⟩ = (V E V^\dagger) V |ψ2⟩ = (V E V^\dagger) |ψ_final⟩. So then the condition for the combined error to be harmless is: E&rsquo; (V E V^\dagger) |ψ_final⟩ = c |ψ_final⟩. That means that the operator (V E V^\dagger) E&rsquo; must act as a phase on |ψ_final⟩. And since |ψ_final⟩ is a specific state, we want to know for which Paulis P on the full 4 qubits do we have P|ψ_final⟩ = ±|ψ_final⟩? And then the condition is that (V E V^\dagger) E&rsquo; is such a Pauli. And since E&rsquo; is on {0,3} and V E V^\dagger is something we can compute, we can determine the conditions.</p>
+<p>But maybe it&rsquo;s easier to compute the fidelity directly by summing over all error possibilities? The fidelity squared is the probability that the final state is exactly the ideal state. That is: F^2 = (1-p)^2 (from no errors) + (from one error on step 2 that is harmless) * (1-p) + (from one error on step 4 that is harmless) * (1-p) + (from errors on both steps that combine to be harmless) * (p/15)^2? But careful: The errors are independent. So the overall probability that the final state is ideal is: 
+Probability(no error on step2 and no error on step4) = (1-p)^2.
+Plus: Probability(error on step2 is harmless and no error on step4) = (number of harmless errors on step2)/15 * p * (1-p).
+Plus: Probability(no error on step2 and error on step4 is harmless) = (1-p) * (number of harmless errors on step4)/15 * p.
+Plus: Probability(error on step2 and error on step4 such that together they are harmless) = (sum over E in step2 and E&rsquo; in step4 that are harmless together) (p/15)^2.</p>
+<p>And then fidelity squared is that total probability. But wait: Is it simply additive? Because if an error occurs, the state becomes a specific Pauli applied to the ideal state. And if that Pauli is such that it gives the ideal state (up to phase), then the fidelity contribution from that branch is 1. But if it is not, then the overlap with the ideal state is 0? Is that true? Actually, if an error occurs that is not harmless, then the resulting state is orthogonal to the ideal state? Possibly not always: The ideal state is a specific state in the 16-dimensional space. An error that is a Pauli will map it to some other state. Could it be that some Pauli error gives a state that has a nonzero overlap with the ideal state? For example, if the ideal state is a Bell state, then a Pauli error might give another Bell state that is orthogonal to it. But here, the ideal state is a specific state. It is not necessarily true that every Pauli error either leaves it invariant (up to phase) or makes it orthogonal. But wait: The ideal state is a stabilizer state? Actually, it is a state in the code space of the [[4,2,2]] code. That code space is 4-dimensional. But the ideal state is a particular state within that code space. If we apply a Pauli operator that is not a stabilizer of that state, could it still have some overlap? Possibly if the Pauli operator acts as a logical operator? For example, consider a logical X error on one qubit. That would map |00⟩<em>L to |10⟩_L, and these are orthogonal because they are different logical states. So indeed, if the error is a logical error, then the resulting state is orthogonal to the ideal state. But what about errors that are not in the stabilizer and not logical operators? Actually, any Pauli operator on 4 qubits will either commute with the stabilizers or anticommute with some. But the ideal state is a simultaneous eigenvector of the stabilizers. If an error anticommutes with a stabilizer, then it will flip the eigenvalue, so the resulting state is orthogonal to the ideal state because they have different stabilizer eigenvalues. So indeed, if the ideal state is a stabilizer state (which it is, since it is in the code space and is an eigenvector of the stabilizers), then for any Pauli operator P that is not in the stabilizer group of that state (i.e., that does not leave the state invariant up to phase), we have ⟨ψ|P|ψ⟩ = 0. This is a property of stabilizer states: For a stabilizer state, the expectation value of any Pauli operator is either ±1 (if it is in the stabilizer) or 0 otherwise. Actually, check: For a stabilizer state, the stabilizer group is a subgroup of the Pauli group. And if a Pauli operator is not in the stabilizer, then it anticommutes with at least one element of the stabilizer, and then ⟨ψ|P|ψ⟩ = 0. So indeed, for our ideal state, if an error E (which is a Pauli) is applied, then either E|ψ⟩ = ±|ψ⟩ (if E is in the stabilizer of |ψ⟩) or ⟨ψ|E|ψ⟩ = 0. So that means that if an error occurs that is not &ldquo;harmless&rdquo; (i.e., does not act as a phase on the ideal state), then the resulting state is orthogonal to the ideal state. So then the fidelity squared is exactly the probability that the overall error (after pushing through the circuit) is in the stabilizer of the ideal state. And since the errors are independent on the two gates, we can compute: The overall operation is: E&rsquo; * U_4 * U_3 * E * U_2 * U_1. And we want this to be, when acting on |0000⟩, equal to a phase times the ideal state. That is equivalent to saying that the effective error operator (when conjugated to the end) is an element of the stabilizer of the ideal state. So we want to compute: Let F = U (the ideal circuit). Then the actual operation is: E&rsquo; * F * (F^\dagger E F)? Actually, careful: F = U_4 U_3 U_2 U_1. But our operation is: E&rsquo; * U_4 U_3 * E * U_2 U_1 = E&rsquo; * (U_4 U_3) E (U_4 U_3)^\dagger * (U_4 U_3 U_2 U_1) = (E&rsquo; * (V E V^\dagger)) * F, where V = U_4 U_3. So the overall error (from the ideal circuit) is: E_total = E&rsquo; * (V E V^\dagger). So we want that E_total |ψ_final⟩ = ±|ψ_final⟩, i.e., E_total is in the stabilizer of |ψ_final⟩. And since |ψ_final⟩ is a stabilizer state, its stabilizer group is known? Actually, we know the stabilizers of the code: XXXX and ZZZZ. But wait: The ideal state is not necessarily stabilized by all code stabilizers? It is, as we checked: XXXX and ZZZZ both give +1. But the full stabilizer group of the state is larger than the code stabilizer? Actually, for a stabilizer state, the stabilizer group is the set of all Paulis that leave the state invariant. For a state in a stabilizer code, the stabilizer group of the state is the same as the code&rsquo;s stabilizer group if the state is a logical basis state? But here, the state is a superposition of logical states. Actually, check: For the state |ψ_final⟩ = 1/2(|0000⟩+|1001⟩+|0110⟩+|1111⟩), what are its stabilizers? We already found that XXXX and ZZZZ stabilize it. Also, what about XIXI? That is X_A. Does it stabilize? XIXI|0000⟩ = |1010⟩, which is not in the superposition. So no. So the stabilizer group of |ψ_final⟩ is actually the code stabilizer group? But wait, the code stabilizer group has 4 elements: I, XXXX, ZZZZ, XXXX ZZZZ = YYYY. So the stabilizer group of |ψ_final⟩ is {I, XXXX, ZZZZ, YYYY}? But check YYYY: we already did, it gives +1. So yes. So the condition for an error E_total to be harmless is that E_total is one of these four Paulis: I, XXXX, ZZZZ, YYYY. But careful: Could there be a phase? For example, if E_total = -I, then that is just a global phase, so that is also harmless. But Paulis are defined up to phases? Actually, Pauli group elements include phases ±1, ±i. But typically, we consider the Pauli operators as Hermitian ones? But anyway, we want E_total|ψ⟩ = c|ψ⟩ with |c|=1. So if E_total = -XXXX, then that would give -1 eigenvalue? But wait, check: XXXX|ψ⟩ = |ψ⟩, so (-XXXX)|ψ⟩ = -|ψ⟩. That is still a phase factor (e^(iπ) so fidelity is 1. So actually, if E_total is any Pauli that is ± one of these stabilizers, then it&rsquo;s harmless. But careful: The depolarizing error channel: It applies one of the 15 non-identity Paulis with equal probability. But these Paulis are usually taken as the set {X, Y, Z} on each qubit? But they are defined up to phase? Typically, the depolarizing channel is defined as: With probability p, an error occurs, and the error is chosen uniformly from the set {I, X, Y, Z}⊗n excluding I? But then they are Hermitian? Actually, often the depolarizing channel is: ρ -&gt; (1-p)ρ + (p/3)(XρX + YρY + ZρZ) for a single qubit. So the errors are X, Y, Z. And for two qubits, it&rsquo;s: ρ -&gt; (1-p)ρ + (p/15) sum</em>{P in {I,X,Y,Z}⊗2 \ {I⊗I}} P ρ P. And these P are Hermitian. So then the errors are Hermitian Paulis. So then if an error is, say, -XXXX, that is not in the set because we only have XXXX itself (since X is Hermitian, XXXX is Hermitian). So the errors are exactly the Paulis with no extra minus signs. So then the condition for harmlessness is that E_total is exactly one of I, XXXX, ZZZZ, YYYY. But wait: Could it be that E_total = -YYYY? That would be not in our set because YYYY is Hermitian? Actually, Y is Hermitian, so YYYY is Hermitian. So indeed, the only possibilities are these four. But also, what about the identity? That is no error. So overall, we want E_total = E&rsquo; * (V E V^\dagger) to be either I, XXXX, ZZZZ, or YYYY.</p>
+<p>Now, let&rsquo;s compute V = U_4 U_3, where U_3 = H_0 and U_4 = CNOT_{03}. So V acts on qubits. It might be easier to compute the conjugation of Paulis on qubits {1,2} by V. But careful: E is on qubits {1,2} only. So E is a Pauli on qubits 1 and 2, and identity on qubits 0 and 3. So E can be written as P1 ⊗ P2, where P1, P2 are in {I, X, Y, Z} but not both I? Actually, E can be identity as well, but that&rsquo;s the no-error case. So for errors, E is one of the 15 non-identity Paulis on qubits 1 and 2.
+We want to compute V E V^\dagger. Since V = CNOT_{03} H_0. But careful: V acts on all qubits. But E acts only on qubits 1 and 2. And H_0 acts on qubit0, and CNOT_{03} acts on qubits 0 and 3. So these commute with operations on qubits 1 and 2? Actually, yes, because they act on different qubits. So V E V^\dagger = E itself? Because V does not affect qubits 1 and 2? Check: V = (CNOT_{03})(H_0). H_0 acts on qubit0, so it commutes with operators on qubits 1 and 2. CNOT_{03} acts on qubits 0 and 3, so it also commutes with operators on qubits 1 and 2. So indeed, V E V^\dagger = E. So that is simple: The errors on step 2, when pushed through the subsequent gates, remain as the same Pauli on qubits 1 and 2. So then E_total = E&rsquo; * E, where E&rsquo; is on qubits {0,3} and E is on qubits {1,2}. But careful: E_total is a product of two Paulis that act on disjoint sets? Actually, E&rsquo; acts on qubits 0 and 3, and E acts on qubits 1 and 2. So E_total is a Pauli on all 4 qubits that is the tensor product of the Pauli on qubits 0,3 from E&rsquo; and the Pauli on qubits 1,2 from E. So then the condition for harmlessness is that the combined Pauli E&rsquo; ⊗ E (on qubits: on 0,3 from E&rsquo; and on 1,2 from E) is one of: I (i.e., identity on all), XXXX, ZZZZ, YYYY.
+Now, what are these? 
+XXXX = X0 X1 X2 X3.
+ZZZZ = Z0 Z1 Z2 Z3.
+YYYY = Y0 Y1 Y2 Y3.</p>
+<p>And E&rsquo; is a Pauli on qubits 0 and 3. So E&rsquo; can be: I0I3, X0I3, I0X3, X0X3, Y0I3, I0Y3, Y0Y3, Z0I3, I0Z3, Z0Z3, and also mixed like X0Y3, etc. Actually, the full set on two qubits: There are 15 non-identity Paulis. They are: 
+On qubits 0 and 3: 
+X0I3, I0X3, X0X3,
+Y0I3, I0Y3, Y0Y3,
+Z0I3, I0Z3, Z0Z3,
+and also: X0Y3, X0Z3, Y0X3, Y0Z3, Z0X3, Z0Y3. So total 15.
+And E is a Pauli on qubits 1 and 2. Similarly, 15 possibilities.</p>
+<p>We want E&rsquo; ⊗ E to be one of: I, XXXX, ZZZZ, YYYY.
+Let&rsquo;s denote E&rsquo; as a Pauli on qubits 0 and 3. Write it as: (P0, P3) where P0, P3 ∈ {I, X, Y, Z} but not both I.
+And E as on qubits 1 and 2: (Q1, Q2) with Q1, Q2 ∈ {I, X, Y, Z} but not both I.
+Then E&rsquo; ⊗ E is the Pauli: P0 on qubit0, Q1 on qubit1, Q2 on qubit2, P3 on qubit3.
+We want this to equal either:
+I: That means P0=I, Q1=I, Q2=I, P3=I. But that is the identity. But that corresponds to no errors. So that gives probability (1-p)^2.
+Next, XXXX: That means P0=X, Q1=X, Q2=X, P3=X.
+So we need E&rsquo; such that on qubits 0 and 3, it is X0 X3? Actually, careful: XXXX means: on qubit0: X, on qubit1: X, on qubit2: X, on qubit3: X. So for E&rsquo; ⊗ E to be XXXX, we need: E&rsquo; must be such that on qubit0: X, on qubit3: X. But E&rsquo; is a Pauli on qubits 0 and 3. It could be X0 X3 itself, but also could it be something like? What if E&rsquo; = X0 I3? Then that would give on qubit0: X, on qubit3: I. But then to get X on qubit3 from E, we would need E to have on qubit? But E acts on qubits 1 and 2 only. So it cannot affect qubit3. So indeed, for E&rsquo; ⊗ E to be XXXX, we need E&rsquo; to have X on qubit0 and X on qubit3. But wait: Could E&rsquo; be something like -? But as argued, the errors are taken from the set of Paulis without minus signs? Actually, the depolarizing channel applies the Pauli operators themselves. So E&rsquo; is one of the 15 non-identity Paulis on {0,3}. For it to contribute to XXXX, we need that E&rsquo; is exactly X0 X3. But is that the only possibility? What if E&rsquo; = Y0 Y3? Then that gives Y on qubit0 and Y on qubit3. Then for E, we would need X on qubits 1 and 2? But then the product would be Y0 X1 X2 Y3, which is not XXXX. So no.
+So for XXXX, we need: E&rsquo; = X0 X3, and E = X1 X2.
+But wait: Could there be a possibility like E&rsquo; = something that gives a phase? For example, if E&rsquo; = -X0 X3, but that&rsquo;s not in our set because we only have the Paulis themselves (they are Hermitian, so they are defined up to sign? Actually, the depolarizing channel is usually defined with the Pauli matrices themselves, which are Hermitian. So X0X3 is Hermitian. -X0X3 is also Hermitian? But typically, the set of Pauli errors is taken as {I, X, Y, Z} for each qubit, and then the tensor products. But note: X ⊗ X is Hermitian. But -X⊗X is also Hermitian? Actually, (-X)⊗X = - (X⊗X) is Hermitian if X⊗X is Hermitian? But then the eigenvalues are ±1. However, the standard depolarizing channel is: ρ -&gt; (1-p)ρ + (p/15) ∑_{P in {I,X,Y,Z}⊗2 \ {I⊗I}} P ρ P. Here, P are exactly the Pauli matrices (which are usually taken as σ_x, σ_y, σ_z). And these are defined as: σ_x = [[0,1],[1,0]], σ_y = [[0,-i],[i,0]], σ_z = [[1,0],[0,-1]]. So they are Hermitian. But note that -σ_x is not included because that would be a different matrix. So indeed, the set of errors is exactly the set of Pauli strings with coefficients 1 (not -1). So we only consider the ones that are products of I, X, Y, Z without any minus signs. So then for XXXX, the only possibility is: E&rsquo; = X0 X3 and E = X1 X2.
+Next, ZZZZ: That requires: On qubit0: Z, qubit1: Z, qubit2: Z, qubit3: Z. So then E&rsquo; must be such that on qubits 0 and 3, it gives Z on qubit0 and Z on qubit3. So E&rsquo; must be Z0 Z3. And E must be Z1 Z2.
+Next, YYYY: That requires: On qubit0: Y, qubit1: Y, qubit2: Y, qubit3: Y. So then E&rsquo; must be Y0 Y3, and E must be Y1 Y2.</p>
+<p>Are there any other stabilizers? The stabilizer group of the ideal state is of size 4. So indeed, the only harmless combined errors are these: 
+Case 1: No errors: E&rsquo; = I (but careful: E&rsquo; is on {0,3} and E on {1,2} but identity is not included in the error set because error means non-identity? Actually, the error channel: With probability 1-p, no error. So that is separate.)
+Case 2: E&rsquo; = X0X3 and E = X1X2.
+Case 3: E&rsquo; = Z0Z3 and E = Z1Z2.
+Case 4: E&rsquo; = Y0Y3 and E = Y1Y2.</p>
+<p>But wait: Could there be cases where one of E or E&rsquo; is identity? For example, if E is identity (no error on step2) and E&rsquo; is such that E&rsquo; itself is a stabilizer? But E&rsquo; acts on qubits {0,3} only. For E&rsquo; to be a stabilizer of the ideal state, we would need that E&rsquo; acting on qubits 0 and 3 is such that when combined with identity on qubits 1 and 2, it becomes one of XXXX, ZZZZ, YYYY. But if E&rsquo; is on {0,3} only, then for it to be XXXX, we would need that on qubits 1 and 2 we have identity, but then that gives I1 I2, but XXXX requires X on qubits 1 and 2. So that doesn&rsquo;t work. Similarly, for ZZZZ, we would need Z on qubits 1 and 2, so if E&rsquo; is Z0Z3, then with E=I, the product is Z0 I1 I2 Z3, which is not ZZZZ. For YYYY, similarly. So indeed, if only one error occurs (and the other is no error), then the overall error is just that error on its qubits. And as argued, since the ideal state is a stabilizer state, any Pauli that is not a stabilizer will have zero overlap. And a single error on either step will be a Pauli on two qubits. Could it be that such a Pauli is actually a stabilizer? For example, consider an error on step2: E = X1 X2. Then E_total = X1 X2 (since E&rsquo;=I). Is X1 X2 a stabilizer of the ideal state? That would require that X1 X2|ψ_final⟩ = ±|ψ_final⟩. But check: |ψ_final⟩ = 1/2(|0000⟩+|1001⟩+|0110⟩+|1111⟩). Apply X1 X2: 
+X1X2|0000⟩ = |0⟩0, X1|0⟩1 = |1⟩1, X2|0⟩2 = |1⟩2, so becomes |0110⟩.
+X1X2|1001⟩ = |1⟩0, X1|0⟩1 = |1⟩1, X2|0⟩2 = |1⟩2, so becomes |1111⟩? Actually, careful: |1001⟩: qubit1=0 -&gt; becomes 1, qubit2=0 -&gt; becomes 1, so becomes |1111⟩.
+X1X2|0110⟩ = |0⟩0, X1|1⟩1 = |0⟩1, X2|1⟩2 = |0⟩2, so becomes |0000⟩.
+X1X2|1111⟩ = |1⟩0, X1|1⟩1 = |0⟩1, X2|1⟩2 = |0⟩2, so becomes |1001⟩.
+So indeed, X1X2|ψ_final⟩ = |ψ_final⟩. So wait! That means that if only an error E = X1X2 occurs on step2 (and no error on step4), then the final state is actually the ideal state? But then that would be a harmless error on step2 by itself. But earlier I argued that for an error on step2 to be harmless, we needed that E|ψ2_ideal⟩ is proportional to |ψ2_ideal⟩. But here, E = X1X2. Let&rsquo;s check that: |ψ2_ideal⟩ = 1/√2 (|0000⟩ + |0110⟩). Apply X1X2: X1X2|0000⟩ = |0110⟩, and X1X2|0110⟩ = |0000⟩. So indeed, X1X2|ψ2_ideal⟩ = |ψ2_ideal⟩. So that means that X1X2 is actually a harmless error on step2 by itself. Similarly, what about E = Z1Z2? Check: Z1Z2|ψ2_ideal⟩: |0000⟩ -&gt; |0000⟩, |0110⟩ -&gt; (-1)<em>(-1)|0110⟩ = |0110⟩. So Z1Z2 is harmless. And what about E = Y1Y2? Y1Y2|0000⟩ = ? Y1|0⟩ = i|1⟩, Y2|0⟩ = i|1⟩, so product = -|11⟩? Actually, careful: Y1Y2|0000⟩ = (Y1|0⟩)(Y2|0⟩)|00⟩ on qubits 0,3 = (i|1⟩)(i|1⟩) = -|11⟩ so that gives -|0110⟩? Actually, |0000⟩ becomes: qubits1,2: from 00 to? Actually, let&rsquo;s do: |ψ2_ideal⟩ = 1/√2 (|00⟩_{01?} Actually, careful: |ψ2_ideal⟩ = 1/√2 (|0⟩0|0⟩1|0⟩2|0⟩3 + |0⟩0|1⟩1|1⟩2|0⟩3). So apply Y1Y2: On the first term: Y1|0⟩ = i|1⟩, Y2|0⟩ = i|1⟩, so becomes (i</em>i)|1⟩1|1⟩2 = -|11⟩, so first term becomes -|0,1,1,0⟩ = -|0110⟩.
+On the second term: Y1|1⟩ = -i|0⟩, Y2|1⟩ = -i|0⟩, so product = (-i)<em>(-i) = -1, so second term becomes -|0,0,0,0⟩ = -|0000⟩.
+So Y1Y2|ψ2_ideal⟩ = -1/√2 (|0110⟩+|0000⟩) = -|ψ2_ideal⟩. So indeed, Y1Y2 is also harmless (just a phase). So on step2, the errors that are harmless are: X1X2, Z1Z2, Y1Y2. That is 3 out of 15. But wait, are there any others? What about, say, X1 I2? That would give: X1 I2|ψ2_ideal⟩ = 1/√2 (|0100⟩ + |0010⟩) which is not proportional to |ψ2_ideal⟩. So indeed, on step2, the harmless errors are those that are either X⊗X, Z⊗Z, or Y⊗Y on qubits 1 and 2. So there are 3 harmless errors on step2.
+Similarly, on step4, errors on qubits {0,3}. Let&rsquo;s check: After step4, the ideal state is |ψ_final⟩. An error E&rsquo; on step4 is applied directly to |ψ_final⟩. So we want E&rsquo;|ψ_final⟩ to be proportional to |ψ_final⟩. Which E&rsquo; on qubits {0,3} have that property? Let&rsquo;s check: E&rsquo; = X0 X3. Then as computed earlier, X0X3|ψ_final⟩: 
+|0000⟩ -&gt; |1010⟩? Actually, careful: |ψ_final⟩ = 1/2(|0000⟩+|1001⟩+|0110⟩+|1111⟩). Apply X0X3: 
+X0X3|0000⟩ = |1010⟩? Because qubit0:0-&gt;1, qubit3:0-&gt;1, so becomes |1,0,0,1⟩? Actually, careful: qubits: 0,1,2,3. So |0000⟩: apply X0: becomes |1000⟩? Wait, I&rsquo;m mixing: E&rsquo; acts on qubits 0 and 3. So it applies X on qubit0 and X on qubit3. So on |0000⟩, that gives: qubit0: 0-&gt;1, qubit3: 0-&gt;1, so becomes |1,0,0,1⟩ = |1001⟩? Actually, |1001⟩ means qubit0=1, qubit1=0, qubit2=0, qubit3=1. So yes, |0000⟩ -&gt; |1001⟩.
+Next, X0X3|1001⟩: qubit0:1-&gt;0, qubit3:1-&gt;0, so becomes |0000⟩.
+X0X3|0110⟩: qubit0:0-&gt;1, qubit3:0-&gt;1, so becomes |1111⟩.
+X0X3|1111⟩: qubit0:1-&gt;0, qubit3:1-&gt;0, so becomes |0110⟩.
+So indeed, X0X3|ψ_final⟩ = |ψ_final⟩. So E&rsquo; = X0X3 is harmless.
+What about E&rsquo; = Z0Z3? 
+Z0Z3|0000⟩ = |0000⟩ (since Z on |0⟩ gives +1, so remains)
+Z0Z3|1001⟩: qubit0:1 -&gt; -1, qubit3:1 -&gt; -1, product = (+1) so actually careful: Z|1⟩ = -|1⟩, so Z0 gives -1, Z3 gives -1, product = (-1)</em>(-1)=+1, so |1001⟩ remains? But wait, phase: Z0|1⟩ = -|1⟩, so that gives a factor of -1 from qubit0, and Z3|1⟩ = -|1⟩, so another -1, so total factor = (-1)<em>(-1)=+1. So |1001⟩ -&gt; |1001⟩.
+Z0Z3|0110⟩: qubit0:0 -&gt; +1, qubit3:0 -&gt; +1, so remains.
+Z0Z3|1111⟩: qubit0:1 -&gt; -1, qubit3:1 -&gt; -1, product = +1, so remains.
+So actually, Z0Z3|ψ_final⟩ = |ψ_final⟩. So E&rsquo; = Z0Z3 is harmless.
+What about E&rsquo; = Y0Y3?
+Y0Y3|0000⟩: Y0|0⟩ = i|1⟩, Y3|0⟩ = i|1⟩, so becomes (i</em>i)|1,0,0,1⟩ = -|1001⟩.
+Y0Y3|1001⟩: Y0|1⟩ = -i|0⟩, Y3|1⟩ = -i|0⟩, so becomes (-i)*(-i)|0,0,0,0⟩ = -|0000⟩.
+Y0Y3|0110⟩: Y0|0⟩ = i|1⟩, Y3|0⟩ = i|1⟩, so becomes -|1111⟩.
+Y0Y3|1111⟩: Y0|1⟩ = -i|0⟩, Y3|1⟩ = -i|0⟩, so becomes -|0110⟩.
+So Y0Y3|ψ_final⟩ = -1/2(|1001⟩+|0000⟩+|1111⟩+|0110⟩) = -|ψ_final⟩. So E&rsquo; = Y0Y3 is harmless.
+So on step4, the harmless errors are: X0X3, Z0Z3, Y0Y3. That is 3 out of 15.
+But wait: Could there be other errors on step4 that are harmless? For example, what about I0X3? That would give: I0X3|0000⟩ = |0001⟩, which is not in the superposition. So no.
+So indeed, on step4 alone, the harmless errors are exactly those that are the product of the same Pauli on both qubits: XX, ZZ, YY. So there are 3.</p>
+<p>Now, what about combined errors where both step2 and step4 have errors that are not individually harmless? For example, if step2 error is X1I2 (which is not harmless) and step4 error is something that might cancel it? But as we computed using the pushed-through method, the overall error is E_total = E&rsquo; ⊗ E (since they act on disjoint sets). And for that to be a stabilizer, we need that on qubits 1 and 2, E must be such that together with the identity on those from E&rsquo;? Actually, careful: E&rsquo; acts on qubits 0 and 3 only. So E_total = (E&rsquo; on qubits 0,3) ⊗ (E on qubits 1,2). For this to be, say, XXXX, we need E&rsquo; to be X0X3 and E to be X1X2. So that is the only possibility. Similarly, for ZZZZ, we need E&rsquo; = Z0Z3 and E = Z1Z2. For YYYY, we need E&rsquo; = Y0Y3 and E = Y1Y2.
+What about the possibility of E_total = I? That would require E&rsquo; = I and E = I, but that&rsquo;s no error.
+So indeed, the only combined errors that are harmless are exactly when either:
+- No errors on both: probability (1-p)^2.
+- Only step2 error that is harmless: There are 3 harmless errors on step2. But careful: If only step2 error occurs and step4 is no error, then the overall error is just E on step2. But as we computed, for step2, the harmless errors are those that are X1X2, Z1Z2, Y1Y2. But wait, check: For step2, if E = X1X2, then overall, E_total = X1X2. But is X1X2 a stabilizer of the final state? We computed that: X1X2|ψ_final⟩ = |ψ_final⟩. So that works. Similarly, Z1Z2 and Y1Y2. So indeed, if only step2 error is one of these 3, then the final state is ideal. So that gives probability: (3/15)<em>p * (1-p) = (p/5)</em>(1-p).
+- Only step4 error that is harmless: There are 3 harmless errors on step4. So probability: (1-p) * (3/15)<em>p = (p/5)</em>(1-p).
+- Both step2 and step4 errors that are exactly the pairs that combine to give a stabilizer? But wait: If both errors occur, then the overall error is E&rsquo; ⊗ E. For this to be a stabilizer, we need that E&rsquo; is one of {X0X3, Z0Z3, Y0Y3} and E is the corresponding one: if E&rsquo; = X0X3, then E must be X1X2; if E&rsquo; = Z0Z3, then E must be Z1Z2; if E&rsquo; = Y0Y3, then E must be Y1Y2. So that gives 3 possibilities out of 15<em>15 = 225? Actually, careful: The probability for a specific pair (E, E&rsquo;) is (p/15)^2. So the total probability from both errors that are harmless is: 3</em>(p/15)^2 = 3 p^2/225 = p^2/75.
+But wait: Could there be a case where both errors occur but individually they are not harmless? For example, if step2 error is X1I2 (not harmless) and step4 error is something that makes the product become a stabilizer? As argued, since they act on disjoint sets, the product is just the tensor product. For it to be, say, XXXX, we need on qubits 1 and 2 to be X and X. So if step2 error is X1I2, then on qubits 1 and 2 we have X and I. That is not X⊗X. So it cannot become XXXX. What about becoming ZZZZ? That would require on qubits 1 and 2: Z and Z. So no. YYYY: requires Y and Y. So indeed, the only combined errors that are harmless are exactly when both errors are of the form: on step2, the error is a two-qubit Pauli that is the same Pauli on both qubits (X⊗X, Z⊗Z, Y⊗Y) and on step4, the error is the same Pauli on both qubits? But wait, check: For step2, harmless errors are exactly those: X⊗X, Z⊗Z, Y⊗Y. And for step4, harmless errors are: X⊗X, Z⊗Z, Y⊗Y. But if step2 error is X⊗X and step4 error is Z⊗Z, then the overall is (Z0Z3) ⊗ (X1X2). That is not one of the stabilizers because stabilizers require the same Pauli on all qubits. So indeed, they must match: if step2 is X⊗X, then step4 must be X⊗X to give XXXX; if step2 is Z⊗Z, then step4 must be Z⊗Z to give ZZZZ; if step2 is Y⊗Y, then step4 must be Y⊗Y to give YYYY.
+So then the total probability that the final state is ideal is:
+P(ideal) = (1-p)^2 + (3/15)p(1-p) + (3/15)p(1-p) + (3/15^2)p^2? But careful: The probability for a specific harmless error on step2 is p/15. So total from step2 harmless alone is 3<em>(p/15)</em>(1-p) = (3p/15)(1-p) = (p/5)(1-p). Similarly, step4 harmless alone: (p/5)(1-p). And both harmless that match: There are 3 pairs: (X⊗X, X⊗X), (Z⊗Z, Z⊗Z), (Y⊗Y, Y⊗Y). Each has probability (p/15)<em>(p/15) = p^2/225. So total from both = 3 p^2/225 = p^2/75.
+So then P(ideal) = (1-p)^2 + (2p/5)(1-p) + (p^2/75).
+But wait: Are these events disjoint? Yes, because they correspond to different error patterns. So then the fidelity squared F^2 is exactly this probability. But careful: Fidelity is defined as sqrt(⟨ψ|ρ|ψ⟩). And since if the error pattern is not harmless, then the resulting state is orthogonal to the ideal state, the contribution to the overlap is 0. So indeed, the fidelity squared is exactly the probability that the overall error is a stabilizer of the ideal state. So then F^2 = 1 - 2p + p^2 + (2p/5 - 2p^2/5) + p^2/75 = 1 - 2p + p^2 + 0.4p - 0.4p^2 + p^2/75.
+Combine: 1 - 2p + 0.4p = 1 - 1.6p.
+p^2 - 0.4p^2 = 0.6p^2, and then plus p^2/75 = p^2</em>(0.6 + 1/75). 1/75 = 0.013333&hellip;, so 0.6 + 0.01333&hellip; = 0.61333&hellip; Actually, exactly: 0.6 = 45/75, so 45/75 + 1/75 = 46/75. So F^2 = 1 - (8/5)p + (46/75)p^2? But 1.6 = 8/5, so yes: F^2 = 1 - (8/5)p + (46/75)p^2.
+But wait: Is that all? Check: What about the case where there is an error on step2 that is not harmless? That gives 0 overlap. And similarly step4. And combined errors that are not matching give 0. So that seems to be it.</p>
+<p>But wait: Could there be a case where an error on step2 is harmless? We already identified: X1X2, Z1Z2, Y1Y2. That is 3 out of 15. So that gives probability 3/15 = 1/5. So indeed, step2 alone harmless probability = p/5<em>(1-p). Similarly step4.
+And both harmless matching: probability = (1/5)</em>(1/5)<em>p^2? But careful: The probability that step2 error is, say, X1X2 is p/15, and step4 error is X0X3 is p/15, so that product is p^2/225. And there are 3 such pairs, so total = 3p^2/225 = p^2/75. And 1/5 * 1/5 = 1/25 = 9/225, so that would be 9p^2/225 if they were independent? But they are not independent because if step2 is harmless, it could be any of the 3, but then step4 must be the specific one that matches. So actually, if step2 is harmless, the probability that step4 is the matching one is (1/15) because out of 15, only 1 specific Pauli (e.g., if step2 is X1X2, then step4 must be X0X3) gives match. So then the probability for a given match is (p/15)</em>(p/15) = p^2/225. And there are 3 matches, so total = 3p^2/225 = p^2/75. So that is correct.
+So then F^2 = (1-p)^2 + (3/15)p(1-p) + (3/15)p(1-p) + (3/225)p^2 = 1 - 2p + p^2 + (6p/15)(1-p) + (p^2/75) = 1 - 2p + p^2 + (2p/5)(1-p) + p^2/75 = 1 - 2p + p^2 + 2p/5 - 2p^2/5 + p^2/75 = 1 - (8/5)p + p^2<em>(1 - 2/5 + 1/75) = 1 - (8/5)p + p^2</em>(3/5 + 1/75) = 1 - (8/5)p + p^2*(45/75 + 1/75) = 1 - (8/5)p + (46/75)p^2.
+So F = sqrt(1 - (8/5)p + (46/75)p^2).</p>
+<p>But wait: The question asks: &ldquo;What is the physical state fidelity of the final physical 4-qubit state at the end of the circuit as a function of the two-qubit gate error rate p?&rdquo; That is F. But usually fidelity is the overlap. So answer: F = sqrt(1 - (8/5)p + (46/75)p^2). But maybe they want the fidelity squared? Or just F? The problem says &ldquo;physical state fidelity&rdquo;, which is often the fidelity between the actual state and the ideal state. That is F. But sometimes fidelity is defined as the square of that. However, the common definition: F(ρ, |ψ⟩) = sqrt(⟨ψ|ρ|ψ⟩). So I&rsquo;ll give F.</p>
+<p>But wait: Could there be any contributions from errors that are not Pauli? The error channel is depolarizing, so it&rsquo;s exactly a mixture over Pauli errors. So that is it.</p>
+<p>Thus, the answer is: F = [1 - (8/5)p + (46/75)p^2]^(1/2).</p>
+<p>But let&rsquo;s check for small p: F ≈ 1 - (4/5)p + &hellip; so infidelity = 1-F ≈ (4/5)p? That seems plausible.</p>
+<p>I&rsquo;ll double-check by considering each step separately:
+Step2: After step2, the state is: with probability 1-p, ideal; with probability p, it is a mixture over 15 Paulis on qubits 1,2. Among these, 3 give the ideal state (X1X2, Z1Z2, Y1Y2) and 12 give orthogonal states. So after step2, the fidelity squared (overlap with ideal step2 state) is: (1-p) + (3/15)p = 1-p + p/5 = 1 - (4/5)p. But then step3 and step4 are perfect unitaries, so they preserve fidelity. So if there were only step2 errors, the final fidelity would be sqrt(1 - (4/5)p) approximately? But wait, fidelity is not linear; actually, if the state is a mixture: (1 - α)|ψ⟩⟨ψ| + α ρ_orthogonal, then fidelity = sqrt(1-α). So indeed, after step2, the fidelity would be sqrt(1 - (4/5)p). But then we also have step4 errors. And step4 errors act on the state after step3. But careful: The errors are independent. So the overall fidelity squared is the product? Not exactly, because the errors from step2 and step4 can cancel. But if they were independent, then the probability that the state remains ideal after both steps would be: (probability step2 harmless) * (probability step4 harmless) but that would be (1 - (12/15)p) * (1 - (12/15)p) = (1 - (4/5)p)^2? That would give F^2 = 1 - (8/5)p + (16/25)p^2. But we got 1 - (8/5)p + (46/75)p^2. And (16/25) = (48/75), so our result is 1 - (8/5)p + (46/75)p^2, which is slightly lower than that product? Actually, (46/75) is less than (48/75), so our F^2 is lower. That means that if errors occur on both steps, the chance of cancellation is actually less than if they were independent? Actually, if they were independent, the probability that step2 is harmless is 1 - (12/15)p = 1 - (4/5)p, but that is not exactly the probability of no error? Actually, careful: The probability that step2 is harmless is: no error: (1-p) plus harmless errors: (3/15)p = p/5, so total = 1-p + p/5 = 1 - (4/5)p. So indeed, the probability that step2 yields the ideal state (up to phase) is 1 - (4/5)p. Similarly, step4: 1 - (4/5)p. If they were independent, then the probability that both are harmless would be (1 - (4/5)p)^2 = 1 - (8/5)p + (16/25)p^2. But our computed probability for the final state to be ideal is: (1-p)^2 + (p/5)(1-p) + (p/5)(1-p) + (p^2/75) = 1 - 2p + p^2 + (2p/5)(1-p) + p^2/75 = 1 - 2p + p^2 + 2p/5 - 2p^2/5 + p^2/75 = 1 - (8/5)p + p^2<em>(1 - 2/5 + 1/75) = 1 - (8/5)p + p^2</em>(3/5 + 1/75) = 1 - (8/5)p + p^2<em>(45/75+1/75)= 1 - (8/5)p + (46/75)p^2. And (16/25) = (48/75). So indeed, the probability that the final state is ideal is (46/75)p^2 instead of (48/75)p^2 when both steps have errors. That means that if both steps have errors, the chance that they cancel is actually lower than if they were independent? Actually, if they were independent, the probability that step2 is harmless is 1 - (4/5)p, but that includes the case of no error and harmless errors. But if both steps have errors (i.e., actually an error occurs on step2 and an error occurs on step4), then the probability that they are both harmless is: (3/15)</em>(3/15) = 9/225 = 3/75 = 36/900? Actually, 9/225 = 1/25 = 0.04, but wait, our computed probability for both errors to be harmless is 3/225 = 1/75 = 0.01333&hellip; So there is a discrepancy: If step2 has an error (non-identity) and step4 has an error (non-identity), then the probability that step2 error is harmless is 3/15 = 1/5, and step4 error is harmless is 3/15 = 1/5, so if they were independent, the probability that both are harmless would be 1/25 = 0.04. But our computed probability for both errors to be harmless is: There are 3 specific pairs that give overall stabilizer: (X1X2, X0X3), (Z1Z2, Z0Z3), (Y1Y2, Y0Y3). So the probability for that is 3<em>(1/15)</em>(1/15) = 3/225 = 1/75 ≈ 0.01333. So indeed, if both steps have errors, they are not independent in the sense that even if step2 error is harmless (1/5 chance) and step4 error is harmless (1/5 chance), the overall product is not necessarily a stabilizer. Because if step2 error is X1X2 and step4 error is Z0Z3 (both harmless individually), then the overall is (Z0Z3) ⊗ (X1X2) which is not a stabilizer. So that makes sense. So our computed probability is correct.</p>
+<p>Thus, the fidelity squared is: F^2 = 1 - (8/5)p + (46/75)p^2.
+So F = sqrt(1 - (8/5)p + (46/75)p^2).</p>
+<p>That is the answer.</p>
+<p>I&rsquo;ll put it in a nice form: F = sqrt(1 - 1.6 p + (46/75) p^2). Or F = sqrt(1 - (8/5)p + (46/75)p^2).</p>
+<p>We can also write as: F = sqrt(1 - (8/5)p + (46/75)p^2).</p>
+<p>I&rsquo;ll check: For p=0, F=1. For small p, F ≈ 1 - (4/5)p. That seems plausible.</p>
+<p>So final answer: 
+<strong>Final Answer:</strong> 
+The physical state fidelity is </p>
+<div class="arithmatex">\[
+F = \sqrt{1 - \frac{8}{5}p + \frac{46}{75}p^2}.
+\]</div>
+<p>I&rsquo;ll now produce the step-by-step derivation.</p>
+                      </div>
+                    </details>
+<div class="content markdown-body"><h3 id="step-1-understand-the-circuit-and-error-model">Step 1. Understand the Circuit and Error Model</h3>
+<p>We wish to prepare the logical GHZ state  </p>
+<div class="arithmatex">\[
+|\psi_{\text{ideal}}\rangle = \frac{|00\rangle_{AB} + |11\rangle_{AB}}{\sqrt{2}}
+\]</div>
+<p>in the <span class="arithmatex">\([[4,2,2]]\)</span> code, using the circuit:</p>
+<div class="arithmatex">\[
+\text{CNOT}_{03} \cdot \text{H}_0 \cdot \text{CNOT}_{21} \cdot \text{H}_2
+\]</div>
+<p>The operations are applied from right to left. The initial state is <span class="arithmatex">\( |0000\rangle \)</span>. The Hadamard gates are perfect, but each CNOT gate is followed by a two-qubit depolarizing error channel:</p>
+<ul>
+<li>With probability <span class="arithmatex">\(1 - p\)</span>, no error occurs.</li>
+<li>With probability <span class="arithmatex">\(p\)</span>, an error occurs, chosen uniformly from the 15 non-identity two-qubit Pauli operators on the involved qubits.</li>
+</ul>
+<p>The errors occur after:
+- <span class="arithmatex">\(\text{CNOT}_{21}\)</span> on qubits <span class="arithmatex">\(\{1,2\}\)</span>
+- <span class="arithmatex">\(\text{CNOT}_{03}\)</span> on qubits <span class="arithmatex">\(\{0,3\}\)</span></p>
+<p>The final state is a mixture over error patterns. The physical state fidelity is defined as  </p>
+<div class="arithmatex">\[
+F = \sqrt{\langle \psi_{\text{ideal}} | \rho_{\text{final}} | \psi_{\text{ideal}} \rangle}
+\]</div>
+<p>where <span class="arithmatex">\(\rho_{\text{final}}\)</span> is the actual density matrix.</p>
+<hr />
+<h3 id="step-2-ideal-circuit-no-errors">Step 2. Ideal Circuit (No Errors)</h3>
+<p>Apply the gates in order:</p>
+<ol>
+<li><strong><span class="arithmatex">\(H_2\)</span></strong> on qubit 2:  </li>
+</ol>
+<div class="arithmatex">\[
+   |0000\rangle \rightarrow \frac{1}{\sqrt{2}} (|0000\rangle + |0010\rangle)
+\]</div>
+<ol start="2">
+<li><strong><span class="arithmatex">\(\text{CNOT}_{21}\)</span></strong> (control qubit 2, target qubit 1):  </li>
+</ol>
+<div class="arithmatex">\[
+   \frac{1}{\sqrt{2}} (|0000\rangle + |0010\rangle) \rightarrow \frac{1}{\sqrt{2}} (|0000\rangle + |0110\rangle)
+\]</div>
+<ol start="3">
+<li><strong><span class="arithmatex">\(H_0\)</span></strong> on qubit 0:  </li>
+</ol>
+<div class="arithmatex">\[
+   \frac{1}{\sqrt{2}} (|0000\rangle + |0110\rangle) \rightarrow \frac{1}{2} (|0000\rangle + |1000\rangle + |0110\rangle + |1110\rangle)
+\]</div>
+<ol start="4">
+<li><strong><span class="arithmatex">\(\text{CNOT}_{03}\)</span></strong> (control qubit 0, target qubit 3):  </li>
+</ol>
+<div class="arithmatex">\[
+   \frac{1}{2} (|0000\rangle + |1000\rangle + |0110\rangle + |1110\rangle) \rightarrow \frac{1}{2} (|0000\rangle + |1001\rangle + |0110\rangle + |1111\rangle)
+\]</div>
+<p>This is the ideal physical state:</p>
+<div class="arithmatex">\[
+|\psi_{\text{ideal}}\rangle = \frac{1}{2} (|0000\rangle + |1001\rangle + |0110\rangle + |1111\rangle)
+\]</div>
+<p>It is a stabilizer state with stabilizers <span class="arithmatex">\(XXXX\)</span>, <span class="arithmatex">\(ZZZZ\)</span>, and <span class="arithmatex">\(YYYY\)</span>, all with eigenvalue <span class="arithmatex">\(+1\)</span>.</p>
+<hr />
+<h3 id="step-3-effect-of-errors-on-fidelity">Step 3. Effect of Errors on Fidelity</h3>
+<p>Since <span class="arithmatex">\(|\psi_{\text{ideal}}\rangle\)</span> is a stabilizer state, any Pauli error <span class="arithmatex">\(E\)</span> either satisfies  </p>
+<div class="arithmatex">\[
+E |\psi_{\text{ideal}}\rangle = \pm |\psi_{\text{ideal}}\rangle
+\]</div>
+<p>or yields a state orthogonal to <span class="arithmatex">\(|\psi_{\text{ideal}}\rangle\)</span>. Therefore, the fidelity squared <span class="arithmatex">\(F^2\)</span> is exactly the probability that the overall error pattern results in a state proportional to <span class="arithmatex">\(|\psi_{\text{ideal}}\rangle\)</span>.</p>
+<p>Let:
+- <span class="arithmatex">\(E\)</span> be an error on qubits <span class="arithmatex">\(\{1,2\}\)</span> after <span class="arithmatex">\(\text{CNOT}_{21}\)</span>
+- <span class="arithmatex">\(E'\)</span> be an error on qubits <span class="arithmatex">\(\{0,3\}\)</span> after <span class="arithmatex">\(\text{CNOT}_{03}\)</span></p>
+<p>The overall error is <span class="arithmatex">\(E' \otimes E\)</span>, acting on disjoint qubit sets. This overall error must be one of the stabilizers of <span class="arithmatex">\(|\psi_{\text{ideal}}\rangle\)</span>:  </p>
+<div class="arithmatex">\[
+I,\quad XXXX,\quad ZZZZ,\quad YYYY
+\]</div>
+<h4 id="a-no-errors">(a) No errors:</h4>
+<ul>
+<li>Probability: <span class="arithmatex">\((1 - p)^2\)</span></li>
+</ul>
+<h4 id="b-error-only-on-step-2-harmless">(b) Error only on step 2 (harmless):</h4>
+<p>Harmless errors on qubits <span class="arithmatex">\(\{1,2\}\)</span> are those that act as <span class="arithmatex">\(X \otimes X\)</span>, <span class="arithmatex">\(Z \otimes Z\)</span>, or <span class="arithmatex">\(Y \otimes Y\)</span>. There are 3 such Paulis out of 15.</p>
+<ul>
+<li>Probability: <span class="arithmatex">\(3 \cdot \frac{p}{15} \cdot (1 - p) = \frac{p}{5}(1 - p)\)</span></li>
+</ul>
+<h4 id="c-error-only-on-step-4-harmless">(c) Error only on step 4 (harmless):</h4>
+<p>Harmless errors on qubits <span class="arithmatex">\(\{0,3\}\)</span> are those that act as <span class="arithmatex">\(X \otimes X\)</span>, <span class="arithmatex">\(Z \otimes Z\)</span>, or <span class="arithmatex">\(Y \otimes Y\)</span>. Again, 3 out of 15.</p>
+<ul>
+<li>Probability: <span class="arithmatex">\((1 - p) \cdot 3 \cdot \frac{p}{15} = \frac{p}{5}(1 - p)\)</span></li>
+</ul>
+<h4 id="d-errors-on-both-steps-harmless">(d) Errors on both steps (harmless):</h4>
+<p>The overall error <span class="arithmatex">\(E' \otimes E\)</span> must be one of the stabilizers. This occurs only when:
+- <span class="arithmatex">\(E' = X_0 X_3\)</span> and <span class="arithmatex">\(E = X_1 X_2\)</span>
+- <span class="arithmatex">\(E' = Z_0 Z_3\)</span> and <span class="arithmatex">\(E = Z_1 Z_2\)</span>
+- <span class="arithmatex">\(E' = Y_0 Y_3\)</span> and <span class="arithmatex">\(E = Y_1 Y_2\)</span></p>
+<p>Each specific pair has probability <span class="arithmatex">\(\left(\frac{p}{15}\right)^2\)</span>, and there are 3 such pairs.</p>
+<ul>
+<li>Probability: <span class="arithmatex">\(3 \cdot \left(\frac{p}{15}\right)^2 = \frac{p^2}{75}\)</span></li>
+</ul>
+<p>All other error patterns yield states orthogonal to <span class="arithmatex">\(|\psi_{\text{ideal}}\rangle\)</span>, contributing 0 to <span class="arithmatex">\(F^2\)</span>.</p>
+<hr />
+<h3 id="step-4-compute-the-fidelity">Step 4. Compute the Fidelity</h3>
+<p>Summing all probabilities:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+F^2 &amp;= (1 - p)^2 + \frac{p}{5}(1 - p) + \frac{p}{5}(1 - p) + \frac{p^2}{75} \\
+&amp;= (1 - 2p + p^2) + \frac{2p}{5}(1 - p) + \frac{p^2}{75} \\
+&amp;= 1 - 2p + p^2 + \frac{2p}{5} - \frac{2p^2}{5} + \frac{p^2}{75} \\
+&amp;= 1 - \frac{8}{5}p + p^2 \left(1 - \frac{2}{5} + \frac{1}{75}\right) \\
+&amp;= 1 - \frac{8}{5}p + p^2 \left(\frac{3}{5} + \frac{1}{75}\right) \\
+&amp;= 1 - \frac{8}{5}p + p^2 \left(\frac{45}{75} + \frac{1}{75}\right) \\
+&amp;= 1 - \frac{8}{5}p + \frac{46}{75}p^2
+\end{aligned}
+\]</div>
+<p>Thus, the fidelity is:</p>
+<div class="arithmatex">\[
+F = \sqrt{1 - \frac{8}{5}p + \frac{46}{75}p^2}
+\]</div>
+<hr />
+<h3 id="final-answer">Final Answer:</h3>
+<div class="arithmatex">\[
+\boxed{\sqrt{1 - \frac{8}{5}p + \frac{46}{75}p^2}}
+\]</div></div>
+</article>
+
+
+<article class="message role-user">
+    <div class="meta">
+        <span class="badge">User</span>
+        <span class="idx">#3</span>
+    </div>
+    <div class="content markdown-body"><p>Populate your final answer into the code template provided below. This step is purely for formatting/display purposes. No additional reasoning or derivation should be performed. Do not import any modules or packages beyond what is provided in the template.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">answer</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the expression of the physical state fidelity of the final physical 4-qubit state</span>
+<span class="sd">    at the end of the circuit as a function of the two-qubit gate error rate $p$.</span>
+
+<span class="sd">    Inputs</span>
+<span class="sd">    ----------</span>
+<span class="sd">    p: sympy.Symbol, two-qubit gate error rate $p$</span>
+
+<span class="sd">    Outputs</span>
+<span class="sd">    ----------</span>
+<span class="sd">    F_physical: sympy.Expr, the physical state fidelity of the final physical 4-qubit state</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># ------------------ FILL IN YOUR RESULTS BELOW ------------------</span>
+    <span class="n">F_physical</span> <span class="o">=</span> <span class="o">...</span>  <span class="c1"># a SymPy expression of inputs</span>
+    <span class="c1"># ---------------------------------------------------------------</span>
+
+    <span class="k">return</span> <span class="n">F_physical</span>
+</code></pre></div></div>
+</article>
+
+
+<article class="message role-assistant">
+    <div class="meta">
+        <span class="badge">Assistant</span>
+        <span class="idx">#4</span>
+    </div>
+    
+                    <details class="reasoning">
+                      <summary>Reasoning <span class="tag">(model)</span></summary>
+                      <div class="markdown-body reasoning-body">
+                        <p>We are given a function template to fill.
+ The fidelity expression we derived is: F = sqrt(1 - (8/5)<em>p + (46/75)</em>p^2)
+ We will represent this using sympy.
+ Note: We must use exact fractions.</p>
+                      </div>
+                    </details>
+<div class="content markdown-body"><p><strong>Final Answer:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">answer</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the expression of the physical state fidelity of the final physical 4-qubit state</span>
+<span class="sd">    at the end of the circuit as a function of the two-qubit gate error rate $p$.</span>
+
+<span class="sd">    Inputs</span>
+<span class="sd">    ----------</span>
+<span class="sd">    p: sympy.Symbol, two-qubit gate error rate $p$</span>
+
+<span class="sd">    Outputs</span>
+<span class="sd">    ----------</span>
+<span class="sd">    F_physical: sympy.Expr, the physical state fidelity of the final physical 4-qubit state</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># ------------------ FILL IN YOUR RESULTS BELOW ------------------</span>
+    <span class="n">F_physical</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">sp</span><span class="o">.</span><span class="n">Rational</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span><span class="o">*</span><span class="n">p</span> <span class="o">+</span> <span class="n">sp</span><span class="o">.</span><span class="n">Rational</span><span class="p">(</span><span class="mi">46</span><span class="p">,</span><span class="mi">75</span><span class="p">)</span><span class="o">*</span><span class="n">p</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="c1"># ---------------------------------------------------------------</span>
+
+    <span class="k">return</span> <span class="n">F_physical</span>
+</code></pre></div></div>
+</article>
+
+</div>
+
+<footer>
+  Generated at 2025-09-24T22:02:09.540482
+</footer>
+
+<script>
+(function() {
+  // Tabs
+  const tabs = document.querySelectorAll('.tab');
+  const panels = document.querySelectorAll('.tab-content');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      const target = document.querySelector(tab.dataset.target);
+      if (target) target.classList.add('active');
+    });
+  });
+
+  // Theme toggle
+  const toggleBtn = document.getElementById('theme-toggle');
+  function setTheme(dark) {
+    if (dark) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('dark', '1');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('dark', '0');
+    }
+  }
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const stored = localStorage.getItem('dark');
+  setTheme(stored === null ? prefersDark : stored === '1');
+
+  toggleBtn.addEventListener('click', () => {
+    const isDark = document.documentElement.classList.contains('dark');
+    setTheme(!isDark);
+  });
+})();
+</script>
+</body>
+</html>

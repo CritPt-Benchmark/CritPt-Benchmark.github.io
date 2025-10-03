@@ -1,0 +1,1643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Challenge</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.codehilite .hll { background-color: #ffffcc }
+.codehilite { background: #f8f8f8; }
+.codehilite .c { color: #3D7B7B; font-style: italic } /* Comment */
+.codehilite .err { border: 1px solid #F00 } /* Error */
+.codehilite .k { color: #008000; font-weight: bold } /* Keyword */
+.codehilite .o { color: #666 } /* Operator */
+.codehilite .ch { color: #3D7B7B; font-style: italic } /* Comment.Hashbang */
+.codehilite .cm { color: #3D7B7B; font-style: italic } /* Comment.Multiline */
+.codehilite .cp { color: #9C6500 } /* Comment.Preproc */
+.codehilite .cpf { color: #3D7B7B; font-style: italic } /* Comment.PreprocFile */
+.codehilite .c1 { color: #3D7B7B; font-style: italic } /* Comment.Single */
+.codehilite .cs { color: #3D7B7B; font-style: italic } /* Comment.Special */
+.codehilite .gd { color: #A00000 } /* Generic.Deleted */
+.codehilite .ge { font-style: italic } /* Generic.Emph */
+.codehilite .ges { font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+.codehilite .gr { color: #E40000 } /* Generic.Error */
+.codehilite .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.codehilite .gi { color: #008400 } /* Generic.Inserted */
+.codehilite .go { color: #717171 } /* Generic.Output */
+.codehilite .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.codehilite .gs { font-weight: bold } /* Generic.Strong */
+.codehilite .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.codehilite .gt { color: #04D } /* Generic.Traceback */
+.codehilite .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.codehilite .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.codehilite .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.codehilite .kp { color: #008000 } /* Keyword.Pseudo */
+.codehilite .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.codehilite .kt { color: #B00040 } /* Keyword.Type */
+.codehilite .m { color: #666 } /* Literal.Number */
+.codehilite .s { color: #BA2121 } /* Literal.String */
+.codehilite .na { color: #687822 } /* Name.Attribute */
+.codehilite .nb { color: #008000 } /* Name.Builtin */
+.codehilite .nc { color: #00F; font-weight: bold } /* Name.Class */
+.codehilite .no { color: #800 } /* Name.Constant */
+.codehilite .nd { color: #A2F } /* Name.Decorator */
+.codehilite .ni { color: #717171; font-weight: bold } /* Name.Entity */
+.codehilite .ne { color: #CB3F38; font-weight: bold } /* Name.Exception */
+.codehilite .nf { color: #00F } /* Name.Function */
+.codehilite .nl { color: #767600 } /* Name.Label */
+.codehilite .nn { color: #00F; font-weight: bold } /* Name.Namespace */
+.codehilite .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.codehilite .nv { color: #19177C } /* Name.Variable */
+.codehilite .ow { color: #A2F; font-weight: bold } /* Operator.Word */
+.codehilite .w { color: #BBB } /* Text.Whitespace */
+.codehilite .mb { color: #666 } /* Literal.Number.Bin */
+.codehilite .mf { color: #666 } /* Literal.Number.Float */
+.codehilite .mh { color: #666 } /* Literal.Number.Hex */
+.codehilite .mi { color: #666 } /* Literal.Number.Integer */
+.codehilite .mo { color: #666 } /* Literal.Number.Oct */
+.codehilite .sa { color: #BA2121 } /* Literal.String.Affix */
+.codehilite .sb { color: #BA2121 } /* Literal.String.Backtick */
+.codehilite .sc { color: #BA2121 } /* Literal.String.Char */
+.codehilite .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.codehilite .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.codehilite .s2 { color: #BA2121 } /* Literal.String.Double */
+.codehilite .se { color: #AA5D1F; font-weight: bold } /* Literal.String.Escape */
+.codehilite .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.codehilite .si { color: #A45A77; font-weight: bold } /* Literal.String.Interpol */
+.codehilite .sx { color: #008000 } /* Literal.String.Other */
+.codehilite .sr { color: #A45A77 } /* Literal.String.Regex */
+.codehilite .s1 { color: #BA2121 } /* Literal.String.Single */
+.codehilite .ss { color: #19177C } /* Literal.String.Symbol */
+.codehilite .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.codehilite .fm { color: #00F } /* Name.Function.Magic */
+.codehilite .vc { color: #19177C } /* Name.Variable.Class */
+.codehilite .vg { color: #19177C } /* Name.Variable.Global */
+.codehilite .vi { color: #19177C } /* Name.Variable.Instance */
+.codehilite .vm { color: #19177C } /* Name.Variable.Magic */
+.codehilite .il { color: #666 } /* Literal.Number.Integer.Long */
+
+</style>
+<style>
+    :root {
+  --bg: #ffffff;
+  --fg: #222222;
+  --muted: #555555;
+  --border: #e0e0e0;
+  --accent: #005fcc;
+  --code-bg: #f6f8fa;
+  --role-user: #0ea5e9;
+  --role-assistant: #22c55e;
+  --role-system: #9ca3af;
+  --return-code: #a35291;
+}
+html.dark {
+  --bg: #0b0b0b;
+  --fg: #e8e8e8;
+  --muted: #a0a0a0;
+  --border: #333333;
+  --accent: #3b82f6;
+  --code-bg: #111827;
+  --role-user: #0ea5e9;
+  --role-assistant: #22c55e;
+  --role-system: #9ca3af;
+  --return-code: #a35291;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
+  line-height: 1.6;
+}
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 10;
+}
+h1 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+}
+.tab {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--border);
+  border-bottom: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 6px 6px 0 0;
+  color: var(--fg);
+}
+.tab.active {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+.tab-content {
+  display: none;
+  padding: 1rem 1.25rem;
+  border-top: 1px solid var(--border);
+}
+.tab-content.active {
+  display: block;
+}
+#theme-toggle {
+  border: 1px solid var(--border);
+  padding: 0.2rem 0.6rem;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  cursor: pointer;
+  background: transparent;
+  color: var(--fg);
+}
+.main {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.message {
+  border: 1px solid var(--border);
+  border-left-width: 6px;
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+  background: rgba(0,0,0,0.02);
+}
+.message .meta {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.6rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.message .badge {
+  font-weight: 600;
+}
+.role-user {
+  border-left-color: var(--role-user);
+}
+.role-assistant {
+  border-left-color: var(--role-assistant);
+}
+.role-system {
+  border-left-color: var(--role-system);
+}
+.role-unknown {
+  border-left-color: var(--accent);
+}
+
+.output-code-container {
+  display: flex;
+  gap: 1rem;               /* space between children */
+  align-items: center;     /* vertical alignment */
+  justify-content: start;  /* horizontal alignment */
+}
+
+.output-code-container .codeblock {
+  flex: 0 1 auto;
+}
+
+.codeblock {
+  border: 1px solid var(--border);
+  border-left-width: 6px;
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+  background: rgba(0,0,0,0.02);
+}
+.codeblock-content {
+  margin-bottom: 0.6rem;
+  border: 1px dashed var(--border);
+  border-radius: 4px;
+  padding: 0.4rem 0.6rem;
+  background: rgba(0,0,0,0.02);
+}
+
+.codeblock.eval_code {
+  border-left-color: var(--role-user);
+}
+.codeblock.target_code {
+  border-left-color: var(--role-assistant);
+}
+.codeblock.output_code {
+  border-left-color: var(--role-system);
+}
+
+html.dark .codeblock-content {
+  background: rgba(255,255,255,0.03);
+}
+.codeblock > summary {
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none; /* remove default triangle in some browsers */
+}
+.codeblock > summary::-webkit-details-marker {
+  display: none; /* Safari/Chrome marker */
+}
+.codeblock > summary::before {
+  content: "▶ ";
+  display: inline-block;
+  transform: rotate(0deg);
+  transition: transform 0.12s ease-out;
+}
+.codeblock[open] > summary::before {
+  transform: rotate(90deg);
+}
+.codeblock .tag {
+  color: var(--muted);
+  font-weight: 400;
+  font-size: 0.85em;
+  margin-left: 0.25rem;
+}
+
+.markdown-body pre code {
+  background: var(--code-bg);
+  display: block;
+  padding: 0.75rem;
+  overflow-x: auto;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+.markdown-body code {
+  background: var(--code-bg);
+  padding: 0.15rem 0.3rem;
+  border-radius: 4px;
+}
+/* Extra info tree */
+details > summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+details .block {
+  padding-left: 1rem;
+  margin: 0.25rem 0 0.5rem 0;
+  border-left: 2px solid var(--border);
+}
+.kv .key {
+  font-weight: 600;
+}
+.kv .type {
+  color: var(--muted);
+  margin-left: 0.5rem;
+  font-size: 0.85rem;
+}
+footer {
+  margin: 2rem 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+/* CodeHilite (pygments) overrides to respect theme vars */
+.codehilite {
+  background: var(--code-bg) !important;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.75rem !important;
+}
+.reasoning {
+  margin-bottom: 0.6rem;
+  border: 1px dashed var(--border);
+  border-radius: 4px;
+  padding: 0.4rem 0.6rem;
+  background: rgba(0,0,0,0.02);
+}
+html.dark .reasoning {
+  background: rgba(255,255,255,0.03);
+}
+.reasoning > summary {
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none; /* remove default triangle in some browsers */
+}
+.reasoning > summary::-webkit-details-marker {
+  display: none; /* Safari/Chrome marker */
+}
+.reasoning > summary::before {
+  content: "▶ ";
+  display: inline-block;
+  transform: rotate(0deg);
+  transition: transform 0.12s ease-out;
+}
+.reasoning[open] > summary::before {
+  transform: rotate(90deg);
+}
+.reasoning .tag {
+  color: var(--muted);
+  font-weight: 400;
+  font-size: 0.85em;
+  margin-left: 0.25rem;
+}
+.reasoning-body {
+  margin-top: 0.5rem;
+}
+</style>
+
+<!-- ===== MATHJAX CONFIG ===== -->
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [ ["\\(","\\)"] ],
+    displayMath: [ ["\\[","\\]"] ],
+    processEscapes: true,
+    processEnvironments: true
+  },
+  options: {
+    ignoreHtmlClass: ".*",
+    processHtmlClass: "arithmatex"
+
+    // skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    // if you dynamically add content later, you can call MathJax.typesetPromise()
+  }
+};
+</script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<!-- ========================== -->
+</head>
+<body>
+<header>
+  <h1>Challenge</h1>
+  <div>
+    <button id="theme-toggle" aria-label="toggle dark mode">🌓</button>
+  </div>
+</header>
+
+<div class="main">
+  
+<article class="message role-system">
+    <div class="meta">
+        <span class="badge">System</span>
+        <span class="idx">#0</span>
+    </div>
+    <div class="content markdown-body"><p>You are a physics research assistant specializing in solving complex, research-level problems using precise, step-by-step reasoning.</p>
+<p><strong>Input</strong>
+Problems will be provided in Markdown format.</p>
+<p><strong>Output (Markdown format)</strong></p>
+<ol>
+<li><strong>Step-by-Step Derivation</strong> - Show every non-trivial step in the solution.  Justify steps using relevant physical laws, theorems, mathematical identities or numerical codes.</li>
+<li><strong>Mathematical Typesetting</strong> - Use LaTeX for all mathematics:  <code>$...$</code> for inline expressions, <code>$$...$$</code> for display equations.</li>
+<li><strong>Conventions and Units</strong> - Follow the unit system and conventions specified in the problem.</li>
+<li>
+<p><strong>Final Answer</strong> - At the end of the solution,  start a new line with <strong>&ldquo;Final Answer:&rdquo;</strong>, and present the final result.</p>
+<p>For final answers involving values, follow the precision requirements specified in the problem.
+If no precision is specified:
+- If an exact value is possible, provide it (e.g., \$\sqrt(2)\$, \$\pi/4\$).
+- If exact form is not feasible, retain at least 12 significant digits in the result. </p>
+</li>
+<li>
+<p><strong>Formatting Compliance</strong> - If the user requests a specific output format (e.g., code, table),  provide the final answer accordingly.</p>
+</li>
+</ol></div>
+</article>
+
+
+<article class="message role-user">
+    <div class="meta">
+        <span class="badge">User</span>
+        <span class="idx">#1</span>
+    </div>
+    <div class="content markdown-body"><h1 id="problem-setup">Problem setup:</h1>
+<p>In quantum error correction, you encode quantum states into logical states made of many qubits in order to improve their resilience to errors. In quantum error detection, you do the same but can only detect the presence of errors and not correct them. In this problem, we will consider a single [[4,2,2]] quantum error detection code, which encodes two logical qubits into four physical qubits, and investigate how robust logical quantum operations in this code are to quantum errors.</p>
+<p>Our convention is that the four physical qubits in the [[4,2,2]] code are labelled 0,1,2,3. The two logical qubits are labelled A and B. The stabilizers are <span class="arithmatex">\(XXXX\)</span> and <span class="arithmatex">\(ZZZZ\)</span>, where <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(Z\)</span> are Pauli matrices. The logical <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(Z\)</span> operators on the two qubits are <span class="arithmatex">\(X_A = XIXI\)</span>, <span class="arithmatex">\(X_B=XXII\)</span>, <span class="arithmatex">\(Z_A = ZZII\)</span>, <span class="arithmatex">\(Z_B = ZIZI\)</span>, up to multiplication by stabilizers.</p>
+<p>We will consider different state preparation circuits consisting of controlled not <span class="arithmatex">\(CNOT_{ij}\)</span> gates, where <span class="arithmatex">\(CNOT_{ij}\)</span> has control qubit <span class="arithmatex">\(i\)</span> and target qubit <span class="arithmatex">\(j\)</span>. As a simple model of quantum errors in hardware, we will suppose that each <span class="arithmatex">\(CNOT_{ij}\)</span> gate in the circuit has a two qubit depolarizing error channel following it that produces one of the 15 non-identity two-qubit Paulis with equal probability <span class="arithmatex">\(p/15\)</span>. The probability <span class="arithmatex">\(p\)</span> indicates the probability of an error in a single two-qubit gate. We will assess the logical infidelity of certain state preparation protocols as a function of the physical infidelity <span class="arithmatex">\(p\)</span>.</p>
+<h1 id="main-problem">Challenge</h1>
+<p>Suppose that we prepare a logical two-qubit <span class="arithmatex">\(|00\rangle_{AB}\)</span> state in the [[4,2,2]] code. To do so, we introduce an ancilla qubit, qubit 4, and use the following state preparation circuit:</p>
+<div class="arithmatex">\[
+M_4 (CNOT_{04}) (CNOT_{34}) (CNOT_{23}) (CNOT_{10}) (CNOT_{12}) (H_1)
+\]</div>
+<p>Note that this equation is written in matrix multiplication order, while the quantum operations in the circuit occur in the reverse order (from right-to-left in the above equation).  <span class="arithmatex">\(H\)</span> is a single-qubit Hadamard gate and <span class="arithmatex">\(M\)</span> is a single-qubit measurement. The ancilla is used to detect errors in the state preparation circuit and makes the circuit fault-tolerant. If the ancilla measurement is <span class="arithmatex">\(|0\rangle\)</span> (<span class="arithmatex">\(|1\rangle\)</span>), the state preparation succeeds (fails).</p>
+<p>What is the logical state fidelity of the final 2-qubit logical state at the end of the circuit as a function of two-qubit gate error rate <span class="arithmatex">\(p\)</span>, assuming the state is post-selected on all detectable errors in the code and on the ancilla qubit measuring <span class="arithmatex">\(|0\rangle\)</span>?</p></div>
+</article>
+
+
+<article class="message role-assistant">
+    <div class="meta">
+        <span class="badge">Assistant</span>
+        <span class="idx">#2</span>
+    </div>
+    
+                    <details class="tool-call">
+                      <summary>Tool Call <span class="tag">(code to execute)</span></summary>
+                      <div class="markdown-body tool-call-body">
+                        <div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">product</span><span class="p">,</span> <span class="n">combinations</span>
+
+<span class="c1"># Basic single-qubit Paulis</span>
+<span class="n">I</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="p">],[</span><span class="mi">1</span><span class="n">j</span><span class="p">,</span><span class="mi">0</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+<span class="n">H</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+
+<span class="n">pauli_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;I&#39;</span><span class="p">:</span><span class="n">I</span><span class="p">,</span><span class="s1">&#39;X&#39;</span><span class="p">:</span><span class="n">X</span><span class="p">,</span><span class="s1">&#39;Y&#39;</span><span class="p">:</span><span class="n">Y</span><span class="p">,</span><span class="s1">&#39;Z&#39;</span><span class="p">:</span><span class="n">Z</span><span class="p">}</span>
+<span class="n">paulis</span> <span class="o">=</span> <span class="p">[</span><span class="n">I</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">]</span>
+<span class="n">pauli_labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;I&#39;</span><span class="p">,</span><span class="s1">&#39;X&#39;</span><span class="p">,</span><span class="s1">&#39;Y&#39;</span><span class="p">,</span><span class="s1">&#39;Z&#39;</span><span class="p">]</span>
+
+<span class="c1"># Tensor product builder placing a single-qubit op on qubit q (0..4), or two-qubit op on specific pair</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">kronN</span><span class="p">(</span><span class="n">ops</span><span class="p">):</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">ops</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">M</span> <span class="ow">in</span> <span class="n">ops</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">M</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">out</span>
+
+<span class="n">nq</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="c1"># Embed single-qubit U on qubit q (0-indexed, with qubit order 0..4)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">embed1</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">nq</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">ops</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nq</span><span class="p">):</span>
+        <span class="n">ops</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">U</span> <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="n">q</span> <span class="k">else</span> <span class="n">I</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">kronN</span><span class="p">(</span><span class="n">ops</span><span class="p">)</span>
+
+<span class="c1"># Embed two-qubit op U2 on qubits (q1,q2) in order; U2 is 4x4 acting on q1,q2 in that order</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">embed2</span><span class="p">(</span><span class="n">U2</span><span class="p">,</span> <span class="n">q1</span><span class="p">,</span> <span class="n">q2</span><span class="p">,</span> <span class="n">nq</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    <span class="c1"># We&#39;ll build by expanding U2 into sum over basis elements |a b&gt;&lt;c d| with Kronecker products</span>
+    <span class="c1"># But easier: build using projectors on both qubits with control-target structure for CNOT</span>
+    <span class="c1"># For general U2, we&#39;ll map basis ordering consistent with q1 as more significant within the pair.</span>
+    <span class="c1"># We can construct identity on all, then reshape and swap axes; simpler: compose from elementary gates we know (CNOT)</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+<span class="c1"># Instead of general embed2, we will construct CNOT by its control-target action using projectors</span>
+<span class="n">P0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+<span class="n">P1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+
+<span class="c1"># Construct CNOT acting on qubits (c,t)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">CNOT_on</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">nq</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">ops0</span> <span class="o">=</span> <span class="p">[</span><span class="n">I</span><span class="p">]</span><span class="o">*</span><span class="n">nq</span>
+    <span class="n">ops1</span> <span class="o">=</span> <span class="p">[</span><span class="n">I</span><span class="p">]</span><span class="o">*</span><span class="n">nq</span>
+    <span class="n">ops0</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">P0</span>
+    <span class="n">ops1</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">P1</span>
+    <span class="c1"># When control=0, apply I on target; when control=1, apply X on target</span>
+    <span class="n">U0</span> <span class="o">=</span> <span class="n">kronN</span><span class="p">([</span><span class="n">ops0</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">if</span> <span class="n">i</span><span class="o">!=</span><span class="n">t</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">ops0</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">I</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nq</span><span class="p">)])</span>
+    <span class="c1"># But dotting ops0[i] by I does nothing; more straightforward: build tensor as product with P0 at c and I elsewhere</span>
+    <span class="c1"># Let&#39;s rebuild carefully</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">tensor_with_op_at</span><span class="p">(</span><span class="n">op</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">nq</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">ops</span> <span class="o">=</span> <span class="p">[</span><span class="n">I</span><span class="p">]</span><span class="o">*</span><span class="n">nq</span>
+    <span class="n">ops</span><span class="p">[</span><span class="n">q</span><span class="p">]</span> <span class="o">=</span> <span class="n">op</span>
+    <span class="k">return</span> <span class="n">kronN</span><span class="p">(</span><span class="n">ops</span><span class="p">)</span>
+
+<span class="c1"># We&#39;ll construct CNOT via sum: |0&gt;&lt;0|_c ⊗ I_t + |1&gt;&lt;1|_c ⊗ X_t acting on full register</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">two_qubit_gate_from_local</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">base_on_t</span><span class="p">):</span>
+    <span class="c1"># base_on_t is operator to apply on t when control=1; when control=0 it&#39;s identity</span>
+    <span class="k">return</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">P0</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">nq</span><span class="p">)</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">nq</span><span class="p">)</span> <span class="o">+</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">P1</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">nq</span><span class="p">)</span> <span class="o">@</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">base_on_t</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">nq</span><span class="p">)</span>
+
+<span class="c1"># But the above is not correct: the first term must be P0 on c tensor I on all others; we used matrix multiplication with identity dims, fine.</span>
+
+<span class="n">U_CNOT_cache</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">CNOT</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="n">key</span> <span class="o">=</span> <span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">U_CNOT_cache</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">U_CNOT_cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+    <span class="n">U</span> <span class="o">=</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">P0</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">nq</span><span class="p">)</span> <span class="o">+</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">P1</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">nq</span><span class="p">)</span> <span class="o">@</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">nq</span><span class="p">)</span>
+    <span class="n">U_CNOT_cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">U</span>
+    <span class="k">return</span> <span class="n">U</span>
+
+<span class="c1"># Precompute gate unitaries of the circuit</span>
+<span class="n">U_H1</span> <span class="o">=</span> <span class="n">embed1</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">nq</span><span class="p">)</span>
+<span class="n">U_C12</span> <span class="o">=</span> <span class="n">CNOT</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">U_C10</span> <span class="o">=</span> <span class="n">CNOT</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">U_C23</span> <span class="o">=</span> <span class="n">CNOT</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">U_C34</span> <span class="o">=</span> <span class="n">CNOT</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">U_C04</span> <span class="o">=</span> <span class="n">CNOT</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="c1"># Prepare the ideal state |00000&gt;</span>
+<span class="n">ket0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+<span class="n">ket1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">],[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+<span class="n">ket00</span> <span class="o">=</span> <span class="n">kronN</span><span class="p">([</span><span class="n">ket0</span><span class="p">]</span><span class="o">*</span><span class="n">nq</span><span class="p">)</span>
+
+<span class="c1"># Projector onto ancilla |0&gt; on qubit 4</span>
+<span class="n">Z4</span> <span class="o">=</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">nq</span><span class="p">)</span>
+<span class="n">P0_anc</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">nq</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span> <span class="o">+</span> <span class="n">Z4</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">P1_anc</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">nq</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span> <span class="o">-</span> <span class="n">Z4</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+
+<span class="c1"># Stabilizers on data qubits 0..3</span>
+<span class="n">X0</span> <span class="o">=</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">nq</span><span class="p">)</span>
+<span class="n">X1</span> <span class="o">=</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">nq</span><span class="p">)</span>
+<span class="n">X2</span> <span class="o">=</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">nq</span><span class="p">)</span>
+<span class="n">X3</span> <span class="o">=</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">nq</span><span class="p">)</span>
+<span class="n">Z0</span> <span class="o">=</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">nq</span><span class="p">)</span>
+<span class="n">Z1</span> <span class="o">=</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">nq</span><span class="p">)</span>
+<span class="n">Z2</span> <span class="o">=</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">nq</span><span class="p">)</span>
+<span class="n">Z3</span> <span class="o">=</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">nq</span><span class="p">)</span>
+
+<span class="n">Sx</span> <span class="o">=</span> <span class="n">X0</span> <span class="o">@</span> <span class="n">X1</span> <span class="o">@</span> <span class="n">X2</span> <span class="o">@</span> <span class="n">X3</span>
+<span class="n">Sz</span> <span class="o">=</span> <span class="n">Z0</span> <span class="o">@</span> <span class="n">Z1</span> <span class="o">@</span> <span class="n">Z2</span> <span class="o">@</span> <span class="n">Z3</span>
+
+<span class="c1"># Logical Z_A = Z Z I I (qubits 0,1)</span>
+<span class="n">Z_A</span> <span class="o">=</span> <span class="n">Z0</span> <span class="o">@</span> <span class="n">Z1</span>
+<span class="n">Z_B</span> <span class="o">=</span> <span class="n">Z0</span> <span class="o">@</span> <span class="n">Z2</span>
+
+<span class="c1"># Build two-qubit Pauli errors for a given gate qubits (a,b), excluding II</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">pauli_on_pair_list</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="c1"># Return list of 32x32 matrices for all two-qubit Paulis on qubits a,b except II</span>
+    <span class="n">mats</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">la</span><span class="p">,</span> <span class="n">lb</span> <span class="ow">in</span> <span class="n">product</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">la</span><span class="o">==</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">lb</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">op_a</span> <span class="o">=</span> <span class="p">[</span><span class="n">I</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">][</span><span class="n">la</span><span class="p">]</span>
+        <span class="n">op_b</span> <span class="o">=</span> <span class="p">[</span><span class="n">I</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">][</span><span class="n">lb</span><span class="p">]</span>
+        <span class="n">mats</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">op_a</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">nq</span><span class="p">)</span> <span class="o">@</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">op_b</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">nq</span><span class="p">))</span>
+        <span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pauli_labels</span><span class="p">[</span><span class="n">la</span><span class="p">]</span><span class="o">+</span><span class="n">pauli_labels</span><span class="p">[</span><span class="n">lb</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">mats</span><span class="p">,</span> <span class="n">labels</span>
+
+<span class="c1"># Get error sets for each gate</span>
+<span class="n">err_sets</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="mi">2</span><span class="p">:</span> <span class="n">pauli_on_pair_list</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span>  <span class="c1"># after CNOT_12 errors act on (1,2)</span>
+    <span class="mi">3</span><span class="p">:</span> <span class="n">pauli_on_pair_list</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>  <span class="c1"># after CNOT_10 errors act on (1,0)</span>
+    <span class="mi">4</span><span class="p">:</span> <span class="n">pauli_on_pair_list</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span>  <span class="c1"># after CNOT_23 errors act on (2,3)</span>
+    <span class="mi">5</span><span class="p">:</span> <span class="n">pauli_on_pair_list</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span>  <span class="c1"># after CNOT_34 errors act on (3,4)</span>
+    <span class="mi">6</span><span class="p">:</span> <span class="n">pauli_on_pair_list</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span>  <span class="c1"># after CNOT_04 errors act on (0,4)</span>
+<span class="p">}</span>
+
+<span class="c1"># Ideal circuit evolution without errors to get target state before ancilla measurement</span>
+<span class="n">U_circuit_no_meas</span> <span class="o">=</span> <span class="n">U_C04</span> <span class="o">@</span> <span class="n">U_C34</span> <span class="o">@</span> <span class="n">U_C23</span> <span class="o">@</span> <span class="n">U_C10</span> <span class="o">@</span> <span class="n">U_C12</span> <span class="o">@</span> <span class="n">U_H1</span>
+<span class="n">psi_ideal_full</span> <span class="o">=</span> <span class="n">U_circuit_no_meas</span> <span class="o">@</span> <span class="n">ket00</span>
+<span class="c1"># Ideal ancilla measurement prob and collapsed data state</span>
+<span class="n">p0_ideal</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">((</span><span class="n">psi_ideal_full</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">P0_anc</span> <span class="o">@</span> <span class="n">psi_ideal_full</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]))</span>
+<span class="n">psi_ideal_post</span> <span class="o">=</span> <span class="n">P0_anc</span> <span class="o">@</span> <span class="n">psi_ideal_full</span>
+<span class="n">psi_ideal_post</span> <span class="o">=</span> <span class="n">psi_ideal_post</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">psi_ideal_post</span><span class="p">)</span>
+<span class="c1"># Extract just the data-qubit state vector from the 5-qubit state conditioned on ancilla=0</span>
+<span class="c1"># We can compute the 4-qubit vector by reshaping and slicing ancilla index=0</span>
+<span class="n">psi5</span> <span class="o">=</span> <span class="n">psi_ideal_post</span><span class="o">.</span><span class="n">reshape</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">psi_data_ideal</span> <span class="o">=</span> <span class="n">psi5</span><span class="p">[:,:,:,:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># Verify it&#39;s stabilized by Sx and Sz with +1</span>
+<span class="n">sx_ev</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">((</span><span class="n">psi_ideal_post</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">Sx</span> <span class="o">@</span> <span class="n">psi_ideal_post</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]))</span>
+<span class="n">sz_ev</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">((</span><span class="n">psi_ideal_post</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">Sz</span> <span class="o">@</span> <span class="n">psi_ideal_post</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]))</span>
+
+<span class="c1"># Now enumerate all pairs of error locations and 15x15 error types and compute acceptance to order p^2</span>
+
+<span class="n">pairs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">combinations</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="mi">2</span><span class="p">))</span>
+
+<span class="c1"># Cache gate sequence list to apply sequentially</span>
+<span class="n">gate_seq</span> <span class="o">=</span> <span class="p">[</span><span class="n">U_H1</span><span class="p">,</span> <span class="n">U_C12</span><span class="p">,</span> <span class="n">U_C10</span><span class="p">,</span> <span class="n">U_C23</span><span class="p">,</span> <span class="n">U_C34</span><span class="p">,</span> <span class="n">U_C04</span><span class="p">]</span>
+
+<span class="c1"># We&#39;ll map step indices to positions in gate_seq: 1..6; errors after 2..6 only</span>
+
+<span class="n">malignant_count_weighted</span> <span class="o">=</span> <span class="mf">0.0</span>  <span class="c1"># sum over patterns of Prob(anc0) * indicator(accepted and wrong)</span>
+<span class="n">accepted_wrong_patterns</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">accepted_correct_patterns</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="ow">in</span> <span class="n">pairs</span><span class="p">:</span>
+    <span class="n">mats_i</span><span class="p">,</span> <span class="n">labels_i</span> <span class="o">=</span> <span class="n">err_sets</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">mats_j</span><span class="p">,</span> <span class="n">labels_j</span> <span class="o">=</span> <span class="n">err_sets</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">idx_i</span><span class="p">,</span> <span class="n">Ei</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">mats_i</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">idx_j</span><span class="p">,</span> <span class="n">Ej</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">mats_j</span><span class="p">):</span>
+            <span class="c1"># evolve</span>
+            <span class="n">psi</span> <span class="o">=</span> <span class="n">ket00</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="c1"># step 1</span>
+            <span class="n">psi</span> <span class="o">=</span> <span class="n">gate_seq</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">@</span> <span class="n">psi</span>
+            <span class="c1"># step 2 (CNOT_12)</span>
+            <span class="n">psi</span> <span class="o">=</span> <span class="n">gate_seq</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">@</span> <span class="n">psi</span>
+            <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span>
+                <span class="n">psi</span> <span class="o">=</span> <span class="n">Ei</span> <span class="o">@</span> <span class="n">psi</span>
+            <span class="k">if</span> <span class="n">j</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span>
+                <span class="n">psi</span> <span class="o">=</span> <span class="n">Ej</span> <span class="o">@</span> <span class="n">psi</span>
+            <span class="c1"># step 3 (CNOT_10)</span>
+            <span class="n">psi</span> <span class="o">=</span> <span class="n">gate_seq</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">@</span> <span class="n">psi</span>
+            <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">3</span><span class="p">:</span>
+                <span class="n">psi</span> <span class="o">=</span> <span class="n">Ei</span> <span class="o">@</span> <span class="n">psi</span>
+            <span class="k">if</span> <span class="n">j</span><span class="o">==</span><span class="mi">3</span><span class="p">:</span>
+                <span class="n">psi</span> <span class="o">=</span> <span class="n">Ej</span> <span class="o">@</span> <span class="n">psi</span>
+            <span class="c1"># step 4 (CNOT_23)</span>
+            <span class="n">psi</span> <span class="o">=</span> <span class="n">gate_seq</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">@</span> <span class="n">psi</span>
+            <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">4</span><span class="p">:</span>
+                <span class="n">psi</span> <span class="o">=</span> <span class="n">Ei</span> <span class="o">@</span> <span class="n">psi</span>
+            <span class="k">if</span> <span class="n">j</span><span class="o">==</span><span class="mi">4</span><span class="p">:</span>
+                <span class="n">psi</span> <span class="o">=</span> <span class="n">Ej</span> <span class="o">@</span> <span class="n">psi</span>
+            <span class="c1"># step 5 (CNOT_34)</span>
+            <span class="n">psi</span> <span class="o">=</span> <span class="n">gate_seq</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">@</span> <span class="n">psi</span>
+            <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">5</span><span class="p">:</span>
+                <span class="n">psi</span> <span class="o">=</span> <span class="n">Ei</span> <span class="o">@</span> <span class="n">psi</span>
+            <span class="k">if</span> <span class="n">j</span><span class="o">==</span><span class="mi">5</span><span class="p">:</span>
+                <span class="n">psi</span> <span class="o">=</span> <span class="n">Ej</span> <span class="o">@</span> <span class="n">psi</span>
+            <span class="c1"># step 6 (CNOT_04)</span>
+            <span class="n">psi</span> <span class="o">=</span> <span class="n">gate_seq</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">@</span> <span class="n">psi</span>
+            <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">6</span><span class="p">:</span>
+                <span class="n">psi</span> <span class="o">=</span> <span class="n">Ei</span> <span class="o">@</span> <span class="n">psi</span>
+            <span class="k">if</span> <span class="n">j</span><span class="o">==</span><span class="mi">6</span><span class="p">:</span>
+                <span class="n">psi</span> <span class="o">=</span> <span class="n">Ej</span> <span class="o">@</span> <span class="n">psi</span>
+
+            <span class="c1"># ancilla measurement: compute prob of 0 and collapsed state</span>
+            <span class="n">p0</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">((</span><span class="n">psi</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">P0_anc</span> <span class="o">@</span> <span class="n">psi</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]))</span>
+            <span class="k">if</span> <span class="n">p0</span> <span class="o">&lt;</span> <span class="mf">1e-12</span><span class="p">:</span>
+                <span class="c1"># never accepted</span>
+                <span class="k">continue</span>
+            <span class="n">psi0</span> <span class="o">=</span> <span class="n">P0_anc</span> <span class="o">@</span> <span class="n">psi</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">p0</span><span class="p">)</span>
+            <span class="c1"># Check stabilizers (deterministic signs)</span>
+            <span class="n">sxe</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">((</span><span class="n">psi0</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">Sx</span> <span class="o">@</span> <span class="n">psi0</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]))</span>
+            <span class="n">sze</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">((</span><span class="n">psi0</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">Sz</span> <span class="o">@</span> <span class="n">psi0</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]))</span>
+            <span class="n">accept</span> <span class="o">=</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">sxe</span><span class="o">-</span><span class="mf">1.0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-8</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">sze</span><span class="o">-</span><span class="mf">1.0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-8</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">accept</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="c1"># Compute fidelity with ideal target data state |00&gt;_L (GHZ+ on 0..3)</span>
+            <span class="c1"># Take inner product on full 5-qubit state with ancilla fixed at 0</span>
+            <span class="n">overlap</span> <span class="o">=</span> <span class="p">(</span><span class="n">psi_ideal_post</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">psi0</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">F</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">overlap</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">conj</span><span class="p">(</span><span class="n">overlap</span><span class="p">)))</span>
+            <span class="c1"># Determine wrongness: for pure stabilizer, F is either 0 or 1 (within tolerance)</span>
+            <span class="n">wrong</span> <span class="o">=</span> <span class="p">(</span><span class="n">F</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="o">-</span> <span class="mf">1e-8</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">wrong</span><span class="p">:</span>
+                <span class="n">malignant_count_weighted</span> <span class="o">+=</span> <span class="n">p0</span>
+                <span class="n">accepted_wrong_patterns</span><span class="o">.</span><span class="n">append</span><span class="p">(((</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">),</span> <span class="n">labels_i</span><span class="p">[</span><span class="n">idx_i</span><span class="p">],</span> <span class="n">labels_j</span><span class="p">[</span><span class="n">idx_j</span><span class="p">],</span> <span class="n">p0</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">accepted_correct_patterns</span><span class="o">.</span><span class="n">append</span><span class="p">(((</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">),</span> <span class="n">labels_i</span><span class="p">[</span><span class="n">idx_i</span><span class="p">],</span> <span class="n">labels_j</span><span class="p">[</span><span class="n">idx_j</span><span class="p">],</span> <span class="n">p0</span><span class="p">))</span>
+
+<span class="n">malignant_sum</span> <span class="o">=</span> <span class="n">malignant_count_weighted</span>
+<span class="n">num_pairs</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">pairs</span><span class="p">)</span>
+
+<span class="c1"># b2 coefficient is (1/15^2) * sum over (i&lt;j) sum_{errors} P(anc0 AND accept AND wrong)</span>
+<span class="c1"># In our loop, for each pattern we added p0 to malignant_count_weighted, which is exactly Prob(anc0) for that pattern; stabilizer acceptance and wrongness were enforced by continue/if.</span>
+<span class="c1"># Hence the sum malignant_sum is the total sum over patterns of Prob(anc0) for malignant ones. </span>
+<span class="c1"># Divide by 15^2 to get per-pair mean, then sum across pairs already included by summing all; So b2 = malignant_sum / 15^2.</span>
+
+<span class="n">b2</span> <span class="o">=</span> <span class="n">malignant_sum</span> <span class="o">/</span> <span class="p">(</span><span class="mi">15</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># For reporting, also get acceptance-weighted sum for correct patterns to estimate acceptance probability to O(p^0)</span>
+<span class="n">correct_sum</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">p0</span> <span class="k">for</span> <span class="n">_pair</span><span class="p">,</span> <span class="n">_li</span><span class="p">,</span> <span class="n">_lj</span><span class="p">,</span> <span class="n">p0</span> <span class="ow">in</span> <span class="n">accepted_correct_patterns</span><span class="p">)</span>
+<span class="n">acc_sum_total</span> <span class="o">=</span> <span class="n">correct_sum</span> <span class="o">+</span> <span class="n">malignant_sum</span>
+
+<span class="n">b2</span><span class="p">,</span> <span class="n">malignant_sum</span><span class="p">,</span> <span class="n">acc_sum_total</span>
+</code></pre></div>
+                      </div>
+                    </details>
+</article>
+
+
+<article class="message role-tool">
+    <div class="meta">
+        <span class="badge">Tool</span>
+        <span class="idx">#3</span>
+    </div>
+    <div class="content markdown-body"><div class="codehilite"><pre><span></span><code>&#39;&#39;
+</code></pre></div></div>
+</article>
+
+
+<article class="message role-assistant">
+    <div class="meta">
+        <span class="badge">Assistant</span>
+        <span class="idx">#4</span>
+    </div>
+    
+                    <details class="tool-call">
+                      <summary>Tool Call <span class="tag">(code to execute)</span></summary>
+                      <div class="markdown-body tool-call-body">
+                        <div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">product</span><span class="p">,</span> <span class="n">combinations</span>
+
+<span class="c1"># Basic single-qubit Paulis</span>
+<span class="n">I</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="p">],[</span><span class="mi">1</span><span class="n">j</span><span class="p">,</span><span class="mi">0</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+<span class="n">H</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+
+<span class="n">pauli_labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;I&#39;</span><span class="p">,</span><span class="s1">&#39;X&#39;</span><span class="p">,</span><span class="s1">&#39;Y&#39;</span><span class="p">,</span><span class="s1">&#39;Z&#39;</span><span class="p">]</span>
+
+<span class="n">nq</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">kronN</span><span class="p">(</span><span class="n">ops</span><span class="p">):</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">ops</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">M</span> <span class="ow">in</span> <span class="n">ops</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">M</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">out</span>
+
+<span class="c1"># Embed op at position q</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">embed1</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">nq</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">ops</span> <span class="o">=</span> <span class="p">[</span><span class="n">I</span><span class="p">]</span><span class="o">*</span><span class="n">nq</span>
+    <span class="n">ops</span><span class="p">[</span><span class="n">q</span><span class="p">]</span> <span class="o">=</span> <span class="n">U</span>
+    <span class="k">return</span> <span class="n">kronN</span><span class="p">(</span><span class="n">ops</span><span class="p">)</span>
+
+<span class="n">P0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+<span class="n">P1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">tensor_with_op_at</span><span class="p">(</span><span class="n">op</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">nq</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">ops</span> <span class="o">=</span> <span class="p">[</span><span class="n">I</span><span class="p">]</span><span class="o">*</span><span class="n">nq</span>
+    <span class="n">ops</span><span class="p">[</span><span class="n">q</span><span class="p">]</span> <span class="o">=</span> <span class="n">op</span>
+    <span class="k">return</span> <span class="n">kronN</span><span class="p">(</span><span class="n">ops</span><span class="p">)</span>
+
+<span class="n">U_CNOT_cache</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">CNOT</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="n">key</span> <span class="o">=</span> <span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">U_CNOT_cache</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">U_CNOT_cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+    <span class="n">U</span> <span class="o">=</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">P0</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">nq</span><span class="p">)</span> <span class="o">+</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">P1</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">nq</span><span class="p">)</span> <span class="o">@</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">nq</span><span class="p">)</span>
+    <span class="n">U_CNOT_cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">U</span>
+    <span class="k">return</span> <span class="n">U</span>
+
+<span class="c1"># Precompute unitaries</span>
+<span class="n">U_H1</span> <span class="o">=</span> <span class="n">embed1</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">nq</span><span class="p">)</span>
+<span class="n">U_C12</span> <span class="o">=</span> <span class="n">CNOT</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">U_C10</span> <span class="o">=</span> <span class="n">CNOT</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">U_C23</span> <span class="o">=</span> <span class="n">CNOT</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">U_C34</span> <span class="o">=</span> <span class="n">CNOT</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">U_C04</span> <span class="o">=</span> <span class="n">CNOT</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="c1"># initial |00000&gt;</span>
+<span class="n">ket0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+<span class="n">psi</span> <span class="o">=</span> <span class="n">kronN</span><span class="p">([</span><span class="n">ket0</span><span class="p">]</span><span class="o">*</span><span class="n">nq</span><span class="p">)</span>
+
+<span class="c1"># Projectors for ancilla meas</span>
+<span class="n">Z4</span> <span class="o">=</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">nq</span><span class="p">)</span>
+<span class="n">P0_anc</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">nq</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span> <span class="o">+</span> <span class="n">Z4</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+
+<span class="c1"># Stabilizers</span>
+<span class="n">X0</span> <span class="o">=</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">nq</span><span class="p">)</span>
+<span class="n">X1</span> <span class="o">=</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">nq</span><span class="p">)</span>
+<span class="n">X2</span> <span class="o">=</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">nq</span><span class="p">)</span>
+<span class="n">X3</span> <span class="o">=</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">nq</span><span class="p">)</span>
+<span class="n">Z0</span> <span class="o">=</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">nq</span><span class="p">)</span>
+<span class="n">Z1</span> <span class="o">=</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">nq</span><span class="p">)</span>
+<span class="n">Z2</span> <span class="o">=</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">nq</span><span class="p">)</span>
+<span class="n">Z3</span> <span class="o">=</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">nq</span><span class="p">)</span>
+<span class="n">Sx</span> <span class="o">=</span> <span class="n">X0</span> <span class="o">@</span> <span class="n">X1</span> <span class="o">@</span> <span class="n">X2</span> <span class="o">@</span> <span class="n">X3</span>
+<span class="n">Sz</span> <span class="o">=</span> <span class="n">Z0</span> <span class="o">@</span> <span class="n">Z1</span> <span class="o">@</span> <span class="n">Z2</span> <span class="o">@</span> <span class="n">Z3</span>
+
+<span class="c1"># Ideal evolution</span>
+<span class="n">U_circ</span> <span class="o">=</span> <span class="n">U_C04</span> <span class="o">@</span> <span class="n">U_C34</span> <span class="o">@</span> <span class="n">U_C23</span> <span class="o">@</span> <span class="n">U_C10</span> <span class="o">@</span> <span class="n">U_C12</span> <span class="o">@</span> <span class="n">U_H1</span>
+<span class="n">psi_ideal_full</span> <span class="o">=</span> <span class="n">U_circ</span> <span class="o">@</span> <span class="n">psi</span>
+<span class="n">p0_ideal</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">((</span><span class="n">psi_ideal_full</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">P0_anc</span> <span class="o">@</span> <span class="n">psi_ideal_full</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]))</span>
+<span class="n">psi0_ideal</span> <span class="o">=</span> <span class="n">P0_anc</span> <span class="o">@</span> <span class="n">psi_ideal_full</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">p0_ideal</span><span class="p">)</span>
+
+<span class="c1"># Two-qubit Pauli errors on gate pairs</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">pauli_on_pair_list</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
+    <span class="n">mats</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">base</span> <span class="o">=</span> <span class="p">[</span><span class="n">I</span><span class="p">,</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span><span class="n">Z</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">ia</span><span class="p">,</span> <span class="n">ib</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">ia</span><span class="o">==</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">ib</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">mats</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">base</span><span class="p">[</span><span class="n">ia</span><span class="p">],</span> <span class="n">a</span><span class="p">,</span> <span class="n">nq</span><span class="p">)</span> <span class="o">@</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">base</span><span class="p">[</span><span class="n">ib</span><span class="p">],</span> <span class="n">b</span><span class="p">,</span> <span class="n">nq</span><span class="p">))</span>
+        <span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pauli_labels</span><span class="p">[</span><span class="n">ia</span><span class="p">]</span><span class="o">+</span><span class="n">pauli_labels</span><span class="p">[</span><span class="n">ib</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">mats</span><span class="p">,</span> <span class="n">labels</span>
+
+<span class="n">err_sets</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="mi">2</span><span class="p">:</span> <span class="n">pauli_on_pair_list</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span>
+    <span class="mi">3</span><span class="p">:</span> <span class="n">pauli_on_pair_list</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
+    <span class="mi">4</span><span class="p">:</span> <span class="n">pauli_on_pair_list</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span>
+    <span class="mi">5</span><span class="p">:</span> <span class="n">pauli_on_pair_list</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span>
+    <span class="mi">6</span><span class="p">:</span> <span class="n">pauli_on_pair_list</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span>
+<span class="p">}</span>
+
+<span class="n">pairs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">combinations</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="mi">2</span><span class="p">))</span>
+
+<span class="n">gate_seq</span> <span class="o">=</span> <span class="p">[</span><span class="n">U_H1</span><span class="p">,</span> <span class="n">U_C12</span><span class="p">,</span> <span class="n">U_C10</span><span class="p">,</span> <span class="n">U_C23</span><span class="p">,</span> <span class="n">U_C34</span><span class="p">,</span> <span class="n">U_C04</span><span class="p">]</span>
+
+<span class="n">malignant_sum</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">correct_sum</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">count_mal</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">count_cor</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="ow">in</span> <span class="n">pairs</span><span class="p">:</span>
+    <span class="n">Ei_list</span><span class="p">,</span> <span class="n">Ei_labels</span> <span class="o">=</span> <span class="n">err_sets</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">Ej_list</span><span class="p">,</span> <span class="n">Ej_labels</span> <span class="o">=</span> <span class="n">err_sets</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">idx_i</span><span class="p">,</span> <span class="n">Ei</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">Ei_list</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">idx_j</span><span class="p">,</span> <span class="n">Ej</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">Ej_list</span><span class="p">):</span>
+            <span class="n">psi</span> <span class="o">=</span> <span class="n">kronN</span><span class="p">([</span><span class="n">ket0</span><span class="p">]</span><span class="o">*</span><span class="n">nq</span><span class="p">)</span>
+            <span class="c1"># Apply gates + errors</span>
+            <span class="n">psi</span> <span class="o">=</span> <span class="n">gate_seq</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">@</span> <span class="n">psi</span>
+            <span class="n">psi</span> <span class="o">=</span> <span class="n">gate_seq</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">@</span> <span class="n">psi</span>
+            <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span>
+                <span class="n">psi</span> <span class="o">=</span> <span class="n">Ei</span> <span class="o">@</span> <span class="n">psi</span>
+            <span class="k">if</span> <span class="n">j</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span>
+                <span class="n">psi</span> <span class="o">=</span> <span class="n">Ej</span> <span class="o">@</span> <span class="n">psi</span>
+            <span class="n">psi</span> <span class="o">=</span> <span class="n">gate_seq</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">@</span> <span class="n">psi</span>
+            <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">3</span><span class="p">:</span>
+                <span class="n">psi</span> <span class="o">=</span> <span class="n">Ei</span> <span class="o">@</span> <span class="n">psi</span>
+            <span class="k">if</span> <span class="n">j</span><span class="o">==</span><span class="mi">3</span><span class="p">:</span>
+                <span class="n">psi</span> <span class="o">=</span> <span class="n">Ej</span> <span class="o">@</span> <span class="n">psi</span>
+            <span class="n">psi</span> <span class="o">=</span> <span class="n">gate_seq</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">@</span> <span class="n">psi</span>
+            <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">4</span><span class="p">:</span>
+                <span class="n">psi</span> <span class="o">=</span> <span class="n">Ei</span> <span class="o">@</span> <span class="n">psi</span>
+            <span class="k">if</span> <span class="n">j</span><span class="o">==</span><span class="mi">4</span><span class="p">:</span>
+                <span class="n">psi</span> <span class="o">=</span> <span class="n">Ej</span> <span class="o">@</span> <span class="n">psi</span>
+            <span class="n">psi</span> <span class="o">=</span> <span class="n">gate_seq</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">@</span> <span class="n">psi</span>
+            <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">5</span><span class="p">:</span>
+                <span class="n">psi</span> <span class="o">=</span> <span class="n">Ei</span> <span class="o">@</span> <span class="n">psi</span>
+            <span class="k">if</span> <span class="n">j</span><span class="o">==</span><span class="mi">5</span><span class="p">:</span>
+                <span class="n">psi</span> <span class="o">=</span> <span class="n">Ej</span> <span class="o">@</span> <span class="n">psi</span>
+            <span class="n">psi</span> <span class="o">=</span> <span class="n">gate_seq</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">@</span> <span class="n">psi</span>
+            <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">6</span><span class="p">:</span>
+                <span class="n">psi</span> <span class="o">=</span> <span class="n">Ei</span> <span class="o">@</span> <span class="n">psi</span>
+            <span class="k">if</span> <span class="n">j</span><span class="o">==</span><span class="mi">6</span><span class="p">:</span>
+                <span class="n">psi</span> <span class="o">=</span> <span class="n">Ej</span> <span class="o">@</span> <span class="n">psi</span>
+
+            <span class="c1"># ancilla measurement 0 probability and post state</span>
+            <span class="n">p0</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">((</span><span class="n">psi</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">P0_anc</span> <span class="o">@</span> <span class="n">psi</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]))</span>
+            <span class="k">if</span> <span class="n">p0</span> <span class="o">&lt;</span> <span class="mf">1e-12</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">psi0</span> <span class="o">=</span> <span class="n">P0_anc</span> <span class="o">@</span> <span class="n">psi</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">p0</span><span class="p">)</span>
+            <span class="c1"># Stabilizer accept?</span>
+            <span class="n">sxe</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">((</span><span class="n">psi0</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">Sx</span> <span class="o">@</span> <span class="n">psi0</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]))</span>
+            <span class="n">sze</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">((</span><span class="n">psi0</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">Sz</span> <span class="o">@</span> <span class="n">psi0</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]))</span>
+            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">sxe</span><span class="o">-</span><span class="mf">1.0</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">1e-8</span> <span class="ow">or</span> <span class="nb">abs</span><span class="p">(</span><span class="n">sze</span><span class="o">-</span><span class="mf">1.0</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">1e-8</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="c1"># Fidelity to ideal</span>
+            <span class="n">overlap</span> <span class="o">=</span> <span class="p">(</span><span class="n">psi0_ideal</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">psi0</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">F</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">overlap</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">conj</span><span class="p">(</span><span class="n">overlap</span><span class="p">)))</span>
+            <span class="k">if</span> <span class="n">F</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="o">-</span> <span class="mf">1e-8</span><span class="p">:</span>
+                <span class="n">malignant_sum</span> <span class="o">+=</span> <span class="n">p0</span>
+                <span class="n">count_mal</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">correct_sum</span> <span class="o">+=</span> <span class="n">p0</span>
+                <span class="n">count_cor</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="n">b2</span> <span class="o">=</span> <span class="n">malignant_sum</span> <span class="o">/</span> <span class="p">(</span><span class="mi">15</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">acc_weighted_sum</span> <span class="o">=</span> <span class="p">(</span><span class="n">malignant_sum</span> <span class="o">+</span> <span class="n">correct_sum</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">15</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;p0 ideal ancilla 0 prob =&#39;</span><span class="p">,</span> <span class="n">p0_ideal</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Counts: accepted wrong patterns =&#39;</span><span class="p">,</span> <span class="n">count_mal</span><span class="p">,</span> <span class="s1">&#39;accepted correct patterns =&#39;</span><span class="p">,</span> <span class="n">count_cor</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Sum of p0 over malignant patterns =&#39;</span><span class="p">,</span> <span class="n">malignant_sum</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;b2 coefficient =&#39;</span><span class="p">,</span> <span class="n">b2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Acceptance-weighted sum per pair total (for ref) =&#39;</span><span class="p">,</span> <span class="n">acc_weighted_sum</span><span class="p">)</span>
+</code></pre></div>
+                      </div>
+                    </details>
+</article>
+
+
+<article class="message role-tool">
+    <div class="meta">
+        <span class="badge">Tool</span>
+        <span class="idx">#5</span>
+    </div>
+    <div class="content markdown-body"><div class="codehilite"><pre><span></span><code><span class="nv">p0</span><span class="w"> </span><span class="nv">ideal</span><span class="w"> </span><span class="nv">ancilla</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="nv">prob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>.<span class="mi">9999999999999998</span>
+<span class="nv">Counts</span>:<span class="w"> </span><span class="nv">accepted</span><span class="w"> </span><span class="nv">wrong</span><span class="w"> </span><span class="nv">patterns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">144</span><span class="w"> </span><span class="nv">accepted</span><span class="w"> </span><span class="nv">correct</span><span class="w"> </span><span class="nv">patterns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">138</span>
+<span class="nv">Sum</span><span class="w"> </span><span class="nv">of</span><span class="w"> </span><span class="nv">p0</span><span class="w"> </span><span class="nv">over</span><span class="w"> </span><span class="nv">malignant</span><span class="w"> </span><span class="nv">patterns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">143</span>.<span class="mi">99999999999997</span>
+<span class="nv">b2</span><span class="w"> </span><span class="nv">coefficient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>.<span class="mi">6399999999999999</span>
+<span class="nv">Acceptance</span><span class="o">-</span><span class="nv">weighted</span><span class="w"> </span><span class="nv">sum</span><span class="w"> </span><span class="nv">per</span><span class="w"> </span><span class="nv">pair</span><span class="w"> </span><span class="nv">total</span><span class="w"> </span><span class="ss">(</span><span class="k">for</span><span class="w"> </span><span class="nv">ref</span><span class="ss">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>.<span class="mi">2533333333333332</span>
+</code></pre></div></div>
+</article>
+
+
+<article class="message role-assistant">
+    <div class="meta">
+        <span class="badge">Assistant</span>
+        <span class="idx">#6</span>
+    </div>
+    
+                    <details class="tool-call">
+                      <summary>Tool Call <span class="tag">(code to execute)</span></summary>
+                      <div class="markdown-body tool-call-body">
+                        <div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">product</span>
+
+<span class="c1"># Reuse definitions from previous cell by redefining quickly</span>
+<span class="n">I</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="p">],[</span><span class="mi">1</span><span class="n">j</span><span class="p">,</span><span class="mi">0</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+<span class="n">H</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+
+<span class="n">nq</span><span class="o">=</span><span class="mi">5</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">kronN</span><span class="p">(</span><span class="n">ops</span><span class="p">):</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">ops</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">M</span> <span class="ow">in</span> <span class="n">ops</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">M</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">out</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">embed1</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">nq</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">ops</span> <span class="o">=</span> <span class="p">[</span><span class="n">I</span><span class="p">]</span><span class="o">*</span><span class="n">nq</span>
+    <span class="n">ops</span><span class="p">[</span><span class="n">q</span><span class="p">]</span> <span class="o">=</span> <span class="n">U</span>
+    <span class="k">return</span> <span class="n">kronN</span><span class="p">(</span><span class="n">ops</span><span class="p">)</span>
+
+<span class="n">P0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+<span class="n">P1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">tensor_with_op_at</span><span class="p">(</span><span class="n">op</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">nq</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">ops</span> <span class="o">=</span> <span class="p">[</span><span class="n">I</span><span class="p">]</span><span class="o">*</span><span class="n">nq</span>
+    <span class="n">ops</span><span class="p">[</span><span class="n">q</span><span class="p">]</span> <span class="o">=</span> <span class="n">op</span>
+    <span class="k">return</span> <span class="n">kronN</span><span class="p">(</span><span class="n">ops</span><span class="p">)</span>
+
+<span class="n">U_CNOT_cache</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">CNOT</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">t</span><span class="p">):</span>
+    <span class="n">key</span><span class="o">=</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">U_CNOT_cache</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">U_CNOT_cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+    <span class="n">U</span> <span class="o">=</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">P0</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">nq</span><span class="p">)</span> <span class="o">+</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">P1</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">nq</span><span class="p">)</span> <span class="o">@</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">nq</span><span class="p">)</span>
+    <span class="n">U_CNOT_cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">=</span><span class="n">U</span>
+    <span class="k">return</span> <span class="n">U</span>
+
+<span class="n">U_H1</span> <span class="o">=</span> <span class="n">embed1</span><span class="p">(</span><span class="n">H</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">nq</span><span class="p">)</span>
+<span class="n">U_C12</span> <span class="o">=</span> <span class="n">CNOT</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">U_C10</span> <span class="o">=</span> <span class="n">CNOT</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">U_C23</span> <span class="o">=</span> <span class="n">CNOT</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">U_C34</span> <span class="o">=</span> <span class="n">CNOT</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">U_C04</span> <span class="o">=</span> <span class="n">CNOT</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="n">ket0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+<span class="n">psi0</span> <span class="o">=</span> <span class="n">kronN</span><span class="p">([</span><span class="n">ket0</span><span class="p">]</span><span class="o">*</span><span class="n">nq</span><span class="p">)</span>
+<span class="n">Z4</span> <span class="o">=</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">nq</span><span class="p">)</span>
+<span class="n">P0_anc</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">nq</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span> <span class="o">+</span> <span class="n">Z4</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+
+<span class="n">X0</span> <span class="o">=</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">nq</span><span class="p">)</span>
+<span class="n">X1</span> <span class="o">=</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">nq</span><span class="p">)</span>
+<span class="n">X2</span> <span class="o">=</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">nq</span><span class="p">)</span>
+<span class="n">X3</span> <span class="o">=</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">nq</span><span class="p">)</span>
+<span class="n">Z0</span> <span class="o">=</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">nq</span><span class="p">)</span>
+<span class="n">Z1</span> <span class="o">=</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">nq</span><span class="p">)</span>
+<span class="n">Z2</span> <span class="o">=</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">nq</span><span class="p">)</span>
+<span class="n">Z3</span> <span class="o">=</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">nq</span><span class="p">)</span>
+<span class="n">Sx</span> <span class="o">=</span> <span class="n">X0</span> <span class="o">@</span> <span class="n">X1</span> <span class="o">@</span> <span class="n">X2</span> <span class="o">@</span> <span class="n">X3</span>
+<span class="n">Sz</span> <span class="o">=</span> <span class="n">Z0</span> <span class="o">@</span> <span class="n">Z1</span> <span class="o">@</span> <span class="n">Z2</span> <span class="o">@</span> <span class="n">Z3</span>
+
+<span class="n">U_circ</span> <span class="o">=</span> <span class="n">U_C04</span> <span class="o">@</span> <span class="n">U_C34</span> <span class="o">@</span> <span class="n">U_C23</span> <span class="o">@</span> <span class="n">U_C10</span> <span class="o">@</span> <span class="n">U_C12</span> <span class="o">@</span> <span class="n">U_H1</span>
+
+<span class="c1"># error sets</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">product</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">pauli_on_pair_list</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
+    <span class="n">base</span><span class="o">=</span><span class="p">[</span><span class="n">I</span><span class="p">,</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span><span class="n">Z</span><span class="p">]</span>
+    <span class="n">mats</span><span class="o">=</span><span class="p">[];</span> <span class="n">labels</span><span class="o">=</span><span class="p">[]</span>
+    <span class="k">for</span> <span class="n">ia</span><span class="p">,</span><span class="n">ib</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">ia</span><span class="o">==</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">ib</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">mats</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">base</span><span class="p">[</span><span class="n">ia</span><span class="p">],</span><span class="n">a</span><span class="p">,</span><span class="n">nq</span><span class="p">)</span> <span class="o">@</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">base</span><span class="p">[</span><span class="n">ib</span><span class="p">],</span><span class="n">b</span><span class="p">,</span><span class="n">nq</span><span class="p">))</span>
+        <span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">ia</span><span class="p">,</span><span class="n">ib</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">mats</span><span class="p">,</span> <span class="n">labels</span>
+
+<span class="n">err_sets</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="mi">2</span><span class="p">:</span> <span class="n">pauli_on_pair_list</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span>
+    <span class="mi">3</span><span class="p">:</span> <span class="n">pauli_on_pair_list</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
+    <span class="mi">4</span><span class="p">:</span> <span class="n">pauli_on_pair_list</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span>
+    <span class="mi">5</span><span class="p">:</span> <span class="n">pauli_on_pair_list</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span>
+    <span class="mi">6</span><span class="p">:</span> <span class="n">pauli_on_pair_list</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span>
+<span class="p">}</span>
+
+<span class="c1"># Enumerate single-error acceptance probability</span>
+
+<span class="n">acc_sum_single</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">rej_sum_single</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]:</span>
+    <span class="n">Elist</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">err_sets</span><span class="p">[</span><span class="n">g</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">E</span> <span class="ow">in</span> <span class="n">Elist</span><span class="p">:</span>
+        <span class="n">psi</span> <span class="o">=</span> <span class="n">psi0</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="c1"># apply gates with error after g</span>
+        <span class="n">psi</span> <span class="o">=</span> <span class="n">U_H1</span> <span class="o">@</span> <span class="n">psi</span>
+        <span class="n">psi</span> <span class="o">=</span> <span class="n">U_C12</span> <span class="o">@</span> <span class="n">psi</span>
+        <span class="k">if</span> <span class="n">g</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span>
+            <span class="n">psi</span> <span class="o">=</span> <span class="n">E</span> <span class="o">@</span> <span class="n">psi</span>
+        <span class="n">psi</span> <span class="o">=</span> <span class="n">U_C10</span> <span class="o">@</span> <span class="n">psi</span>
+        <span class="k">if</span> <span class="n">g</span><span class="o">==</span><span class="mi">3</span><span class="p">:</span>
+            <span class="n">psi</span> <span class="o">=</span> <span class="n">E</span> <span class="o">@</span> <span class="n">psi</span>
+        <span class="n">psi</span> <span class="o">=</span> <span class="n">U_C23</span> <span class="o">@</span> <span class="n">psi</span>
+        <span class="k">if</span> <span class="n">g</span><span class="o">==</span><span class="mi">4</span><span class="p">:</span>
+            <span class="n">psi</span> <span class="o">=</span> <span class="n">E</span> <span class="o">@</span> <span class="n">psi</span>
+        <span class="n">psi</span> <span class="o">=</span> <span class="n">U_C34</span> <span class="o">@</span> <span class="n">psi</span>
+        <span class="k">if</span> <span class="n">g</span><span class="o">==</span><span class="mi">5</span><span class="p">:</span>
+            <span class="n">psi</span> <span class="o">=</span> <span class="n">E</span> <span class="o">@</span> <span class="n">psi</span>
+        <span class="n">psi</span> <span class="o">=</span> <span class="n">U_C04</span> <span class="o">@</span> <span class="n">psi</span>
+        <span class="k">if</span> <span class="n">g</span><span class="o">==</span><span class="mi">6</span><span class="p">:</span>
+            <span class="n">psi</span> <span class="o">=</span> <span class="n">E</span> <span class="o">@</span> <span class="n">psi</span>
+
+        <span class="n">p0</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">((</span><span class="n">psi</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">P0_anc</span> <span class="o">@</span> <span class="n">psi</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]))</span>
+        <span class="k">if</span> <span class="n">p0</span> <span class="o">&lt;</span> <span class="mf">1e-12</span><span class="p">:</span>
+            <span class="n">pA</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">psi_post</span> <span class="o">=</span> <span class="n">P0_anc</span> <span class="o">@</span> <span class="n">psi</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">p0</span><span class="p">)</span>
+            <span class="n">sxe</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">((</span><span class="n">psi_post</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">Sx</span> <span class="o">@</span> <span class="n">psi_post</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]))</span>
+            <span class="n">sze</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">((</span><span class="n">psi_post</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">Sz</span> <span class="o">@</span> <span class="n">psi_post</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]))</span>
+            <span class="n">accept</span> <span class="o">=</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">sxe</span><span class="o">-</span><span class="mf">1.0</span><span class="p">)</span><span class="o">&lt;</span><span class="mf">1e-8</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">sze</span><span class="o">-</span><span class="mf">1.0</span><span class="p">)</span><span class="o">&lt;</span><span class="mf">1e-8</span><span class="p">)</span>
+            <span class="n">pA</span> <span class="o">=</span> <span class="n">p0</span> <span class="k">if</span> <span class="n">accept</span> <span class="k">else</span> <span class="mf">0.0</span>
+        <span class="n">acc_sum_single</span> <span class="o">+=</span> <span class="n">pA</span>
+        <span class="n">rej_sum_single</span> <span class="o">+=</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">pA</span><span class="p">)</span>
+
+<span class="c1"># Each single-error happens with probability p/15, there are 5*15 such patterns. </span>
+<span class="c1"># P(A) to first order is 1 - (rej_sum_single / 15) * p + O(p^2). Actually we should average over gate uniformly; rej_sum_single sums 75 terms of (1 - pA), so per-gate average (1 - pA) is rej_sum_single/75.</span>
+<span class="c1"># But the coefficient a1 equals sum over g of E[1-pA_g] over 15 errors =&gt; rej_sum_single/15</span>
+
+<span class="n">alpha1</span> <span class="o">=</span> <span class="n">rej_sum_single</span><span class="o">/</span><span class="mf">15.0</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Sum over single-error acceptance probabilities (acc_sum_single) =&#39;</span><span class="p">,</span> <span class="n">acc_sum_single</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Sum over single-error rejection contributions =&#39;</span><span class="p">,</span> <span class="n">rej_sum_single</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Linear coefficient a1 in P(A) = 1 - a1 p + ... has a1 =&#39;</span><span class="p">,</span> <span class="n">alpha1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Therefore acceptance to first order is 1 -&#39;</span><span class="p">,</span> <span class="n">alpha1</span><span class="p">,</span> <span class="s1">&#39;* p&#39;</span><span class="p">)</span>
+</code></pre></div>
+                      </div>
+                    </details>
+</article>
+
+
+<article class="message role-tool">
+    <div class="meta">
+        <span class="badge">Tool</span>
+        <span class="idx">#7</span>
+    </div>
+    <div class="content markdown-body"><div class="codehilite"><pre><span></span><code>Sum over single-error acceptance probabilities (acc_sum_single) = 6.999999999999999
+Sum over single-error rejection contributions = 68.0
+Linear coefficient a1 in P(A) = 1 - a1 p + ... has a1 = 4.533333333333333
+Therefore acceptance to first order is 1 - 4.533333333333333 * p
+</code></pre></div></div>
+</article>
+
+
+<article class="message role-assistant">
+    <div class="meta">
+        <span class="badge">Assistant</span>
+        <span class="idx">#8</span>
+    </div>
+    
+                    <details class="tool-call">
+                      <summary>Tool Call <span class="tag">(code to execute)</span></summary>
+                      <div class="markdown-body tool-call-body">
+                        <div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">product</span><span class="p">,</span> <span class="n">combinations</span>
+
+<span class="c1"># rebuild environment quickly</span>
+<span class="n">I</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="p">],[</span><span class="mi">1</span><span class="n">j</span><span class="p">,</span><span class="mi">0</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+<span class="n">H</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+
+<span class="n">nq</span><span class="o">=</span><span class="mi">5</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">kronN</span><span class="p">(</span><span class="n">ops</span><span class="p">):</span>
+    <span class="n">out</span><span class="o">=</span><span class="n">ops</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">M</span> <span class="ow">in</span> <span class="n">ops</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">M</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">out</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">embed1</span><span class="p">(</span><span class="n">U</span><span class="p">,</span><span class="n">q</span><span class="p">):</span>
+    <span class="n">ops</span><span class="o">=</span><span class="p">[</span><span class="n">I</span><span class="p">]</span><span class="o">*</span><span class="n">nq</span>
+    <span class="n">ops</span><span class="p">[</span><span class="n">q</span><span class="p">]</span><span class="o">=</span><span class="n">U</span>
+    <span class="k">return</span> <span class="n">kronN</span><span class="p">(</span><span class="n">ops</span><span class="p">)</span>
+
+<span class="n">P0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+<span class="n">P1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">tensor_with_op_at</span><span class="p">(</span><span class="n">op</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
+    <span class="n">ops</span><span class="o">=</span><span class="p">[</span><span class="n">I</span><span class="p">]</span><span class="o">*</span><span class="n">nq</span>
+    <span class="n">ops</span><span class="p">[</span><span class="n">q</span><span class="p">]</span><span class="o">=</span><span class="n">op</span>
+    <span class="k">return</span> <span class="n">kronN</span><span class="p">(</span><span class="n">ops</span><span class="p">)</span>
+
+<span class="n">U_CNOT_cache</span><span class="o">=</span><span class="p">{}</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">CNOT</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">t</span><span class="p">):</span>
+    <span class="n">key</span><span class="o">=</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">U_CNOT_cache</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">U_CNOT_cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+    <span class="n">U</span> <span class="o">=</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">P0</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="o">+</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">P1</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="o">@</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+    <span class="n">U_CNOT_cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">=</span><span class="n">U</span>
+    <span class="k">return</span> <span class="n">U</span>
+
+<span class="n">U_H1</span><span class="o">=</span><span class="n">embed1</span><span class="p">(</span><span class="n">H</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">U_C12</span><span class="o">=</span><span class="n">CNOT</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">U_C10</span><span class="o">=</span><span class="n">CNOT</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">U_C23</span><span class="o">=</span><span class="n">CNOT</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">U_C34</span><span class="o">=</span><span class="n">CNOT</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">U_C04</span><span class="o">=</span><span class="n">CNOT</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="n">ket0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+<span class="n">psi0</span> <span class="o">=</span> <span class="n">kronN</span><span class="p">([</span><span class="n">ket0</span><span class="p">]</span><span class="o">*</span><span class="n">nq</span><span class="p">)</span>
+
+<span class="n">Z4</span> <span class="o">=</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">P0_anc</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">nq</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span> <span class="o">+</span> <span class="n">Z4</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+
+<span class="c1"># Stabilizers and logical Z&#39;s</span>
+<span class="n">X0</span> <span class="o">=</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">X1</span> <span class="o">=</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">X2</span> <span class="o">=</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">X3</span> <span class="o">=</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">Z0</span> <span class="o">=</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">Z1</span> <span class="o">=</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">Z2</span> <span class="o">=</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">Z3</span> <span class="o">=</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">Sx</span> <span class="o">=</span> <span class="n">X0</span> <span class="o">@</span> <span class="n">X1</span> <span class="o">@</span> <span class="n">X2</span> <span class="o">@</span> <span class="n">X3</span>
+<span class="n">Sz</span> <span class="o">=</span> <span class="n">Z0</span> <span class="o">@</span> <span class="n">Z1</span> <span class="o">@</span> <span class="n">Z2</span> <span class="o">@</span> <span class="n">Z3</span>
+
+<span class="n">Z_A</span> <span class="o">=</span> <span class="n">Z0</span> <span class="o">@</span> <span class="n">Z1</span>
+<span class="n">Z_B</span> <span class="o">=</span> <span class="n">Z0</span> <span class="o">@</span> <span class="n">Z2</span>
+
+<span class="n">U_circ</span> <span class="o">=</span> <span class="n">U_C04</span> <span class="o">@</span> <span class="n">U_C34</span> <span class="o">@</span> <span class="n">U_C23</span> <span class="o">@</span> <span class="n">U_C10</span> <span class="o">@</span> <span class="n">U_C12</span> <span class="o">@</span> <span class="n">U_H1</span>
+<span class="n">psi_ideal</span> <span class="o">=</span> <span class="n">U_circ</span> <span class="o">@</span> <span class="n">psi0</span>
+<span class="n">psi_ideal_post</span> <span class="o">=</span> <span class="n">P0_anc</span> <span class="o">@</span> <span class="n">psi_ideal</span>
+<span class="n">psi_ideal_post</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">psi_ideal_post</span><span class="p">)</span>
+
+<span class="c1"># error sets</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">product</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">pauli_on_pair_list</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
+    <span class="n">mats</span><span class="o">=</span><span class="p">[];</span> <span class="n">lab</span><span class="o">=</span><span class="p">[]</span>
+    <span class="n">base</span><span class="o">=</span><span class="p">[</span><span class="n">I</span><span class="p">,</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span><span class="n">Z</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">ia</span><span class="p">,</span><span class="n">ib</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">ia</span><span class="o">==</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">ib</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">mats</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">base</span><span class="p">[</span><span class="n">ia</span><span class="p">],</span><span class="n">a</span><span class="p">)</span> <span class="o">@</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">base</span><span class="p">[</span><span class="n">ib</span><span class="p">],</span><span class="n">b</span><span class="p">))</span>
+        <span class="n">lab</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">ia</span><span class="p">,</span><span class="n">ib</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">mats</span><span class="p">,</span> <span class="n">lab</span>
+
+<span class="n">err_sets</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="mi">2</span><span class="p">:</span> <span class="n">pauli_on_pair_list</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span>
+    <span class="mi">3</span><span class="p">:</span> <span class="n">pauli_on_pair_list</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
+    <span class="mi">4</span><span class="p">:</span> <span class="n">pauli_on_pair_list</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span>
+    <span class="mi">5</span><span class="p">:</span> <span class="n">pauli_on_pair_list</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span>
+    <span class="mi">6</span><span class="p">:</span> <span class="n">pauli_on_pair_list</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span>
+<span class="p">}</span>
+
+<span class="n">pairs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">combinations</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="mi">2</span><span class="p">))</span>
+
+<span class="c1"># Collect ev signatures for malignant accepted patterns</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
+<span class="n">sig_counter</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">()</span>
+<span class="n">by_pair_counts</span> <span class="o">=</span> <span class="p">{</span><span class="n">pair</span><span class="p">:</span><span class="mi">0</span> <span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">pairs</span><span class="p">}</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="ow">in</span> <span class="n">pairs</span><span class="p">:</span>
+    <span class="n">Ei_list</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">err_sets</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">Ej_list</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">err_sets</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">Ei</span> <span class="ow">in</span> <span class="n">Ei_list</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">Ej</span> <span class="ow">in</span> <span class="n">Ej_list</span><span class="p">:</span>
+            <span class="n">psi</span> <span class="o">=</span> <span class="n">psi0</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">psi</span> <span class="o">=</span> <span class="n">U_H1</span> <span class="o">@</span> <span class="n">psi</span>
+            <span class="n">psi</span> <span class="o">=</span> <span class="n">U_C12</span> <span class="o">@</span> <span class="n">psi</span>
+            <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span> <span class="n">psi</span> <span class="o">=</span> <span class="n">Ei</span> <span class="o">@</span> <span class="n">psi</span>
+            <span class="k">if</span> <span class="n">j</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span> <span class="n">psi</span> <span class="o">=</span> <span class="n">Ej</span> <span class="o">@</span> <span class="n">psi</span>
+            <span class="n">psi</span> <span class="o">=</span> <span class="n">U_C10</span> <span class="o">@</span> <span class="n">psi</span>
+            <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">3</span><span class="p">:</span> <span class="n">psi</span> <span class="o">=</span> <span class="n">Ei</span> <span class="o">@</span> <span class="n">psi</span>
+            <span class="k">if</span> <span class="n">j</span><span class="o">==</span><span class="mi">3</span><span class="p">:</span> <span class="n">psi</span> <span class="o">=</span> <span class="n">Ej</span> <span class="o">@</span> <span class="n">psi</span>
+            <span class="n">psi</span> <span class="o">=</span> <span class="n">U_C23</span> <span class="o">@</span> <span class="n">psi</span>
+            <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">4</span><span class="p">:</span> <span class="n">psi</span> <span class="o">=</span> <span class="n">Ei</span> <span class="o">@</span> <span class="n">psi</span>
+            <span class="k">if</span> <span class="n">j</span><span class="o">==</span><span class="mi">4</span><span class="p">:</span> <span class="n">psi</span> <span class="o">=</span> <span class="n">Ej</span> <span class="o">@</span> <span class="n">psi</span>
+            <span class="n">psi</span> <span class="o">=</span> <span class="n">U_C34</span> <span class="o">@</span> <span class="n">psi</span>
+            <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">5</span><span class="p">:</span> <span class="n">psi</span> <span class="o">=</span> <span class="n">Ei</span> <span class="o">@</span> <span class="n">psi</span>
+            <span class="k">if</span> <span class="n">j</span><span class="o">==</span><span class="mi">5</span><span class="p">:</span> <span class="n">psi</span> <span class="o">=</span> <span class="n">Ej</span> <span class="o">@</span> <span class="n">psi</span>
+            <span class="n">psi</span> <span class="o">=</span> <span class="n">U_C04</span> <span class="o">@</span> <span class="n">psi</span>
+            <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">6</span><span class="p">:</span> <span class="n">psi</span> <span class="o">=</span> <span class="n">Ei</span> <span class="o">@</span> <span class="n">psi</span>
+            <span class="k">if</span> <span class="n">j</span><span class="o">==</span><span class="mi">6</span><span class="p">:</span> <span class="n">psi</span> <span class="o">=</span> <span class="n">Ej</span> <span class="o">@</span> <span class="n">psi</span>
+
+            <span class="n">p0</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">((</span><span class="n">psi</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">P0_anc</span> <span class="o">@</span> <span class="n">psi</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]))</span>
+            <span class="k">if</span> <span class="n">p0</span> <span class="o">&lt;</span> <span class="mf">1e-12</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">psi</span> <span class="o">=</span> <span class="n">P0_anc</span> <span class="o">@</span> <span class="n">psi</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">p0</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">((</span><span class="n">psi</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">Sx</span> <span class="o">@</span> <span class="n">psi</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]))</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">&gt;</span><span class="mf">1e-8</span><span class="p">:</span> <span class="k">continue</span>
+            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">((</span><span class="n">psi</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">Sz</span> <span class="o">@</span> <span class="n">psi</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]))</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">&gt;</span><span class="mf">1e-8</span><span class="p">:</span> <span class="k">continue</span>
+            <span class="n">overlap</span> <span class="o">=</span> <span class="p">(</span><span class="n">psi_ideal_post</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">psi</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">F</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">overlap</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">conj</span><span class="p">(</span><span class="n">overlap</span><span class="p">)))</span>
+            <span class="k">if</span> <span class="n">F</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">-</span> <span class="mf">1e-8</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="c1"># malignant; compute logical Z expectations</span>
+            <span class="n">zA</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">((</span><span class="n">psi</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">Z_A</span> <span class="o">@</span> <span class="n">psi</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]))</span>
+            <span class="n">zB</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">((</span><span class="n">psi</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">Z_B</span> <span class="o">@</span> <span class="n">psi</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]))</span>
+            <span class="n">sig_counter</span><span class="p">[(</span><span class="nb">round</span><span class="p">(</span><span class="n">zA</span><span class="p">),</span> <span class="nb">round</span><span class="p">(</span><span class="n">zB</span><span class="p">))]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">by_pair_counts</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Signature counts (Z_A, Z_B eigenvalues) among malignant accepted patterns:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sig_counter</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Counts by pair (malignant):&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">by_pair_counts</span><span class="p">)</span>
+</code></pre></div>
+                      </div>
+                    </details>
+</article>
+
+
+<article class="message role-tool">
+    <div class="meta">
+        <span class="badge">Tool</span>
+        <span class="idx">#9</span>
+    </div>
+    <div class="content markdown-body"><div class="codehilite"><pre><span></span><code>Signature counts (Z_A, Z_B eigenvalues) among malignant accepted patterns:
+Counter({(1, -1): 80, (-1, -1): 48, (-1, 1): 16})
+Counts by pair (malignant):
+{(2, 3): 0, (2, 4): 0, (2, 5): 16, (2, 6): 16, (3, 4): 16, (3, 5): 24, (3, 6): 16, (4, 5): 16, (4, 6): 24, (5, 6): 16}
+</code></pre></div></div>
+</article>
+
+
+<article class="message role-assistant">
+    <div class="meta">
+        <span class="badge">Assistant</span>
+        <span class="idx">#10</span>
+    </div>
+    
+                    <details class="tool-call">
+                      <summary>Tool Call <span class="tag">(code to execute)</span></summary>
+                      <div class="markdown-body tool-call-body">
+                        <div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">product</span>
+
+<span class="c1"># Recreate needed items</span>
+<span class="n">I</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="p">],[</span><span class="mi">1</span><span class="n">j</span><span class="p">,</span><span class="mi">0</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+<span class="n">H</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+
+<span class="n">nq</span><span class="o">=</span><span class="mi">5</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">kronN</span><span class="p">(</span><span class="n">ops</span><span class="p">):</span>
+    <span class="n">out</span><span class="o">=</span><span class="n">ops</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">M</span> <span class="ow">in</span> <span class="n">ops</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+        <span class="n">out</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">out</span><span class="p">,</span><span class="n">M</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">out</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">embed1</span><span class="p">(</span><span class="n">U</span><span class="p">,</span><span class="n">q</span><span class="p">):</span>
+    <span class="n">ops</span><span class="o">=</span><span class="p">[</span><span class="n">I</span><span class="p">]</span><span class="o">*</span><span class="n">nq</span>
+    <span class="n">ops</span><span class="p">[</span><span class="n">q</span><span class="p">]</span><span class="o">=</span><span class="n">U</span>
+    <span class="k">return</span> <span class="n">kronN</span><span class="p">(</span><span class="n">ops</span><span class="p">)</span>
+
+<span class="n">P0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+<span class="n">P1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">tensor_with_op_at</span><span class="p">(</span><span class="n">op</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
+    <span class="n">ops</span><span class="o">=</span><span class="p">[</span><span class="n">I</span><span class="p">]</span><span class="o">*</span><span class="n">nq</span>
+    <span class="n">ops</span><span class="p">[</span><span class="n">q</span><span class="p">]</span><span class="o">=</span><span class="n">op</span>
+    <span class="k">return</span> <span class="n">kronN</span><span class="p">(</span><span class="n">ops</span><span class="p">)</span>
+
+<span class="n">U_CNOT_cache</span><span class="o">=</span><span class="p">{}</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">CNOT</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">t</span><span class="p">):</span>
+    <span class="n">key</span><span class="o">=</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">U_CNOT_cache</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">U_CNOT_cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+    <span class="n">U</span> <span class="o">=</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">P0</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="o">+</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">P1</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="o">@</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+    <span class="n">U_CNOT_cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">=</span><span class="n">U</span>
+    <span class="k">return</span> <span class="n">U</span>
+
+<span class="n">U_H1</span><span class="o">=</span><span class="n">embed1</span><span class="p">(</span><span class="n">H</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">U_C12</span><span class="o">=</span><span class="n">CNOT</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">U_C10</span><span class="o">=</span><span class="n">CNOT</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">U_C23</span><span class="o">=</span><span class="n">CNOT</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">U_C34</span><span class="o">=</span><span class="n">CNOT</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">U_C04</span><span class="o">=</span><span class="n">CNOT</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="n">ket0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+<span class="n">psi_in</span> <span class="o">=</span> <span class="n">kronN</span><span class="p">([</span><span class="n">ket0</span><span class="p">]</span><span class="o">*</span><span class="n">nq</span><span class="p">)</span>
+<span class="n">Z4</span> <span class="o">=</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">P0_anc</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">nq</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span> <span class="o">+</span> <span class="n">Z4</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">X0</span> <span class="o">=</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">X1</span> <span class="o">=</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">X2</span> <span class="o">=</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">X3</span> <span class="o">=</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">Z0</span> <span class="o">=</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">Z1</span> <span class="o">=</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">Z2</span> <span class="o">=</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">Z3</span> <span class="o">=</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">Sx</span> <span class="o">=</span> <span class="n">X0</span> <span class="o">@</span> <span class="n">X1</span> <span class="o">@</span> <span class="n">X2</span> <span class="o">@</span> <span class="n">X3</span>
+<span class="n">Sz</span> <span class="o">=</span> <span class="n">Z0</span> <span class="o">@</span> <span class="n">Z1</span> <span class="o">@</span> <span class="n">Z2</span> <span class="o">@</span> <span class="n">Z3</span>
+
+<span class="n">U_circ</span> <span class="o">=</span> <span class="n">U_C04</span> <span class="o">@</span> <span class="n">U_C34</span> <span class="o">@</span> <span class="n">U_C23</span> <span class="o">@</span> <span class="n">U_C10</span> <span class="o">@</span> <span class="n">U_C12</span> <span class="o">@</span> <span class="n">U_H1</span>
+<span class="n">psi_ideal</span> <span class="o">=</span> <span class="n">U_circ</span> <span class="o">@</span> <span class="n">psi_in</span>
+<span class="n">psi_ideal_post</span> <span class="o">=</span> <span class="n">P0_anc</span> <span class="o">@</span> <span class="n">psi_ideal</span>
+<span class="n">psi_ideal_post</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">psi_ideal_post</span><span class="p">)</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">product</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">pauli_on_pair_list</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
+    <span class="n">base</span><span class="o">=</span><span class="p">[</span><span class="n">I</span><span class="p">,</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span><span class="n">Z</span><span class="p">]</span>
+    <span class="n">mats</span><span class="o">=</span><span class="p">[]</span>
+    <span class="k">for</span> <span class="n">ia</span><span class="p">,</span><span class="n">ib</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">ia</span><span class="o">==</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">ib</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">mats</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">base</span><span class="p">[</span><span class="n">ia</span><span class="p">],</span><span class="n">a</span><span class="p">)</span> <span class="o">@</span> <span class="n">tensor_with_op_at</span><span class="p">(</span><span class="n">base</span><span class="p">[</span><span class="n">ib</span><span class="p">],</span><span class="n">b</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">mats</span>
+
+<span class="n">err_sets</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="mi">2</span><span class="p">:</span> <span class="n">pauli_on_pair_list</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span>
+    <span class="mi">3</span><span class="p">:</span> <span class="n">pauli_on_pair_list</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
+    <span class="mi">4</span><span class="p">:</span> <span class="n">pauli_on_pair_list</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span>
+    <span class="mi">5</span><span class="p">:</span> <span class="n">pauli_on_pair_list</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span>
+    <span class="mi">6</span><span class="p">:</span> <span class="n">pauli_on_pair_list</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span>
+<span class="p">}</span>
+
+<span class="n">accepted_single</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]:</span>
+    <span class="k">for</span> <span class="n">E</span> <span class="ow">in</span> <span class="n">err_sets</span><span class="p">[</span><span class="n">g</span><span class="p">]:</span>
+        <span class="n">psi</span> <span class="o">=</span> <span class="n">psi_in</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">psi</span> <span class="o">=</span> <span class="n">U_H1</span> <span class="o">@</span> <span class="n">psi</span>
+        <span class="n">psi</span> <span class="o">=</span> <span class="n">U_C12</span> <span class="o">@</span> <span class="n">psi</span>
+        <span class="k">if</span> <span class="n">g</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span> <span class="n">psi</span> <span class="o">=</span> <span class="n">E</span> <span class="o">@</span> <span class="n">psi</span>
+        <span class="n">psi</span> <span class="o">=</span> <span class="n">U_C10</span> <span class="o">@</span> <span class="n">psi</span>
+        <span class="k">if</span> <span class="n">g</span><span class="o">==</span><span class="mi">3</span><span class="p">:</span> <span class="n">psi</span> <span class="o">=</span> <span class="n">E</span> <span class="o">@</span> <span class="n">psi</span>
+        <span class="n">psi</span> <span class="o">=</span> <span class="n">U_C23</span> <span class="o">@</span> <span class="n">psi</span>
+        <span class="k">if</span> <span class="n">g</span><span class="o">==</span><span class="mi">4</span><span class="p">:</span> <span class="n">psi</span> <span class="o">=</span> <span class="n">E</span> <span class="o">@</span> <span class="n">psi</span>
+        <span class="n">psi</span> <span class="o">=</span> <span class="n">U_C34</span> <span class="o">@</span> <span class="n">psi</span>
+        <span class="k">if</span> <span class="n">g</span><span class="o">==</span><span class="mi">5</span><span class="p">:</span> <span class="n">psi</span> <span class="o">=</span> <span class="n">E</span> <span class="o">@</span> <span class="n">psi</span>
+        <span class="n">psi</span> <span class="o">=</span> <span class="n">U_C04</span> <span class="o">@</span> <span class="n">psi</span>
+        <span class="k">if</span> <span class="n">g</span><span class="o">==</span><span class="mi">6</span><span class="p">:</span> <span class="n">psi</span> <span class="o">=</span> <span class="n">E</span> <span class="o">@</span> <span class="n">psi</span>
+        <span class="n">p0</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">((</span><span class="n">psi</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">P0_anc</span> <span class="o">@</span> <span class="n">psi</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]))</span>
+        <span class="k">if</span> <span class="n">p0</span> <span class="o">&lt;</span> <span class="mf">1e-12</span><span class="p">:</span> <span class="k">continue</span>
+        <span class="n">psi</span> <span class="o">=</span> <span class="n">P0_anc</span> <span class="o">@</span> <span class="n">psi</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">p0</span><span class="p">)</span>
+        <span class="c1"># Check stabilizers</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">((</span><span class="n">psi</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">Sx</span> <span class="o">@</span> <span class="n">psi</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]))</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">&gt;</span><span class="mf">1e-8</span><span class="p">:</span> <span class="k">continue</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">((</span><span class="n">psi</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">Sz</span> <span class="o">@</span> <span class="n">psi</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]))</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">&gt;</span><span class="mf">1e-8</span><span class="p">:</span> <span class="k">continue</span>
+        <span class="c1"># accepted; check fidelity with ideal</span>
+        <span class="n">F</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">abs</span><span class="p">((</span><span class="n">psi_ideal_post</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">psi</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">accepted_single</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">F</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of single-error patterns that pass acceptance:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">accepted_single</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Fidelity values among them (should be 1): unique set =&#39;</span><span class="p">,</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="nb">round</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">accepted_single</span><span class="p">])))</span>
+</code></pre></div>
+                      </div>
+                    </details>
+</article>
+
+
+<article class="message role-tool">
+    <div class="meta">
+        <span class="badge">Tool</span>
+        <span class="idx">#11</span>
+    </div>
+    <div class="content markdown-body"><div class="codehilite"><pre><span></span><code>Number of single-error patterns that pass acceptance: 7
+Fidelity values among them (should be 1): unique set = [1.0]
+</code></pre></div></div>
+</article>
+
+
+<article class="message role-assistant">
+    <div class="meta">
+        <span class="badge">Assistant</span>
+        <span class="idx">#12</span>
+    </div>
+    <div class="content markdown-body"><ol>
+<li>Step-by-Step Derivation</li>
+</ol>
+<ul>
+<li>Target logical state and the [[4,2,2]] code</li>
+<li>Stabilizers: S = ⟨XXXX, ZZZZ⟩ on data qubits 0–3.</li>
+<li>Logical operators (one valid choice up to stabilizers):<ul>
+<li>X_A = X I X I, X_B = X X I I,</li>
+<li>Z_A = Z Z I I, Z_B = Z I Z I.</li>
+</ul>
+</li>
+<li>The ideal encoded |00⟩_{AB} we prepare is the GHZ+ state on data qubits:</li>
+</ul>
+<div class="arithmatex">\[
+|\psi_{\text{code}}\rangle = \frac{|0000\rangle + |1111\rangle}{\sqrt{2}},
+\]</div>
+<div class="codehilite"><pre><span></span><code>which satisfies Z_A|ψ⟩ = +|ψ⟩, Z_B|ψ⟩ = +|ψ⟩, and is stabilized by XXXX and ZZZZ.
+</code></pre></div>
+
+<ul>
+<li>Circuit and flag ancilla</li>
+<li>Circuit (right-to-left): H_1, CNOT_{12}, CNOT_{10}, CNOT_{23}, CNOT_{34}, CNOT_{04}, then measure ancilla 4 in Z.</li>
+<li>The last two CNOTs to the ancilla implement a parity check between data qubits 0 and 3. In the Heisenberg picture,</li>
+</ul>
+<div class="arithmatex">\[
+U_{\text{flag}} = CNOT_{04}\, CNOT_{34}, \quad U_{\text{flag}}^\dagger\, Z_4\, U_{\text{flag}} = Z_0\, Z_3\, Z_4.
+\]</div>
+<div class="codehilite"><pre><span></span><code>Since the ancilla starts in |0⟩ (Z_4 eigenvalue +1), measuring Z_4 at the end is equivalent to measuring Z_0 Z_3 on the data; accepting the run only when the outcome is +1 enforces Z_0 Z_3 = +1. For the ideal GHZ+, Z_0 Z_3 = +1 deterministically, so ancilla reads 0 with certainty in the absence of faults.
+</code></pre></div>
+
+<ul>
+<li>Error model</li>
+<li>After each CNOT gate (there are five: 12, 10, 23, 34, 04), a two-qubit depolarizing channel is applied: with probability p a non-identity two-qubit Pauli on the two qubits of that CNOT is drawn uniformly from the 15 possibilities; with probability 1−p it is identity. No error follows H or the measurement.</li>
+<li>
+<p>We post-select on:
+    1) ancilla outcome Z_4 = +1 (i.e., “0”), and
+    2) both stabilizers XXXX and ZZZZ measured +1 (“all detectable errors are discarded”).</p>
+</li>
+<li>
+<p>Fault-tolerance at first order in p</p>
+</li>
+<li>Any single fault (one two-qubit Pauli after any one CNOT) that survives post-selection must commute with both stabilizers and with the effective ancilla check Z_0 Z_3. Such surviving errors lie in the normalizer N(S) and are equivalent (in the code space) to a logical Pauli times a stabilizer.</li>
+<li>Because the target state |00⟩_{AB} is a +1 eigenstate of Z_A and Z_B, any logical Z-type or stabilizer-only error leaves the state invariant. A single fault cannot induce an undetected harmful logical X-type on A or B in this flagged circuit.</li>
+<li>
+<p>Therefore, the first-order contribution to logical infidelity vanishes, and the leading contribution is O(p^2).</p>
+</li>
+<li>
+<p>Structure of undetected second-order (O(p^2)) faults</p>
+</li>
+<li>Two independent gate faults can conspire to produce a net data Pauli in N(S) containing at least one logical X (X_A and/or X_B), while still yielding ancilla outcome 0 and stabilizer +1. Such patterns are malignant because they map |00⟩_{AB} to an orthogonal logical basis state (|10⟩, |01⟩, or |11⟩), thus reducing the fidelity.</li>
+<li>
+<p>Accepted (post-selected) benign second-order patterns are those equivalent to stabilizers and/or logical Z’s; these do not reduce fidelity to |00⟩_{AB}.</p>
+</li>
+<li>
+<p>Counting the O(p^2) malignant pairs</p>
+</li>
+<li>There are 5 CNOTs → 10 unordered pairs of distinct error locations. For a fixed pair of locations, there are 15×15 two-qubit Pauli choices.</li>
+<li>For small p, the probability that exactly two gates have errors is p^2+O(p^3), and choices within each location are i.i.d. uniform over the 15 non-identity Paulis. Let M denote the set of two-fault patterns that:
+    1) yield ancilla Z_4 = +1 upon measurement,
+    2) pass both stabilizers XXXX and ZZZZ with +1, and
+    3) act as a nontrivial logical X (X_A, X_B, or X_A X_B) on the code state (possibly multiplied by logical Z’s and/or stabilizers).</li>
+<li>Then the leading logical error probability is</li>
+</ul>
+<div class="arithmatex">\[
+P_L = \frac{1}{15^2}\left(\sum_{\text{pairs}} |M_{\text{pair}}|\right) p^2 + O(p^3).
+\]</div>
+<div class="codehilite"><pre><span></span><code>Consequently, the conditional logical fidelity (conditioned on post-selection) is
+</code></pre></div>
+
+<div class="arithmatex">\[
+F_L(p) = 1 - b_2\, p^2 + O(p^3), \quad b_2 = \frac{1}{15^2} \sum_{\text{pairs}} |M_{\text{pair}}|.
+\]</div>
+<ul>
+<li>Numerical enumeration (Clifford/Pauli-exact)</li>
+<li>We simulate the 5-qubit circuit exactly (dimension 32), inserting Pauli errors after the specified CNOTs and then:
+    1) measuring ancilla Z and keeping only outcome 0,
+    2) keeping only runs with XXXX=+1 and ZZZZ=+1,
+    3) evaluating fidelity with the ideal |00⟩_{AB}.</li>
+<li>For each unordered pair of error locations (10 total) and all 15×15 Pauli choices, we count a pattern as malignant if it passes post-selection and produces an orthogonal logical state (i.e., includes a logical X on A and/or B).</li>
+<li>Result of the exact enumeration:<ul>
+<li>Total malignant accepted patterns across all 10 pairs: 144.</li>
+<li>Hence</li>
+</ul>
+</li>
+</ul>
+<div class="arithmatex">\[
+b_2 = \frac{144}{15^2} = \frac{16}{25} = 0.64.
+\]</div>
+<div class="codehilite"><pre><span></span><code><span class="k">-</span> The breakdown by logical effect among malignant patterns is:
+  <span class="k">-</span> X_B only: 80 patterns,
+  <span class="k">-</span> X_A only: 16 patterns,
+  <span class="k">-</span> X_A X_B: 48 patterns,
+  consistent with the code’s logical operator structure and the circuit’s connectivity.
+</code></pre></div>
+
+<ul>
+<li>
+<p>We also verified that 7 single-fault patterns pass post-selection, but all of them are benign (stabilizer/logical-Z only), confirming first-order fault tolerance.</p>
+</li>
+<li>
+<p>Optional: acceptance rate to first order (not needed for F_L to O(p^2))</p>
+</li>
+<li>The acceptance probability is</li>
+</ul>
+<div class="arithmatex">\[
+P_{\text{acc}}(p) = 1 - \alpha_1 p + O(p^2), \quad \alpha_1 = \frac{68}{15} \approx 4.533\ldots,
+\]</div>
+<div class="codehilite"><pre><span></span><code><span class="n">obtained</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="n">enumerating</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="mi">75</span><span class="w"> </span><span class="n">single</span><span class="o">-</span><span class="n">fault</span><span class="w"> </span><span class="n">cases</span><span class="o">.</span><span class="w"> </span><span class="n">This</span><span class="w"> </span><span class="n">does</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">affect</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">p</span><span class="o">^</span><span class="mi">2</span><span class="w"> </span><span class="n">coefficient</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">conditional</span><span class="w"> </span><span class="n">fidelity</span><span class="o">.</span>
+</code></pre></div>
+
+<ul>
+<li>Numerical code used (sketch)</li>
+<li>The following Python snippet (Clifford-exact via dense matrices on 5 qubits) enumerates all two-fault patterns, performs ancilla measurement and stabilizer post-selection, and computes the leading coefficient b_2. It returns b_2 = 16/25.</li>
+</ul>
+<p><code># Outline:
+  # - Build 5-qubit unitaries for H_1, CNOT_12, CNOT_10, CNOT_23, CNOT_34, CNOT_04
+  # - Prepare |00000&gt;, evolve ideally to define |ψ_ideal⟩ and |ψ_ideal,anc=0⟩
+  # - For each pair of error locations and 15×15 error Paulis:
+  #   * insert errors after those CNOTs,
+  #   * measure ancilla Z (keep outcome 0),
+  #   * check XXXX, ZZZZ = +1 (post-selection),
+  #   * count as malignant if fidelity with |00⟩_L is 0 (i.e., logical X present).
+  # - Compute b2 = (sum over malignant patterns of Pr[ancilla=0]) / 15^2</code></p>
+<p>The exact run returned:
+  - accepted wrong patterns = 144,
+  - b2 = 144/225 = 16/25 = 0.64.</p>
+<ol start="2">
+<li>Mathematical Typesetting</li>
+</ol>
+<ul>
+<li>Leading-order conditional logical fidelity:</li>
+</ul>
+<div class="arithmatex">\[
+F_L(p) \;=\; 1 \;-\; \frac{16}{25}\, p^2 \;+\; O(p^3).
+\]</div>
+<ol start="3">
+<li>Conventions and Units</li>
+</ol>
+<ul>
+<li>Error rate p is the two-qubit depolarizing probability per CNOT gate.</li>
+<li>All probabilities are dimensionless.</li>
+</ul>
+<ol start="4">
+<li>Final Answer:
+To leading non-vanishing order in the two-qubit gate error rate p, the post-selected logical-state fidelity is</li>
+</ol>
+<div class="arithmatex">\[
+F_L(p) \;=\; 1 \;-\; \frac{16}{25}\, p^2 \;+\; O(p^3)\,.
+\]</div>
+<p>Here, the p term vanishes (first-order fault tolerance), and the quadratic coefficient is exactly 16/25.</p></div>
+</article>
+
+
+<article class="message role-user">
+    <div class="meta">
+        <span class="badge">User</span>
+        <span class="idx">#13</span>
+    </div>
+    <div class="content markdown-body"><p>Populate your final answer into the code template provided below. This step is purely for formatting/display purposes. No additional reasoning or derivation should be performed. Do not import any modules or packages beyond what is provided in the template.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">answer</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the expression of the logical state fidelity of the final 2-qubit logical state</span>
+<span class="sd">    at the end of the circuit as a function of two-qubit gate error rate $p$.</span>
+
+<span class="sd">    Inputs</span>
+<span class="sd">    ----------</span>
+<span class="sd">    p: sympy.Symbol, two-qubit gate error rate, $p$</span>
+
+<span class="sd">    Outputs</span>
+<span class="sd">    ----------</span>
+<span class="sd">    F_logical: sympy.Expr, logical state fidelity of the final 2-qubit logical state</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># ------------------ FILL IN YOUR RESULTS BELOW ------------------</span>
+    <span class="n">F_logical</span> <span class="o">=</span> <span class="o">...</span>  <span class="c1"># a SymPy expression of inputs</span>
+    <span class="c1"># ---------------------------------------------------------------</span>
+
+    <span class="k">return</span> <span class="n">F_logical</span>
+</code></pre></div></div>
+</article>
+
+
+<article class="message role-assistant">
+    <div class="meta">
+        <span class="badge">Assistant</span>
+        <span class="idx">#14</span>
+    </div>
+    <div class="content markdown-body"><div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">answer</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the expression of the logical state fidelity of the final 2-qubit logical state</span>
+<span class="sd">    at the end of the circuit as a function of two-qubit gate error rate $p$.</span>
+
+<span class="sd">    Inputs</span>
+<span class="sd">    ----------</span>
+<span class="sd">    p: sympy.Symbol, two-qubit gate error rate, $p$</span>
+
+<span class="sd">    Outputs</span>
+<span class="sd">    ----------</span>
+<span class="sd">    F_logical: sympy.Expr, logical state fidelity of the final 2-qubit logical state</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># ------------------ FILL IN YOUR RESULTS BELOW ------------------</span>
+    <span class="n">F_logical</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">sp</span><span class="o">.</span><span class="n">Rational</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span><span class="o">*</span><span class="n">p</span><span class="o">**</span><span class="mi">2</span>  <span class="c1"># a SymPy expression of inputs</span>
+    <span class="c1"># ---------------------------------------------------------------</span>
+
+    <span class="k">return</span> <span class="n">F_logical</span>
+</code></pre></div></div>
+</article>
+
+</div>
+
+<footer>
+  Generated at 2025-09-24T22:02:10.744901
+</footer>
+
+<script>
+(function() {
+  // Tabs
+  const tabs = document.querySelectorAll('.tab');
+  const panels = document.querySelectorAll('.tab-content');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      const target = document.querySelector(tab.dataset.target);
+      if (target) target.classList.add('active');
+    });
+  });
+
+  // Theme toggle
+  const toggleBtn = document.getElementById('theme-toggle');
+  function setTheme(dark) {
+    if (dark) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('dark', '1');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('dark', '0');
+    }
+  }
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const stored = localStorage.getItem('dark');
+  setTheme(stored === null ? prefersDark : stored === '1');
+
+  toggleBtn.addEventListener('click', () => {
+    const isDark = document.documentElement.classList.contains('dark');
+    setTheme(!isDark);
+  });
+})();
+</script>
+</body>
+</html>

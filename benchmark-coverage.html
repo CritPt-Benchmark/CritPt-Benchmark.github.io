@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benchmark Coverage - CritPt</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        body {
+            font-family: 'Aptos', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState } = React;
+
+        // Icons
+        const BoltLogo = (props) => (
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" {...props}>
+                <path d="M13 2L3 14h7l-1 8 11-14h-7l0-6Z" fill="currentColor"/>
+            </svg>
+        );
+
+        // Data (same as index.html)
+        const rows = [
+            { model: "GPT-5 (high, code & web)", accuracy: "10.7%", cost: "$187.79", icon: "o" },
+            { model: "GPT-5 (high, code)",       accuracy: "9.0%",  cost: "$53.01",  icon: "o" },
+            { model: "GPT-5 (high)",             accuracy: "2.6%",  cost: "$94.14",  icon: "o" },
+            { model: "Gemini-2.5 Pro",           accuracy: "0.9%",  cost: "$84.88",  icon: "g" },
+            { model: "o3 (high)",                accuracy: "0.6%",  cost: "$56.03",  icon: "o" },
+            { model: "DeepSeek R1",              accuracy: "0.6%",  cost: "$12.41",  icon: "ds" },
+            { model: "o4-mini (high)",           accuracy: "0.3%",  cost: "$28.24",  icon: "o" },
+            { model: "Gemini-2.5 Flash",         accuracy: "0.3%",  cost: "$23.04",  icon: "g" },
+            { model: "Claude Opus 4",            accuracy: "0.0%",  cost: "$359.76", icon: "c" },
+            { model: "GPT-5 (minimal)",          accuracy: "0.0%",  cost: "$8.58",   icon: "o" },
+            { model: "Llama-4 Maverick",         accuracy: "0.0%",  cost: "$0.48",   icon: "llama" },
+            { model: "GPT-4o",                   accuracy: "0.0%",  cost: "$4.13",   icon: "o" },
+        ];
+
+        // Components
+        function Pill({ children, onClick, active = false, href }) {
+            if (href) {
+                return (
+                    <a
+                        href={href}
+                        className={`px-4 py-2 rounded-full font-medium text-lg transition-transform duration-200 hover:font-semibold hover:scale-110 ${active ? 'font-semibold scale-110' : ''}`}
+                        style={{color: 'rgb(240, 237, 228)'}}
+                    >
+                        {children}
+                    </a>
+                );
+            }
+            return (
+                <button
+                    onClick={onClick}
+                    className={`px-4 py-2 rounded-full font-medium text-lg transition-transform duration-200 hover:font-semibold hover:scale-110 ${active ? 'font-semibold scale-110' : ''}`}
+                    style={{color: 'rgb(240, 237, 228)'}}
+                >
+                    {children}
+                </button>
+            );
+        }
+
+        function BrandMark() {
+            return (
+                <a href="index.html" className="flex items-center gap-2 no-underline">
+                    <img src="figures/CritPt_Cavolini.png" alt="CritPt" style={{height: '80px', marginLeft: '-16px', marginTop: '16px'}} />
+                </a>
+            );
+        }
+
+        // Main App Component
+        function App() {
+            return (
+                <div className="min-h-screen" style={{backgroundColor: 'rgb(240, 237, 228)', color: 'rgb(89, 89, 89)'}}>
+                    {/* Top Nav */}
+                    <header className="sticky top-0 z-40 w-full border-b border-black/5 backdrop-blur" style={{backgroundColor: 'rgb(15, 76, 129)'}}>
+                        <div className="mx-auto max-w-6xl px-4">
+                            <div className="flex h-20 items-center justify-between gap-4">
+                                <BrandMark />
+                                <nav className="hidden md:flex items-center gap-2">
+                                    <Pill href="index.html">Overview</Pill>
+                                    <Pill active>Coverage</Pill>
+                                    <Pill href="performance-details.html">Performance</Pill>
+                                    <Pill href="example.html">Example</Pill>
+                                    <Pill href="about.html">About</Pill>
+                                </nav>
+                            </div>
+                        </div>
+                    </header>
+
+                    {/* Main Content */}
+                    <main className="mx-auto max-w-6xl px-4 py-16">
+                        <div className="prose prose-zinc max-w-none">
+                            <h1 className="text-3xl md:text-[2.8rem] font-semibold mb-8" style={{color: 'rgb(89, 89, 89)'}}>Benchmark Coverage</h1>
+                        </div>
+
+                        {/* Summary Stats */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-12">
+                            <div className="rounded-xl border border-zinc-200 bg-[#FAF8F3] p-8 shadow-lg">
+                                <div style={{color: 'rgb(89, 89, 89)'}}><span className="text-5xl font-normal">71</span> <span className="text-2xl font-normal ml-3">research challenges</span></div>
+                            </div>
+                            <div className="rounded-xl border border-zinc-200 bg-[#FAF8F3] p-8 shadow-lg">
+                                <div style={{color: 'rgb(89, 89, 89)'}}><span className="text-5xl font-normal">190</span> <span className="text-2xl font-normal ml-3">checkpoints</span></div>
+                            </div>
+                        </div>
+
+                        {/* Coverage Section */}
+                        <section className="mb-12">
+                            <div className="overflow-hidden rounded-2xl border border-zinc-200 bg-[#FAF8F3] shadow-lg">
+                                <table className="w-full text-left">
+                                    <thead className="bg-[#FAF8F3] text-xl" style={{color: 'rgb(89, 89, 89)'}}>
+                                        <tr>
+                                            <th className="px-6 py-4 font-bold">Research Discipline<sup>*</sup></th>
+                                            <th className="px-6 py-4 font-bold text-center">Challenges</th>
+                                            <th className="px-6 py-4 font-bold text-center">% of Total</th>
+                                            <th className="px-6 py-4 font-bold text-center">Checkpoints</th>
+                                            <th className="px-6 py-4 font-bold text-center">% of Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="divide-y divide-zinc-100 text-lg" style={{color: 'rgb(89, 89, 89)'}}>
+                                        <tr className="hover:bg-[rgb(240,237,228)]">
+                                            <td className="px-6 py-4 font-medium" style={{color: 'rgb(89, 89, 89)'}}>Condensed Matter Physics</td>
+                                            <td className="px-6 py-4 text-center" style={{color: 'rgb(89, 89, 89)'}}><div className="flex justify-center"><span className="inline-block w-8 text-right">25</span></div></td>
+                                            <td className="px-6 py-4 text-center"><div className="flex justify-center"><span className="inline-block w-12 text-right">35.2%</span></div></td>
+                                            <td className="px-6 py-4 text-center"><div className="flex justify-center"><span className="inline-block w-8 text-right">69</span></div></td>
+                                            <td className="px-6 py-4 text-center"><div className="flex justify-center"><span className="inline-block w-12 text-right">36.3%</span></div></td>
+                                        </tr>
+                                        <tr className="hover:bg-[rgb(240,237,228)]">
+                                            <td className="px-6 py-4 font-medium">Atomic, Molecular & Optical</td>
+                                            <td className="px-6 py-4 text-center"><div className="flex justify-center"><span className="inline-block w-8 text-right">15</span></div></td>
+                                            <td className="px-6 py-4 text-center"><div className="flex justify-center"><span className="inline-block w-12 text-right">21.1%</span></div></td>
+                                            <td className="px-6 py-4 text-center"><div className="flex justify-center"><span className="inline-block w-8 text-right">42</span></div></td>
+                                            <td className="px-6 py-4 text-center"><div className="flex justify-center"><span className="inline-block w-12 text-right">22.1%</span></div></td>
+                                        </tr>
+                                        <tr className="hover:bg-[rgb(240,237,228)]">
+                                            <td className="px-6 py-4 font-medium">Quantum Information, Science & Technology</td>
+                                            <td className="px-6 py-4 text-center"><div className="flex justify-center"><span className="inline-block w-8 text-right">15</span></div></td>
+                                            <td className="px-6 py-4 text-center"><div className="flex justify-center"><span className="inline-block w-12 text-right">21.1%</span></div></td>
+                                            <td className="px-6 py-4 text-center"><div className="flex justify-center"><span className="inline-block w-8 text-right">39</span></div></td>
+                                            <td className="px-6 py-4 text-center"><div className="flex justify-center"><span className="inline-block w-12 text-right">20.5%</span></div></td>
+                                        </tr>
+                                        <tr className="hover:bg-[rgb(240,237,228)]">
+                                            <td className="px-6 py-4 font-medium">Gravitation, Cosmology & Astrophysics</td>
+                                            <td className="px-6 py-4 text-center"><div className="flex justify-center"><span className="inline-block w-8 text-right">11</span></div></td>
+                                            <td className="px-6 py-4 text-center"><div className="flex justify-center"><span className="inline-block w-12 text-right">15.5%</span></div></td>
+                                            <td className="px-6 py-4 text-center"><div className="flex justify-center"><span className="inline-block w-8 text-right">30</span></div></td>
+                                            <td className="px-6 py-4 text-center"><div className="flex justify-center"><span className="inline-block w-12 text-right">15.8%</span></div></td>
+                                        </tr>
+                                        <tr className="hover:bg-[rgb(240,237,228)]">
+                                            <td className="px-6 py-4 font-medium">High Energy Physics</td>
+                                            <td className="px-6 py-4 text-center"><div className="flex justify-center"><span className="inline-block w-8 text-right">10</span></div></td>
+                                            <td className="px-6 py-4 text-center"><div className="flex justify-center"><span className="inline-block w-12 text-right">14.1%</span></div></td>
+                                            <td className="px-6 py-4 text-center"><div className="flex justify-center"><span className="inline-block w-8 text-right">30</span></div></td>
+                                            <td className="px-6 py-4 text-center"><div className="flex justify-center"><span className="inline-block w-12 text-right">15.8%</span></div></td>
+                                        </tr>
+                                        <tr className="hover:bg-[rgb(240,237,228)]">
+                                            <td className="px-6 py-4 font-medium">Mathematical Physics</td>
+                                            <td className="px-6 py-4 text-center"><div className="flex justify-center"><span className="inline-block w-8 text-right">9</span></div></td>
+                                            <td className="px-6 py-4 text-center"><div className="flex justify-center"><span className="inline-block w-12 text-right">12.7%</span></div></td>
+                                            <td className="px-6 py-4 text-center"><div className="flex justify-center"><span className="inline-block w-8 text-right">20</span></div></td>
+                                            <td className="px-6 py-4 text-center"><div className="flex justify-center"><span className="inline-block w-12 text-right">10.5%</span></div></td>
+                                        </tr>
+                                        <tr className="hover:bg-[rgb(240,237,228)]">
+                                            <td className="px-6 py-4 font-medium">Statistical Physics & Thermodynamics</td>
+                                            <td className="px-6 py-4 text-center"><div className="flex justify-center"><span className="inline-block w-8 text-right">9</span></div></td>
+                                            <td className="px-6 py-4 text-center"><div className="flex justify-center"><span className="inline-block w-12 text-right">12.7%</span></div></td>
+                                            <td className="px-6 py-4 text-center"><div className="flex justify-center"><span className="inline-block w-8 text-right">24</span></div></td>
+                                            <td className="px-6 py-4 text-center"><div className="flex justify-center"><span className="inline-block w-12 text-right">12.6%</span></div></td>
+                                        </tr>
+                                        <tr className="hover:bg-[rgb(240,237,228)]">
+                                            <td className="px-6 py-4 font-medium">Nuclear Physics</td>
+                                            <td className="px-6 py-4 text-center"><div className="flex justify-center"><span className="inline-block w-8 text-right">7</span></div></td>
+                                            <td className="px-6 py-4 text-center"><div className="flex justify-center"><span className="inline-block w-12 text-right">9.9%</span></div></td>
+                                            <td className="px-6 py-4 text-center"><div className="flex justify-center"><span className="inline-block w-8 text-right">19</span></div></td>
+                                            <td className="px-6 py-4 text-center"><div className="flex justify-center"><span className="inline-block w-12 text-right">10.0%</span></div></td>
+                                        </tr>
+                                        <tr className="hover:bg-[rgb(240,237,228)]">
+                                            <td className="px-6 py-4 font-medium">Nonlinear Dynamics</td>
+                                            <td className="px-6 py-4 text-center"><div className="flex justify-center"><span className="inline-block w-8 text-right">4</span></div></td>
+                                            <td className="px-6 py-4 text-center"><div className="flex justify-center"><span className="inline-block w-12 text-right">5.6%</span></div></td>
+                                            <td className="px-6 py-4 text-center"><div className="flex justify-center"><span className="inline-block w-8 text-right">12</span></div></td>
+                                            <td className="px-6 py-4 text-center"><div className="flex justify-center"><span className="inline-block w-12 text-right">6.3%</span></div></td>
+                                        </tr>
+                                        <tr className="hover:bg-[rgb(240,237,228)]">
+                                            <td className="px-6 py-4 font-medium">Fluid Dynamics</td>
+                                            <td className="px-6 py-4 text-center"><div className="flex justify-center"><span className="inline-block w-8 text-right">2</span></div></td>
+                                            <td className="px-6 py-4 text-center"><div className="flex justify-center"><span className="inline-block w-12 text-right">2.8%</span></div></td>
+                                            <td className="px-6 py-4 text-center"><div className="flex justify-center"><span className="inline-block w-8 text-right">6</span></div></td>
+                                            <td className="px-6 py-4 text-center"><div className="flex justify-center"><span className="inline-block w-12 text-right">3.2%</span></div></td>
+                                        </tr>
+                                        <tr className="hover:bg-[rgb(240,237,228)]">
+                                            <td className="px-6 py-4 font-medium">Biophysics</td>
+                                            <td className="px-6 py-4 text-center"><div className="flex justify-center"><span className="inline-block w-8 text-right">2</span></div></td>
+                                            <td className="px-6 py-4 text-center"><div className="flex justify-center"><span className="inline-block w-12 text-right">2.8%</span></div></td>
+                                            <td className="px-6 py-4 text-center"><div className="flex justify-center"><span className="inline-block w-8 text-right">4</span></div></td>
+                                            <td className="px-6 py-4 text-center"><div className="flex justify-center"><span className="inline-block w-12 text-right">2.1%</span></div></td>
+                                        </tr>
+                                        <tr className="bg-[#FAF8F3] text-lg" style={{color: 'rgb(89, 89, 89)'}}>
+                                            <td className="px-6 py-4 font-semibold">Total</td>
+                                            <td className="px-6 py-4 text-center font-semibold"><div className="flex justify-center"><span className="inline-block w-8 text-right">71</span></div></td>
+                                            <td className="px-6 py-4 text-center font-semibold"></td>
+                                            <td className="px-6 py-4 text-center font-semibold"><div className="flex justify-center"><span className="inline-block w-8 text-right">190</span></div></td>
+                                            <td className="px-6 py-4 text-center font-semibold"></td>
+                                        </tr>
+                                        <tr className="hover:bg-[rgb(240,237,228)]">
+                                            <td className="px-6 py-4 font-semibold">Covering Multiple Disciplines</td>
+                                            <td className="px-6 py-4 text-center"><div className="flex justify-center"><span className="inline-block w-8 text-right">33</span></div></td>
+                                            <td className="px-6 py-4 text-center"><div className="flex justify-center"><span className="inline-block w-12 text-right">46.5%</span></div></td>
+                                            <td className="px-6 py-4 text-center"><div className="flex justify-center"><span className="inline-block w-8 text-right">88</span></div></td>
+                                            <td className="px-6 py-4 text-center"><div className="flex justify-center"><span className="inline-block w-12 text-right">46.3%</span></div></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div className="mt-3 text-base text-zinc-500">
+                                <p><sup>*</sup> Our categorization is a modified version of the <a href="https://physh.org/about" target="_blank" rel="noopener noreferrer" className="underline hover:text-zinc-700">Physics Subject Heading (PhySH)</a> classification scheme by the American Physical Society.</p>
+                            </div>
+
+                            {/* Problem Type Distribution Charts */}
+                            <div className="mt-8 bg-[#FAF8F3] rounded-xl border border-zinc-200 shadow-lg">
+                                <h3 className="text-xl font-bold px-6 py-4" style={{color: 'rgb(89, 89, 89)'}}>Research Flavor</h3>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-8 pb-8">
+                                    <div>
+                                        <div className="flex justify-center">
+                                            <svg width="320" height="340" viewBox="0 0 320 340">
+                                                {/* Pie chart for Challenges */}
+                                                <g transform="translate(160, 185)">
+                                                    {/* Starting angle: -90 degrees (top) */}
+                                                    {/* Computational: 5.6% = 20.16 degrees */}
+                                                    <path d="M 0,-140 A 140,140 0 0,1 27.51,-137.27 L 0,0 Z" fill="#f5e6a3" stroke="#fff" strokeWidth="2"/>
+                                                    {/* Experimental: 15.5% = 55.8 degrees */}
+                                                    <path d="M 27.51,-137.27 A 140,140 0 0,1 109.45,-87.29 L 0,0 Z" fill="#f4a9a8" stroke="#fff" strokeWidth="2"/>
+                                                    {/* Theoretical: 78.9% = 284.04 degrees */}
+                                                    <path d="M 109.45,-87.29 A 140,140 0 1,1 0,-140 L 0,0 Z" fill="#a8cdf0" stroke="#fff" strokeWidth="2"/>
+
+                                                    {/* Labels inside chart */}
+                                                    <text x="0" y="30" textAnchor="middle" className="text-lg fill-[rgb(89,89,89)]">Theoretical</text>
+                                                    <text x="0" y="50" textAnchor="middle" className="text-base fill-[rgb(89,89,89)]">56 (78.9%)</text>
+                                                </g>
+
+                                                {/* Labels outside chart */}
+                                                <text x="160" y="20" textAnchor="middle" className="text-base fill-[rgb(89,89,89)]">Computational</text>
+                                                <text x="160" y="35" textAnchor="middle" className="text-sm fill-[rgb(89,89,89)]">4 (5.6%)</text>
+
+                                                <text x="265" y="50" textAnchor="middle" className="text-base fill-[rgb(89,89,89)]">Experimental</text>
+                                                <text x="265" y="65" textAnchor="middle" className="text-sm fill-[rgb(89,89,89)]">11 (15.5%)</text>
+                                            </svg>
+                                        </div>
+                                        <p className="text-center text-base mt-1" style={{color: 'rgb(89, 89, 89)'}}>71 Challenges</p>
+                                    </div>
+
+                                    <div>
+                                        <div className="flex justify-center">
+                                            <svg width="320" height="340" viewBox="0 0 320 340">
+                                                {/* Pie chart for Checkpoints */}
+                                                <g transform="translate(160, 185)">
+                                                    {/* Starting angle: -90 degrees (top) */}
+                                                    {/* Computational: 5.8% = 20.88 degrees */}
+                                                    <path d="M 0,-140 A 140,140 0 0,1 28.50,-137.07 L 0,0 Z" fill="#f5e6a3" stroke="#fff" strokeWidth="2"/>
+                                                    {/* Experimental: 15.8% = 56.88 degrees */}
+                                                    <path d="M 28.50,-137.07 A 140,140 0 0,1 110.86,-85.48 L 0,0 Z" fill="#f4a9a8" stroke="#fff" strokeWidth="2"/>
+                                                    {/* Theoretical: 78.4% = 282.24 degrees */}
+                                                    <path d="M 110.86,-85.48 A 140,140 0 1,1 0,-140 L 0,0 Z" fill="#a8cdf0" stroke="#fff" strokeWidth="2"/>
+
+                                                    {/* Labels inside chart */}
+                                                    <text x="0" y="30" textAnchor="middle" className="text-lg fill-[rgb(89,89,89)]">Theoretical</text>
+                                                    <text x="0" y="50" textAnchor="middle" className="text-base fill-[rgb(89,89,89)]">149 (78.4%)</text>
+                                                </g>
+
+                                                {/* Labels outside chart */}
+                                                <text x="160" y="20" textAnchor="middle" className="text-base fill-[rgb(89,89,89)]">Computational</text>
+                                                <text x="160" y="35" textAnchor="middle" className="text-sm fill-[rgb(89,89,89)]">11 (5.8%)</text>
+
+                                                <text x="265" y="50" textAnchor="middle" className="text-base fill-[rgb(89,89,89)]">Experimental</text>
+                                                <text x="265" y="65" textAnchor="middle" className="text-sm fill-[rgb(89,89,89)]">30 (15.8%)</text>
+                                            </svg>
+                                        </div>
+                                        <p className="text-center text-base mt-1" style={{color: 'rgb(89, 89, 89)'}}>190 Checkpoints</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* List of Challenges */}
+                        <section className="mb-12 mt-16">
+                            <h2 className="text-3xl font-semibold mb-6" style={{color: 'rgb(89, 89, 89)'}}>List of Challenges</h2>
+
+                            <div className="bg-[#FAF8F3] rounded-xl border border-zinc-200 p-8 mb-6 shadow-lg">
+                                <h3 className="text-xl font-semibold mb-4" style={{color: 'rgb(89, 89, 89)'}}>Example Challenge:</h3>
+                                <ol className="list-decimal list-inside text-lg" style={{color: 'rgb(89, 89, 89)'}}>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Quantum error detection</li>
+                                </ol>
+                            </div>
+
+                            <div className="bg-[#FAF8F3] rounded-xl border border-zinc-200 p-8 shadow-lg">
+                                <h3 className="text-xl font-semibold mb-4" style={{color: 'rgb(89, 89, 89)'}}>Test set (70 challenges):</h3>
+                                <ol className="list-decimal list-inside space-y-2 text-lg" style={{color: 'rgb(89, 89, 89)'}}>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Holographic Weyl anomaly</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Population growth rate from stochastic model of growth and cell-size regulation</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Geodesic in AdS/BCFT of a black hole</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Orbital angular momentum conservation in high harmonic generation</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Marchenko-Pastur entropy</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Noisy quantum sensing</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Scalar spectrum in Nieh–Yan gravity</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Axion inflation with Nieh–Yan</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Axion inflation with Chern-Simons</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Gapped edge of the Moore-Read state</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Parafermion zero modes tunneling</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Verlinde lines in the Moore-Read CFT</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">High/low-temperature duality in Ising Torus</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Decohered Affleck-Kennedy-Lieb-Tasaki (AKLT) model</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Interacting Chern insulator</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Zero temperature entropy in Sachdev-Ye-Kitaev models</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Optical binding force</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Cascade optical parametric amplifier</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Torsional levitated optomechanics</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Numerical LaMET matching</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Single particle Holevo information</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">One-loop correction of quasi-PDF</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">LaMET matching in Coulomb gauge</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Minimum Doppler factor of a relativistic jet</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Spherical cavity shifts</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">One-axis twisting model with dissipation</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Optical conductivity of the Hubbard model</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Hubbard model in an optical lattice</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Orthogonal non-isometric maps</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Linear stability analysis of Rayleigh-Bénard convection</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Rayleigh-Darcy convection with mixed boundary conditions</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Condensation of three types of particles</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Quantum tensor networks</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Quantum inverse problem</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Oscillation amplitude in transient dynamics of autocatalytic cycles</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Dark matter with a dark photon mediator</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Quantum geometry</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Scattering rate of Hatsugai-Kohmoto model</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Alteration of cavity field coherences due to atom-cavity interaction</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Hydrodynamic modes in Schwinger-Keldysh</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Energy in many body quantum systems</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Graphene minimal conductivity</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Disclination charge</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Ground state in Kitaev honeycomb model</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Goniopolarity in semiconductor</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">PXP scar</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Integrals of motion</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Lattice Gaussian sum</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Long-range light cone</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Many-body NC Partitions</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Random walk a₃(t)</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Efimov effect in three body problem</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Extended obstruction tensors</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Magic wavelengths for Yb isotopes</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">INS cross-section for scattering from an oscillator</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Axion in neutron stars</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Scalar DM in cosmic explorer</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Vector DM in modified LIGO</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Magnetic space group identification</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Optical Stark shift and Bloch-Siegert shift</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">CDW diffraction</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Superresolution</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Quantum search time</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Quantum games in multi-slit interference</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Noise robustness in Kochen–Specker and Spekkens contextuality</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Conformal correlators</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Constructing fermionic matrix operators</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Generating function of index</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Quantum capacity for quantum channels</li>
+                                    <li className="hover:bg-[rgb(240,237,228)] px-2 py-1 rounded transition-colors duration-200">Quantum f-divergence</li>
+                                </ol>
+                            </div>
+                        </section>
+
+                    </main>
+
+                </div>
+            );
+        }
+
+        // Render the app
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>

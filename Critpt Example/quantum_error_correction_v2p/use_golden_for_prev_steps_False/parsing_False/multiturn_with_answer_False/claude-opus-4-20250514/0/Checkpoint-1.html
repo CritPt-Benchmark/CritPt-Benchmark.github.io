@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Checkpoint-1</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.codehilite .hll { background-color: #ffffcc }
+.codehilite { background: #f8f8f8; }
+.codehilite .c { color: #3D7B7B; font-style: italic } /* Comment */
+.codehilite .err { border: 1px solid #F00 } /* Error */
+.codehilite .k { color: #008000; font-weight: bold } /* Keyword */
+.codehilite .o { color: #666 } /* Operator */
+.codehilite .ch { color: #3D7B7B; font-style: italic } /* Comment.Hashbang */
+.codehilite .cm { color: #3D7B7B; font-style: italic } /* Comment.Multiline */
+.codehilite .cp { color: #9C6500 } /* Comment.Preproc */
+.codehilite .cpf { color: #3D7B7B; font-style: italic } /* Comment.PreprocFile */
+.codehilite .c1 { color: #3D7B7B; font-style: italic } /* Comment.Single */
+.codehilite .cs { color: #3D7B7B; font-style: italic } /* Comment.Special */
+.codehilite .gd { color: #A00000 } /* Generic.Deleted */
+.codehilite .ge { font-style: italic } /* Generic.Emph */
+.codehilite .ges { font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+.codehilite .gr { color: #E40000 } /* Generic.Error */
+.codehilite .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.codehilite .gi { color: #008400 } /* Generic.Inserted */
+.codehilite .go { color: #717171 } /* Generic.Output */
+.codehilite .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.codehilite .gs { font-weight: bold } /* Generic.Strong */
+.codehilite .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.codehilite .gt { color: #04D } /* Generic.Traceback */
+.codehilite .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.codehilite .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.codehilite .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.codehilite .kp { color: #008000 } /* Keyword.Pseudo */
+.codehilite .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.codehilite .kt { color: #B00040 } /* Keyword.Type */
+.codehilite .m { color: #666 } /* Literal.Number */
+.codehilite .s { color: #BA2121 } /* Literal.String */
+.codehilite .na { color: #687822 } /* Name.Attribute */
+.codehilite .nb { color: #008000 } /* Name.Builtin */
+.codehilite .nc { color: #00F; font-weight: bold } /* Name.Class */
+.codehilite .no { color: #800 } /* Name.Constant */
+.codehilite .nd { color: #A2F } /* Name.Decorator */
+.codehilite .ni { color: #717171; font-weight: bold } /* Name.Entity */
+.codehilite .ne { color: #CB3F38; font-weight: bold } /* Name.Exception */
+.codehilite .nf { color: #00F } /* Name.Function */
+.codehilite .nl { color: #767600 } /* Name.Label */
+.codehilite .nn { color: #00F; font-weight: bold } /* Name.Namespace */
+.codehilite .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.codehilite .nv { color: #19177C } /* Name.Variable */
+.codehilite .ow { color: #A2F; font-weight: bold } /* Operator.Word */
+.codehilite .w { color: #BBB } /* Text.Whitespace */
+.codehilite .mb { color: #666 } /* Literal.Number.Bin */
+.codehilite .mf { color: #666 } /* Literal.Number.Float */
+.codehilite .mh { color: #666 } /* Literal.Number.Hex */
+.codehilite .mi { color: #666 } /* Literal.Number.Integer */
+.codehilite .mo { color: #666 } /* Literal.Number.Oct */
+.codehilite .sa { color: #BA2121 } /* Literal.String.Affix */
+.codehilite .sb { color: #BA2121 } /* Literal.String.Backtick */
+.codehilite .sc { color: #BA2121 } /* Literal.String.Char */
+.codehilite .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.codehilite .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.codehilite .s2 { color: #BA2121 } /* Literal.String.Double */
+.codehilite .se { color: #AA5D1F; font-weight: bold } /* Literal.String.Escape */
+.codehilite .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.codehilite .si { color: #A45A77; font-weight: bold } /* Literal.String.Interpol */
+.codehilite .sx { color: #008000 } /* Literal.String.Other */
+.codehilite .sr { color: #A45A77 } /* Literal.String.Regex */
+.codehilite .s1 { color: #BA2121 } /* Literal.String.Single */
+.codehilite .ss { color: #19177C } /* Literal.String.Symbol */
+.codehilite .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.codehilite .fm { color: #00F } /* Name.Function.Magic */
+.codehilite .vc { color: #19177C } /* Name.Variable.Class */
+.codehilite .vg { color: #19177C } /* Name.Variable.Global */
+.codehilite .vi { color: #19177C } /* Name.Variable.Instance */
+.codehilite .vm { color: #19177C } /* Name.Variable.Magic */
+.codehilite .il { color: #666 } /* Literal.Number.Integer.Long */
+
+</style>
+<style>
+    :root {
+  --bg: #ffffff;
+  --fg: #222222;
+  --muted: #555555;
+  --border: #e0e0e0;
+  --accent: #005fcc;
+  --code-bg: #f6f8fa;
+  --role-user: #0ea5e9;
+  --role-assistant: #22c55e;
+  --role-system: #9ca3af;
+  --return-code: #a35291;
+}
+html.dark {
+  --bg: #0b0b0b;
+  --fg: #e8e8e8;
+  --muted: #a0a0a0;
+  --border: #333333;
+  --accent: #3b82f6;
+  --code-bg: #111827;
+  --role-user: #0ea5e9;
+  --role-assistant: #22c55e;
+  --role-system: #9ca3af;
+  --return-code: #a35291;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
+  line-height: 1.6;
+}
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 10;
+}
+h1 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+}
+.tab {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--border);
+  border-bottom: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 6px 6px 0 0;
+  color: var(--fg);
+}
+.tab.active {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+.tab-content {
+  display: none;
+  padding: 1rem 1.25rem;
+  border-top: 1px solid var(--border);
+}
+.tab-content.active {
+  display: block;
+}
+#theme-toggle {
+  border: 1px solid var(--border);
+  padding: 0.2rem 0.6rem;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  cursor: pointer;
+  background: transparent;
+  color: var(--fg);
+}
+.main {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.message {
+  border: 1px solid var(--border);
+  border-left-width: 6px;
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+  background: rgba(0,0,0,0.02);
+}
+.message .meta {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.6rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.message .badge {
+  font-weight: 600;
+}
+.role-user {
+  border-left-color: var(--role-user);
+}
+.role-assistant {
+  border-left-color: var(--role-assistant);
+}
+.role-system {
+  border-left-color: var(--role-system);
+}
+.role-unknown {
+  border-left-color: var(--accent);
+}
+
+.output-code-container {
+  display: flex;
+  gap: 1rem;               /* space between children */
+  align-items: center;     /* vertical alignment */
+  justify-content: start;  /* horizontal alignment */
+}
+
+.output-code-container .codeblock {
+  flex: 0 1 auto;
+}
+
+.codeblock {
+  border: 1px solid var(--border);
+  border-left-width: 6px;
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+  background: rgba(0,0,0,0.02);
+}
+.codeblock-content {
+  margin-bottom: 0.6rem;
+  border: 1px dashed var(--border);
+  border-radius: 4px;
+  padding: 0.4rem 0.6rem;
+  background: rgba(0,0,0,0.02);
+}
+
+.codeblock.eval_code {
+  border-left-color: var(--role-user);
+}
+.codeblock.target_code {
+  border-left-color: var(--role-assistant);
+}
+.codeblock.output_code {
+  border-left-color: var(--role-system);
+}
+
+html.dark .codeblock-content {
+  background: rgba(255,255,255,0.03);
+}
+.codeblock > summary {
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none; /* remove default triangle in some browsers */
+}
+.codeblock > summary::-webkit-details-marker {
+  display: none; /* Safari/Chrome marker */
+}
+.codeblock > summary::before {
+  content: "▶ ";
+  display: inline-block;
+  transform: rotate(0deg);
+  transition: transform 0.12s ease-out;
+}
+.codeblock[open] > summary::before {
+  transform: rotate(90deg);
+}
+.codeblock .tag {
+  color: var(--muted);
+  font-weight: 400;
+  font-size: 0.85em;
+  margin-left: 0.25rem;
+}
+
+.markdown-body pre code {
+  background: var(--code-bg);
+  display: block;
+  padding: 0.75rem;
+  overflow-x: auto;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+.markdown-body code {
+  background: var(--code-bg);
+  padding: 0.15rem 0.3rem;
+  border-radius: 4px;
+}
+/* Extra info tree */
+details > summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+details .block {
+  padding-left: 1rem;
+  margin: 0.25rem 0 0.5rem 0;
+  border-left: 2px solid var(--border);
+}
+.kv .key {
+  font-weight: 600;
+}
+.kv .type {
+  color: var(--muted);
+  margin-left: 0.5rem;
+  font-size: 0.85rem;
+}
+footer {
+  margin: 2rem 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+/* CodeHilite (pygments) overrides to respect theme vars */
+.codehilite {
+  background: var(--code-bg) !important;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.75rem !important;
+}
+.reasoning {
+  margin-bottom: 0.6rem;
+  border: 1px dashed var(--border);
+  border-radius: 4px;
+  padding: 0.4rem 0.6rem;
+  background: rgba(0,0,0,0.02);
+}
+html.dark .reasoning {
+  background: rgba(255,255,255,0.03);
+}
+.reasoning > summary {
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none; /* remove default triangle in some browsers */
+}
+.reasoning > summary::-webkit-details-marker {
+  display: none; /* Safari/Chrome marker */
+}
+.reasoning > summary::before {
+  content: "▶ ";
+  display: inline-block;
+  transform: rotate(0deg);
+  transition: transform 0.12s ease-out;
+}
+.reasoning[open] > summary::before {
+  transform: rotate(90deg);
+}
+.reasoning .tag {
+  color: var(--muted);
+  font-weight: 400;
+  font-size: 0.85em;
+  margin-left: 0.25rem;
+}
+.reasoning-body {
+  margin-top: 0.5rem;
+}
+</style>
+
+<!-- ===== MATHJAX CONFIG ===== -->
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [ ["\\(","\\)"] ],
+    displayMath: [ ["\\[","\\]"] ],
+    processEscapes: true,
+    processEnvironments: true
+  },
+  options: {
+    ignoreHtmlClass: ".*",
+    processHtmlClass: "arithmatex"
+
+    // skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    // if you dynamically add content later, you can call MathJax.typesetPromise()
+  }
+};
+</script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<!-- ========================== -->
+</head>
+<body>
+<header>
+  <h1>Checkpoint-1</h1>
+  <div>
+    <button id="theme-toggle" aria-label="toggle dark mode">🌓</button>
+  </div>
+</header>
+
+<div class="main">
+  
+<article class="message role-system">
+    <div class="meta">
+        <span class="badge">System</span>
+        <span class="idx">#0</span>
+    </div>
+    <div class="content markdown-body"><p>You are a physics research assistant specializing in solving complex, research-level problems using precise, step-by-step reasoning.</p>
+<p><strong>Input</strong>
+Problems will be provided in Markdown format.</p>
+<p><strong>Output (Markdown format)</strong></p>
+<ol>
+<li><strong>Step-by-Step Derivation</strong> - Show every non-trivial step in the solution.  Justify steps using relevant physical laws, theorems, or mathematical identities.</li>
+<li><strong>Mathematical Typesetting</strong> - Use LaTeX for all mathematics:  <code>$...$</code> for inline expressions, <code>$$...$$</code> for display equations.</li>
+<li><strong>Conventions and Units</strong> - Follow the unit system and conventions specified in the problem.</li>
+<li>
+<p><strong>Final Answer</strong> - At the end of the solution,  start a new line with <strong>&ldquo;Final Answer:&rdquo;</strong>, and present the final result.</p>
+<p>For final answers involving values, follow the precision requirements specified in the problem.
+If no precision is specified:
+- If an exact value is possible, provide it (e.g., \$\sqrt(2)\$, \$\pi/4\$).
+- If exact form is not feasible, retain at least 12 significant digits in the result. </p>
+</li>
+<li>
+<p><strong>Formatting Compliance</strong> - If the user requests a specific output format (e.g., code, table),  provide the final answer accordingly.</p>
+</li>
+</ol></div>
+</article>
+
+
+<article class="message role-user">
+    <div class="meta">
+        <span class="badge">User</span>
+        <span class="idx">#1</span>
+    </div>
+    <div class="content markdown-body"><h1 id="problem-setup">Problem setup:</h1>
+<p>In quantum error correction, you encode quantum states into logical states made of many qubits in order to improve their resilience to errors. In quantum error detection, you do the same but can only detect the presence of errors and not correct them. In this problem, we will consider a single [[4,2,2]] quantum error detection code, which encodes two logical qubits into four physical qubits, and investigate how robust logical quantum operations in this code are to quantum errors.</p>
+<p>Our convention is that the four physical qubits in the [[4,2,2]] code are labelled 0,1,2,3. The two logical qubits are labelled A and B. The stabilizers are <span class="arithmatex">\(XXXX\)</span> and <span class="arithmatex">\(ZZZZ\)</span>, where <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(Z\)</span> are Pauli matrices. The logical <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(Z\)</span> operators on the two qubits are <span class="arithmatex">\(X_A = XIXI\)</span>, <span class="arithmatex">\(X_B=XXII\)</span>, <span class="arithmatex">\(Z_A = ZZII\)</span>, <span class="arithmatex">\(Z_B = ZIZI\)</span>, up to multiplication by stabilizers.</p>
+<p>We will consider different state preparation circuits consisting of controlled not <span class="arithmatex">\(CNOT_{ij}\)</span> gates, where <span class="arithmatex">\(CNOT_{ij}\)</span> has control qubit <span class="arithmatex">\(i\)</span> and target qubit <span class="arithmatex">\(j\)</span>. As a simple model of quantum errors in hardware, we will suppose that each <span class="arithmatex">\(CNOT_{ij}\)</span> gate in the circuit has a two qubit depolarizing error channel following it that produces one of the 15 non-identity two-qubit Paulis with equal probability <span class="arithmatex">\(p/15\)</span>. The probability <span class="arithmatex">\(p\)</span> indicates the probability of an error in a single two-qubit gate. We will assess the logical infidelity of certain state preparation protocols as a function of the physical infidelity <span class="arithmatex">\(p\)</span>.</p>
+<h2 id="subproblem-1">Checkpoint 1</h2>
+<p>Suppose that we wish to prepare a logical two-qubit GHZ state  <span class="arithmatex">\((|00\rangle_{AB}+|11\rangle_{AB})/\sqrt{2}\)</span> in the [[4,2,2]] code. To do so, we use the following state preparation circuit:</p>
+<div class="arithmatex">\[
+(CNOT_{03}) (H_0) (CNOT_{21}) (H_2).
+\]</div>
+<p>Note that this equation is written in matrix multiplication order, while the quantum operations in the circuit occur in the reverse order (from right-to-left in the above equation). <span class="arithmatex">\(H\)</span> is a single-qubit Hadamard gate.</p>
+<p>What is the physical state fidelity of the final physical 4-qubit state at the end of the circuit as a function of the two-qubit gate error rate <span class="arithmatex">\(p\)</span>?</p></div>
+</article>
+
+
+<article class="message role-assistant">
+    <div class="meta">
+        <span class="badge">Assistant</span>
+        <span class="idx">#2</span>
+    </div>
+    
+                    <details class="reasoning">
+                      <summary>Reasoning <span class="tag">(model)</span></summary>
+                      <div class="markdown-body reasoning-body">
+                        <p>Let me work through this step by step.</p>
+<p>First, let&rsquo;s understand the [[4,2,2]] code:
+- 4 physical qubits (labeled 0, 1, 2, 3)
+- 2 logical qubits (labeled A and B)
+- Stabilizers: XXXX and ZZZZ
+- Logical operators:
+  - <span class="arithmatex">\(X_A = XIXI\)</span>
+  - <span class="arithmatex">\(X_B = XXII\)</span>
+  - <span class="arithmatex">\(Z_A = ZZII\)</span>
+  - <span class="arithmatex">\(Z_B = ZIZI\)</span></p>
+<p>The circuit to prepare the logical GHZ state <span class="arithmatex">\((|00\rangle_{AB} + |11\rangle_{AB})/\sqrt{2}\)</span> is:</p>
+<div class="arithmatex">\[
+(CNOT_{03})(H_0)(CNOT_{21})(H_2)
+\]</div>
+<p>The circuit operations happen in reverse order, so:</p>
+<ol>
+<li><span class="arithmatex">\(H_2\)</span>: Hadamard on qubit 2</li>
+<li><span class="arithmatex">\(CNOT_{21}\)</span>: CNOT with control qubit 2, target qubit 1</li>
+<li><span class="arithmatex">\(H_0\)</span>: Hadamard on qubit 0</li>
+<li><span class="arithmatex">\(CNOT_{03}\)</span>: CNOT with control qubit 0, target qubit 3</li>
+</ol>
+<p>Let&rsquo;s trace through the circuit starting from <span class="arithmatex">\(|0000\rangle\)</span>:</p>
+<ol>
+<li>
+<p>After <span class="arithmatex">\(H_2\)</span>: 
+   <span class="arithmatex">\(|0000\rangle \rightarrow |00\rangle \otimes \frac{|0\rangle + |1\rangle}{\sqrt{2}} \otimes |0\rangle = \frac{|0000\rangle + |0010\rangle}{\sqrt{2}}\)</span></p>
+</li>
+<li>
+<p>After <span class="arithmatex">\(CNOT_{21}\)</span>:
+   <span class="arithmatex">\(\frac{|0000\rangle + |0010\rangle}{\sqrt{2}} \rightarrow \frac{|0000\rangle + |0110\rangle}{\sqrt{2}}\)</span></p>
+</li>
+<li>
+<p>After <span class="arithmatex">\(H_0\)</span>, the state becomes a superposition with increased complexity. The Hadamard gate splits the first qubit&rsquo;s state, creating four possible combinations. This results in a normalized state that combines different bit configurations, effectively spreading the quantum information across multiple basis states.</p>
+</li>
+<li>
+<p>The <span class="arithmatex">\(CNOT_{03}\)</span> operation further transforms the quantum state. By applying this controlled-NOT gate between specific qubits, the entanglement is modified, producing a new state where certain bit flips occur based on the control qubit&rsquo;s value. The resulting state represents a carefully constructed quantum configuration that maintains specific correlations between qubits.</p>
+</li>
+</ol>
+<p>The ideal final state emerges as a precisely balanced superposition, representing a key quantum error correction configuration that encodes logical information across multiple physical qubits.</p>
+<p>Exploring the logical computational basis requires understanding how stabilizer operators interact with quantum states. The logical states must satisfy specific symmetry conditions, particularly maintaining +1 eigenstates for critical stabilizer operators. This involves examining how different basis states transform under specific logical operations, revealing the intricate structure of quantum error correction codes.</p>
+<p>The standard approach to defining logical states centers on eigenvalue properties, specifically how states relate to the logical <span class="arithmatex">\(Z_L\)</span> operator and the code space&rsquo;s fundamental symmetries.</p>
+<p>By carefully analyzing the <span class="arithmatex">\(|00\rangle_{AB}\)</span>, <span class="arithmatex">\(|01\rangle_{AB}\)</span>, <span class="arithmatex">\(|10\rangle_{AB}\)</span>, and <span class="arithmatex">\(|11\rangle_{AB}\)</span> states, I can map out their precise eigenvalue characteristics under <span class="arithmatex">\(Z_A\)</span> and <span class="arithmatex">\(Z_B\)</span> transformations, which provides insight into the code&rsquo;s logical computational structure.</p>
+<p>The code space fundamentally requires states satisfying two key stabilizer conditions: XXXX and ZZZZ must both return the same state. Focusing on the ZZZZ stabilizer reveals a critical constraint - only computational basis states with an even number of 1s are permitted.</p>
+<p>This means the valid computational basis states include: <span class="arithmatex">\(|0000\rangle\)</span>, <span class="arithmatex">\(|0011\rangle\)</span>, <span class="arithmatex">\(|0101\rangle\)</span>, <span class="arithmatex">\(|0110\rangle\)</span>, <span class="arithmatex">\(|1001\rangle\)</span>, <span class="arithmatex">\(|1010\rangle\)</span>, <span class="arithmatex">\(|1100\rangle\)</span>, and <span class="arithmatex">\(|1111\rangle\)</span>. These states represent the +1 eigenspace of the ZZZZ transformation, ensuring parity-based consistency.</p>
+<p>Examining the XXXX stabilizer introduces additional complexity, as it systematically flips all qubits. The resulting +1 eigenstates emerge through specific superposition configurations that remain invariant under this bit-flip operation.</p>
+<p>I&rsquo;ll construct a code space basis by normalizing these symmetric states, creating four distinct quantum states that represent the fundamental encoding:</p>
+<ul>
+<li>|C₁⟩ represents the all-zero and all-one state superposition</li>
+<li>|C₂⟩ captures the first two qubits&rsquo; symmetric configuration</li>
+<li>|C₃⟩ reflects symmetric behavior in the middle qubits</li>
+<li>|C₄⟩ demonstrates symmetry in the last two qubits</li>
+</ul>
+<p>These normalized basis states will help me investigate the logical computational properties under specific stabilizer transformations.</p>
+<p>Examining <span class="arithmatex">\(Z_A = ZZII\)</span>, I observe:
+- |C₁⟩ remains unchanged
+- |C₂⟩ and |C₃⟩ acquire a negative phase
+- |C₄⟩ maintains its original configuration</p>
+<p>This suggests certain computational basis states are eigenvalues of the <span class="arithmatex">\(Z_A\)</span> stabilizer.</p>
+<p>For <span class="arithmatex">\(Z_B = ZIZI\)</span>, the pattern shifts:
+- |C₁⟩ preserves its initial state
+- |C₂⟩ receives a negative sign
+- |C₃⟩ now appears positive
+- |C₄⟩ remains to be determined</p>
+<p>, likely with a negative sign</p>
+<p>Continuing the eigenvalue mapping:
+- <span class="arithmatex">\(|00⟩_{AB}\)</span> shows symmetric entanglement
+- <span class="arithmatex">\(|01⟩_{AB}\)</span> demonstrates asymmetric phase relationships
+- <span class="arithmatex">\(|10⟩_{AB}\)</span> suggests a similar transformation pattern
+- <span class="arithmatex">\(|11⟩_{AB}\)</span> indicates complete phase inversion</p>
+<p>I&rsquo;ll carefully analyze the logical qubit states to verify the eigenvalue calculations, focusing on the Z-basis transformations and their implications for quantum state representation.</p>
+<p>The eigenvalue matrix reveals systematic phase relationships across different computational basis states, showing how Z-operators interact with each logical qubit&rsquo;s state. Each two-qubit configuration demonstrates predictable sign changes that encode fundamental quantum information properties.</p>
+<p>By mapping these eigenvalue patterns, I can trace the precise quantum state transformations and understand the underlying symmetries in this quantum system.</p>
+<p>The logical Bell states emerge through carefully constructed superpositions, revealing intricate entanglement structures where specific basis states combine with precise amplitude relationships. These states represent fundamental quantum information building blocks with well-defined computational characteristics.</p>
+<p>The logical GHZ state demonstrates a remarkable symmetry, combining computational basis states with balanced amplitudes that highlight quantum coherence and entanglement principles.</p>
+<p>Critically, the actual circuit preparation diverges from the intended GHZ state, instead generating a distinct entangled configuration with different eigenvalue characteristics and state composition.</p>
+<p>I&rsquo;ll carefully trace the quantum gate transformations, noting how each operation modifies the initial quantum state. The Hadamard gate on qubit 2 introduces superposition, while the controlled-NOT gate creates entanglement between specific qubits, fundamentally altering the quantum circuit&rsquo;s output.</p>
+<p>The intermediate state reveals a nuanced quantum transformation that deviates from the original expectation, suggesting a need for precise gate sequence verification.</p>
+<p>Continuing the calculation, the next CNOT operation will further manipulate the quantum state, potentially introducing additional complexity to the circuit&rsquo;s final configuration.</p>
+<p>The state transforms, with specific qubits flipping based on control qubit conditions. The result shows a symmetric pattern of quantum state modifications, where certain basis states change while maintaining overall quantum coherence.</p>
+<p>The quantum circuit&rsquo;s progression reveals intricate interactions between entangled qubits, demonstrating how controlled operations can systematically alter quantum information representations.</p>
+<p>I&rsquo;m questioning whether this circuit genuinely produces the intended GHZ state, recognizing potential discrepancies between the designed outcome and actual quantum state generation.</p>
+<p>The analysis will now focus on error mechanisms, specifically examining the two-qubit depolarizing channel&rsquo;s probabilistic Pauli transformations that introduce noise into the quantum system.</p>
+<p>The circuit&rsquo;s error model involves CNOT gates followed by stochastic quantum noise, where each gate experiences potential random Pauli perturbations across two qubits. Single-qubit Hadamard gates remain unaffected by these error processes.</p>
+<p>I&rsquo;ll track how these probabilistic errors might deviate the quantum state from the ideal GHZ configuration, systematically mapping the circuit&rsquo;s quantum transformations under noisy conditions.</p>
+<p>The initial state transforms through Hadamard and controlled-NOT operations, with each CNOT gate potentially introducing stochastic quantum noise that could disrupt the delicate quantum coherence.</p>
+<p>After the first Hadamard gate on qubit 2, the state becomes a superposition of <span class="arithmatex">\(|0000\rangle\)</span> and <span class="arithmatex">\(|0010\rangle\)</span>. The subsequent CNOT gate between qubits 2 and 1 further entangles these basis states, creating a new superposition of <span class="arithmatex">\(|0000\rangle\)</span> and <span class="arithmatex">\(|0110\rangle\)</span>.</p>
+<p>The error channel introduces probabilistic Pauli noise, where each non-identity Pauli operation on qubits 2 and 1 contributes a small probability of state perturbation, represented by a weighted sum across the Pauli group.</p>
+<p>I&rsquo;ll apply the Hadamard gate on qubit 0, which transforms the state&rsquo;s basis representation. The CNOT gate between qubits 0 and 3 then propagates potential entanglement or error correlations.</p>
+<p>The final error channel again introduces probabilistic Pauli noise, this time across qubits 0 and 3, completing the quantum circuit&rsquo;s error propagation analysis.</p>
+<p>I can leverage the predictable transformation of Pauli errors through Clifford gates, which allows me to systematically track error evolution across different quantum operations.</p>
+<p>By defining specific unitary transformations for each gate sequence, I can map how errors propagate through the quantum circuit&rsquo;s computational steps.</p>
+<p>When <span class="arithmatex">\(H_0\)</span> acts on qubit 0, Pauli errors on qubits 2 and 1 remain unchanged, demonstrating the commutative nature of these quantum gates with specific error types.</p>
+<p>The <span class="arithmatex">\(CNOT_{03}\)</span> gate introduces more complex error propagation dynamics across qubits 0 and 3, requiring careful analysis of how Pauli errors transform through this entangling operation.</p>
+<p>Critically, Pauli errors on qubits 2 and 1 continue to commute with the <span class="arithmatex">\(CNOT_{03}\)</span> gate, preserving their original error configuration throughout the quantum circuit&rsquo;s evolution.</p>
+<p>Consequently, an initial error <span class="arithmatex">\(P_{21}\)</span> persists unaltered through the quantum gate sequence, maintaining its fundamental quantum error characteristics.</p>
+<p>The comprehensive density matrix representation captures the probabilistic nature of these quantum errors, systematically accounting for all possible two-qubit Pauli error combinations across different qubit configurations.</p>
+<p>The expansion reveals multiple error contribution terms, ranging from the ideal state preservation to increasingly complex error interactions, weighted by precise probability coefficients that reflect the likelihood of each quantum operation.</p>
+<p>I&rsquo;ll calculate the fidelity by comparing this error-prone state against the original quantum state, tracking how these probabilistic transformations impact quantum information integrity.</p>
+<p>The first term directly represents the probability of no error occurring, while subsequent terms capture increasingly intricate error scenarios across different Pauli transformation sets.</p>
+<p>I&rsquo;ll focus on computing matrix elements for the quantum state <span class="arithmatex">\(|\psi\rangle\)</span>, which is a superposition of four specific four-qubit basis states. Each term involves calculating overlap integrals between this state and various Pauli operators.</p>
+<p>The quantum state is symmetrically constructed: <span class="arithmatex">\(|\psi\rangle = \frac{1}{2}(|0000\rangle + |1001\rangle + |0110\rangle + |1111\rangle)\)</span>, suggesting interesting symmetry properties for the matrix element calculations.</p>
+<p>I&rsquo;ll systematically evaluate <span class="arithmatex">\(\langle\psi|P|\psi\rangle\)</span> across different Pauli operators to understand how these transformations interact with the specific quantum state.</p>
+<p>The key observation is that matrix elements will be non-zero only when the Pauli operator maps basis states to themselves or their scalar multiples, which requires careful tracking of phase and sign transformations.</p>
+<p>I&rsquo;ll systematically list the Pauli operators on qubits 2 and 1, continuing the previous enumeration with additional operators involving X, Y, and Z interactions. These operators represent specific quantum transformations within the computational basis, each introducing unique phase relationships between quantum states.</p>
+<p>The sequence includes combinations like <span class="arithmatex">\(I \otimes X \otimes Y \otimes I\)</span> and <span class="arithmatex">\(I \otimes Y \otimes Z \otimes I\)</span>, which demonstrate the rich structure of two-qubit Pauli interactions. Each operator represents a potential contribution to quantum computational processes, revealing intricate quantum mechanical symmetries and transformation rules.</p>
+<p>I&rsquo;m noticing a pattern emerging in these operator combinations, suggesting a systematic exploration of quantum state manipulations across different qubit configurations.</p>
+<p>The two-qubit depolarizing channel formula seems complex, involving a weighted mixture of the original state and a maximally mixed state. The parameter <span class="arithmatex">\(p\)</span> controls the noise level, with the sum over Pauli operators indicating a comprehensive noise model that considers multiple potential quantum perturbations.</p>
+<p>I&rsquo;ll need to carefully analyze how these Pauli operators interact within the depolarizing channel&rsquo;s mathematical framework. The channel introduces a probabilistic transformation where each non-identity two-qubit Pauli occurs with equal probability <span class="arithmatex">\(p/15\)</span>. The transformation can be expressed as a weighted sum of the original state and Pauli perturbations, with the identity term having a different weight.</p>
+<p>I&rsquo;ll compute the fidelity for a pure state by examining how the state transforms under this channel, focusing on the dominant term and potential error contributions.</p>
+<p>The circuit involves sequential CNOT gates with independent error channels, where the unitary operation <span class="arithmatex">\(\mathcal{U}\)</span> transforms the initial state <span class="arithmatex">\(|0000\rangle\)</span>. Crucially, errors on specific qubits can commute through later gates, simplifying the error analysis. This means the effective error propagation can be modeled as a composition of independent error channels acting on different qubit subsets.</p>
+<p>By leveraging the commutativity of error channels on disjoint qubits, I can rearrange the error operations. The resulting density matrix reflects the accumulated errors, with each error channel introducing a probabilistic mixture of the original state and potential error projections.</p>
+<p>The mathematical representation captures how small error probabilities compound, showing a quadratic decay of the ideal state fidelity as errors propagate through the quantum circuit.</p>
+<p>I&rsquo;ll calculate the expected fidelity by tracking the contributions from different error scenarios, considering both single and combined error projections across distinct qubit subspaces.</p>
+<p>The quantum state involves symmetric superpositions across four computational basis states. I&rsquo;ll systematically evaluate the overlap between this state and various Pauli error projections, focusing on specific qubit interactions and their probabilistic contributions to the overall quantum process.</p>
+<p>By carefully decomposing the error probabilities and projection operators, I can systematically compute the intricate quantum fidelity components, tracking how different error configurations modify the initial quantum state&rsquo;s coherence and probability amplitudes.</p>
+<p>For the specific Pauli projection <span class="arithmatex">\(I \otimes I \otimes X \otimes I\)</span>, I observe how this operator transforms each basis state, revealing precise state transitions and phase modifications across the quantum system&rsquo;s computational subspace.</p>
+<p>Calculating the expectation value reveals an intriguing symmetry where the inner product vanishes, suggesting orthogonal interactions between the quantum state and non-identity Pauli operators.</p>
+<p>I&rsquo;m investigating whether this quantum state exhibits eigenstate properties under different Pauli transformations, systematically checking each potential operator&rsquo;s effect on the state&rsquo;s structure.</p>
+<p>For the <span class="arithmatex">\(I \otimes Z \otimes Z \otimes I\)</span> Pauli operator, I note its specific action on the <span class="arithmatex">\(|0000\rangle\)</span> basis state, which provides initial insights into potential eigenstate relationships.</p>
+<p>The computational exploration shows the operator does not simply map the state to a scalar multiple of itself, indicating complex transformation dynamics within the quantum system.</p>
+<p>This suggests a nuanced approach is needed to understand the precise interaction between the quantum state and various Pauli operators, potentially revealing deeper structural constraints.</p>
+<p>I&rsquo;ll systematically examine single-qubit Pauli transformations, tracking how they interact with the state&rsquo;s specific support configuration. Initial investigations reveal most elementary Pauli operators fail to preserve the state&rsquo;s intrinsic structure, requiring more sophisticated analysis.</p>
+<p>The computational basis states form a delicate network where simple transformations often disrupt the precise quantum configuration, demanding careful mapping of potential permutations and phase relationships.</p>
+<p>Exploring tensor product combinations of Pauli matrices emerges as a promising strategy. The <span class="arithmatex">\(X_0 X_3\)</span> product demonstrates remarkable preservation properties, perfectly cycling through the support states while maintaining their fundamental relationships.</p>
+<p>Subsequent investigations will explore additional tensor product combinations to uncover potential symmetry-preserving transformations within this quantum system.</p>
+<p>The computational approach involves systematically mapping state transitions, verifying support preservation, and analyzing overlap characteristics with the initial quantum state.</p>
+<p>I examine <span class="arithmatex">\(Z\)</span> operators, noting they maintain computational basis states while introducing phase variations. Checking <span class="arithmatex">\(Z_0\)</span> reveals zero overlap, indicating no significant interaction with the original quantum state.</p>
+<p>For <span class="arithmatex">\(Z_1\)</span>, I begin calculating the overlap, but the computation appears incomplete. The quantum state transformation suggests potential phase cancellations, though the final overlap calculation remains unresolved.</p>
+<p>Investigating <span class="arithmatex">\(Z_2\)</span> and <span class="arithmatex">\(Z_3\)</span> confirms similar zero-overlap behavior. However, when combining specific <span class="arithmatex">\(Z\)</span> operators like <span class="arithmatex">\(Z_0 Z_3\)</span> and <span class="arithmatex">\(Z_1 Z_2\)</span>, the quantum state remains unchanged, resulting in a complete overlap of 1.</p>
+<p>These observations hint at intriguing quantum operator interactions, suggesting complex phase relationships within the quantum system.</p>
+<p>The list of operators producing unit overlap includes fundamental transformations like the identity and specific cross-operator combinations of <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(Z\)</span> operators across different qubit indices.</p>
+<p>Exploring <span class="arithmatex">\(Y\)</span> operators reveals additional complexity, with their composition involving intricate sign and phase interactions through the combination of <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(Z\)</span> transformations.</p>
+<p>Specifically, <span class="arithmatex">\(Y_0 Y_3\)</span> and <span class="arithmatex">\(Y_1 Y_2\)</span> both generate a phase inversion, resulting in an expectation value of -1 when applied to the quantum state <span class="arithmatex">\(|\psi\rangle\)</span>. These mixed product interactions demonstrate subtle quantum mechanical symmetries within the system.</p>
+<p>The analysis suggests intricate relationships between different operator combinations and their effects on the quantum state&rsquo;s phase and overlap characteristics.</p>
+<p>Examining <span class="arithmatex">\(X_0 Z_3\)</span> reveals zero expectation value, indicating orthogonality with the original state&rsquo;s support. This systematic investigation uncovers precise interaction patterns across quantum operators.</p>
+<p>The quantum state can be elegantly represented as a symmetric superposition, highlighting its balanced probabilistic nature across specific basis configurations.</p>
+<p>The state fundamentally emerges as a tensor product of two maximally entangled Bell states connecting specific qubit pairs, demonstrating intricate quantum correlational structures.</p>
+<p>Preservation of Bell states under specific Pauli transformations reveals fundamental symmetry operations, with identity and cross-X interactions maintaining core quantum state characteristics.</p>
+<p>Certain Pauli operators induce phase transformations while preserving the essential entanglement topology, suggesting nuanced quantum manipulation strategies.</p>
+<p>For the Bell state pairs, I&rsquo;ll track the non-zero overlap Pauli products across qubits 0-3 and 1-2, revealing intricate interaction patterns. The computational basis reveals symmetric transformations where specific tensor products generate interesting quantum correlations.</p>
+<p>The overlap calculations demonstrate how local Pauli operators interact with entangled quantum states, showing systematic phase and symmetry preservation across different qubit combinations.</p>
+<p>Exploring error channel projections, I&rsquo;m identifying non-trivial Pauli subsets on specific qubit pairs, excluding identity operations to understand potential quantum error dynamics.</p>
+<p>For the <span class="arithmatex">\(\mathcal{P}_{21}\)</span> subset, key interactions emerge through <span class="arithmatex">\(X_1 X_2\)</span>, <span class="arithmatex">\(Y_1 Y_2\)</span>, and <span class="arithmatex">\(Z_1 Z_2\)</span> operators. Each interaction yields a magnitude of 1, indicating significant quantum correlations between these qubits under different Pauli transformations.</p>
+<p>These measurements reveal consistent overlap patterns, suggesting robust quantum state interactions across different Pauli bases. I&rsquo;ll complete the partial thought from the previous rewritten thinking by copying over the next thinking to finish the sentence, and then summarize:</p>
+<div class="arithmatex">\[
+\sum_{P \in \mathcal{P}_{21}} |\langle\psi|P|\psi\rangle|^2 = 1 + 1 + 1 = 3
+\]</div>
+<p>The cross-product terms reveal interesting interactions between different Pauli operator sets. When considering products of Pauli operators from <span class="arithmatex">\(\mathcal{P}_{21}\)</span> and <span class="arithmatex">\(\mathcal{P}_{03}\)</span>, we find nine potential non-zero overlap scenarios. These arise from the specific combinations of operators acting on disjoint qubits, creating a systematic pattern of quantum correlations.</p>
+<p>The calculation shows that when <span class="arithmatex">\(P = X_1 X_2\)</span> and <span class="arithmatex">\(Q = X_0 X_3\)</span>, the resulting operator <span class="arithmatex">\(QP\)</span> transforms the state in a way that preserves the code&rsquo;s stabilizer structure, highlighting the intricate symmetries of the quantum error-correcting code.</p>
+<p>I notice the product <span class="arithmatex">\(X_0 X_3 \cdot X_1 X_2\)</span> yields a stabilizer operator <span class="arithmatex">\(XXXX\)</span>, which remains invariant when applied to the code&rsquo;s basis state. This suggests a deep connection between the operator composition and the code&rsquo;s fundamental symmetry properties.</p>
+<p>The systematic exploration of different operator combinations reveals interesting algebraic relationships within the quantum code&rsquo;s structure, particularly how specific Pauli operator products interact with the code space.</p>
+<p>By carefully computing <span class="arithmatex">\(X_0 Y_1 Y_2 X_3 |\psi\rangle\)</span>, I find the transformation leads to a sign change, indicating non-trivial phase dynamics in the quantum state manipulation.</p>
+<p>The comprehensive analysis shows that all nine possible product combinations exhibit consistent behavior, with squared expectation values uniformly equal to 1, which points to a robust quantum error correction mechanism.</p>
+<p>I&rsquo;m tracking the fidelity calculation through algebraic transformations, systematically expanding and simplifying the expression to reveal its underlying mathematical structure. The goal is to precisely characterize how quantum state fidelity evolves under specific transformations.</p>
+<p>The current algebraic manipulation involves carefully tracking each term&rsquo;s contribution, methodically reducing the complex expression to its most fundamental representation.</p>
+<p>The final result emerges as a quadratic function of p, with coefficients that reflect intricate probabilistic interactions. The equation</p>
+<div class="arithmatex">\[
+F = 1 - \frac{8p}{5} + \frac{16p^2}{25}
+\]</div>
+<p>captures the nuanced relationship between the quantum states, distilling multiple computational steps into an elegant, compact form.</p>
+                      </div>
+                    </details>
+<div class="content markdown-body"><p>Looking at this quantum error correction problem, I need to trace through the circuit and analyze the error propagation.</p>
+<h2 id="step-1-understanding-the-circuit-and-initial-state">Step 1: Understanding the Circuit and Initial State</h2>
+<p>The circuit operates on the initial state <span class="arithmatex">\(|0000\rangle\)</span> and consists of:</p>
+<ol>
+<li><span class="arithmatex">\(H_2\)</span> (Hadamard on qubit 2)</li>
+<li><span class="arithmatex">\(CNOT_{21}\)</span> (control: qubit 2, target: qubit 1) </li>
+<li><span class="arithmatex">\(H_0\)</span> (Hadamard on qubit 0)</li>
+<li><span class="arithmatex">\(CNOT_{03}\)</span> (control: qubit 0, target: qubit 3)</li>
+</ol>
+<p>Let me trace through the ideal circuit:</p>
+<p>After <span class="arithmatex">\(H_2\)</span>: </p>
+<div class="arithmatex">\[
+|0000\rangle \rightarrow \frac{|0000\rangle + |0010\rangle}{\sqrt{2}}
+\]</div>
+<p>After <span class="arithmatex">\(CNOT_{21}\)</span>:</p>
+<div class="arithmatex">\[
+\frac{|0000\rangle + |0010\rangle}{\sqrt{2}} \rightarrow \frac{|0000\rangle + |0110\rangle}{\sqrt{2}}
+\]</div>
+<p>After <span class="arithmatex">\(H_0\)</span>:</p>
+<div class="arithmatex">\[
+\frac{|0000\rangle + |0110\rangle}{\sqrt{2}} \rightarrow \frac{1}{2}(|0000\rangle + |1000\rangle + |0110\rangle + |1110\rangle)
+\]</div>
+<p>After <span class="arithmatex">\(CNOT_{03}\)</span>:</p>
+<div class="arithmatex">\[
+\frac{1}{2}(|0000\rangle + |1000\rangle + |0110\rangle + |1110\rangle) \rightarrow \frac{1}{2}(|0000\rangle + |1001\rangle + |0110\rangle + |1111\rangle)
+\]</div>
+<p>So the ideal final state is:</p>
+<div class="arithmatex">\[
+|\psi\rangle = \frac{1}{2}(|0000\rangle + |1001\rangle + |0110\rangle + |1111\rangle)
+\]</div>
+<h2 id="step-2-recognizing-the-state-structure">Step 2: Recognizing the State Structure</h2>
+<p>This state can be rewritten as:</p>
+<div class="arithmatex">\[
+|\psi\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle)_{03} \otimes \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle)_{12}
+\]</div>
+<p>This is a product of two Bell states: one between qubits 0,3 and another between qubits 1,2.</p>
+<h2 id="step-3-error-analysis">Step 3: Error Analysis</h2>
+<p>Each CNOT gate has a two-qubit depolarizing error channel following it. The error channel applies one of the 15 non-identity two-qubit Paulis with probability <span class="arithmatex">\(p/15\)</span> each.</p>
+<p>Since Hadamard gates have no errors and errors propagate through Clifford gates predictably, I can effectively consider all errors as occurring at the end of the circuit:
+- Errors from <span class="arithmatex">\(\mathcal{E}_{21}\)</span> (on qubits 2,1) 
+- Errors from <span class="arithmatex">\(\mathcal{E}_{03}\)</span> (on qubits 0,3)</p>
+<p>The final density matrix is:</p>
+<div class="arithmatex">\[
+\rho = (1-p)^2 |\psi\rangle\langle\psi| + (1-p)\frac{p}{15}\sum_{P \in \mathcal{P}_{21}} P|\psi\rangle\langle\psi|P^\dagger + (1-p)\frac{p}{15}\sum_{Q \in \mathcal{P}_{03}} Q|\psi\rangle\langle\psi|Q^\dagger + \frac{p^2}{225}\sum_{P,Q} QP|\psi\rangle\langle\psi|P^\dagger Q^\dagger
+\]</div>
+<h2 id="step-4-computing-overlaps">Step 4: Computing Overlaps</h2>
+<p>For the Bell state structure, only certain Paulis give non-zero overlaps with <span class="arithmatex">\(|\psi\rangle\)</span>:</p>
+<p>For qubits 1,2: <span class="arithmatex">\(\{X_1X_2, Y_1Y_2, Z_1Z_2\}\)</span> each give <span class="arithmatex">\(|\langle\psi|P|\psi\rangle|^2 = 1\)</span></p>
+<p>For qubits 0,3: <span class="arithmatex">\(\{X_0X_3, Y_0Y_3, Z_0Z_3\}\)</span> each give <span class="arithmatex">\(|\langle\psi|Q|\psi\rangle|^2 = 1\)</span></p>
+<p>All other Paulis give zero overlap.</p>
+<h2 id="step-5-calculating-the-fidelity">Step 5: Calculating the Fidelity</h2>
+<p>The fidelity is:</p>
+<div class="arithmatex">\[
+F = \langle\psi|\rho|\psi\rangle
+\]</div>
+<div class="arithmatex">\[
+F = (1-p)^2 + (1-p)\frac{p}{15} \cdot 3 + (1-p)\frac{p}{15} \cdot 3 + \frac{p^2}{225} \cdot 9
+\]</div>
+<div class="arithmatex">\[
+F = (1-p)^2 + \frac{2p(1-p)}{5} + \frac{p^2}{25}
+\]</div>
+<p>Expanding:</p>
+<div class="arithmatex">\[
+F = 1 - 2p + p^2 + \frac{2p}{5} - \frac{2p^2}{5} + \frac{p^2}{25}
+\]</div>
+<div class="arithmatex">\[
+F = 1 + p\left(-2 + \frac{2}{5}\right) + p^2\left(1 - \frac{2}{5} + \frac{1}{25}\right)
+\]</div>
+<div class="arithmatex">\[
+F = 1 - \frac{8p}{5} + \frac{16p^2}{25}
+\]</div>
+<p><strong>Final Answer:</strong> <span class="arithmatex">\(F = 1 - \frac{8p}{5} + \frac{16p^2}{25}\)</span></p></div>
+</article>
+
+
+<article class="message role-user">
+    <div class="meta">
+        <span class="badge">User</span>
+        <span class="idx">#3</span>
+    </div>
+    <div class="content markdown-body"><p>Populate your final answer into the code template provided below. This step is purely for formatting/display purposes. No additional reasoning or derivation should be performed. Do not import any modules or packages beyond what is provided in the template.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">answer</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the expression of the physical state fidelity of the final physical 4-qubit state</span>
+<span class="sd">    at the end of the circuit as a function of the two-qubit gate error rate $p$.</span>
+
+<span class="sd">    Inputs</span>
+<span class="sd">    ----------</span>
+<span class="sd">    p: sympy.Symbol, two-qubit gate error rate $p$</span>
+
+<span class="sd">    Outputs</span>
+<span class="sd">    ----------</span>
+<span class="sd">    F_physical: sympy.Expr, the physical state fidelity of the final physical 4-qubit state</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># ------------------ FILL IN YOUR RESULTS BELOW ------------------</span>
+    <span class="n">F_physical</span> <span class="o">=</span> <span class="o">...</span>  <span class="c1"># a SymPy expression of inputs</span>
+    <span class="c1"># ---------------------------------------------------------------</span>
+
+    <span class="k">return</span> <span class="n">F_physical</span>
+</code></pre></div></div>
+</article>
+
+
+<article class="message role-assistant">
+    <div class="meta">
+        <span class="badge">Assistant</span>
+        <span class="idx">#4</span>
+    </div>
+    
+                    <details class="reasoning">
+                      <summary>Reasoning <span class="tag">(model)</span></summary>
+                      <div class="markdown-body reasoning-body">
+                        <p>The user wants me to fill in the code template with the final answer I derived. The physical state fidelity I found was:</p>
+<p><span class="arithmatex">\(F = 1 - \frac{8p}{5} + \frac{16p^2}{25}\)</span></p>
+<p>I need to express this as a SymPy expression. Let me write this out:
+- The constant term is 1
+- The coefficient of p is -8/5
+- The coefficient of p^2 is 16/25</p>
+<p>So the expression is:
+F_physical = 1 - 8<em>p/5 + 16</em>p**2/25</p>
+                      </div>
+                    </details>
+<div class="content markdown-body"><div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">answer</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the expression of the physical state fidelity of the final physical 4-qubit state</span>
+<span class="sd">    at the end of the circuit as a function of the two-qubit gate error rate $p$.</span>
+
+<span class="sd">    Inputs</span>
+<span class="sd">    ----------</span>
+<span class="sd">    p: sympy.Symbol, two-qubit gate error rate $p$</span>
+
+<span class="sd">    Outputs</span>
+<span class="sd">    ----------</span>
+<span class="sd">    F_physical: sympy.Expr, the physical state fidelity of the final physical 4-qubit state</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># ------------------ FILL IN YOUR RESULTS BELOW ------------------</span>
+    <span class="n">F_physical</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="mi">8</span><span class="o">*</span><span class="n">p</span><span class="o">/</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">16</span><span class="o">*</span><span class="n">p</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mi">25</span>  <span class="c1"># a SymPy expression of inputs</span>
+    <span class="c1"># ---------------------------------------------------------------</span>
+
+    <span class="k">return</span> <span class="n">F_physical</span>
+</code></pre></div></div>
+</article>
+
+</div>
+
+<footer>
+  Generated at 2025-09-24T22:02:09.434871
+</footer>
+
+<script>
+(function() {
+  // Tabs
+  const tabs = document.querySelectorAll('.tab');
+  const panels = document.querySelectorAll('.tab-content');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      const target = document.querySelector(tab.dataset.target);
+      if (target) target.classList.add('active');
+    });
+  });
+
+  // Theme toggle
+  const toggleBtn = document.getElementById('theme-toggle');
+  function setTheme(dark) {
+    if (dark) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('dark', '1');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('dark', '0');
+    }
+  }
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const stored = localStorage.getItem('dark');
+  setTheme(stored === null ? prefersDark : stored === '1');
+
+  toggleBtn.addEventListener('click', () => {
+    const isDark = document.documentElement.classList.contains('dark');
+    setTheme(!isDark);
+  });
+})();
+</script>
+</body>
+</html>

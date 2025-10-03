@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detailed Performance - CritPt</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        body {
+            font-family: 'Aptos', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState } = React;
+
+        // Icons
+        const BoltLogo = (props) => (
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" {...props}>
+                <path d="M13 2L3 14h7l-1 8 11-14h-7l0-6Z" fill="currentColor"/>
+            </svg>
+        );
+
+        // Data (same as index.html)
+        const rows = [
+            { model: "GPT-5 (high, code & web)", accuracy: "10.7%", cost: "$187.79", icon: "o" },
+            { model: "GPT-5 (high, code)",       accuracy: "9.0%",  cost: "$53.01",  icon: "o" },
+            { model: "GPT-5 (high)",             accuracy: "2.6%",  cost: "$94.14",  icon: "o" },
+            { model: "Gemini-2.5 Pro",           accuracy: "0.9%",  cost: "$84.88",  icon: "g" },
+            { model: "o3 (high)",                accuracy: "0.6%",  cost: "$56.03",  icon: "o" },
+            { model: "DeepSeek R1",              accuracy: "0.6%",  cost: "$12.41",  icon: "ds" },
+            { model: "o4-mini (high)",           accuracy: "0.3%",  cost: "$28.24",  icon: "o" },
+            { model: "Gemini-2.5 Flash",         accuracy: "0.3%",  cost: "$23.04",  icon: "g" },
+            { model: "Claude Opus 4",            accuracy: "0.0%",  cost: "$359.76", icon: "c" },
+            { model: "GPT-5 (minimal)",          accuracy: "0.0%",  cost: "$8.58",   icon: "o" },
+            { model: "Llama-4 Maverick",         accuracy: "0.0%",  cost: "$0.48",   icon: "llama" },
+            { model: "GPT-4o",                   accuracy: "0.0%",  cost: "$4.13",   icon: "o" },
+        ];
+
+        // Components
+        function Pill({ children, onClick, active = false, href }) {
+            if (href) {
+                return (
+                    <a
+                        href={href}
+                        className={`px-4 py-2 rounded-full font-medium text-lg transition-transform duration-200 hover:font-semibold hover:scale-110 ${active ? 'font-semibold scale-110' : ''}`}
+                        style={{color: 'rgb(240, 237, 228)'}}
+                    >
+                        {children}
+                    </a>
+                );
+            }
+            return (
+                <button
+                    onClick={onClick}
+                    className={`px-4 py-2 rounded-full font-medium text-lg transition-transform duration-200 hover:font-semibold hover:scale-110 ${active ? 'font-semibold scale-110' : ''}`}
+                    style={{color: 'rgb(240, 237, 228)'}}
+                >
+                    {children}
+                </button>
+            );
+        }
+
+        function BrandMark() {
+            return (
+                <a href="index.html" className="flex items-center gap-2 no-underline">
+                    <img src="figures/CritPt_Cavolini.png" alt="CritPt" style={{height: '80px', marginLeft: '-16px', marginTop: '16px'}} />
+                </a>
+            );
+        }
+
+        // Main App Component
+        function App() {
+            return (
+                <div className="min-h-screen" style={{backgroundColor: 'rgb(240, 237, 228)', color: 'rgb(89, 89, 89)'}}>
+                    {/* Top Nav */}
+                    <header className="sticky top-0 z-40 w-full border-b border-black/5 backdrop-blur" style={{backgroundColor: 'rgb(15, 76, 129)'}}>
+                        <div className="mx-auto max-w-6xl px-4">
+                            <div className="flex h-20 items-center justify-between gap-4">
+                                <BrandMark />
+                                <nav className="hidden md:flex items-center gap-2">
+                                    <Pill href="index.html">Overview</Pill>
+                                    <Pill href="benchmark-coverage.html">Coverage</Pill>
+                                    <Pill active>Performance</Pill>
+                                    <Pill href="example.html">Example</Pill>
+                                    <Pill href="about.html">About</Pill>
+                                </nav>
+                            </div>
+                        </div>
+                    </header>
+
+                    {/* Main Content */}
+                    <main className="mx-auto max-w-6xl px-4 py-16">
+                        <div className="prose prose-zinc max-w-none">
+                            <h1 className="text-3xl md:text-[2.8rem] font-semibold mb-16" style={{color: 'rgb(89, 89, 89)'}}>Detailed Model Performance</h1>
+                        </div>
+
+                        {/* Performance Metrics Table */}
+                        <section className="mb-12">
+                            <div className="overflow-hidden rounded-2xl border border-zinc-200 bg-[#FAF8F3] shadow-lg">
+                                <div className="overflow-x-auto">
+                                    <table className="w-full text-left table-fixed">
+                                        <colgroup>
+                                            <col style={{width: '20.1%'}} />
+                                            <col style={{width: '13.5%'}} />
+                                            <col style={{width: '13.2%'}} />
+                                            <col style={{width: '13.2%'}} />
+                                            <col style={{width: '13.5%'}} />
+                                            <col style={{width: '13.2%'}} />
+                                            <col style={{width: '13.3%'}} />
+                                        </colgroup>
+                                        <thead className="bg-[#FAF8F3]" style={{color: 'rgb(89, 89, 89)'}}>
+                                            <tr>
+                                                <th className="px-4 py-4 font-semibold text-xl">Model Name</th>
+                                                <th colSpan="3" className="px-4 py-4 font-semibold text-left text-xl border-b border-zinc-200">Average Accuracy<sup>1</sup> (%)</th>
+                                                <th colSpan="3" className="px-4 py-4 font-semibold text-left text-xl border-b border-zinc-200">Consistently Solved Rate<sup>2</sup> (%)</th>
+                                            </tr>
+                                            <tr className="bg-[#FAF8F3]">
+                                                <th className="px-4 py-2 font-normal text-center text-lg"></th>
+                                                <th className="px-4 py-2 font-normal text-left text-lg">Challenge</th>
+                                                <th colSpan="2" className="px-4 py-2 font-normal text-left text-lg border-b border-zinc-200">Checkpoint</th>
+                                                <th className="px-4 py-2 font-normal text-left text-lg">Challenge</th>
+                                                <th colSpan="2" className="px-4 py-2 font-normal text-left text-lg border-b border-zinc-200">Checkpoint</th>
+                                            </tr>
+                                            <tr className="bg-[#FAF8F3] border-b border-zinc-200">
+                                                <th className="px-3 py-2 font-normal text-center text-base"></th>
+                                                <th className="px-3 py-2 font-normal text-center text-base"></th>
+                                                <th className="px-3 py-2 font-normal text-center text-base">Self Carryover<sup>3</sup></th>
+                                                <th className="px-3 py-2 font-normal text-center text-base">Oracle Carryover</th>
+                                                <th className="px-3 py-2 font-normal text-center text-base"></th>
+                                                <th className="px-3 py-2 font-normal text-center text-base">Self Carryover</th>
+                                                <th className="px-3 py-2 font-normal text-center text-base">Oracle Carryover</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody className="divide-y divide-zinc-100 text-base" style={{color: 'rgb(89, 89, 89)'}}>
+                                            <tr className="hover:bg-[rgb(240,237,228)]">
+                                                <td className="px-4 py-3 font-medium">GPT-5 (high, code & web)</td>
+                                                <td className="px-4 py-3 text-center font-semibold">11.7</td>
+                                                <td className="px-3 py-3 text-center">20.8</td>
+                                                <td className="px-3 py-3 text-center">25.6</td>
+                                                <td className="px-4 py-3 text-center">8.6</td>
+                                                <td className="px-3 py-3 text-center">15.0</td>
+                                                <td className="px-3 py-3 text-center">18.7</td>
+                                            </tr>
+                                            <tr className="hover:bg-[rgb(240,237,228)]">
+                                                <td className="px-4 py-3 font-medium">GPT-5 (high, code)</td>
+                                                <td className="px-4 py-3 text-center font-semibold">9.4</td>
+                                                <td className="px-3 py-3 text-center">18.7</td>
+                                                <td className="px-3 py-3 text-center">24.6</td>
+                                                <td className="px-4 py-3 text-center">5.7</td>
+                                                <td className="px-3 py-3 text-center">15.0</td>
+                                                <td className="px-3 py-3 text-center">18.7</td>
+                                            </tr>
+                                            <tr className="hover:bg-[rgb(240,237,228)]">
+                                                <td className="px-4 py-3 font-medium">GPT-5 (high)</td>
+                                                <td className="px-4 py-3 text-center font-semibold">4.0</td>
+                                                <td className="px-3 py-3 text-center">14.4</td>
+                                                <td className="px-3 py-3 text-center">20.5</td>
+                                                <td className="px-4 py-3 text-center">2.9</td>
+                                                <td className="px-3 py-3 text-center">9.6</td>
+                                                <td className="px-3 py-3 text-center">16.0</td>
+                                            </tr>
+                                            <tr className="hover:bg-[rgb(240,237,228)]">
+                                                <td className="px-4 py-3 font-medium">Gemini-2.5 Pro</td>
+                                                <td className="px-4 py-3 text-center font-semibold">1.7</td>
+                                                <td className="px-3 py-3 text-center">7.4</td>
+                                                <td className="px-3 py-3 text-center">9.6</td>
+                                                <td className="px-4 py-3 text-center">0.0</td>
+                                                <td className="px-3 py-3 text-center">3.7</td>
+                                                <td className="px-3 py-3 text-center">4.8</td>
+                                            </tr>
+                                            <tr className="hover:bg-[rgb(240,237,228)]">
+                                                <td className="px-4 py-3 font-medium">o3 (high)</td>
+                                                <td className="px-4 py-3 text-center font-semibold">1.1</td>
+                                                <td className="px-3 py-3 text-center">7.3</td>
+                                                <td className="px-3 py-3 text-center">11.0</td>
+                                                <td className="px-4 py-3 text-center">0.0</td>
+                                                <td className="px-3 py-3 text-center">3.2</td>
+                                                <td className="px-3 py-3 text-center">6.4</td>
+                                            </tr>
+                                            <tr className="hover:bg-[rgb(240,237,228)]">
+                                                <td className="px-4 py-3 font-medium">Gemini-2.5 Flash</td>
+                                                <td className="px-4 py-3 text-center font-semibold">1.1</td>
+                                                <td className="px-3 py-3 text-center">2.8</td>
+                                                <td className="px-3 py-3 text-center">4.8</td>
+                                                <td className="px-4 py-3 text-center">0.0</td>
+                                                <td className="px-3 py-3 text-center">1.7</td>
+                                                <td className="px-3 py-3 text-center">2.7</td>
+                                            </tr>
+                                            <tr className="hover:bg-[rgb(240,237,228)]">
+                                                <td className="px-4 py-3 font-medium">DeepSeek R1</td>
+                                                <td className="px-4 py-3 text-center font-semibold">0.9</td>
+                                                <td className="px-3 py-3 text-center">4.8</td>
+                                                <td className="px-3 py-3 text-center">6.5</td>
+                                                <td className="px-4 py-3 text-center">0.0</td>
+                                                <td className="px-3 py-3 text-center">1.7</td>
+                                                <td className="px-3 py-3 text-center">3.2</td>
+                                            </tr>
+                                            <tr className="hover:bg-[rgb(240,237,228)]">
+                                                <td className="px-4 py-3 font-medium">o4-mini (high)</td>
+                                                <td className="px-4 py-3 text-center font-semibold">0.6</td>
+                                                <td className="px-3 py-3 text-center">5.8</td>
+                                                <td className="px-3 py-3 text-center">7.9</td>
+                                                <td className="px-4 py-3 text-center">0.0</td>
+                                                <td className="px-3 py-3 text-center">2.7</td>
+                                                <td className="px-3 py-3 text-center">3.2</td>
+                                            </tr>
+                                            <tr className="hover:bg-[rgb(240,237,228)]">
+                                                <td className="px-4 py-3 font-medium">Claude Opus 4</td>
+                                                <td className="px-4 py-3 text-center font-semibold">0.3</td>
+                                                <td className="px-3 py-3 text-center">2.8</td>
+                                                <td className="px-3 py-3 text-center">4.2</td>
+                                                <td className="px-4 py-3 text-center">0.0</td>
+                                                <td className="px-3 py-3 text-center">0.5</td>
+                                                <td className="px-3 py-3 text-center">2.1</td>
+                                            </tr>
+                                            <tr className="hover:bg-[rgb(240,237,228)]">
+                                                <td className="px-4 py-3 font-medium">GPT-5 (minimal)</td>
+                                                <td className="px-4 py-3 text-center font-semibold">0.0</td>
+                                                <td className="px-3 py-3 text-center">2.8</td>
+                                                <td className="px-3 py-3 text-center">4.5</td>
+                                                <td className="px-4 py-3 text-center">0.0</td>
+                                                <td className="px-3 py-3 text-center">1.6</td>
+                                                <td className="px-3 py-3 text-center">2.7</td>
+                                            </tr>
+                                            <tr className="hover:bg-[rgb(240,237,228)]">
+                                                <td className="px-4 py-3 font-medium">Llama-4 Maverick</td>
+                                                <td className="px-4 py-3 text-center font-semibold">0.0</td>
+                                                <td className="px-3 py-3 text-center">2.6</td>
+                                                <td className="px-3 py-3 text-center">2.9</td>
+                                                <td className="px-4 py-3 text-center">0.0</td>
+                                                <td className="px-3 py-3 text-center">1.1</td>
+                                                <td className="px-3 py-3 text-center">1.1</td>
+                                            </tr>
+                                            <tr className="hover:bg-[rgb(240,237,228)]">
+                                                <td className="px-4 py-3 font-medium">GPT-4o</td>
+                                                <td className="px-4 py-3 text-center font-semibold">0.0</td>
+                                                <td className="px-3 py-3 text-center">1.8</td>
+                                                <td className="px-3 py-3 text-center">1.6</td>
+                                                <td className="px-4 py-3 text-center">0.0</td>
+                                                <td className="px-3 py-3 text-center">0.0</td>
+                                                <td className="px-3 py-3 text-center">0.0</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div className="mt-4">
+                                <p className="text-base" style={{color: 'rgb(89, 89, 89)'}}><sup>1</sup> Average accuracy over 5 runs × 70 test challenges (or × 187 test checkpoints).</p>
+                                <p className="text-base mt-1" style={{color: 'rgb(89, 89, 89)'}}><sup>2</sup> A problem is deemed as <span className="font-semibold">consistently solved</span> only if <span className="font-semibold">at least four out of five runs</span> give correct final answers.</p>
+                                <p className="text-base leading-tight mt-2" style={{color: 'rgb(89, 89, 89)'}}><sup>3</sup> Two different setups for checkpoint evaluation (each challenge is decomposed into 2–4 checkpoints, which are always evaluated sequentially in a multi-turn conversation):</p>
+                                <div className="ml-8 mt-0" style={{color: 'rgb(89, 89, 89)'}}>
+                                    <p className="text-base leading-tight mb-0">– <span className="font-semibold">Self-carryover</span> without expert answer: The model proceeds sequentially, using only its own previous outputs.</p>
+                                    <p className="text-base leading-tight">– <span className="font-semibold">Oracle carryover</span> with expert answers: The model also proceeds sequentially, but is given gold answer provided by experts to the prior checkpoint before attempting the next.</p>
+                                </div>
+                            </div>
+                        </section>
+
+                    </main>
+
+                </div>
+            );
+        }
+
+        // Render the app
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>

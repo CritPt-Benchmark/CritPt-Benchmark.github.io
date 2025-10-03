@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Checkpoint-2</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.codehilite .hll { background-color: #ffffcc }
+.codehilite { background: #f8f8f8; }
+.codehilite .c { color: #3D7B7B; font-style: italic } /* Comment */
+.codehilite .err { border: 1px solid #F00 } /* Error */
+.codehilite .k { color: #008000; font-weight: bold } /* Keyword */
+.codehilite .o { color: #666 } /* Operator */
+.codehilite .ch { color: #3D7B7B; font-style: italic } /* Comment.Hashbang */
+.codehilite .cm { color: #3D7B7B; font-style: italic } /* Comment.Multiline */
+.codehilite .cp { color: #9C6500 } /* Comment.Preproc */
+.codehilite .cpf { color: #3D7B7B; font-style: italic } /* Comment.PreprocFile */
+.codehilite .c1 { color: #3D7B7B; font-style: italic } /* Comment.Single */
+.codehilite .cs { color: #3D7B7B; font-style: italic } /* Comment.Special */
+.codehilite .gd { color: #A00000 } /* Generic.Deleted */
+.codehilite .ge { font-style: italic } /* Generic.Emph */
+.codehilite .ges { font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+.codehilite .gr { color: #E40000 } /* Generic.Error */
+.codehilite .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.codehilite .gi { color: #008400 } /* Generic.Inserted */
+.codehilite .go { color: #717171 } /* Generic.Output */
+.codehilite .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.codehilite .gs { font-weight: bold } /* Generic.Strong */
+.codehilite .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.codehilite .gt { color: #04D } /* Generic.Traceback */
+.codehilite .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.codehilite .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.codehilite .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.codehilite .kp { color: #008000 } /* Keyword.Pseudo */
+.codehilite .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.codehilite .kt { color: #B00040 } /* Keyword.Type */
+.codehilite .m { color: #666 } /* Literal.Number */
+.codehilite .s { color: #BA2121 } /* Literal.String */
+.codehilite .na { color: #687822 } /* Name.Attribute */
+.codehilite .nb { color: #008000 } /* Name.Builtin */
+.codehilite .nc { color: #00F; font-weight: bold } /* Name.Class */
+.codehilite .no { color: #800 } /* Name.Constant */
+.codehilite .nd { color: #A2F } /* Name.Decorator */
+.codehilite .ni { color: #717171; font-weight: bold } /* Name.Entity */
+.codehilite .ne { color: #CB3F38; font-weight: bold } /* Name.Exception */
+.codehilite .nf { color: #00F } /* Name.Function */
+.codehilite .nl { color: #767600 } /* Name.Label */
+.codehilite .nn { color: #00F; font-weight: bold } /* Name.Namespace */
+.codehilite .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.codehilite .nv { color: #19177C } /* Name.Variable */
+.codehilite .ow { color: #A2F; font-weight: bold } /* Operator.Word */
+.codehilite .w { color: #BBB } /* Text.Whitespace */
+.codehilite .mb { color: #666 } /* Literal.Number.Bin */
+.codehilite .mf { color: #666 } /* Literal.Number.Float */
+.codehilite .mh { color: #666 } /* Literal.Number.Hex */
+.codehilite .mi { color: #666 } /* Literal.Number.Integer */
+.codehilite .mo { color: #666 } /* Literal.Number.Oct */
+.codehilite .sa { color: #BA2121 } /* Literal.String.Affix */
+.codehilite .sb { color: #BA2121 } /* Literal.String.Backtick */
+.codehilite .sc { color: #BA2121 } /* Literal.String.Char */
+.codehilite .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.codehilite .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.codehilite .s2 { color: #BA2121 } /* Literal.String.Double */
+.codehilite .se { color: #AA5D1F; font-weight: bold } /* Literal.String.Escape */
+.codehilite .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.codehilite .si { color: #A45A77; font-weight: bold } /* Literal.String.Interpol */
+.codehilite .sx { color: #008000 } /* Literal.String.Other */
+.codehilite .sr { color: #A45A77 } /* Literal.String.Regex */
+.codehilite .s1 { color: #BA2121 } /* Literal.String.Single */
+.codehilite .ss { color: #19177C } /* Literal.String.Symbol */
+.codehilite .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.codehilite .fm { color: #00F } /* Name.Function.Magic */
+.codehilite .vc { color: #19177C } /* Name.Variable.Class */
+.codehilite .vg { color: #19177C } /* Name.Variable.Global */
+.codehilite .vi { color: #19177C } /* Name.Variable.Instance */
+.codehilite .vm { color: #19177C } /* Name.Variable.Magic */
+.codehilite .il { color: #666 } /* Literal.Number.Integer.Long */
+
+</style>
+<style>
+    :root {
+  --bg: #ffffff;
+  --fg: #222222;
+  --muted: #555555;
+  --border: #e0e0e0;
+  --accent: #005fcc;
+  --code-bg: #f6f8fa;
+  --role-user: #0ea5e9;
+  --role-assistant: #22c55e;
+  --role-system: #9ca3af;
+  --return-code: #a35291;
+}
+html.dark {
+  --bg: #0b0b0b;
+  --fg: #e8e8e8;
+  --muted: #a0a0a0;
+  --border: #333333;
+  --accent: #3b82f6;
+  --code-bg: #111827;
+  --role-user: #0ea5e9;
+  --role-assistant: #22c55e;
+  --role-system: #9ca3af;
+  --return-code: #a35291;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
+  line-height: 1.6;
+}
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 10;
+}
+h1 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+}
+.tab {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--border);
+  border-bottom: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 6px 6px 0 0;
+  color: var(--fg);
+}
+.tab.active {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+.tab-content {
+  display: none;
+  padding: 1rem 1.25rem;
+  border-top: 1px solid var(--border);
+}
+.tab-content.active {
+  display: block;
+}
+#theme-toggle {
+  border: 1px solid var(--border);
+  padding: 0.2rem 0.6rem;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  cursor: pointer;
+  background: transparent;
+  color: var(--fg);
+}
+.main {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.message {
+  border: 1px solid var(--border);
+  border-left-width: 6px;
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+  background: rgba(0,0,0,0.02);
+}
+.message .meta {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.6rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.message .badge {
+  font-weight: 600;
+}
+.role-user {
+  border-left-color: var(--role-user);
+}
+.role-assistant {
+  border-left-color: var(--role-assistant);
+}
+.role-system {
+  border-left-color: var(--role-system);
+}
+.role-unknown {
+  border-left-color: var(--accent);
+}
+
+.output-code-container {
+  display: flex;
+  gap: 1rem;               /* space between children */
+  align-items: center;     /* vertical alignment */
+  justify-content: start;  /* horizontal alignment */
+}
+
+.output-code-container .codeblock {
+  flex: 0 1 auto;
+}
+
+.codeblock {
+  border: 1px solid var(--border);
+  border-left-width: 6px;
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+  background: rgba(0,0,0,0.02);
+}
+.codeblock-content {
+  margin-bottom: 0.6rem;
+  border: 1px dashed var(--border);
+  border-radius: 4px;
+  padding: 0.4rem 0.6rem;
+  background: rgba(0,0,0,0.02);
+}
+
+.codeblock.eval_code {
+  border-left-color: var(--role-user);
+}
+.codeblock.target_code {
+  border-left-color: var(--role-assistant);
+}
+.codeblock.output_code {
+  border-left-color: var(--role-system);
+}
+
+html.dark .codeblock-content {
+  background: rgba(255,255,255,0.03);
+}
+.codeblock > summary {
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none; /* remove default triangle in some browsers */
+}
+.codeblock > summary::-webkit-details-marker {
+  display: none; /* Safari/Chrome marker */
+}
+.codeblock > summary::before {
+  content: "▶ ";
+  display: inline-block;
+  transform: rotate(0deg);
+  transition: transform 0.12s ease-out;
+}
+.codeblock[open] > summary::before {
+  transform: rotate(90deg);
+}
+.codeblock .tag {
+  color: var(--muted);
+  font-weight: 400;
+  font-size: 0.85em;
+  margin-left: 0.25rem;
+}
+
+.markdown-body pre code {
+  background: var(--code-bg);
+  display: block;
+  padding: 0.75rem;
+  overflow-x: auto;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+.markdown-body code {
+  background: var(--code-bg);
+  padding: 0.15rem 0.3rem;
+  border-radius: 4px;
+}
+/* Extra info tree */
+details > summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+details .block {
+  padding-left: 1rem;
+  margin: 0.25rem 0 0.5rem 0;
+  border-left: 2px solid var(--border);
+}
+.kv .key {
+  font-weight: 600;
+}
+.kv .type {
+  color: var(--muted);
+  margin-left: 0.5rem;
+  font-size: 0.85rem;
+}
+footer {
+  margin: 2rem 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+/* CodeHilite (pygments) overrides to respect theme vars */
+.codehilite {
+  background: var(--code-bg) !important;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.75rem !important;
+}
+.reasoning {
+  margin-bottom: 0.6rem;
+  border: 1px dashed var(--border);
+  border-radius: 4px;
+  padding: 0.4rem 0.6rem;
+  background: rgba(0,0,0,0.02);
+}
+html.dark .reasoning {
+  background: rgba(255,255,255,0.03);
+}
+.reasoning > summary {
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none; /* remove default triangle in some browsers */
+}
+.reasoning > summary::-webkit-details-marker {
+  display: none; /* Safari/Chrome marker */
+}
+.reasoning > summary::before {
+  content: "▶ ";
+  display: inline-block;
+  transform: rotate(0deg);
+  transition: transform 0.12s ease-out;
+}
+.reasoning[open] > summary::before {
+  transform: rotate(90deg);
+}
+.reasoning .tag {
+  color: var(--muted);
+  font-weight: 400;
+  font-size: 0.85em;
+  margin-left: 0.25rem;
+}
+.reasoning-body {
+  margin-top: 0.5rem;
+}
+</style>
+
+<!-- ===== MATHJAX CONFIG ===== -->
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [ ["\\(","\\)"] ],
+    displayMath: [ ["\\[","\\]"] ],
+    processEscapes: true,
+    processEnvironments: true
+  },
+  options: {
+    ignoreHtmlClass: ".*",
+    processHtmlClass: "arithmatex"
+
+    // skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    // if you dynamically add content later, you can call MathJax.typesetPromise()
+  }
+};
+</script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<!-- ========================== -->
+</head>
+<body>
+<header>
+  <h1>Checkpoint-2</h1>
+  <div>
+    <button id="theme-toggle" aria-label="toggle dark mode">🌓</button>
+  </div>
+</header>
+
+<div class="main">
+  
+<article class="message role-system">
+    <div class="meta">
+        <span class="badge">System</span>
+        <span class="idx">#0</span>
+    </div>
+    <div class="content markdown-body"><p>You are a physics research assistant specializing in solving complex, research-level problems using precise, step-by-step reasoning.</p>
+<p><strong>Input</strong>
+Problems will be provided in Markdown format.</p>
+<p><strong>Output (Markdown format)</strong></p>
+<ol>
+<li><strong>Step-by-Step Derivation</strong> - Show every non-trivial step in the solution.  Justify steps using relevant physical laws, theorems, or mathematical identities.</li>
+<li><strong>Mathematical Typesetting</strong> - Use LaTeX for all mathematics:  <code>$...$</code> for inline expressions, <code>$$...$$</code> for display equations.</li>
+<li><strong>Conventions and Units</strong> - Follow the unit system and conventions specified in the problem.</li>
+<li>
+<p><strong>Final Answer</strong> - At the end of the solution,  start a new line with <strong>&ldquo;Final Answer:&rdquo;</strong>, and present the final result.</p>
+<p>For final answers involving values, follow the precision requirements specified in the problem.
+If no precision is specified:
+- If an exact value is possible, provide it (e.g., \$\sqrt(2)\$, \$\pi/4\$).
+- If exact form is not feasible, retain at least 12 significant digits in the result. </p>
+</li>
+<li>
+<p><strong>Formatting Compliance</strong> - If the user requests a specific output format (e.g., code, table),  provide the final answer accordingly.</p>
+</li>
+</ol></div>
+</article>
+
+
+<article class="message role-user">
+    <div class="meta">
+        <span class="badge">User</span>
+        <span class="idx">#1</span>
+    </div>
+    <div class="content markdown-body"><h1 id="problem-setup">Problem setup:</h1>
+<p>In quantum error correction, you encode quantum states into logical states made of many qubits in order to improve their resilience to errors. In quantum error detection, you do the same but can only detect the presence of errors and not correct them. In this problem, we will consider a single [[4,2,2]] quantum error detection code, which encodes two logical qubits into four physical qubits, and investigate how robust logical quantum operations in this code are to quantum errors.</p>
+<p>Our convention is that the four physical qubits in the [[4,2,2]] code are labelled 0,1,2,3. The two logical qubits are labelled A and B. The stabilizers are <span class="arithmatex">\(XXXX\)</span> and <span class="arithmatex">\(ZZZZ\)</span>, where <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(Z\)</span> are Pauli matrices. The logical <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(Z\)</span> operators on the two qubits are <span class="arithmatex">\(X_A = XIXI\)</span>, <span class="arithmatex">\(X_B=XXII\)</span>, <span class="arithmatex">\(Z_A = ZZII\)</span>, <span class="arithmatex">\(Z_B = ZIZI\)</span>, up to multiplication by stabilizers.</p>
+<p>We will consider different state preparation circuits consisting of controlled not <span class="arithmatex">\(CNOT_{ij}\)</span> gates, where <span class="arithmatex">\(CNOT_{ij}\)</span> has control qubit <span class="arithmatex">\(i\)</span> and target qubit <span class="arithmatex">\(j\)</span>. As a simple model of quantum errors in hardware, we will suppose that each <span class="arithmatex">\(CNOT_{ij}\)</span> gate in the circuit has a two qubit depolarizing error channel following it that produces one of the 15 non-identity two-qubit Paulis with equal probability <span class="arithmatex">\(p/15\)</span>. The probability <span class="arithmatex">\(p\)</span> indicates the probability of an error in a single two-qubit gate. We will assess the logical infidelity of certain state preparation protocols as a function of the physical infidelity <span class="arithmatex">\(p\)</span>.</p>
+<h2 id="subproblem-1">Checkpoint 1</h2>
+<p>Suppose that we wish to prepare a logical two-qubit GHZ state  <span class="arithmatex">\((|00\rangle_{AB}+|11\rangle_{AB})/\sqrt{2}\)</span> in the [[4,2,2]] code. To do so, we use the following state preparation circuit:</p>
+<div class="arithmatex">\[
+(CNOT_{03}) (H_0) (CNOT_{21}) (H_2).
+\]</div>
+<p>Note that this equation is written in matrix multiplication order, while the quantum operations in the circuit occur in the reverse order (from right-to-left in the above equation). <span class="arithmatex">\(H\)</span> is a single-qubit Hadamard gate.</p>
+<p>What is the physical state fidelity of the final physical 4-qubit state at the end of the circuit as a function of the two-qubit gate error rate <span class="arithmatex">\(p\)</span>?</p></div>
+</article>
+
+
+<article class="message role-assistant">
+    <div class="meta">
+        <span class="badge">Assistant</span>
+        <span class="idx">#2</span>
+    </div>
+    
+                    <details class="reasoning">
+                      <summary>Reasoning <span class="tag">(model)</span></summary>
+                      <div class="markdown-body reasoning-body">
+                        <p>We are given: &ldquo;What is the physical state fidelity of the final physical 4-qubit state at the end of the circuit as a function of the two-qubit gate error rate p?&rdquo;</p>
+<p>Interpretation: We have a circuit that prepares a logical GHZ state. But then we have errors on the CNOT gates. The circuit is: (CNOT_{03}) (H_0) (CNOT_{21}) (H_2). But careful: &ldquo;this equation is written in matrix multiplication order, while the quantum operations in the circuit occur in the reverse order (from right-to-left in the above equation).&rdquo; So the actual circuit order: first apply H_2, then CNOT_{21}, then H_0, then CNOT_{03}. So the circuit is:
+Step 1: H on qubit 2.
+Step 2: CNOT with control qubit 2 and target qubit 1.
+Step 3: H on qubit 0.
+Step 4: CNOT with control qubit 0 and target qubit 3.</p>
+<p>We want to prepare the logical GHZ state: (|00&gt;_AB + |11&gt;_AB)/√2. But then we have errors on the CNOT gates. Each CNOT gate is followed by a two-qubit depolarizing error channel. That error channel: with probability p, an error occurs. And if an error occurs, it is one of the 15 non-identity two-qubit Paulis with equal probability p/15. So each CNOT gate&rsquo;s error model: after the ideal CNOT, we apply a Pauli error from the set {I, X, Y, Z} on both qubits? Actually: &ldquo;two qubit depolarizing error channel&rdquo; that produces one of the 15 non-identity two-qubit Paulis with equal probability p/15. So total error probability p. And with probability 1-p, no error.</p>
+<p>We want: &ldquo;the physical state fidelity&rdquo; of the final physical 4-qubit state. But careful: &ldquo;physical state fidelity&rdquo; likely means the fidelity between the actual state (which is mixed due to errors) and the ideal state (which is the pure state we want to prepare). So fidelity F = sqrt(<psi|ρ|psi>) maybe? But then &ldquo;as a function of p&rdquo;. But note: The errors occur on the CNOT gates. There are two CNOT gates: CNOT_{21} and CNOT_{03}. So each CNOT gate has an error channel. They are independent? Possibly yes.</p>
+<p>We need to compute the final state density matrix ρ. Initially, we start with all qubits in |0&gt;? Usually state preparation: initial state is |0000&gt;? But the circuit: H_2 and H_0 are applied. So initial state: |0&gt; on all qubits? Typically yes. So initial state: |0000&gt;.</p>
+<p>Then we apply:</p>
+<ol>
+<li>H_2: on qubit 2. That gives: |0&gt;_0, |0&gt;_1, (|0&gt;+|1&gt;)/√2 on qubit 2, |0&gt;_3. So state: (|00&gt; + |01&gt;)/√2? Actually careful: qubits: 0,1,2,3. After H_2: state = |0&gt;_0 |0&gt;_1 (|0&gt;+|1&gt;)/√2 |0&gt;_3 = (|0000&gt; + |0010&gt;)/√2.</li>
+<li>Then CNOT_{21}: control qubit 2, target qubit 1. So ideal: CNOT_{21} applied. That gives: (|0000&gt; + |0110&gt;)/√2? Check: For |0000&gt;: control qubit 2 is 0, so target qubit 1 remains 0. For |0010&gt;: control qubit 2 is 1, so target qubit 1 flips: from 0 to 1. So state becomes: (|0000&gt; + |0110&gt;)/√2.</li>
+<li>Then H_0: on qubit 0. That gives: H on qubit 0: |0&gt; -&gt; (|0&gt;+|1&gt;)/√2, |1&gt; -&gt; (|0&gt;-|1&gt;)/√2. So state becomes: (1/√2)[ (|0000&gt;+|1000&gt;)/√2 + (|0110&gt;+|1110&gt;)/√2? Actually careful: Actually: state = (|0000&gt; + |0110&gt;)/√2. Apply H_0: 
+|0000&gt; -&gt; (|0000&gt;+|1000&gt;)/√2.
+|0110&gt; -&gt; (|0110&gt;+|1110&gt;)/√2? But careful: H on qubit 0: if qubit 0 is 0, then becomes (|0&gt;+|1&gt;)/√2; if qubit 0 is 1, then becomes (|0&gt;-|1&gt;)/√2. But here in |0110&gt;, qubit 0 is 0? Actually: |0110&gt; means: qubit0=0, qubit1=1, qubit2=1, qubit3=0. So indeed qubit0 is 0. So then H_0 gives: (|0110&gt;+|1110&gt;)/√2. So overall state becomes: (1/√2)*[1/√2 (|0000&gt;+|1000&gt; + |0110&gt;+|1110&gt;)] = 1/2 (|0000&gt;+|1000&gt;+|0110&gt;+|1110&gt;).</li>
+<li>Then CNOT_{03}: control qubit 0, target qubit 3. So ideal: 
+For each term:
+|0000&gt;: control=0 -&gt; no flip: remains |0000&gt;.
+|1000&gt;: control=1 -&gt; flip target qubit 3: becomes |1001&gt;.
+|0110&gt;: control=0 -&gt; remains |0110&gt;.
+|1110&gt;: control=1 -&gt; becomes |1111&gt;.
+So final ideal state: (|0000&gt; + |1001&gt; + |0110&gt; + |1111&gt;)/2.
+But is that the logical GHZ state? The logical states: The code [[4,2,2]] encodes two qubits. The logical operators: X_A = XIXI, X_B=XXII, Z_A=ZZII, Z_B=ZIZI. And the stabilizers: XXXX and ZZZZ. Check: Our state: |0000&gt;? But then logical states? Actually, the logical basis states: They are defined as codespace. The codespace is the +1 eigenspace of XXXX and ZZZZ. Check: For state |0000&gt;, XXXX gives +1? Actually, XXXX on |0000&gt; gives |1111&gt;? That is not an eigenvector. So wait: The state we got is not necessarily in the codespace? But we are preparing a logical GHZ state. The logical GHZ state is (|00&gt;_AB + |11&gt;_AB)/√2. That state is a superposition of two logical states. They are in the codespace. So our state should be in the codespace. Check: For our state: (|0000&gt; + |1001&gt; + |0110&gt; + |1111&gt;)/2. Apply XXXX: 
+XXXX|0000&gt; = |1111&gt;
+XXXX|1001&gt; = |0110&gt;? Actually careful: XXXX means apply X on each qubit. So:
+|0000&gt; -&gt; |1111&gt;
+|1001&gt; -&gt; |0110&gt; because: qubit0:1-&gt;0, qubit1:0-&gt;1, qubit2:0-&gt;1, qubit3:1-&gt;0? Actually: |1001&gt;: digits: 1,0,0,1. X on each: becomes 0,1,1,0 so |0110&gt;.
+|0110&gt; -&gt; |1001&gt;
+|1111&gt; -&gt; |0000&gt;
+So indeed XXXX applied gives: (|1111&gt;+|0110&gt;+|1001&gt;+|0000&gt;)/2 = same state. So it is an eigenvector of XXXX with eigenvalue 1.
+Now ZZZZ: 
+ZZZZ|0000&gt; = |0000&gt; because all zeros.
+ZZZZ|1001&gt;: Z on each: qubit0: 1 -&gt; -1, qubit1: 0 -&gt; +1, qubit2: 0 -&gt; +1, qubit3: 1 -&gt; -1, so product = (+1)*? Actually careful: ZZZZ means Z on each qubit. But since it&rsquo;s a diagonal operator, it multiplies each basis state by a phase: for state |abcd&gt;, ZZZZ gives (-1)^(a+b+c+d)? Actually: Z|0&gt;=|0&gt;, Z|1&gt;=-|1&gt;. So indeed, ZZZZ|abcd&gt; = (-1)^(a+b+c+d) |abcd&gt;. So:
+|0000&gt;: phase = 1.
+|1001&gt;: sum=1+0+0+1=2, so phase=1.
+|0110&gt;: sum=0+1+1+0=2, so phase=1.
+|1111&gt;: sum=4, so phase=1.
+So it is also +1 eigenvector. So indeed this state is in the codespace. And it is the logical GHZ state? Check: The logical operators: X_A = XIXI. Apply X_A to our state: 
+X_A|0000&gt; = |0100&gt;? But that is not in our superposition. So maybe it&rsquo;s not exactly the logical basis? Alternatively, we might identify the logical states. The logical states are usually defined as: 
+|00&gt;_L = (|0000&gt;+|1111&gt;)/√2? But our state has also |1001&gt; and |0110&gt;. Actually, note: Our state is (|0000&gt;+|1001&gt;+|0110&gt;+|1111&gt;)/2. That can be written as (1/√2)[ (|0000&gt;+|1111&gt;)/√2 + (|1001&gt;+|0110&gt;)/√2 ]. And these two parts are orthogonal. And they might be the logical states? Actually, check: The stabilizers: XXXX and ZZZZ. The codespace is 4-dimensional. The logical operators: X_A, X_B, Z_A, Z_B. They commute with stabilizers. Possibly our state is indeed the GHZ state: (|00&gt;_AB + |11&gt;_AB)/√2. But we don&rsquo;t need to check further.</li>
+</ol>
+<p>So ideal state: |ψ_ideal&gt; = (|0000&gt; + |1001&gt; + |0110&gt; + |1111&gt;)/2.</p>
+<p>Now, we have errors on the CNOT gates. There are two CNOT gates: CNOT_{21} and CNOT_{03}. Each CNOT gate is followed by an error channel. The error channel: after the gate, with probability 1-p, no error; with probability p, an error occurs. And if error occurs, it is one of the 15 Pauli operators on the two qubits (the ones that are not identity). And these errors are applied on the two qubits involved in the CNOT. So we have two independent error events.</p>
+<p>Let&rsquo;s denote:
+Gate1: CNOT_{21} (on qubits 2 and 1). After this gate, an error E1 is applied from the set of Paulis on qubits {2,1}? But careful: The error channel is on the two qubits that the gate acts on. So for CNOT_{21}, the error acts on qubits 2 and 1. Similarly, for CNOT_{03}, error acts on qubits 0 and 3.</p>
+<p>These errors occur independently. So the overall process: We start with |0&gt;^4. Then we apply the circuit but with errors inserted after each CNOT. So the actual state is a mixture over error patterns.</p>
+<p>We want the physical state fidelity. That is: F = &lt;ψ_ideal| ρ_final |ψ_ideal&gt;. Where ρ_final is the density matrix of the final state (after the entire circuit including errors). And we want it as a function of p.</p>
+<p>Since errors are Pauli errors, and the ideal circuit is Clifford (Hadamard and CNOT), the overall effect is that the final state is a mixture of states that are Pauli errors applied to the ideal state? But careful: The errors occur in the middle. But because the circuit is Clifford, the propagation of Pauli errors through Clifford gates is that they become other Pauli errors. So we can analyze: The ideal circuit U = U_4 * U_3 * U_2 * U_1, where:
+U_1 = H_2
+U_2 = CNOT_{21}
+U_3 = H_0
+U_4 = CNOT_{03}
+But then after U_2, we apply an error E on qubits (2,1). And after U_4, we apply an error F on qubits (0,3).</p>
+<p>So the actual operation is: U_4 * (F) * U_3 * U_2 * (E) * U_1. But note: U_3 and U_1 are single-qubit gates. They are error-free? The problem says: &ldquo;each CNOT_{ij} gate has a two qubit depolarizing error channel following it&rdquo;. So only CNOT gates have errors. The Hadamard gates are perfect.</p>
+<p>So we can consider: Let V = U_4 U_3 U_2 U_1 be the ideal circuit. Then the actual circuit with errors: It becomes: U_4 * F * U_3 * U_2 * E * U_1. But we can commute the errors through the subsequent gates? Because the subsequent gates are Clifford. So we can write: U_4 * F * U_3 * U_2 * E * U_1 = (U_4 U_3 U_2 U_1) * (U_1^\dagger U_2^\dagger U_3^\dagger F U_3 U_2 U_1) * (U_1^\dagger E U_1)? Actually careful: 
+We have: U_4 U_3 U_2 E U_1? Actually order: 
+Actual: After U_1, then E (error on qubits 2,1), then U_2, then U_3, then F (error on qubits 0,3), then U_4.
+So total = U_4 * F * U_3 * U_2 * E * U_1.
+We want to push errors to the end. Write: U_4 * F * U_3 * U_2 * E * U_1 = (U_4 U_3 U_2 U_1) * (U_1^\dagger U_2^\dagger U_3^\dagger F U_3 U_2 U_1) * (U_1^\dagger E U_1)? That doesn&rsquo;t quite work because the order: Actually, we have: U_4 U_3 U_2 E U_1 = (U_4 U_3 U_2 U_1) (U_1^\dagger E U_1) if U_2 and U_3 commute with that? But careful: U_2 and U_3 are not necessarily commuting with E? Actually, we can push errors through Clifford gates. More systematically: 
+Let A = U_4 U_3 U_2 U_1 (ideal). Then actual = U_4 F U_3 U_2 E U_1 = A * (A^-1 U_4 F U_3 U_2 E U_1). But A^-1 = U_1^\dagger U_2^\dagger U_3^\dagger U_4^\dagger. So A^-1 U_4 F U_3 U_2 E U_1 = U_1^\dagger U_2^\dagger U_3^\dagger U_4^\dagger U_4 F U_3 U_2 E U_1 = U_1^\dagger U_2^\dagger U_3^\dagger F U_3 U_2 E U_1. That is not simply a product of two errors because F and E act on different qubits? But they might commute? Actually, F acts on qubits 0,3. E acts on qubits 2,1. They act on disjoint sets? Qubits: 0,1,2,3. E on (2,1) and F on (0,3) are disjoint. And the gates U_3 and U_2: U_3 = H_0, which acts on qubit 0. U_2 = CNOT_{21}? Actually careful: U_2 is CNOT_{21} which acts on qubits 2 and 1. So U_2 commutes with F? Because F acts on qubits 0 and 3, so yes, they commute. U_3 = H_0 acts on qubit 0, so it might not commute with F? But F is on qubits 0 and 3. But we can compute: U_3^\dagger F U_3. That will become some Pauli on qubits 0 and 3? Because H conjugates Pauli X and Z. So indeed, U_3^\dagger F U_3 is still a Pauli on qubits 0 and 3? Actually, careful: F is one of the 15 Paulis on qubits 0 and 3. Under conjugation by H on qubit 0, it will map to a Pauli on qubits 0 and 3? But what about qubit 3? H on qubit 0 does nothing on qubit 3. So yes, it becomes a Pauli on qubits 0 and 3. Similarly, U_2^\dagger E U_2: E is on qubits 2 and 1. U_2 is CNOT_{21}. That will map Paulis on qubits 2 and 1 to Paulis on qubits 2 and 1? Actually, CNOT conjugation: It maps Pauli operators to Pauli operators. So indeed, U_2^\dagger E U_2 is a Pauli on qubits 2 and 1. And then U_1 = H_2. That acts on qubit 2. So U_1^\dagger (that Pauli) U_1 will become a Pauli on qubits 2 and 1? Because H on qubit 2 conjugates Paulis on qubit 2. So overall, we get that the actual operation is A * (some Pauli error on all qubits? But careful: The expression is: U_1^\dagger U_2^\dagger U_3^\dagger F U_3 U_2 U_1 * U_1^\dagger E U_1? Actually, we had: A^-1 actual = U_1^\dagger U_2^\dagger U_3^\dagger F U_3 U_2 E U_1. But note that U_2 and U_3 commute with E? Actually, E acts on qubits 2,1. U_3 acts on qubit 0, so they commute. So we can write: U_1^\dagger U_2^\dagger U_3^\dagger F U_3 U_2 E U_1 = (U_1^\dagger U_2^\dagger U_3^\dagger F U_3 U_2 U_1) (U_1^\dagger E U_1) because U_1 commutes with E? Actually, careful: U_1 = H_2. E acts on qubits 2 and 1. H_2 does not necessarily commute with E? But we can swap them if we conjugate? Actually, we have: U_1^\dagger U_2^\dagger U_3^\dagger F U_3 U_2 E U_1. Since E and U_3 commute, we can move E to the right? But then we get: U_1^\dagger U_2^\dagger U_3^\dagger F U_3 U_2 U_1 E? That would be if U_1 and E commute? But they don&rsquo;t necessarily commute because U_1 acts on qubit 2 and E acts on qubits 2 and 1. So it&rsquo;s better to keep them separate. Actually, we can define: 
+E&rsquo; = U_1^\dagger E U_1. This is a Pauli on qubits 2 and 1.
+And F&rsquo; = U_1^\dagger U_2^\dagger U_3^\dagger F U_3 U_2 U_1. This is a Pauli on qubits? F acts on 0,3. U_3 acts on 0, so F&rsquo; becomes a Pauli on 0,3? But then U_2 acts on 2,1, so that commutes with F? Actually, careful: U_2 is CNOT_{21}. That acts on qubits 2 and 1. F acts on 0 and 3, so they commute. So U_2^\dagger F U_2 = F. Then U_1^\dagger F U_1: U_1 is H_2, but F acts on 0 and 3, so that commutes with H_2? Actually, H_2 acts on qubit 2, so it commutes with operators on qubits 0 and 3. So actually, F&rsquo; = U_3^\dagger F U_3? Because U_2 and U_1 commute with F. Wait: Check: F acts on qubits 0 and 3. U_2 is CNOT_{21} so it acts on qubits 2 and 1. So indeed, U_2 and F commute. U_1 is H_2, so it acts on qubit 2, so it commutes with F. So then F&rsquo; = U_1^\dagger U_2^\dagger U_3^\dagger F U_3 U_2 U_1 = U_3^\dagger F U_3 because U_1 and U_2 commute with F. And U_3 = H_0. So F&rsquo; is: F is a Pauli on qubits 0 and 3. Under conjugation by H_0, on qubit 0, it becomes: if F has X on qubit 0, it becomes Z on qubit 0; if Z on qubit 0, becomes X on qubit 0; if Y on qubit 0, becomes -Y on qubit 0? But careful: Actually, H X H = Z, H Z H = X. So indeed, F&rsquo; will be a Pauli on qubits 0 and 3, but possibly with a sign? But sign might matter? But since errors are depolarizing, we consider all Pauli errors equally likely? But then the overall effect: The actual operation becomes: A * (F&rsquo; * E&rsquo;?) But careful: Our expression: A^-1 actual = U_1^\dagger U_2^\dagger U_3^\dagger F U_3 U_2 E U_1. And we cannot simply swap E and the stuff because they act on different qubits? Actually, they act on disjoint sets: E acts on qubits 2,1; and U_1^\dagger U_2^\dagger U_3^\dagger F U_3 U_2 U_1 acts on qubits? That is F&rsquo; but careful: F&rsquo; = U_1^\dagger U_2^\dagger U_3^\dagger F U_3 U_2 U_1. But note that U_2 and U_1 commute with F? Actually, check: F acts on qubits 0 and 3. U_2 acts on qubits 2 and 1, so they commute. U_1 acts on qubit 2, so they commute. So indeed, F&rsquo; = U_3^\dagger F U_3. And then our expression becomes: A^-1 actual = F&rsquo; * (U_1^\dagger U_2^\dagger E U_2 U_1)? But careful: We have: U_1^\dagger U_2^\dagger U_3^\dagger F U_3 U_2 E U_1. Since U_2 and U_3 commute with E? Actually, E acts on qubits 2,1. U_3 acts on qubit 0, so commutes. So we can move E to the right past U_3? But then we get: U_1^\dagger U_2^\dagger U_3^\dagger F U_3 U_2 U_1 E? That would be if U_1 and E commute? But they don&rsquo;t necessarily commute because U_1 acts on qubit 2 and E acts on qubits 2 and 1. So we cannot simply swap E and U_1. Instead, define E&rsquo;&rsquo; = U_1^\dagger E U_1. Then note that U_2 commutes with U_1? Actually, U_2 is CNOT_{21} and U_1 is H_2. They do not commute generally. So we have: U_1^\dagger U_2^\dagger E U_2 U_1 is not simply E&rsquo;&rsquo; because U_2 and U_1 do not commute. So let&rsquo;s do step by step:</p>
+<p>We have: Actual = U_4 * F * U_3 * U_2 * E * U_1.
+Ideal = U_4 U_3 U_2 U_1 = A.
+We want to express Actual = A * (something). That something is A^-1 Actual = (U_1^\dagger U_2^\dagger U_3^\dagger U_4^\dagger) U_4 F U_3 U_2 E U_1 = U_1^\dagger U_2^\dagger U_3^\dagger F U_3 U_2 E U_1.
+Now, let’s denote: 
+Group: U_3^\dagger F U_3. That is a Pauli on qubits 0 and 3? Because U_3 = H_0, so it conjugates Paulis on qubit 0. So let F1 = U_3^\dagger F U_3. Then we have: = U_1^\dagger U_2^\dagger F1 U_2 E U_1.
+Now, U_2 is CNOT_{21}. F1 acts on qubits 0 and 3. So U_2 commutes with F1 because they act on disjoint sets? Actually, careful: U_2 acts on qubits 2 and 1. F1 acts on qubits 0 and 3. So yes, they commute. So then = U_1^\dagger U_2^\dagger U_2 F1 E U_1 = U_1^\dagger F1 E U_1? But wait: U_2^\dagger U_2 = I. But careful: U_2^\dagger F1 U_2 = F1 because they commute. So then we get: = U_1^\dagger F1 E U_1.
+But then U_1 = H_2. F1 acts on qubits 0 and 3, so commutes with U_1. So then = F1 * U_1^\dagger E U_1.
+So indeed, A^-1 Actual = F1 * (U_1^\dagger E U_1). And let E1 = U_1^\dagger E U_1. Then Actual = A * F1 * E1.
+But wait: Check: U_1 = H_2. E acts on qubits 2 and 1. So E1 is a Pauli on qubits 2 and 1? But careful: H_2 conjugates Paulis on qubit 2. So E1 will be a Pauli on qubits 2 and 1. And F1 is a Pauli on qubits 0 and 3.
+So overall, the actual operation is: Actual = A * (F1 * E1), where F1 is a Pauli error on qubits 0 and 3 that comes from the error F on the second CNOT, and E1 is a Pauli error on qubits 2 and 1 that comes from the error E on the first CNOT.
+And note: A is the ideal circuit. So if we start with |0&gt;^4, then the ideal state is A|0&gt;^4 = |ψ_ideal&gt;. And the actual state (if there is an error pattern) is A * (F1 E1) |0&gt;^4 = (F1 E1) A|0&gt;^4? But careful: A and F1E1 commute? They act on different qubits? A is the entire circuit. But F1E1 is a Pauli operator. Does it commute with A? Not necessarily. But we have: Actual = A * (F1 E1). So the state becomes: |ψ_actual&gt; = A (F1 E1) |0&gt;^4. But note that A|0&gt;^4 = |ψ_ideal&gt;. But then A (F1 E1) |0&gt;^4 is not necessarily equal to (F1 E1) A|0&gt;^4 because A and F1E1 might not commute. Actually, wait: A is a unitary. (F1 E1) is a Pauli. They might not commute. But we can also push the error to the end? Actually, we had: Actual = A * (F1 E1). So if we apply that to |0&gt;, we get A (F1 E1) |0&gt;. That is not necessarily equal to (F1 E1) A|0&gt; because A and F1E1 do not necessarily commute. But we computed A^-1 Actual = F1 E1. That means that Actual = A (F1 E1). So the state is A (F1 E1)|0&gt;. That is the state after the circuit with errors. And if there were no errors, state = A|0&gt;. So the error is essentially applied at the beginning? Actually, careful: The errors occur in the middle. But we have transformed them to equivalent errors at the end? That is typical in fault tolerance analysis: errors propagate through Clifford gates and become Pauli errors at the end. But here, our transformation gave: Actual = A * (F1 E1). But then if we apply that to |0&gt;, we get A (F1 E1)|0&gt;. That is not the same as (F1 E1) A|0&gt; in general because A does not necessarily commute with F1E1. However, note that A is a specific circuit. But maybe we can compute the effect on the initial state |0&gt;^4. The initial state is |0&gt;^4. And F1E1 is a Pauli operator. But |0&gt;^4 is an eigenvector of Z on each qubit. So F1E1|0&gt;^4 will be either |0&gt;^4 or some state that is flipped? Actually, Pauli operators: They are products of X, Y, Z. On |0&gt;, X|0&gt;=|1&gt;, Z|0&gt;=|0&gt;, Y|0&gt;=i|1&gt;? But careful: |0&gt;^4 means all qubits in 0. So if F1E1 has any X or Y on a qubit, it will flip that qubit to 1. So F1E1|0&gt;^4 is some computational basis state. And then A applied to that gives A (F1E1)|0&gt;^4. That is the actual state. So we want the fidelity: &lt;ψ_ideal| ρ |ψ_ideal&gt; where ρ is the mixture over error patterns.</p>
+<p>So let&rsquo;s denote: 
+For the first CNOT (CNOT_{21}), error E occurs. E is chosen from the set of Pauli operators on qubits {2,1} with probability: P(E) = 1-p if E = I⊗I (on qubits 2,1), and p/15 for each of the 15 non-identity Paulis.
+Similarly, for the second CNOT (CNOT_{03}), error F occurs. F is on qubits {0,3} with probability: 1-p if F = I⊗I, and p/15 for each non-identity.</p>
+<p>Then the actual state is: |ψ(E,F)&gt; = A (F1 E1) |0&gt;^4, where 
+E1 = U_1^\dagger E U_1, with U_1 = H_2.
+F1 = U_3^\dagger F U_3, with U_3 = H_0.</p>
+<p>So we need to compute these transformed errors explicitly.</p>
+<p>Let&rsquo;s compute E1. E is a Pauli on qubits 2 and 1. U_1 = H_2. So E1 = H_2^\dagger E H_2. That means: On qubit 2, we conjugate by H. On qubit 1, it remains the same because H acts only on qubit 2. So if E = P_2 ⊗ Q_1, where P, Q are Paulis (I, X, Y, Z) on qubits 2 and 1 respectively, then E1 = (H_2^\dagger P H_2) ⊗ Q. And H conjugates: H X H = Z, H Z H = X, H Y H = -Y. So E1 will be: 
+If P = I, then I.
+If P = X, then becomes Z.
+If P = Z, then becomes X.
+If P = Y, then becomes -Y.
+So essentially, E1 is just a Pauli on qubits 2 and 1, but with a possible sign if Y is involved. But note: The error probabilities: E is uniformly distributed among the 16 Paulis on qubits 2 and 1? Actually, distribution: P(E=I⊗I) = 1-p, and for each of the 15 others, probability p/15. But careful: When we conjugate by H, the set of Paulis is mapped to itself? Because H maps X to Z and Z to X, and Y to -Y. So the set of non-identity Paulis is invariant under conjugation by H (up to a sign). But the sign might matter? But since we are taking the state |0&gt;^4, the sign might affect the state? Actually, if E1 has a minus sign, then E1|0&gt;^4 might get a phase. But then A applied to that might yield a different state. So we need to keep track of the exact Pauli operator (including signs) that results from E1 and F1.</p>
+<p>But maybe we can compute the fidelity directly by considering the effect of errors on the ideal state? Alternatively, we can compute the final density matrix ρ. The process: 
+Start with |0&gt;^4.
+Then apply U_1 (H_2) perfectly.
+Then apply CNOT_{21} perfectly? But then error E occurs. So after that step, the state becomes: (I with probability 1-p, or with probability p, we apply a Pauli error on qubits 2 and 1) on the state after CNOT_{21}. But then we apply U_3 (H_0) perfectly.
+Then apply CNOT_{03} perfectly? Then error F occurs.
+So we can compute the state step by step and then average over errors. That might be more straightforward? But then we have to compute the fidelity with the ideal state. That might be messy.</p>
+<p>Maybe the propagation method is simpler: We found that the overall operation is A * (F1 E1) where F1 = U_3^\dagger F U_3 and E1 = U_1^\dagger E U_1. And A = ideal circuit. So the final state for a given error pattern is: |ψ(E,F)&gt; = A (F1 E1) |0&gt;^4.
+And the ideal state is A|0&gt;^4 = |ψ_ideal&gt;.
+So the fidelity for a given error pattern is: |&lt;ψ_ideal| A (F1 E1) |0&gt;^4|^2 = |&lt;0| A^\dagger A (F1 E1) |0&gt;^4|^2? That would be |&lt;0| F1 E1 |0&gt;^4|^2. But careful: A|0&gt;^4 = |ψ_ideal&gt;. So &lt;ψ_ideal| = &lt;0| A^\dagger. So &lt;ψ_ideal| A (F1 E1)|0&gt; = &lt;0| A^\dagger A (F1 E1)|0&gt; = &lt;0| F1 E1 |0&gt; because A^\dagger A = I. So indeed, the fidelity for a specific error pattern is: f(E,F) = |&lt;0| F1 E1 |0&gt;|^2, where |0&gt; means |0000&gt; (all qubits in 0). And F1 acts on qubits 0 and 3, and E1 acts on qubits 2 and 1. And these are independent. And note that F1 and E1 are Pauli operators (with possible signs). And |0&gt; is the state where all qubits are 0. So &lt;0| F1 E1 |0&gt; is nonzero only if F1 E1 does not flip any qubit from 0 to 1. Because Pauli X and Y flip bits. More precisely, if a Pauli operator has an X or Y on any qubit, then applied to |0&gt;, it will give a state orthogonal to |0&gt;? But careful: What about phases? For example, Z|0&gt; = |0&gt;, so that is fine. Also, I|0&gt; = |0&gt;. But if there is an X, then |1&gt; appears, so overlap 0. If there is a Y, then Y|0&gt; = i|1&gt;, so overlap 0. So the fidelity is 1 if F1 E1 acts as identity on the computational basis? But wait: There could be a phase. For instance, if F1 E1 = -I (all qubits), then &lt;0| -I |0&gt; = -1, so the fidelity squared is 1. So actually, the fidelity is 1 if F1 E1 is either I or -I overall? But careful: The fidelity is |&lt;0| F1 E1 |0&gt;|^2. If F1 E1 = -I, then &lt;0| -I |0&gt; = -1, so squared is 1. So indeed, if the combined error operator F1 E1 leaves the state |0&gt; unchanged up to a phase, then the fidelity is 1. When does that happen? F1 E1 is a product of Paulis on qubits 0,3 and on qubits 2,1. For it to leave |0&gt; invariant, on each qubit, the Pauli must be either I or Z (or possibly with a phase? But careful: For a single qubit, if the operator is Z, then Z|0&gt; = |0&gt;. If it is -Z, then -Z|0&gt; = -|0&gt;, so that gives a phase of -1. But if it is X or Y, then it gives a state orthogonal to |0&gt;. So the condition for &lt;0| F1 E1 |0&gt; to be nonzero is that on each qubit, the Pauli operator is either I or Z (or multiples thereof). But wait: Could it be that on one qubit we have Y? Y|0&gt; = i|1&gt;, so that gives 0 overlap. So indeed, for the overlap to be nonzero, on each qubit, the operator must be proportional to I or Z. But also, there could be a global phase. So essentially, the fidelity is 1 if F1 E1 is a Pauli that is a product of Z&rsquo;s and I&rsquo;s on all qubits (possibly with a minus sign). But careful: What about Paulis that are not diagonal in the computational basis? They will flip some qubits to 1, so then overlap with |0&gt; is 0.
+So, f(E,F) = 1 if F1 E1 is such that on each qubit, the Pauli is either I or Z (i.e., no X or Y). And f(E,F) = 0 otherwise.</p>
+<p>But wait: Is that correct? Let&rsquo;s check with a simple example: Suppose there is no error: E = I on qubits 2,1 and F = I on qubits 0,3. Then F1 = U_3^\dagger I U_3 = I. E1 = U_1^\dagger I U_1 = I. So F1 E1 = I, so fidelity = 1. That works.
+What if there is an error that becomes a Z on some qubit? For instance, consider an error on the first CNOT: E = something that becomes E1 = Z on qubit 2 and I on qubit 1. Then F1 E1 will have Z on qubit 2. That will give &lt;0| Z|0&gt; = 1, so fidelity = 1. So errors that are equivalent to Z errors on the qubits do not reduce the fidelity? That makes sense because the ideal state is a superposition of computational basis states. But wait: The ideal state is |ψ_ideal&gt; = (|0000&gt;+|1001&gt;+|0110&gt;+|1111&gt;)/2. If we apply a Z error on qubit 2, what happens? Z on qubit 2: |0000&gt; -&gt; |0000&gt;, |1001&gt; -&gt; |1001&gt;, |0110&gt; -&gt; -|0110&gt; (because qubit2 is 1), |1111&gt; -&gt; -|1111&gt;. So the state becomes (|0000&gt;+|1001&gt; -|0110&gt; -|1111&gt;)/2. That state is not the same as the ideal state. So then the fidelity would be |&lt;ψ_ideal| that state&gt;|^2. Compute: &lt;ψ_ideal| = (1/2)(&lt;0000|+&lt;1001|+&lt;0110|+&lt;1111|). Dot with (|0000&gt;+|1001&gt; -|0110&gt; -|1111&gt;)/2 gives (1/4)(1+1-1-1)=0. So wait, that suggests that if there is a Z error on qubit 2, the fidelity should be 0. But our computation using the pushed error method gave: f = |&lt;0| F1 E1 |0&gt;|^2. For E1 = Z on qubit 2, that gives 1. There is a discrepancy. Let&rsquo;s recheck the pushed error method carefully.</p>
+<p>We had: Actual = U_4 * F * U_3 * U_2 * E * U_1.
+And we computed that A^-1 Actual = U_1^\dagger U_2^\dagger U_3^\dagger F U_3 U_2 E U_1. And then we simplified to F1 * E1, where F1 = U_3^\dagger F U_3 and E1 = U_1^\dagger E U_1. But wait, did we correctly simplify? Let&rsquo;s do step by step:
+A = U_4 U_3 U_2 U_1.
+A^-1 = U_1^\dagger U_2^\dagger U_3^\dagger U_4^\dagger.
+Then A^-1 Actual = U_1^\dagger U_2^\dagger U_3^\dagger U_4^\dagger * U_4 * F * U_3 * U_2 * E * U_1 = U_1^\dagger U_2^\dagger U_3^\dagger F U_3 U_2 E U_1.
+Now, note that U_3 and U_2 do not necessarily commute with E? But we did: U_3^\dagger F U_3 = F1. But careful: F1 is defined as U_3^\dagger F U_3. That is fine. So then we have: = U_1^\dagger U_2^\dagger F1 U_3 U_2 E U_1? Actually, careful: U_3^\dagger F U_3 is F1. But then we have U_3 still there? Actually, we have: U_1^\dagger U_2^\dagger U_3^\dagger F U_3 U_2 E U_1 = U_1^\dagger U_2^\dagger (U_3^\dagger F U_3) U_3^\dagger U_3 U_2 E U_1? That would be if we insert U_3 U_3^\dagger? I&rsquo;m trying to get F1 separated. Actually, we have: U_3^\dagger F U_3 is F1. But then there is an extra U_3? Because the expression is: U_1^\dagger U_2^\dagger [U_3^\dagger F U_3] U_2 E U_1. But wait, there is a U_3 between F and U_2? The order is: U_1^\dagger U_2^\dagger U_3^\dagger F U_3 U_2 E U_1. So group as: (U_1^\dagger U_2^\dagger) (U_3^\dagger F U_3) (U_2 E U_1). But note that (U_3^\dagger F U_3) is F1. But then we have U_2 and E. But U_2 and F1 commute because they act on different qubits? U_2 acts on qubits 2 and 1, F1 acts on qubits 0 and 3. So indeed, U_2^\dagger F1 U_2 = F1. So then we can write: U_1^\dagger U_2^\dagger F1 U_2 E U_1 = U_1^\dagger (U_2^\dagger F1 U_2) (U_2^\dagger U_2) E U_1? That doesn&rsquo;t work because U_2^\dagger U_2 = I, but then we get U_1^\dagger F1 E U_1. But careful: U_2^\dagger F1 U_2 = F1 because they commute. So then we have: U_1^\dagger F1 U_2^\dagger U_2 E U_1 = U_1^\dagger F1 E U_1. But wait, is it true that U_2^\dagger U_2 = I? Yes, but then we get: U_1^\dagger U_2^\dagger F1 U_2 E U_1 = U_1^\dagger F1 (U_2^\dagger U_2) E U_1 = U_1^\dagger F1 E U_1. But then we have swapped the order of U_2 and E? Actually, careful: The expression is: U_1^\dagger U_2^\dagger F1 U_2 E U_1. Since U_2 and F1 commute, we can move U_2 through F1: = U_1^\dagger F1 U_2^\dagger U_2 E U_1 = U_1^\dagger F1 E U_1. That step is valid if U_2^\dagger and E commute? But U_2 is CNOT_{21} and E acts on qubits 2 and 1. They do not necessarily commute. So we cannot simply say U_2^\dagger U_2 E = E because U_2 and E do not commute. So the correct step is: U_1^\dagger U_2^\dagger F1 U_2 E U_1. Since F1 commutes with U_2, we can write this as U_1^\dagger F1 U_2^\dagger U_2 E U_1 = U_1^\dagger F1 (U_2^\dagger U_2) E U_1. But U_2^\dagger U_2 = I, so that gives U_1^\dagger F1 E U_1. That seems to suggest that U_2^\dagger U_2 E = E. But wait, U_2^\dagger U_2 is indeed I. So it is true that U_2^\dagger U_2 E = E. But careful: U_2^\dagger U_2 is the identity operator. So for any operator E, U_2^\dagger U_2 E = E. So that step is valid. So then we get: A^-1 Actual = U_1^\dagger F1 E U_1. But then we still have E and U_1. And U_1 = H_2. And E acts on qubits 2 and 1. So then we get = F1 * (U_1^\dagger E U_1) because F1 commutes with U_1? F1 acts on qubits 0 and 3, so yes, they commute. So then = F1 * E1, where E1 = U_1^\dagger E U_1. So that derivation seems correct. So then Actual = A (F1 E1). So then the state is A (F1 E1)|0&gt;. And then the fidelity is |&lt;ψ_ideal| A (F1 E1)|0&gt;|^2 = |&lt;0| A^\dagger A (F1 E1)|0&gt;|^2 = |&lt;0| F1 E1 |0&gt;|^2. So according to this, if F1 E1 is, say, Z on qubit 2 (and identity on others), then &lt;0| Z|0&gt; = 1, so fidelity would be 1. But we computed manually that if there is a Z error on qubit 2, the actual state becomes A (Z_2)|0&gt;. And we computed that state explicitly? Let&rsquo;s compute that manually to check.
+Consider an error on the first CNOT that is such that E = ? We want E1 = Z on qubit 2. E1 = U_1^\dagger E U_1 with U_1 = H_2. So if we want E1 = Z_2, then what is E? Since U_1^\dagger E U_1 = Z_2 means E = U_1 Z_2 U_1^\dagger = H_2 Z_2 H_2^\dagger = X_2 (because H Z H = X). So if we have an error E = X on qubit 2 (and identity on qubit 1) on the first CNOT, then after propagation, it becomes E1 = Z_2. So that error pattern: E = X_2 (on qubits 2,1: actually, E acts on qubits 2 and 1, so here it is X on qubit 2 and I on qubit 1). And F = I.
+Now, let&rsquo;s compute the state manually with this error. The circuit:
+Start: |0000&gt;.
+U_1 = H_2: becomes (|0000&gt;+|0010&gt;)/√2.
+Then apply CNOT_{21} ideally: 
+|0000&gt; -&gt; |0000&gt; (control 2=0)
+|0010&gt; -&gt; |0110&gt; (control 2=1 flips qubit 1)
+So state becomes (|0000&gt;+|0110&gt;)/√2.
+Then error E: E = X_2. So apply X on qubit 2. That gives: X_2 on (|0000&gt;+|0110&gt;)/√2 becomes (|0010&gt;+|0100&gt;)/√2? Because X on qubit 2: |0000&gt; -&gt; |0010&gt;; |0110&gt; -&gt; |0100&gt;.
+Then U_3 = H_0: Apply H on qubit 0.
+|0010&gt;: qubit0=0 -&gt; becomes (|0010&gt;+|1010&gt;)/√2.
+|0100&gt;: qubit0=0 -&gt; becomes (|0100&gt;+|1100&gt;)/√2.
+So state becomes: 1/√2 * [1/√2 (|0010&gt;+|1010&gt;+|0100&gt;+|1100&gt;)] = 1/2 (|0010&gt;+|1010&gt;+|0100&gt;+|1100&gt;).
+Then apply CNOT_{03} ideally: 
+|0010&gt;: control qubit0=0 -&gt; remains |0010&gt;.
+|1010&gt;: control=1 -&gt; flip qubit3: becomes |1011&gt;.
+|0100&gt;: control=0 -&gt; remains |0100&gt;.
+|1100&gt;: control=1 -&gt; becomes |1101&gt;.
+So state becomes: 1/2 (|0010&gt;+|1011&gt;+|0100&gt;+|1101&gt;).
+Then error F = I.
+So the final state is: (|0010&gt;+|1011&gt;+|0100&gt;+|1101&gt;)/2.
+Now, what is the ideal state? Ideal state is: (|0000&gt;+|1001&gt;+|0110&gt;+|1111&gt;)/2.
+The fidelity between these two states is 0 because they are orthogonal (different computational basis states). So the fidelity should be 0. But our pushed error method gave fidelity = |&lt;0| F1 E1|0&gt;|^2. For this case, F1 = I (since F=I), and E1 = U_1^\dagger E U_1. E = X_2, so E1 = H_2^\dagger X_2 H_2 = Z_2. So F1 E1 = Z_2. Then &lt;0| Z_2 |0&gt; = 1 because Z|0&gt;=|0&gt;. So that would give fidelity 1. There is a contradiction.</p>
+<p>I suspect the error is in the step where we pushed the errors to the end. The issue is that A is not simply the ideal circuit applied to the initial state? Actually, A = U_4 U_3 U_2 U_1. But then Actual = U_4 F U_3 U_2 E U_1. We want to see if we can write this as A * (something). That something would be A^-1 Actual = U_1^\dagger U_2^\dagger U_3^\dagger U_4^\dagger U_4 F U_3 U_2 E U_1 = U_1^\dagger U_2^\dagger U_3^\dagger F U_3 U_2 E U_1. This is correct.
+Now, can we commute U_2 and U_3 with E and F? Let&rsquo;s compute this operator explicitly for the case where E = X_2 and F = I. Then we have: U_1^\dagger U_2^\dagger U_3^\dagger F U_3 U_2 E U_1 = U_1^\dagger U_2^\dagger U_3^\dagger I U_3 U_2 (X_2) U_1 = U_1^\dagger U_2^\dagger U_2 (X_2) U_1 because U_3^\dagger U_3 = I. So that becomes U_1^\dagger (X_2) U_1 = H_2^\dagger X_2 H_2 = Z_2. So according to this, A^-1 Actual = Z_2. That means Actual = A Z_2. Then the state would be A Z_2 |0&gt;. But wait, what is A Z_2 |0&gt;? A is the ideal circuit. Let&rsquo;s compute A Z_2 |0&gt; manually. 
+A = U_4 U_3 U_2 U_1.
+Start with |0&gt; = |0000&gt;.
+Apply U_1 = H_2: becomes (|0000&gt;+|0010&gt;)/√2.
+Apply U_2 = CNOT_{21}: 
+|0000&gt; -&gt; |0000&gt;
+|0010&gt; -&gt; |0110&gt;
+So state: (|0000&gt;+|0110&gt;)/√2.
+Apply U_3 = H_0: 
+|0000&gt; -&gt; (|0000&gt;+|1000&gt;)/√2
+|0110&gt; -&gt; (|0110&gt;+|1110&gt;)/√2
+So state: 1/√2 * (1/√2)(|0000&gt;+|1000&gt;+|0110&gt;+|1110&gt;) = 1/2 (|0000&gt;+|1000&gt;+|0110&gt;+|1110&gt;).
+Apply U_4 = CNOT_{03}:
+|0000&gt; -&gt; |0000&gt;
+|1000&gt; -&gt; |1001&gt;
+|0110&gt; -&gt; |0110&gt;
+|1110&gt; -&gt; |1111&gt;
+So state becomes: 1/2 (|0000&gt;+|1001&gt;+|0110&gt;+|1111&gt;). That is actually the ideal state! So A|0&gt; is the ideal state. Now, what is A Z_2 |0&gt;? Z_2|0&gt; = |0&gt; because Z_2 acts on qubit 2, and |0&gt; has qubit2=0, so Z_2|0&gt; = |0&gt;. So then A Z_2|0&gt; = A|0&gt; = ideal state. That would suggest that if Actual = A Z_2, then the state is ideal. But our manual computation gave a different state when there is an X_2 error on the first CNOT. So there is an inconsistency. Let&rsquo;s recompute manually very carefully for the error case: E = X_2 (on qubits 2 and 1, so only qubit2 gets X) and F=I.
+Circuit steps:</p>
+<ol>
+<li>Initial: |0000&gt;.</li>
+<li>Apply U_1 = H_2. H_2 acts on qubit2. So state becomes: (|0000&gt; + |0010&gt;)/√2. (I&rsquo;ll denote states as |q0,q1,q2,q3&gt;)</li>
+<li>Apply U_2 = CNOT_{21}. This gate: control qubit2, target qubit1.
+   On |0000&gt;: control=0 -&gt; remains |0000&gt;.
+   On |0010&gt;: control=1 -&gt; flips qubit1: becomes |0110&gt;.
+   So state becomes: (|0000&gt; + |0110&gt;)/√2.</li>
+<li>Now error E: Apply X on qubit2. 
+   On |0000&gt;: X_2 gives |0010&gt;.
+   On |0110&gt;: X_2 gives |0100&gt; because qubit2 flips: 1-&gt;0.
+   So state becomes: (|0010&gt; + |0100&gt;)/√2.</li>
+<li>Apply U_3 = H_0. H_0 acts on qubit0.
+   On |0010&gt;: qubit0=0 -&gt; becomes (|0010&gt; + |1010&gt;)/√2.
+   On |0100&gt;: qubit0=0 -&gt; becomes (|0100&gt; + |1100&gt;)/√2.
+   So state becomes: 1/√2 * [1/√2 (|0010&gt;+|1010&gt;+|0100&gt;+|1100&gt;)] = 1/2 (|0010&gt;+|1010&gt;+|0100&gt;+|1100&gt;).</li>
+<li>Apply U_4 = CNOT_{03}. This gate: control qubit0, target qubit3.
+   On |0010&gt;: control=0 -&gt; remains |0010&gt;.
+   On |1010&gt;: control=1 -&gt; flips qubit3: becomes |1011&gt;.
+   On |0100&gt;: control=0 -&gt; remains |0100&gt;.
+   On |1100&gt;: control=1 -&gt; becomes |1101&gt;.
+   So state becomes: 1/2 (|0010&gt; + |1011&gt; + |0100&gt; + |1101&gt;).</li>
+<li>Error F: I, so state remains.</li>
+</ol>
+<p>So the final state is: |ψ_actual&gt; = (|0010&gt; + |1011&gt; + |0100&gt; + |1101&gt;)/2.
+This is clearly different from the ideal state which is (|0000&gt;+|1001&gt;+|0110&gt;+|1111&gt;)/2.
+So manual computation seems correct.</p>
+<p>Now, what is A Z_2 |0&gt;? We computed that as ideal state. So why does the pushed error method give Actual = A Z_2? Let&rsquo;s check the pushed error method carefully for this case. 
+Actual = U_4 * F * U_3 * U_2 * E * U_1, with F=I, E=X_2.
+So Actual = U_4 * U_3 * U_2 * (X_2) * U_1. 
+Now, can we commute X_2 through U_2? U_2 is CNOT_{21}. What is the action of CNOT_{21} on X_2? CNOT_{21} conjugated by X_2? Actually, we want to move X_2 to the right past U_2. But careful: The order is: U_2 * X_2. This is not a conjugation; it&rsquo;s product. We want to see if U_2 * X_2 = something * U_2. That is, does X_2 commute with U_2? U_2 is CNOT_{21}. Consider acting on a state. CNOT_{21} applies X on qubit1 controlled by qubit2. X_2 applies X on qubit2. These do not commute generally. For example, take |000&gt;. CNOT_{21} then X_2: CNOT_{21}|000&gt; = |000&gt; because control=0; then X_2 gives |010&gt;. Now, if we first apply X_2, then CNOT_{21}: X_2|000&gt; = |010&gt;; then CNOT_{21} on |010&gt;: control qubit2=1, so flip qubit1: becomes |000&gt;. So they anticommute? Actually, check: CNOT_{21} X_2 |000&gt; = |000&gt;, while X_2 CNOT_{21} |000&gt; = |010&gt;. So they are not simply related by a phase. So we cannot simply push X_2 through U_2 without careful treatment. The pushed error method that I did earlier assumed that we can conjugate the errors through the subsequent gates. But that works if the errors occur before the gates? Actually, the standard fault tolerance analysis: errors that occur before a gate can be propagated through the gate by conjugation if the gate is Clifford. But here, the error occurs after the gate? Wait, the error model: after each CNOT gate, an error occurs. So for the first CNOT, we have: ideal CNOT followed by error E. So that is: (E) * (CNOT). But if we want to push the error to after the entire circuit, we would conjugate it through the subsequent gates. But careful: If we have a gate V and then an error E, the overall is E V. If we want to move E to the end, we would write E V = V (V^\dagger E V) = V * (E&rsquo;), where E&rsquo; = V^\dagger E V. That works if the error occurs before the gate? Actually, check: Suppose we have an ideal gate V followed by an error E. Then the operation is E V. If we want to represent this as some operation followed by V, we cannot because V is not necessarily invertible? But it is unitary. Actually, E V = (V V^\dagger) E V = V (V^\dagger E V) = V E&rsquo;. So indeed, if an error occurs after a gate, it is equivalent to an error occurring before the gate but conjugated by the gate inverse. So that is correct: For the first CNOT, we have: U_2 followed by error E. So that is actually: (E) * (U_2). But wait, careful: The order is: &hellip; U_2 then error E. So that is: (E) (U_2). To push this error to after all subsequent gates, we would conjugate through those gates. So we want to write: (subsequent gates) * (E) * (U_2) = (subsequent gates) * (U_2) * (U_2^\dagger E U_2) = (Ideal part) * (U_2^\dagger E U_2). So then the error becomes U_2^\dagger E U_2 acting after the ideal circuit? But then we also have the error from the second CNOT. So then Actual = U_4 * (F) * U_3 * (E) * U_2 * U_1? But careful: The order is: U_1, then U_2, then error E, then U_3, then U_4, then error F? Actually, the circuit is: U_1, then U_2, then error E, then U_3, then U_4, then error F. So Actual = (F) * U_4 * U_3 * (E) * U_2 * U_1.
+Now, let&rsquo;s push the errors to the end correctly:
+We have Actual = F * U_4 * U_3 * E * U_2 * U_1.
+Write this as = (U_4 U_3 U_2 U_1) * (U_1^\dagger U_2^\dagger U_3^\dagger U_4^\dagger) * F * U_4 * U_3 * E * U_2 * U_1.
+= A * (A^-1 F U_4 U_3 E U_2 U_1). That doesn&rsquo;t simplify nicely.
+Maybe it&rsquo;s better to push each error through the gates that come after it individually:
+Start with Actual = F * U_4 * U_3 * E * U_2 * U_1.
+Push F through U_4? F occurs after U_4 actually. Wait, careful: The order is: &hellip; U_4 then F. So that is: F * U_4. We can write F * U_4 = U_4 * (U_4^\dagger F U_4) = U_4 * F&rsquo;, where F&rsquo; = U_4^\dagger F U_4. So then Actual = U_4 * F&rsquo; * U_3 * E * U_2 * U_1.
+Now, next, push F&rsquo; through U_3. F&rsquo; acts after U_3? Actually, now we have: U_4 * F&rsquo; * U_3. But careful: The order is U_4 then (F&rsquo; then U_3) actually careful: Actual = U_4 * (F&rsquo; * U_3) * E * U_2 * U_1. So we want to push F&rsquo; through U_3. But F&rsquo; and U_3 may not commute because U_3 acts on qubit 0 and F&rsquo; acts on qubits? F&rsquo; came from F which acts on qubits 0 and 3. U_4 is CNOT_{03}. So F&rsquo; = U_4^\dagger F U_4. U_4 is CNOT_{03}. So F&rsquo; will be a Pauli on qubits 0 and 3 as well? Actually, conjugation by CNOT changes Paulis. But then U_3 = H_0 acts on qubit 0. So they might not commute. But we can push it: F&rsquo; * U_3 = U_3 * (U_3^\dagger F&rsquo; U_3) = U_3 * F&rsquo;&lsquo;. So then Actual = U_4 * U_3 * F&rsquo;&rsquo; * E * U_2 * U_1.
+Now, push F&rsquo;&rsquo; through E? F&rsquo;&rsquo; and E act on different qubits? F&rsquo;&rsquo; acts on qubits 0 and 3 (likely), and E acts on qubits 2 and 1. So they commute. So Actual = U_4 * U_3 * E * F&rsquo;&rsquo; * U_2 * U_1.
+Next, push E through U_2? E occurs after U_2 actually careful: We have &hellip; U_2 * U_1 already there? Actually, order now: Actual = U_4 * U_3 * E * F&rsquo;&rsquo; * U_2 * U_1. Wait, careful: It is: U_4 * U_3 * (E * F&rsquo;&lsquo;) * U_2 * U_1. But careful: The order of multiplication: Actual = (U_4 U_3) (E F&rdquo;) (U_2 U_1). But these are products. Since E and F&rdquo; commute, we can write = U_4 U_3 U_2 U_1 * (U_1^\dagger U_2^\dagger) (E F&rdquo;) (U_2 U_1). That is = A * (U_1^\dagger U_2^\dagger E F&rdquo; U_2 U_1). And then push through U_1? This is getting messy.</p>
+<p>Maybe it&rsquo;s easier to compute the fidelity directly by considering the effect of errors on the state step by step and then averaging. Since the errors are Pauli errors and the circuit is Clifford, the final state will be a mixture of states that are related to the ideal state by Pauli errors. And we want the fidelity = &lt;ψ_ideal| ρ |ψ_ideal&gt;. And ρ is the average over error patterns of |ψ&gt;&lt;ψ| for each pattern.
+So maybe we can compute: For each error pattern (E on first CNOT, F on second CNOT), what is the resulting state? And then compute its overlap with |ψ_ideal&gt;. And then average that squared overlap over the error distributions.</p>
+<p>So let&rsquo;s do that approach.</p>
+<p>We have the circuit steps clearly:</p>
+<ol>
+<li>Start with |0&gt;^4.</li>
+<li>Apply H_2 -&gt; state becomes: |ψ1&gt; = (|0000&gt; + |0010&gt;)/√2.</li>
+<li>Apply CNOT_{21} -&gt; state becomes: |ψ2&gt; = (|0000&gt; + |0110&gt;)/√2.</li>
+<li>Then error E happens on qubits {2,1}. E is one of the 16 Pauli operators on these two qubits. Its effect: |ψ2&gt; -&gt; E |ψ2&gt;. But careful: E is applied after the CNOT gate. So state becomes: |ψ3&gt; = E |ψ2&gt;.</li>
+<li>Apply H_0 -&gt; state becomes: |ψ4&gt; = H_0 |ψ3&gt;.</li>
+<li>Apply CNOT_{03} -&gt; state becomes: |ψ5&gt; = CNOT_{03} |ψ4&gt;.</li>
+<li>Then error F happens on qubits {0,3} -&gt; state becomes: |ψ6&gt; = F |ψ5&gt;.</li>
+</ol>
+<p>So the final state for given E and F is: |ψ(E,F)&gt; = F * CNOT_{03} * H_0 * E * CNOT_{21} * H_2 |0&gt;^4.
+We want to compute f(E,F) = |&lt;ψ_ideal| ψ(E,F)&gt;|^2.
+And then the physical state fidelity is the average over E and F of f(E,F), because the state is a mixture: ρ = Σ_{E,F} P(E)P(F) |ψ(E,F)&gt;&lt;ψ(E,F)|. And then &lt;ψ_ideal|ρ|ψ_ideal&gt; = Σ_{E,F} P(E)P(F) |&lt;ψ_ideal|ψ(E,F)&gt;|^2. So that is the fidelity.</p>
+<p>So we need to compute for each Pauli error E on qubits {2,1} and each Pauli error F on qubits {0,3}, the overlap squared between the resulting state and the ideal state.</p>
+<p>Now, note that the ideal state is what you get when E=I and F=I. So let&rsquo;s denote that as |ψ_ideal&gt; = CNOT_{03} * H_0 * CNOT_{21} * H_2 |0&gt;^4. And we already computed that: |ψ_ideal&gt; = (|0000&gt;+|1001&gt;+|0110&gt;+|1111&gt;)/2.</p>
+<p>Now, because the circuit is Clifford, the action of Pauli errors will map the state to another state that is actually related to the ideal state by some Pauli operator acting on it? Is that true? If there were no errors, the state is |ψ_ideal&gt;. If an error occurs somewhere, then the state becomes something like P |ψ_ideal&gt; for some Pauli P? Not necessarily because errors occur in the middle. But maybe we can compute the effect by propagating the errors through the subsequent gates. Let&rsquo;s try that approach carefully:</p>
+<p>We have |ψ(E,F)&gt; = F * U_4 * U_3 * E * U_2 * U_1 |0&gt;, where U_1=H_2, U_2=CNOT_{21}, U_3=H_0, U_4=CNOT_{03}.
+Now, consider first the effect of E. Write U_3 * E * U_2. Can we push E through U_2? careful: U_3 * E * U_2 is not simply something times U_2 because U_3 comes after. Maybe we can push E through to the right through U_2? But then we get: U_3 * E * U_2 = U_3 * U_2 * (U_2^\dagger E U_2) = (U_3 U_2) * E&rsquo;, where E&rsquo; = U_2^\dagger E U_2. But then we still have U_3 involved. So then |ψ&gt; = F * U_4 * (U_3 U_2) * E&rsquo; * U_1 |0&gt;. Then push E&rsquo; through U_1? U_1 commutes with E&rsquo;? U_1=H_2 acts on qubit2. E&rsquo; acts on qubits? E&rsquo; came from E which acts on qubits {2,1}. U_2 is CNOT_{21}, so E&rsquo; will act on qubits {2,1} as well. So then U_1 * E&rsquo; = (U_1 E&rsquo; U_1^\dagger) U_1 = E&rsquo;&rsquo; U_1, where E&rsquo;&rsquo; = U_1 E&rsquo; U_1^\dagger. Then we get: |ψ&gt; = F * U_4 * U_3 * U_2 * U_1 * E&rsquo;&rsquo; |0&gt;? But careful: We had: |ψ&gt; = F * U_4 * (U_3 U_2) * E&rsquo; * U_1 |0&gt; = F * U_4 * U_3 * U_2 * U_1 * (U_1^\dagger E&rsquo; U_1) |0&gt; actually wait: (U_3 U_2) * E&rsquo; * U_1 = (U_3 U_2 U_1) * (U_1^\dagger E&rsquo; U_1) because U_1 commutes with U_3 and U_2? Not necessarily: U_1=H_2, U_2=CNOT_{21} involves qubit2, so they don&rsquo;t commute. So that&rsquo;s not simple.</p>
+<p>Maybe it&rsquo;s easier to compute the overlap directly for each type of Pauli error. But there are 16 choices for E and 16 for F, so 256 cases. But they will fall into classes due to symmetries.</p>
+<p>Let&rsquo;s denote the state after step 2 before error E: |ψ2&gt; = (|0000&gt;+|0110&gt;)/√2.
+Then after error E, state becomes |ψ3&gt; = E|ψ2&gt;. E acts on qubits 2 and 1. So let&rsquo;s determine how E acts on |ψ2&gt;. |ψ2&gt; is a state on qubits 0,1,2,3. But note that qubits 0 and 3 are always 0 in |ψ2&gt;. So actually, |ψ2&gt; = |0&gt;<em>0 ⊗ (|00&gt;</em>{12} + |11&gt;<em>{12})/√2 ⊗ |0&gt;_3. So it&rsquo;s effectively a Bell state on qubits 1 and 2 times |0&gt; on qubits 0 and 3.
+So, E acts on qubits 2 and 1. So it will transform the Bell state. Let&rsquo;s denote the Bell state as |Φ^+&gt;</em>{12} = (|00&gt;+|11&gt;)/√2. Then |ψ2&gt; = |0&gt;<em>0 |Φ^+&gt;</em>{12} |0&gt;<em>3.
+Now, error E is a Pauli on qubits 1 and 2. There are 16 Paulis. They will map |Φ^+&gt; to another state. Specifically, if we act with a Pauli on both qubits of a Bell state, we know that Paulis either leave it invariant or flip it to another Bell state. Actually, recall: (I⊗I)|Φ^+&gt; = |Φ^+&gt;.
+(X⊗I)|Φ^+&gt; = (|10&gt;+|01&gt;)/√2 = |Ψ^+&gt;.
+(Z⊗I)|Φ^+&gt; = (|00&gt; - |11&gt;)/√2 = |Φ^-).
+(Y⊗I)|Φ^+&gt; = i(|10&gt; - |01&gt;)/√2 = i|Ψ^-) maybe.
+But careful: E acts on both qubits together. So E can be any product of Paulis on qubit1 and qubit2. So let&rsquo;s list the effect on |Φ^+&gt;</em>{12} for each Pauli operator on two qubits. But note that |Φ^+&gt; is stabilized by X⊗X and Z⊗Z actually. So Paulis that are in the stabilizer of |Φ^+&gt; will leave it invariant up to a phase? Actually, |Φ^+&gt; is an eigenvector of X⊗X with eigenvalue 1, and of Z⊗Z with eigenvalue 1. So if E is I⊗I, X⊗X, Z⊗Z, or Y⊗Y? Check: Y⊗Y = (i)^2 (Z⊗Z)(X⊗X) actually careful: Y⊗Y = (-1) actually, let&rsquo;s do properly:
+We want to know for each Pauli P on qubit1 and Q on qubit2, what is (P⊗Q)|Φ^+&gt; relative to |Φ^+&gt; or another Bell state.
+Actually, better: The Bell states are:
+|Φ^+&gt; = (|00&gt;+|11&gt;)/√2
+|Φ^-| = (|00&gt;-|11&gt;)/√2
+|Ψ^+&gt; = (|01&gt;+|10&gt;)/√2
+|Ψ^-| = (|01&gt;-|10&gt;)/√2.
+Now, act with Pauli on first qubit only? But our errors act on both qubits independently. So let&rsquo;s determine for each Pauli operator on two qubits ( products of I,X,Y,Z on qubit1 and qubit2) what is the resulting state when applied to |Φ^+&gt;. We can compute:
+For E = I⊗I: obvious.
+I⊗X: (I⊗X)|Φ^+&gt; = (|01&gt;+|10&gt;)/√2 = |Ψ^+&gt;.
+I⊗Z: (I⊗Z)|Φ^+&gt; = (|00&gt; - |11&gt;)/√2 = |Φ^-).
+I⊗Y: (I⊗Y)|Φ^+&gt; = ( -i|01&gt; + i|10&gt;)/√2? Actually, Y|0&gt; = i|1&gt;, Y|1&gt; = -i|0&gt;. So (I⊗Y)|00&gt; = i|01&gt;, (I⊗Y)|11&gt; = -i|10&gt;. So result = (i|01&gt; - i|10&gt;)/√2 = i(|01&gt;-|10&gt;)/√2 = i|Ψ^-).
+Now, X⊗I: (X⊗I)|Φ^+&gt; = (|10&gt;+|01&gt;)/√2 = |Ψ^+&gt;.
+X⊗X: (X⊗X)|Φ^+&gt; = (|11&gt;+|00&gt;)/√2 = |Φ^+&gt; actually because X⊗X flips both bits: |00&gt; -&gt; |11&gt;, |11&gt; -&gt; |00&gt;. So yes, X⊗X|Φ^+&gt; = |Φ^+&gt;.
+X⊗Z: (X⊗Z)|Φ^+&gt; = X⊗Z: |00&gt; -&gt; |10&gt; because X on first gives nothing? Let&rsquo;s do carefully: (X⊗Z)|00&gt; = |1⟩⊗ (Z|0⟩)=|1⟩⊗|0⟩=|10&gt;. (X⊗Z)|11&gt; = |0⟩⊗ (Z|1⟩)=|0⟩⊗ (-|1⟩) = -|01&gt;. So result = (|10&gt; - |01&gt;)/√2 = -|Ψ^-).
+X⊗Y: (X⊗Y)|Φ^+&gt; will give something.
+Maybe we don&rsquo;t need the full details. Actually, we only need the overlap with the ideal state later. But wait, after step 3, we then apply H_0 and CNOT_{03}. So maybe it&rsquo;s better to see how these errors affect the final state relative to the ideal state.</p>
+<p>Let&rsquo;s instead compute the final state for a given E and F in terms of its effect on the ideal state. Notice that the ideal state is obtained when E=I and F=I. So consider first only errors on the first CNOT (E errors). Let&rsquo;s compute the state after step 4 when there is an error E. We already have |ψ3&gt; = E|ψ2&gt; where |ψ2&gt; = |0&gt;<em>0 |Φ^+&gt;</em>{12} |0&gt;<em>3.
+So |ψ3&gt; = |0&gt;_0 ⊗ (E|Φ^+&gt;</em>{12}) ⊗ |0&gt;<em>3. So that state is actually still with qubits 0 and 3 being 0. So then step 4: Apply H_0. H_0 acts on qubit0. So |ψ4&gt; = H_0|ψ3&gt; = (|0&gt;_0+|1&gt;_0)/√2 ⊗ (E|Φ^+&gt;</em>{12}) ⊗ |0&gt;<em>3? Not exactly because H_0 acts on the state where qubit0 is 0. So indeed, since qubit0 is 0 in |ψ3&gt;, H_0 makes it (|0&gt;+|1&gt;)/√2. So |ψ4&gt; = 1/√2 [ |0&gt;_0 (E|Φ^+&gt;) |0&gt;_3 + |1&gt;_0 (E|Φ^+&gt;) |0&gt;_3 ] actually careful: H_0|0&gt; = (|0&gt;+|1&gt;)/√2. So |ψ4&gt; = (1/√2)[ |0&gt;_0 (E|Φ^+&gt;) |0&gt;_3 + |1&gt;_0 (E|Φ^+&gt;) |0&gt;_3 ]. So that is = (|0&gt;_0 + |1&gt;_0)/√2 ⊗ (E|Φ^+&gt;) ⊗ |0&gt;_3.
+Then step 5: Apply CNOT</em>{03}. This gate acts on qubits 0 and 3. So it will leave terms where qubit0=0 alone, and flip qubit3 when qubit0=1. So then |ψ5&gt; = CNOT_{03}|ψ4&gt; = 1/√2 [ |0&gt;<em>0 (E|Φ^+&gt;) |0&gt;_3 + |1&gt;_0 (E|Φ^+&gt;) |1&gt;_3 ].
+So before the second error F, the state is: |ψ5&gt; = (|0&gt;_0|0&gt;_3 + |1&gt;_0|1&gt;_3)/√2 ⊗ (E|Φ^+&gt;</em>{12}). But wait, careful: That works if E|Φ^+&gt; is some state on qubits 1 and 2 that does not depend on qubits 0 and 3. Yes because errors E act only on qubits 1 and 2. So actually, |ψ5&gt; = (|00&gt;<em>{03} + |11&gt;</em>{03})/√2 ⊗ (E|Φ^+&gt;<em>{12}). 
+Now, the ideal state would be when E=I, so ideal state is that times |Φ^+&gt;</em>{12}. But wait, our ideal state that we computed earlier is (|0000&gt;+|1001&gt;+|0110&gt;+|1111&gt;)/2. Is that equal to (|00&gt;<em>{03}+|11&gt;</em>{03})/√2 ⊗ |Φ^+&gt;<em>{12}? |Φ^+&gt;</em>{12} = (|00&gt;+|11&gt;)/√2 on qubits 1 and 2. Then product gives: 1/√2 * 1/√2 (|00&gt;<em>{03}|00&gt;</em>{12} + |00&gt;<em>{03}|11&gt;</em>{12} + |11&gt;<em>{03}|00&gt;</em>{12} + |11&gt;<em>{03}|11&gt;</em>{12}) = 1/2 (|0000&gt;+|0011&gt;+|1100&gt;+|1111&gt;). But that is not our ideal state. Our ideal state is (|0000&gt;+|1001&gt;+|0110&gt;+|1111&gt;)/2. So there&rsquo;s a discrepancy because I&rsquo;ve labeled qubits as follows: qubit0, qubit1, qubit2, qubit3. In my current notation, I&rsquo;ve been using that order. So then |ψ5&gt; should be: careful: In step 5, we have applied CNOT_{03}. That acts on qubit0 (control) and qubit3 ( target). So indeed, if the state before CNOT_{03} is that qubit0 is in superposition of 0 and 1 and qubit3 is 0, then after CNOT, we get entanglement between qubit0 and qubit3: becomes |0&gt;<em>0|0&gt;_3 + |1&gt;_0|1&gt;_3 times the rest. So that rest is on qubits 1 and 2. So then |ψ5&gt; = (|0&gt;_0|0&gt;_3 + |1&gt;_0|1&gt;_3)/√2 ⊗ (E|Φ^+&gt;</em>{12}). But then if E=I, that gives: (|00&gt;<em>{03}+|11&gt;</em>{03})/√2 ⊗ (|00&gt;<em>{12}+|11&gt;</em>{12})/√2 = 1/2 (|0000&gt;+|0011&gt;+|1100&gt;+|1111&gt;). But wait, that is different from our earlier computed ideal state. I earlier computed ideal state as (|0000&gt;+|1001&gt;+|0110&gt;+|1111&gt;)/2. So there is a difference: that ideal state has qubit0 and qubit3 correlated as well? They are both. I need to check the ideal state carefully. Let&rsquo;s recompute the ideal circuit without errors step by step:</p>
+<p>Initial: |0000&gt; (qubits 0,1,2,3)
+Step 1: H_2 -&gt; becomes (|0000&gt;+|0010&gt;)/√2.
+Step 2: CNOT_{21} -&gt; control qubit2, target qubit1.
+|0000&gt; -&gt; |0000&gt;
+|0010&gt; -&gt; |0110&gt;
+So state: (|0000&gt;+|0110&gt;)/√2. So that state is: qubit0=0, qubit3=0 always. Qubits1 and2: when first term, they are 00; when second term, they are 11. So that state is |0&gt;<em>0|0&gt;_3 ⊗ (|00&gt;+|11&gt;)/√2 actually. So that is |0&gt;_0|0&gt;_3 ⊗ |Φ^+&gt;</em>{12}. Good.
+Step 3: H_0 -&gt; acts on qubit0.
+H_0|0&gt; = (|0&gt;+|1&gt;)/√2. So state becomes: (1/√2)[ |0&gt;<em>0|0&gt;_3|Φ^+&gt; + |1&gt;_0|0&gt;_3|Φ^+&gt; ] = (|0&gt;_0+|1&gt;_0)/√2 |0&gt;_3|Φ^+&gt; actually careful: It is: 1/√2 (|0&gt;_0|0&gt;_3|Φ^+&gt; + |1&gt;_0|0&gt;_3|Φ^+&gt;) = (|0&gt;_0+|1&gt;_0)/√2 ⊗ |0&gt;_3 ⊗ |Φ^+&gt;. So that is correct.
+Step 4: CNOT</em>{03} -&gt; control qubit0, target qubit3.
+For terms with qubit0=0, target remains same -&gt; become |0&gt;<em>0|0&gt;_3|Φ^+&gt;.
+For terms with qubit0=1, target flips -&gt; become |1&gt;_0|1&gt;_3|Φ^+&gt;.
+So state becomes: 1/√2 (|0&gt;_0|0&gt;_3|Φ^+&gt; + |1&gt;_0|1&gt;_3|Φ^+&gt;) = (|00&gt;</em>{03}+|11&gt;<em>{03})/√2 ⊗ |Φ^+&gt;</em>{12}.
+So the ideal state is indeed: (|0000&gt;+|0011&gt;+|1100&gt;+|1111&gt;)/2. 
+But wait, earlier I got (|0000&gt;+|1001&gt;+|0110&gt;+|1111&gt;)/2. That was because I likely mis-assigned qubit order. In that earlier computation, I had: after H_0, state became 1/2(|0000&gt;+|1000&gt;+|0110&gt;+|1110&gt;) and then CNOT_{03} gave: |0000&gt; -&gt;|0000&gt;, |1000&gt;-&gt;|1001&gt;, |0110&gt;-&gt;|0110&gt;, |1110&gt;-&gt;|1111&gt;. So that would be if the control was qubit0 and target qubit3, then for |0110&gt;, qubit0=0 so it remains |0110&gt;; for |1110&gt;, qubit0=1 so becomes |1111&gt;. So that state is (|0000&gt;+|1001&gt;+|0110&gt;+|1111&gt;)/2. So there is an inconsistency: In that earlier computation, I must have used a different qubit ordering. I said qubits are 0,1,2,3. In the first steps, I applied H_2 -&gt; that acts on qubit2. So that is fine. Then CNOT_{21} -&gt; control=2, target=1. So that gives state with qubits: when term |0010&gt;, that means qubit2=1, qubit1=0? Actually, careful: I&rsquo;ll use consistent order: qubit0, qubit1, qubit2, qubit3.
+So initial: |0000&gt; means everyone 0.
+H_2 acts on qubit2: becomes (|0000&gt;+|0010&gt;)/√2. So that is: first term: qubit2=0; second term: qubit2=1.
+CNOT_{21}: control=2, target=1.
+|0000&gt; -&gt; stays |0000&gt; because control=0.
+|0010&gt; -&gt; control=1 so flip target qubit1: becomes |0110&gt; because qubit1 goes from 0 to 1.
+So state becomes (|0000&gt;+|0110&gt;)/√2. So that means: qubit0=0, qubit3=0 always. Qubits1 and2: first term: 00; second term: 11. So that is |Φ^+&gt;<em>{12} indeed.
+Then H_0 acts on qubit0.
+H_0|0&gt; = (|0&gt;+|1&gt;)/√2. So state becomes: 1/√2 [ (|0&gt;+|1&gt;)_0/√2? Actually, careful: state is (|0000&gt;+|0110&gt;)/√2. Applying H_0 means apply H to qubit0. So:
+H_0|0000&gt; = (|0000&gt;+|1000&gt;)/√2.
+H_0|0110&gt; = (|0110&gt;+|1110&gt;)/√2.
+So state becomes: 1/√2 * [1/√2(|0000&gt;+|1000&gt;+|0110&gt;+|1110&gt;)] = 1/2(|0000&gt;+|1000&gt;+|0110&gt;+|1110&gt;).
+Then CNOT</em>{03} acts with control=0, target=3.
+|0000&gt;: control=0 -&gt; remains |0000&gt;.
+|1000&gt;: control=1 -&gt; flip target qubit3: becomes |1001&gt;.
+|0110&gt;: control=0 -&gt; remains |0110&gt;.
+|1110&gt;: control=1 -&gt; becomes |1111&gt;.
+So state becomes: 1/2(|0000&gt;+|1001&gt;+|0110&gt;+|1111&gt;). 
+So that is what I got earlier. So there is a discrepancy with the state I got when I factors out the Bell state. because that would give (|00&gt;<em>{03}+|11&gt;</em>{03})/√2 ⊗ |Φ^+&gt;<em>{12} would be: that is 1/√2(|00&gt;</em>{03}+|11&gt;<em>{03}) times 1/√2(|00&gt;</em>{12}+|11&gt;<em>{12}) = 1/2(|0000&gt;+|0011&gt;+|1100&gt;+|1111&gt;). So why would that be different? Because careful: |Φ^+&gt;</em>{12} means that qubits 1 and 2 are entangled such that they are the same. In |0000&gt;, qubits1 and2 are 00, that works. In |0011&gt;, qubits1 and2 are 11, that works. In |1100&gt;, qubits1 and2 are 00 works. In |1111&gt;, works. So that state is actually |0&gt;<em>0|0&gt;_3 and |1&gt;_0|1&gt;_3 correlated with qubits1 and2 being both 0 or both 1. So that state is actually (|0000&gt;+|0011&gt;+|1100&gt;+|1111&gt;)/2. But wait, that is different from what I got: I got (|0000&gt;+|1001&gt;+|0110&gt;+|1111&gt;)/2. So the difference is that in one case, the entanglement is between qubit0 and qubit3, and in the other case, it is between qubit0 and qubit1? I realize that I must have been careful with the order of qubits. The stabilizers given are XXXX and ZZZZ. So the codespace should be invariant under permuting qubits? Actually, the [[4,2,2]] code is that any state in the codespace has the property that across any partition into two pairs, something&hellip; I need to determine the correct ideal state from the circuit itself. I&rsquo;ll recompute the ideal circuit very carefully with qubit order 0,1,2,3 as given. The circuit is: 
+H_2, then CNOT</em>{21}, then H_0, then CNOT_{03}.
+Let&rsquo;s compute the state on each qubit after each step in terms of their values.</p>
+<p>Initial: all 0.
+After H_2: qubit2 becomes involved. So state: |0&gt;<em>0|0&gt;_1 (|0&gt;_2+|1&gt;_2)/√2 |0&gt;_3 = (|0000&gt;+|0010&gt;)/√2.
+After CNOT</em>{21}: control=2, target=1.
+For |0000&gt;: control=0 -&gt; remains -&gt; still |0000&gt;.
+For |0010&gt;: control=1 -&gt; flip target qubit1 -&gt; becomes |0110&gt;.
+So state: (|0000&gt;+|0110&gt;)/√2. So now, qubit0=0, qubit3=0 always. Qubit1 and qubit2: in first term: both 0; in second term: both 1.
+After H_0: acts on qubit0.
+|0000&gt; -&gt; becomes (|0000&gt;+|1000&gt;)/√2.
+|0110&gt; -&gt; becomes (|0110&gt;+|1110&gt;)/√2.
+So state becomes: 1/√2*(1/√2)(|0000&gt;+|1000&gt;+|0110&gt;+|1110&gt;) = 1/2(|0000&gt;+|1000&gt;+|0110&gt;+|1110&gt;).
+After CNOT_{03}: control=0, target=3.
+|0000&gt;: control=0 -&gt; remains -&gt; |0000&gt;.
+|1000&gt;: control=1 -&gt; flip target qubit3 -&gt; becomes |1001&gt;.
+|0110&gt;: control=0 -&gt; remains -&gt; |0110&gt;.
+|1110&gt;: control=1 -&gt; becomes |1111&gt;.
+So final state: 1/2(|0000&gt;+|1001&gt;+|0110&gt;+|1111&gt;).
+So that is the state I got. So the ideal state is |ψ_ideal&gt; = (|0000&gt; + |1001&gt; + |0110&gt; + |1111&gt;)/2.
+Now, note that this state is actually not that. because look at qubit0 and qubit3: In the first term, they are both 0. In the second term, qubit0=1, qubit3=1 actually wait: second term is |1001&gt; means qubit0=1, qubit3=1? Actually, |1001&gt; means qubit0=1, qubit1=0, qubit2=0, qubit3=1. So that gives qubit0 and qubit3 are (1,1) actually. In the third term, |0110&gt; means qubit0=0, qubit3=0. In the fourth term, |1111&gt; means qubit0=1, qubit3=1. So actually, qubit0 and qubit3 are correlated: they are both 0 or both 1. So that part is like (|00&gt;+|11&gt;)/√2 on qubits 0 and 3. And then look at qubits 1 and 2: In the first term, they are 00; second term: 00; third term: 11; fourth term: 11. So actually, qubits 1 and 2 are also correlated: they are both 0 or both 1. So actually, the ideal state can be written as: (|00&gt;<em>{03}+|11&gt;</em>{03})/√2 ⊗ (|00&gt;<em>{12}+|11&gt;</em>{12})/√2 would give terms: |0000&gt;, |0011&gt;, |1100&gt;, |1111&gt;. But wait, that gives |0011&gt; and |1100&gt; instead of |1001&gt; and |0110&gt;. So there is a difference: In our state, when qubits 0 and 3 are |00&gt;, qubits 1 and 2 are either |00&gt; or |11&gt;? Actually, in our state, when qubits 0 and 3 are |00&gt;, we have both terms: |0000&gt; and |0110&gt;. But |0110&gt; means qubits 1 and 2 are 11 actually because careful: |0110&gt; means qubit0=0, qubit1=1, qubit2=1, qubit3=0. So that is actually consistent with qubits 1 and 2 being both 1 when qubits 0 and 3 are |00&gt;? But then that would be |0011&gt; if following that order? No, because careful: |0011&gt; would mean qubit0=0, qubit1=0, qubit2=1, qubit3=1. So that&rsquo;s different. So actually, our state is: 
+|ψ_ideal&gt; = 1/2(|0&gt;<em>0|0&gt;_1|0&gt;_2|0&gt;_3 + |1&gt;_0|0&gt;_1|0&gt;_2|1&gt;_3 + |0&gt;_0|1&gt;_1|1&gt;_2|0&gt;_3 + |1&gt;_0|1&gt;_1|1&gt;_2|1&gt;_3).
+So that means that qubit0 and qubit3 are correlated: they are both 0 in terms 1 and 3, and both 1 in terms 2 and 4. And qubits 1 and 2 are correlated: they are both 0 in terms 1 and 2, and both 1 in terms 3 and 4. So actually, this state is actually a product of two Bell states if we pair qubit0 with qubit3 and qubit1 with qubit2. Because then Bell state on qubits 0 and 3 would be (|00&gt;+|11&gt;)/√2 and on qubits 1 and 2 would be (|00&gt;+|11&gt;)/√2. Then their product is indeed (|0000&gt;+|0011&gt;+|1100&gt;+|1111&gt;)/2. But wait, that gives |0011&gt; and |1100&gt;, not |1001&gt; and |0110&gt;. So actually, careful: If I pair qubit0 with qubit3, then that Bell state is between qubit0 and qubit3. But then |0&gt;_0|0&gt;_3 and |1&gt;_0|1&gt;_3. That is correct. And if I pair qubit1 with qubit2, then Bell state would be between qubit1 and qubit2: |0&gt;_1|0&gt;_2 and |1&gt;_1|1&gt;_2. Then product gives: |0&gt;_0|0&gt;_3|0&gt;_1|0&gt;_2 = |0000&gt; okay; |0&gt;_0|0&gt;_3|1&gt;_1|1&gt;_2 = |0011&gt; actually because careful: that would be qubit0=0, qubit1=1, qubit2=1, qubit3=0 -&gt; that is |0110&gt; if order is 0,1,2,3? because order: qubit0,1,2,3 so |0,1,1,0&gt; is |0110&gt;. Yes! Because if I pair qubit1 with qubit2, then that Bell state is actually on qubits 1 and 2. But then the state would be |0&gt;_1|0&gt;_2 and |1&gt;_1|1&gt;_2. So that gives: first term: |0&gt;_1|0&gt;_2 gives that both are 0. Second term: |1&gt;_1|1&gt;_2 gives that both are 1. So then the state becomes: (|0&gt;_0|0&gt;_3)(|0&gt;_1|0&gt;_2) gives |0000&gt;. And (|0&gt;_0|0&gt;_3)(|1&gt;_1|1&gt;_2) gives |0,1,1,0&gt; which is |0110&gt;. And then the ones with qubits 0 and 3 being |1&gt;_0|1&gt;_3 give: with qubits 1 and 2 being |0&gt;_1|0&gt;_2 gives |1,0,0,1&gt; which is |1001&gt;, and with |1&gt;_1|1&gt;_2 gives |1,1,1,1&gt; which is |1111&gt;. So indeed, |ψ_ideal&gt; = (|00&gt;</em>{03}+|11&gt;<em>{03})/√2 ⊗ (|00&gt;</em>{12}+|11&gt;<em>{12})/√2, where careful: that second Bell state is on qubits 1 and 2. So that is correct. So then earlier when I said |Φ^+&gt;</em>{12}, I meant that Bell state on qubits 1 and 2 would be (|00&gt;+|11&gt;)/√2. So that is consistent. So then after step 2, we actually have |ψ2&gt; = |0&gt;<em>0|0&gt;_3 ⊗ |Φ^+&gt;</em>{12}. because |Φ^+&gt;<em>{12} = (|00&gt;+|11&gt;)/√2. Then after H_0, we got |ψ3&gt; = (|0&gt;_0+|1&gt;_0)/√2 |0&gt;_3 |Φ^+&gt;</em>{12} actually careful: H_0 acts on qubit0 only. So that state becomes: 1/√2(|0&gt;<em>0|0&gt;_3|Φ^+&gt; + |1&gt;_0|0&gt;_3|Φ^+&gt;) = (|0&gt;_0+|1&gt;_0)/√2 |0&gt;_3 |Φ^+&gt;. Then CNOT</em>{03} gives: that becomes (|0&gt;<em>0|0&gt;_3 + |1&gt;_0|1&gt;_3)/√2 |Φ^+&gt;</em>{12}. So that is the ideal state. So that is correct.</p>
+<p>Now, when there is an error E on the first CNOT, after step 2, we have |ψ2&gt; = |0&gt;<em>0|0&gt;_3 ⊗ |Φ^+&gt;</em>{12}. Then error E acts on qubits 1 and 2. So |ψ3&gt; = |0&gt;<em>0|0&gt;_3 ⊗ (E|Φ^+&gt;</em>{12}). Then H_0 gives |ψ4&gt; = (|0&gt;<em>0+|1&gt;_0)/√2 |0&gt;_3 ⊗ (E|Φ^+&gt;). Then CNOT</em>{03} gives |ψ5&gt; = (|0&gt;<em>0|0&gt;_3 + |1&gt;_0|1&gt;_3)/√2 ⊗ (E|Φ^+&gt;). So that is before the second error. So that is correct.
+So then the state before the second error is actually always of the form: |ψ5&gt; = |Bell&gt;</em>{03} ⊗ |φ&gt;<em>{12}, where |φ&gt; = E|Φ^+&gt;</em>{12}. And note that the ideal state is when E=I, so |φ&gt; = |Φ^+&gt;.
+Now, then we apply the second error F on qubits {0,3}. So that acts on the Bell state part. So then the final state is: |ψ6&gt; = (F)<em>{03} |Bell&gt;</em>{03} ⊗ |φ&gt;<em>{12}. 
+So overall, for given errors E and F, the final state is: 
+|ψ(E,F)&gt; = [F acting on qubits 0 and 3] applied to (|00&gt;</em>{03}+|11&gt;<em>{03})/√2) ⊗ [E|Φ^+&gt;</em>{12}].</p>
+<p>Now, that is much simpler!
+So then the ideal state is when E=I and F=I, so that is |Bell&gt;<em>{03} ⊗ |Φ^+&gt;</em>{12}.</p>
+<p>Now, we want the fidelity: f(E,F) = |&lt;ψ_ideal|ψ(E,F)&gt;|^2.
+Now, since these states factorize across systems {0,3} and {1,2}, we have:
+&lt;ψ_ideal|ψ(E,F)&gt; = [<em>{03}<Bell| F |Bell></em>{03}] * [<em>{12}&lt;Φ^+| E |Φ^+&gt;</em>{12}].
+So fidelity squared is product of the squared overlaps from each system.
+So let&rsquo;s define:
+A(F) = <em>{03}<Bell| F |Bell></em>{03}, where F is a Pauli operator on qubits 0 and 3.
+B(E) = <em>{12}&lt;Φ^+| E |Φ^+&gt;</em>{12}, where E is a Pauli operator on qubits 1 and 2.
+Then f(E,F) = |A(F)|^2 |B(E)|^2.</p>
+<p>And then the average fidelity is: F = Σ_{E} P(E) Σ_{F} P(F) |A(F)|^2 |B(E)|^2 = (Σ_{E} P(E) |B(E)|^2) (Σ_{F} P(F) |A(F)|^2).</p>
+<p>Now, P(E) is: for E on qubits {2,1} actually careful: E acts on qubits {2,1} wait careful: In our current, E acts on qubits {1,2} because that&rsquo;s how we&rsquo;ve been using it. But careful: Our errors: first CNOT is on qubits 2 and 1. So that error acts on qubits 2 and 1. But in our state, after step 2, we had |ψ2&gt; = |0&gt;<em>0|0&gt;_3 ⊗ |Φ^+&gt;</em>{12}. So that means that the Bell state is on qubits 1 and 2. So actually, the error E acts on qubits 2 and 1. But wait, careful: The first CNOT is CNOT_{21}. So it acts with control on qubit2 and target on qubit1. So the error E acts on qubits 2 and 1. But then in our state, we wrote |Φ^+&gt;<em>{12}. That means qubits 1 and 2. So that is consistent if we order qubits as (1,2) for that Bell state. But careful: |Φ^+&gt;</em>{12} normally means (|00&gt;+|11&gt;)/√2 where the first digit is qubit1 and the second is qubit2. So that is fine. So E acts on qubits 2 and 1. But then when I write E|Φ^+&gt;, I should be careful that E is acting on qubits 2 and 1. But since that&rsquo;s just a Pauli on two qubits, it&rsquo;s fine. So I&rsquo;ll keep calling that system as {1,2} actually careful: system {1,2} means qubit1 and qubit2. But wait, then that would be that the error acts on qubits 2 and 1, that is the same set actually. So it&rsquo;s fine. So I&rsquo;ll use system A for qubits {0,3} and system B for qubits {1,2}. Then:
+Ideal state = |Bell&gt;_A ⊗ |Φ^+&gt;_B, where |Bell&gt;_A = (|00&gt;+|11&gt;)/√2 for qubits 0 and 3, and |Φ^+&gt;_B = (|00&gt;+|11&gt;)/√2 for qubits 1 and 2 (with order: first digit is qubit1, second is qubit2).
+Now, errors: 
+F acts on system A (qubits 0 and 3). Its distribution: with probability 1-p, F=I (on system A). With probability p, F is one of the 15 non-identity Paulis on two qubits, each with probability p/15.
+E acts on system B (qubits 1 and 2). Its distribution: with probability 1-p, E=I. With probability p, E is one of the 15 non-identity Paulis on two qubits, each with probability p/15.</p>
+<p>And we want: 
+A(F) = <Bell|_A F |Bell>_A.
+B(E) = &lt;Φ^+|_B E |Φ^+&gt;_B.</p>
+<p>Then fidelity for given errors is f = |A(F)|^2 |B(E)|^2.
+Then average fidelity F = (Σ_{F} P(F) |A(F)|^2) (Σ_{E} P(E) |B(E)|^2) because they are independent.</p>
+<p>Now, because the systems are similar (2-qubit systems and both states are Bell states essentially), actually careful: |Bell&gt;_A is on qubits 0 and 3. But wait, could it be that due to the fact that the first system involves qubits 0 and 3, and the second involves qubits 1 and 2, they might have different responses to Pauli errors? They are both Bell states. So actually, for any Bell state, say |Φ^+&gt; = (|00&gt;+|11&gt;)/√2, what is &lt;Φ^+| P |Φ^+&gt; for a Pauli operator P on two qubits? Let&rsquo;s compute that generally.
+Consider two qubits. Pauli operators are of the form (-1)^s times tensor products of I,X,Y,Z. But careful with phases. Actually, let&rsquo;s compute for each Pauli type. But note that |Φ^+&gt; is stabilized by X⊗X and Z⊗Z. So if P is in the stabilizer of |Φ^+&gt;, then P|Φ^+&gt; = |Φ^+&gt; ( times a phase possibly). Actually, check: X⊗X|Φ^+&gt; = (|11&gt;+|00&gt;)/√2 = |Φ^+&gt;. So that gives 1.
+Z⊗Z|Φ^+&gt; = (|00&gt;+(-1)^2|11&gt;)/√2 actually careful: Z⊗Z|00&gt; = |00&gt;, Z⊗Z|11&gt; = (-1)*(-1)|11&gt; = |11&gt;, so yes, Z⊗Z|Φ^+&gt; = |Φ^+&gt;. 
+What about Y⊗Y? Y⊗Y|00&gt; = (i)(i)|11&gt; = -|11&gt;, Y⊗Y|11&gt; = (-i)(-i)|00&gt; = -|00&gt;, so Y⊗Y|Φ^+&gt; = -|Φ^+&gt;. So actually, careful: The stabilizer of |Φ^+&gt; is actually {I, X⊗X, Z⊗Z, -Y⊗Y}? Actually, often we take stabilizer as {X⊗X, Z⊗Z}. So anyway, let&rsquo;s compute &lt;Φ^+| P |Φ^+&gt; for any Pauli P on two qubits. Write P = P1 ⊗ P2, where P1,P2 are Pauli matrices (I,X,Y,Z) possibly with phases? But Pauli group elements can have phases ±1, ±i. But here errors are depolarizing: they are that with probability p/15, we apply one of the 15 non-identity Pauli operators. Those Pauli operators are usually taken to be the ones without phases? Actually, careful: The depolarizing channel usually considers Pauli errors as I, X, Y, Z on each qubit independently? But here it says &ldquo;one of the 15 non-identity two-qubit Paulis&rdquo;. Those are typically considered as products of Pauli matrices with no overall phase? So I will assume that the errors are from the set {I,X,Y,Z}⊗{I,X,Y,Z} excluding identity, and each appears with probability p/15. But wait, that set has 15 elements? Actually, there are 16 Pauli operators on two qubits if we include identity. So yes, the non-identity ones are 15.</p>
+<p>So let&rsquo;s compute for a Bell state |Φ^+&gt; = (|00&gt;+|11&gt;)/√2.
+For any Pauli P = A ⊗ B, what is &lt;Φ^+| A⊗B |Φ^+&gt;? 
+&lt;Φ^+| A⊗B |Φ^+&gt; = 1/2 (&lt;00|+&lt;11|) A⊗B (|00&gt;+|11&gt;) = 1/2 [ &lt;00|A⊗B|00&gt; + &lt;00|A⊗B|11&gt; + &lt;11|A⊗B|00&gt; + &lt;11|A⊗B|11&gt; ].
+Now, since A and B are Pauli matrices, they will flip states or leave them alone with phases.
+Let&rsquo;s do case by case based on whether A and B are I, X, Z, Y.
+I will make a table for A⊗B acting on |Φ^+&gt;.
+ better: actually, note that |Φ^+&gt; is an eigenvector of X⊗X and Z⊗Z. So if P commutes with X⊗X and Z⊗Z, then it will leave |Φ^+&gt; invariant up to a phase. The Paulis that commute with both X⊗X and Z⊗Z are exactly those that are in the stabilizer of |Φ^+&gt;. That set is {I⊗I, X⊗X, Z⊗Z, Y⊗Y} actually check: Does Y⊗Y commute with X⊗X? (Y⊗Y)(X⊗X) = (YX)⊗(YX) = (-iZ)⊗(-iZ) = (-1)Z⊗Z actually careful: (YX) = -iZ, so product becomes (-i)(-i) Z⊗Z = -Z⊗Z. So they anticommute? Let&rsquo;s check specifically: X⊗X and Y⊗Y. Take state |00&gt;. X⊗X|00&gt;=|11&gt;. Y⊗Y|00&gt; = (i)(i)|11&gt; = -|11&gt;. So actually, Y⊗Y does not necessarily commute with X⊗X. So better to compute directly.</p>
+<p>Maybe I&rsquo;ll compute for each type:</p>
+<p>Let P = I⊗I: then clearly &lt;Φ^+|I|Φ^+&gt; = 1.</p>
+<p>P = I⊗X: 
+I⊗X|00&gt; = |01&gt;, I⊗X|11&gt; = |10&gt;.
+So &lt;00|I⊗X|00&gt; = 0, &lt;00|I⊗X|11&gt; = &lt;00|10&gt;=0, &lt;11|I⊗X|00&gt;=0, &lt;11|I⊗X|11&gt;=0. So product = 0.
+So |A(I⊗X)|^2 = 0.</p>
+<p>P = I⊗Z:
+I⊗Z|00&gt; = |00&gt;, I⊗Z|11&gt; = -|11&gt;.
+So &lt;00| gives 1, &lt;11| gives -1, so total = (1 + (-1))/2 = 0.
+So zero.</p>
+<p>P = I⊗Y:
+I⊗Y|00&gt; = i|01&gt;, I⊗Y|11&gt; = -i|10&gt;. So zero.</p>
+<p>So for any Pauli that acts nontrivially on only one qubit, the overlap is 0 because it will make the state orthogonal to |Φ^+&gt; because |Φ^+&gt; has both qubits same outcome. So if only one qubit is flipped, then states become |01&gt; or |10&gt; which are orthogonal to |00&gt; and |11&gt;. So indeed, if P is not acting on both qubits with the same Pauli type? What about X⊗I? That will be similar: zero.
+So next, consider P = X⊗X:
+X⊗X|00&gt; = |11&gt;, X⊗X|11&gt; = |00&gt;. So &lt;00|X⊗X|00&gt; = &lt;00|11&gt;=0, but &lt;00|X⊗X|11&gt; = &lt;00|00&gt;=1, similarly &lt;11|X⊗X|00&gt;=1, &lt;11|X⊗X|11&gt;=0. So total = (0+1+1+0)/2 = 1.
+So &lt;Φ^+|X⊗X|Φ^+&gt; = 1.
+P = X⊗Z:
+X⊗Z|00&gt; = X|0&gt;⊗Z|0&gt; = |1&gt;⊗|0&gt; = |10&gt;,
+X⊗Z|11&gt; = X|1&gt;⊗Z|1&gt; = |0&gt;⊗(-|1&gt;) = -|01&gt;.
+So these are states |10&gt; and |01&gt; which are orthogonal to |00&gt; and |11&gt;. So overlap = 0.
+P = X⊗Y:
+X⊗Y|00&gt; = |1&gt;⊗(i|1&gt;) = i|11&gt;,
+X⊗Y|11&gt; = |0&gt;⊗(-i|0&gt;) = -i|00&gt;.
+Then &lt;00| gives -i&lt;00|00&gt; from second term? Let&rsquo;s do properly:
+&lt;00|X⊗Y|00&gt; = 0,
+&lt;00|X⊗Y|11&gt; = &lt;00|(-i|00&gt;) = -i,
+&lt;11|X⊗Y|00&gt; = &lt;11|(i|11&gt;) = i,
+&lt;11|X⊗Y|11&gt; = 0.
+Total = (-i + i)/2 = 0.
+So that gives 0.
+Next, P = Z⊗I: already did, zero.
+P = Z⊗X: zero by similar reason.
+P = Z⊗Z:
+Z⊗Z|00&gt; = |00&gt;, Z⊗Z|11&gt; = |11&gt; (since Z|1&gt; = -|1&gt; actually careful: Z⊗Z|11&gt; = (-1)<em>(-1)|11&gt; = |11&gt;). So actually, Z⊗Z|00&gt;=|00&gt;, Z⊗Z|11&gt;=|11&gt;. So then &lt;00| gives 1, &lt;11| gives 1, so total = (1+1)/2 = 1.
+So &lt;Φ^+|Z⊗Z|Φ^+&gt; = 1.
+P = Z⊗Y:
+Z⊗Y|00&gt; = |0&gt;⊗(i|1&gt;) = i|01&gt;,
+Z⊗Y|11&gt; = (-|1&gt;)⊗(-i|0&gt;) = i|10&gt;? Let&rsquo;s do: Z⊗Y|11&gt; = (Z|1&gt;)⊗(Y|1&gt;) = (-|1&gt;)⊗(-i|0&gt;) = i|10&gt;. So these are |01&gt; and |10&gt;, so overlap 0.
+P = Y⊗I: zero.
+P = Y⊗X: 
+Y⊗X|00&gt; = (i|1&gt;)⊗|1&gt; = i|11&gt;,
+Y⊗X|11&gt; = (-i|0&gt;)⊗|0&gt; = -i|00&gt;.
+That gives: &lt;00| gives -i, &lt;11| gives i, total 0.
+P = Y⊗Z:
+Y⊗Z|00&gt; = (i|1&gt;)⊗|0&gt; = i|10&gt;,
+Y⊗Z|11&gt; = (-i|0&gt;)⊗(-|1&gt;) = i|01&gt;, so 0.
+P = Y⊗Y:
+Y⊗Y|00&gt; = (i|1&gt;)⊗(i|1&gt;) = -|11&gt;,
+Y⊗Y|11&gt; = (-i|0&gt;)⊗(-i|0&gt;) = -|00&gt; because (-i)</em>(-i)= -1 actually careful: Y|0&gt;=i|1&gt;, Y|1&gt;=-i|0&gt;. So Y⊗Y|00&gt; = (i)(i)|11&gt; = -|11&gt;. Y⊗Y|11&gt; = (-i)<em>(-i)|00&gt; = (-1)|00&gt; = -|00&gt;. So then &lt;00|Y⊗Y|00&gt; = 0, &lt;00|Y⊗Y|11&gt; = &lt;00|(-|00&gt;) = -1, &lt;11|Y⊗Y|00&gt; = &lt;11|(-|11&gt;) = -1, &lt;11|Y⊗Y|11&gt;=0. Total = (-1-1)/2 = -1.
+So &lt;Φ^+|Y⊗Y|Φ^+&gt; = -1.
+So总结 for a Bell state |Φ^+&gt; on two qubits, if we act with a Pauli operator P (on those two qubits), the overlap &lt;Φ^+|P|Φ^+&gt; is:
+1 if P = I⊗I, X⊗X, Z⊗Z.
+-1 if P = Y⊗Y.
+0 for all other Paulis.
+But wait, what about something like -I⊗I? That would give -1, but that&rsquo;s not in our error set because errors are taken from the set of Pauli operators without overall phase? Actually, the depolarizing channel usually considers the Pauli errors as those with probability p/15 for each of the 15 non-identity Pauli matrices. Those Pauli matrices are usually taken to be the ones with eigenvalues ±1, but they can have signs? Actually, careful: The depolarizing channel on two qubits is often written as: (1-p)ρ + p/15 Σ_{P in Pauli, P≠I} P ρ P^\dagger. So the errors are actually the Pauli operators themselves. But wait, could they include things like -I? No, because that would be identity up to phase. So indeed, the errors are taken from the set {I, X, Y, Z}⊗{I, X, Y,} actually careful: The set of Pauli strings on two qubits (excluding identity) has 15 elements. They are: X⊗I, Y⊗I, Z⊗I, I⊗X, I⊗Y, I⊗Z, X⊗X, X⊗Y, X⊗Z, Y⊗X, Y⊗Y, Y⊗Z, Z⊗X, Z⊗Y, Z⊗Z. And we computed that for these, the overlap &lt;Φ^+|P|Φ^+&gt; is 0 for most, except for X⊗X and Z⊗Z give 1, and Y⊗Y gives -1. But wait, what about something like? Check X⊗X gives 1, Z⊗Z gives 1, Y⊗Y gives -1. So that means that if the error is such that it is X⊗X or Z⊗Z or Y⊗Y on that Bell state, then the state remains unchanged up to a phase. So then |A(F)|^2 would be 1 for those errors. For any other Pauli error on two qubits, the overlap is 0, so |A(F)|^2 = 0.
+But wait, is that true for any Bell state? Our system A is also a Bell state: |Bell&gt;_A = (|00&gt;+|11&gt;)/√2 for qubits 0 and 3. So the same applies: For a Pauli F acting on qubits 0 and 3, <Bell| F |Bell> will be 1 if F is either I, or X⊗X, or Z⊗Z, or will be -1 if F is Y⊗Y? But careful: That requires that the Pauli acts on both qubits with the same Pauli type? Actually, from our computation, it seems that if F = A⊗B, then the overlap is nonzero only if A and B are both either I, X, Z, or both Y? But wait, check: For system A, the state is |Bell&gt; = (|00&gt;+|11&gt;)/√2. That is the same as |Φ^+&gt; if we order the qubits as (0,3). So yes, it will be: <Bell| F |Bell> = 1 if F is I, or if F = X⊗X, or if F = Z⊗Z, and = -1 if F = Y⊗Y. For any other Pauli, it is 0.
+But wait, could there be something like? What about if F = something like -X⊗X? That would give -1, but that&rsquo;s not considered because that&rsquo;s just a phase times X⊗X. So indeed, for system A, the errors that leave the Bell state invariant (up to a phase) are those that are in the set {I, X⊗X, Z⊗Z, Y⊗Y} actually careful: Y⊗Y gives -1, so that still gives | overlap|^2 = 1 because the fidelity is the absolute value squared of the overlap. So actually, |A(F)|^2 = 1 if F is such that it is either I, or acts as X⊗X, Z⊗Z, or Y⊗Y on the two qubits. But wait, are there any others? What about something like? We already computed others give 0.
+So for system A, the errors that do not reduce the fidelity are those that are in the set S = {I, X⊗X, Z⊗Z, Y⊗Y}. How many Pauli errors on two qubits are there that are in this set? That set has 4 elements out of 16 total Paulis on two qubits. But careful: Our error distribution for F: probability that F = I is 1-p. And for the 15 non-identity Paulis, each has probability p/15. Among these 15, how many are in S? S without identity has {X⊗X, Z⊗Z, Y⊗Y}. So that is 3 out of 15. So for system A, the probability that |A(F)|^2 = 1 is when F is in S. That probability is: P_A = (1-p) + (p/15)</em>3 = 1-p + p/5 = 1 - (4/5)p.
+And if F is not in S, then |A(F)|^2 = 0.
+So then Σ_{F} P(F) |A(F)|^2 = 1 - (4/5)p.</p>
+<p>Now, for system B, we have B(E) = &lt;Φ^+|<em>B E |Φ^+&gt;_B. This is the same thing because it&rsquo;s also a Bell state on two qubits. So similarly, |B(E)|^2 = 1 if E is in the set S (I, X⊗X, Z⊗Z, Y⊗Y) and 0 otherwise. So then Σ</em>{E} P(E) |B(E)|^2 = 1 - (4/5)p as well.</p>
+<p>Therefore, the average fidelity is F = (1 - (4/5)p)^2.</p>
+<p>But wait, is that the physical state fidelity? That is &lt;ψ_ideal|ρ|ψ_ideal&gt;. And since the errors are independent, yes.</p>
+<p>So the physical state fidelity as a function of p is F = (1 - (4/5)p)^2.</p>
+<p>But wait, could there be any terms where both errors occur such that the product gives phase -1? But that doesn&rsquo;t matter because we take absolute value squared.</p>
+<p>So the answer should be: F = 1 - (8/5)p + (16/25)p^2? But wait, that is the fidelity itself. But careful: Fidelity is usually between 0 and 1. When p=0, fidelity=1. When p is small, fidelity ≈ 1 - (8/5)p. That makes sense.</p>
+<p>I will double-check with a couple of examples:
+If there is an error on system A that is, say, X⊗I. Then that would give overlap 0. So that reduces fidelity to 0. That seems plausible because such an error would likely take the state out of the codespace? Actually, wait, could it be that sometimes errors that are not in S still leave some overlap? But our computation seems clear: For a Bell state, if you act with a Pauli that acts on only one qubit, the resulting state is orthogonal to the Bell state. So that seems right.
+So I believe the result is correct.</p>
+<p>Therefore, the physical state fidelity is F = (1 - (4/5)p)^2.</p>
+<p>So the final answer for subproblem 1 is: 
+Physical state fidelity = 1 - (8/5)p + (16/25)p^2, or better as (1 - 4p/5)^2.</p>
+<p>I&rsquo;ll put that as the answer.</p>
+<p>So final answer: \boxed{(1 - \frac{4}{5}p)^2}.</p>
+                      </div>
+                    </details>
+<div class="content markdown-body"><h3 id="step-1-circuit-and-ideal-state-preparation">Step 1. Circuit and Ideal State Preparation</h3>
+<p>The circuit to prepare the logical GHZ state is:</p>
+<div class="arithmatex">\[
+\text{CNOT}_{03} \cdot H_0 \cdot \text{CNOT}_{21} \cdot H_2
+\]</div>
+<p>Applied in reverse order (right-to-left):</p>
+<ol>
+<li>Apply <span class="arithmatex">\( H_2 \)</span> to qubit 2  </li>
+<li>Apply <span class="arithmatex">\( \text{CNOT}_{21} \)</span> (control = 2, target = 1)  </li>
+<li>Apply <span class="arithmatex">\( H_0 \)</span> to qubit 0  </li>
+<li>Apply <span class="arithmatex">\( \text{CNOT}_{03} \)</span> (control = 0, target = 3)</li>
+</ol>
+<p>The initial state is <span class="arithmatex">\( |0000\rangle \)</span>. After applying the circuit without errors, the ideal state is:</p>
+<div class="arithmatex">\[
+|\psi_{\text{ideal}}\rangle = \frac{1}{2} \left( |0000\rangle + |1001\rangle + |0110\rangle + |1111\rangle \right)
+\]</div>
+<p>This state can be rewritten as a product of two Bell states:</p>
+<div class="arithmatex">\[
+|\psi_{\text{ideal}}\rangle = |\text{Bell}\rangle_{03} \otimes |\Phi^+\rangle_{12}
+\]</div>
+<p>where</p>
+<div class="arithmatex">\[
+|\text{Bell}\rangle_{03} = \frac{|00\rangle + |11\rangle}{\sqrt{2}}, \quad |\Phi^+\rangle_{12} = \frac{|00\rangle + |11\rangle}{\sqrt{2}}
+\]</div>
+<hr />
+<h3 id="step-2-error-model">Step 2. Error Model</h3>
+<p>Each CNOT gate is followed by a two-qubit depolarizing error channel:</p>
+<ul>
+<li>With probability <span class="arithmatex">\( 1 - p \)</span>, no error occurs  </li>
+<li>With probability <span class="arithmatex">\( p \)</span>, an error occurs, chosen uniformly from the 15 non-identity two-qubit Pauli operators (each with probability <span class="arithmatex">\( \frac{p}{15} \)</span>)</li>
+</ul>
+<p>Let:</p>
+<ul>
+<li><span class="arithmatex">\( E \)</span>: error on qubits 2 and 1 (after <span class="arithmatex">\( \text{CNOT}_{21} \)</span>)  </li>
+<li><span class="arithmatex">\( F \)</span>: error on qubits 0 and 3 (after <span class="arithmatex">\( \text{CNOT}_{03} \)</span>)</li>
+</ul>
+<p>The final state becomes:</p>
+<div class="arithmatex">\[
+|\psi(E, F)\rangle = F \cdot \text{CNOT}_{03} \cdot H_0 \cdot E \cdot \text{CNOT}_{21} \cdot H_2 |0000\rangle
+\]</div>
+<hr />
+<h3 id="step-3-effect-of-errors-on-the-state">Step 3. Effect of Errors on the State</h3>
+<p>After applying <span class="arithmatex">\( H_2 \)</span> and <span class="arithmatex">\( \text{CNOT}_{21} \)</span>, the state is:</p>
+<div class="arithmatex">\[
+|\psi_2\rangle = |0\rangle_0 |0\rangle_3 \otimes |\Phi^+\rangle_{12}
+\]</div>
+<p>Applying error <span class="arithmatex">\( E \)</span> (on qubits 2 and 1) gives:</p>
+<div class="arithmatex">\[
+|\psi_3\rangle = |0\rangle_0 |0\rangle_3 \otimes (E |\Phi^+\rangle_{12})
+\]</div>
+<p>Then applying <span class="arithmatex">\( H_0 \)</span> and <span class="arithmatex">\( \text{CNOT}_{03} \)</span> yields:</p>
+<div class="arithmatex">\[
+|\psi_5\rangle = |\text{Bell}\rangle_{03} \otimes (E |\Phi^+\rangle_{12})
+\]</div>
+<p>Finally, applying error <span class="arithmatex">\( F \)</span> (on qubits 0 and 3) gives:</p>
+<div class="arithmatex">\[
+|\psi(E, F)\rangle = (F |\text{Bell}\rangle_{03}) \otimes (E |\Phi^+\rangle_{12})
+\]</div>
+<p>The fidelity for a given error pattern is:</p>
+<div class="arithmatex">\[
+f(E, F) = \left| \langle \psi_{\text{ideal}} | \psi(E, F) \rangle \right|^2 = \left| \langle \text{Bell} | F | \text{Bell} \rangle \right|^2 \cdot \left| \langle \Phi^+ | E | \Phi^+ \rangle \right|^2
+\]</div>
+<p>Define:</p>
+<ul>
+<li><span class="arithmatex">\( A(F) = \langle \text{Bell} | F | \text{Bell} \rangle \)</span></li>
+<li><span class="arithmatex">\( B(E) = \langle \Phi^+ | E | \Phi^+ \rangle \)</span></li>
+</ul>
+<p>Then:</p>
+<div class="arithmatex">\[
+f(E, F) = |A(F)|^2 \cdot |B(E)|^2
+\]</div>
+<hr />
+<h3 id="step-4-overlap-values-for-pauli-errors">Step 4. Overlap Values for Pauli Errors</h3>
+<p>For a two-qubit Bell state <span class="arithmatex">\( |\Phi^+\rangle = \frac{|00\rangle + |11\rangle}{\sqrt{2}} \)</span>, the overlap <span class="arithmatex">\( \langle \Phi^+ | P | \Phi^+ \rangle \)</span> for a Pauli operator <span class="arithmatex">\( P \)</span> is:</p>
+<ul>
+<li><span class="arithmatex">\( 1 \)</span> if <span class="arithmatex">\( P = I \otimes I, X \otimes X, Z \otimes Z \)</span></li>
+<li><span class="arithmatex">\( -1 \)</span> if <span class="arithmatex">\( P = Y \otimes Y \)</span></li>
+<li><span class="arithmatex">\( 0 \)</span> otherwise</li>
+</ul>
+<p>Thus, <span class="arithmatex">\( |A(F)|^2 = 1 \)</span> only if <span class="arithmatex">\( F \in S = \{I, X \otimes X, Z \otimes Z, Y \otimes Y\} \)</span>, and 0 otherwise. Similarly for <span class="arithmatex">\( |B(E)|^2 \)</span>.</p>
+<hr />
+<h3 id="step-5-average-fidelity">Step 5. Average Fidelity</h3>
+<p>The average fidelity is:</p>
+<div class="arithmatex">\[
+F = \sum_{E, F} P(E) P(F) \cdot f(E, F) = \left( \sum_F P(F) |A(F)|^2 \right) \left( \sum_E P(E) |B(E)|^2 \right)
+\]</div>
+<p>Each sum is computed as:</p>
+<ul>
+<li>With probability <span class="arithmatex">\( 1 - p \)</span>, no error occurs → contribution = 1  </li>
+<li>With probability <span class="arithmatex">\( p \)</span>, an error occurs → 3 out of 15 Pauli errors are in <span class="arithmatex">\( S \)</span>, each with probability <span class="arithmatex">\( \frac{p}{15} \)</span></li>
+</ul>
+<div class="arithmatex">\[
+\sum_F P(F) |A(F)|^2 = (1 - p) + 3 \cdot \frac{p}{15} = 1 - p + \frac{p}{5} = 1 - \frac{4}{5}p
+\]</div>
+<p>Similarly for <span class="arithmatex">\( \sum_E P(E) |B(E)|^2 \)</span>. Therefore:</p>
+<div class="arithmatex">\[
+F = \left(1 - \frac{4}{5}p\right)^2
+\]</div>
+<hr />
+<h3 id="final-answer">Final Answer</h3>
+<div class="arithmatex">\[
+\boxed{(1 - \frac{4}{5}p)^2}
+\]</div></div>
+</article>
+
+
+<article class="message role-user">
+    <div class="meta">
+        <span class="badge">User</span>
+        <span class="idx">#3</span>
+    </div>
+    <div class="content markdown-body"><h2 id="subproblem-2">Checkpoint 2</h2>
+<p>Suppose that we wish to prepare a logical two-qubit GHZ state  <span class="arithmatex">\((|00\rangle_{AB}+|11\rangle_{AB})/\sqrt{2}\)</span> in the [[4,2,2]] code. To do so, we use the following state preparation circuit:</p>
+<div class="arithmatex">\[
+(CNOT_{03}) (H_0) (CNOT_{21}) (H_2).
+\]</div>
+<p>Note that this equation is written in matrix multiplication order, while the quantum operations in the circuit occur in the reverse order (from right-to-left in the above equation). <span class="arithmatex">\(H\)</span> is a single-qubit Hadamard gate.</p>
+<p>What is the logical state fidelity of the final 2-qubit logical state at the end of the circuit as a function of the two-qubit gate error rate <span class="arithmatex">\(p\)</span>, assuming the state is post-selected on all detectable errors in the code?</p></div>
+</article>
+
+
+<article class="message role-assistant">
+    <div class="meta">
+        <span class="badge">Assistant</span>
+        <span class="idx">#4</span>
+    </div>
+    
+                    <details class="reasoning">
+                      <summary>Reasoning <span class="tag">(model)</span></summary>
+                      <div class="markdown-body reasoning-body">
+                        <p>We are asked: &ldquo;What is the logical state fidelity of the final 2-qubit logical state at the end of the circuit as a function of the two-qubit gate error rate p, assuming the state is post-selected on all detectable errors in the code?&rdquo;</p>
+<p>Interpretation: We have the same circuit as before. But now we post-select on detectable errors. That means we measure the stabilizers? The [[4,2,2]] code has stabilizers XXXX and ZZZZ. Detectable errors are those that anti-commute with at least one stabilizer? Actually, the code distance is 2, so it can detect any single-qubit error? Actually, [[4,2,2]] code: It encodes 2 logical qubits into 4 physical qubits with distance 2. So it can detect any single-qubit error. But wait: &ldquo;post-selected on all detectable errors&rdquo; means that we measure the stabilizers and if we get a non-trivial syndrome, we discard the state. So we only keep states that are in the code space? But careful: The circuit might produce errors that are not detectable? Actually, the code has distance 2, so it can detect any error on one qubit? But wait: The errors here are on two-qubit gates. They act on two qubits. So these errors could be weight-1 or weight-2 Paulis. But they are applied after each CNOT. So the errors are on specific pairs: first error on qubits {2,1} and second error on qubits {0,3}. So these errors are weight-2 Paulis? Actually, they are two-qubit Paulis. They can be products of single-qubit Paulis. So they could be weight-1 errors if only one qubit is acted on by a non-identity Pauli? But careful: The error channel: &ldquo;each CNOT_{ij} gate has a two qubit depolarizing error channel following it that produces one of the 15 non-identity two-qubit Paulis with equal probability p/15.&rdquo; So these errors are on two qubits. But they could be, for example, X⊗I. That is a weight-1 error on the first qubit of that pair. So indeed, there can be weight-1 errors. So these errors are detectable if they are not in the stabilizer? Actually, the code&rsquo;s stabilizers are XXXX and ZZZZ. An error is detectable if it anti-commutes with at least one stabilizer. So we need to determine, for each error pattern (E on {2,1} and F on {0,3}), whether the combined error (after propagation through the circuit) is detectable or not. And then we post-select: we only keep states that have no error syndrome (i.e., are in the code space)? Or wait: &ldquo;post-selected on all detectable errors&rdquo; might mean that we discard states that have a detectable error. So we only keep states that are either error-free or have an error that is not detectable (i.e., logical errors). But careful: &ldquo;post-selected on all detectable errors&rdquo; suggests that we measure the stabilizers and if we get any non-trivial syndrome, we throw away the state. So the logical state fidelity after post-selection is the fidelity of the state conditioned on no error detection. That means we only consider error patterns that do not trigger any stabilizer measurement outcome (i.e., they are either identity or act as a logical operator on the code space). So we need to compute the probability that the state is in the code space (i.e., no detected error) and among those, what is the fidelity to the ideal logical state.</p>
+<p>So we have the same setup as before. The final state is: 
+|ψ(E,F)&gt; = (F |Bell&gt;<em>{03}) ⊗ (E |Φ^+&gt;</em>{12}).
+But careful: That was derived assuming that the errors act on the state after the ideal circuit? Actually, we derived that the effect of errors is that they act on the two separate Bell states. But wait: Is that always true? We had: 
+|ψ5&gt; = |Bell&gt;<em>{03} ⊗ (E|Φ^+&gt;</em>{12})
+Then applied F on qubits 0 and 3 gives: |ψ6&gt; = (F|Bell&gt;<em>{03}) ⊗ (E|Φ^+&gt;</em>{12}).
+So that is correct.</p>
+<p>Now, the ideal logical state is |ψ_ideal&gt; = |Bell&gt;<em>{03} ⊗ |Φ^+&gt;</em>{12}.
+So the error pattern effectively applies Pauli operators on these two Bell states independently. So the combined state is a product state across the two pairs: (0,3) and (1,2). And note that the code space of the [[4,2,2]] code is exactly the set of states that are simultaneous +1 eigenvectors of XXXX and ZZZZ. But our state is a product of two Bell states. Is that always in the code space? Actually, check: For |ψ_ideal&gt;, we have XXXX|ψ_ideal&gt; =? XXXX on |Bell&gt;<em>{03} gives? Actually, careful: The stabilizers are XXXX and ZZZZ. They act on all 4 qubits. But our state is a product state between qubits {0,3} and {1,2}. For a product state |Bell&gt;</em>{03} ⊗ |Φ^+&gt;<em>{12}, what is XXXX? That is (X⊗X)</em>{03} ⊗ (X⊗X)_{12}. And since both are Bell states, they are eigenvectors with eigenvalue +1. So yes, it is in the code space. Similarly for ZZZZ. So the code space is exactly the set of states that are products of Bell states on these two pairs? Actually, the [[4,2,2]] code has dimension 4. And indeed, the logical operators are given. So that is consistent.</p>
+<p>Now, an error pattern will take the state to (F|Bell&gt;<em>{03}) ⊗ (E|Φ^+&gt;</em>{12}). This state will be in the code space if and only if both F|Bell&gt;<em>{03} and E|Φ^+&gt;</em>{12} are Bell states themselves? Actually, careful: The code space is the set of states that are +1 eigenvectors of XXXX and ZZZZ. If we have a product state across these two pairs, then it will be in the code space if and only if each factor is a Bell state (i.e., maximally entangled) because then XXXX will give +1. But wait: Could it be that the state is not a product of Bell states but still in the code space? The code space is 4-dimensional. The product states of Bell states on (0,3) and (1,2) actually form a basis? There are 4 Bell states on two qubits. So indeed, any state in the code space can be written as |Bell_i&gt;<em>{03} ⊗ |Bell_j&gt;</em>{12} with appropriate phases? Actually, check: The stabilizer conditions: XXXX = (X⊗X)<em>{03} (X⊗X)</em>{12} must have eigenvalue +1. That means that the state on (0,3) and (1,2) must be such that the eigenvalue of (X⊗X) on each pair is the same? Actually, if the state is a product, then the eigenvalue for XXXX is the product of the eigenvalues for (X⊗X)<em>{03} and (X⊗X)</em>{12}. So for the state to be in the code space, we need that (X⊗X)<em>{03} and (X⊗X)</em>{12} both have the same eigenvalue? But wait, the stabilizer is XXXX itself. So if |ψ&gt; = |a&gt;<em>{03} ⊗ |b&gt;</em>{12}, then XXXX|ψ&gt; = ((X⊗X)|a&gt;) ⊗ ((X⊗X)|b&gt;). For this to equal |ψ&gt;, we need that |a&gt; is an eigenvector of X⊗X and |b&gt; is an eigenvector of X⊗X with the same eigenvalue? Actually, if |a&gt; has eigenvalue λ and |b&gt; has eigenvalue μ, then the product is λμ. For it to be +1, we need λμ=1. So it is possible that one has eigenvalue +1 and the other -1? But then the product is -1, so that state would not be in the code space because the stabilizer requires +1. So indeed, for a product state to be in the code space, we need that both |a&gt; and |b&gt; are eigenvectors of X⊗X with eigenvalue +1, or both with eigenvalue -1? But wait, if both are -1, then product is +1. So actually, there are two possibilities: either both have +1 or both have -1. But are there Bell states that are eigenvectors of X⊗X with eigenvalue -1? The Bell states: |Φ^+&gt; has eigenvalue +1. |Φ^-&gt; has eigenvalue? X⊗X|Φ^-&gt; =? |Φ^-&gt; = (|00&gt;-|11&gt;)/√2, then X⊗X|Φ^-&gt; = (|11&gt;-|00&gt;)/√2 = -|Φ^-&gt;. So yes, |Φ^-&gt; is eigenvector with eigenvalue -1. Similarly, |Ψ^+&gt; and |Ψ^-&gt;? Check: |Ψ^+&gt; = (|01&gt;+|10&gt;)/√2, then X⊗X|Ψ^+&gt; = (|10&gt;+|01&gt;)/√2 = +|Ψ^+&gt; actually? Wait, careful: X⊗X acts on |01&gt;: X|0&gt;=|1&gt;, X|1&gt;=|0&gt; so becomes |10&gt;. So indeed, |Ψ^+&gt; gives +1. And |Ψ^-&gt; gives? |Ψ^-&gt; = (|01&gt;-|10&gt;)/√2, then X⊗X|Ψ^-&gt; = (|10&gt;-|01&gt;)/√2 = -|Ψ^-&gt;. So actually, the Bell states are eigenvectors of X⊗X with eigenvalues: 
+|Φ^+&gt;: +1
+|Φ^-): -1
+|Ψ^+&gt;: +1
+|Ψ^-): -1
+So for the state to be in the code space, we need that the product of the eigenvalues for X⊗X on the two pairs is +1. That means if one pair is in a Bell state with eigenvalue +1, the other must be in a Bell state with eigenvalue +1; or if one is with eigenvalue -1, the other must be with eigenvalue -1. But wait, also consider the other stabilizer ZZZZ. That will impose conditions as well. So actually, the code space is exactly the set of states that are simultaneous +1 eigenvectors of XXXX and ZZZZ. For a product state |a&gt;<em>{03} ⊗ |b&gt;</em>{12}, we need:
+(X⊗X)<em>{03}|a&gt; = λ |a&gt;, (X⊗X)</em>{12}|b&gt; = μ |b&gt;, and we need λμ = +1.
+Also (Z⊗Z)<em>{03}|a&gt; = ν |a&gt;, (Z⊗Z)</em>{12}|b&gt; = ω |b&gt;, and we need νω = +1.
+The Bell states have:
+|Φ^+&gt;: λ=+1, ν=+1
+|Φ^-): λ=-1, ν=+1? Actually, check: Z⊗Z|Φ^-&gt; =? |Φ^-&gt; = (|00&gt;-|11&gt;)/√2, Z⊗Z|00&gt;=|00&gt;, Z⊗Z|11&gt;=|11&gt;, so actually Z⊗Z|Φ^-&gt; = |Φ^-&gt;, so ν=+1.
+|Ψ^+&gt;: λ=+1, ν=? Z⊗Z|Ψ^+&gt; = (Z|0&gt;Z|1&gt; + Z|1&gt;Z|0&gt;)/√2 = (|0&gt;(-|1&gt;) + (-|1&gt;)|0&gt;)/√2 = -|Ψ^+&gt;, so ν=-1.
+|Ψ^-): λ=-1, ν=? Z⊗Z|Ψ^-) =? Actually, compute: |Ψ^-) = (|01&gt;-|10&gt;)/√2, then Z⊗Z|01&gt; = -|01&gt;, Z⊗Z|10&gt; = -|10&gt;, so actually Z⊗Z|Ψ^-) =? careful: Z⊗Z|01&gt; = (Z|0&gt;)(Z|1&gt;) = (|0&gt;)(-|1&gt;) = -|01&gt;; Z⊗Z|10&gt; = (-|1&gt;)(|0&gt;) = -|10&gt;; so then Z⊗Z|Ψ^-) = (-|01&gt; - (-|10&gt;)? Actually, let&rsquo;s do properly:
+Z⊗Z|Ψ^-) = 1/√2 (Z⊗Z|01&gt; - Z⊗Z|10&gt;) = 1/√2 ((-|01&gt;) - (-|10&gt;)) = 1/√2 (-|01&gt;+|10&gt;) = -|Ψ^-)? Actually, check sign: |Ψ^-) = (|01&gt;-|10&gt;)/√2. Multiply by -1 gives (-|01&gt;+|10&gt;)/√2 = |Ψ^-) actually? Because |Ψ^-) is antisymmetric. Actually, |Ψ^-) is defined as (|01&gt;-|10&gt;)/√2. If we multiply by -1, we get (|10&gt;-|01&gt;)/√2 = -|Ψ^-). So careful: 
+We want to compute eigenvalues. For |Ψ^+&gt; we already got: Z⊗Z|Ψ^+&gt; =? Let&rsquo;s compute systematically:
+Bell states:
+|Φ^+&gt; = (|00&gt;+|11&gt;)/√2.
+|Φ^-&gt; = (|00&gt;-|11&gt;)/√2.
+|Ψ^+&gt; = (|01&gt;+|10&gt;)/√2.
+|Ψ^-&gt; = (|01&gt;-|10&gt;)/√2.</p>
+<p>Now, X⊗X:
+X⊗X|00&gt; = |11&gt;, X⊗X|11&gt; = |00&gt;. So 
+X⊗X|Φ^+&gt; = (|11&gt;+|00&gt;)/√2 = |Φ^+&gt; so eigenvalue +1.
+X⊗X|Φ^-&gt; = (|11&gt;-|00&gt;)/√2 = -|Φ^-&gt; so eigenvalue -1.
+X⊗X|01&gt; = |10&gt;, X⊗X|10&gt; = |01&gt;. So
+X⊗X|Ψ^+&gt; = (|10&gt;+|01&gt;)/√2 = |Ψ^+&gt; so eigenvalue +1.
+X⊗X|Ψ^-&gt; = (|10&gt;-|01&gt;)/√2 = -|Ψ^-&gt; so eigenvalue -1.</p>
+<p>Now, Z⊗Z:
+Z⊗Z|00&gt; = |00&gt;, Z⊗Z|11&gt; = |11&gt;. So
+Z⊗Z|Φ^+&gt; = |Φ^+&gt;, eigenvalue +1.
+Z⊗Z|Φ^-&gt; = |Φ^-&gt;, eigenvalue +1.
+Z⊗Z|01&gt; = -|01&gt;, Z⊗Z|10&gt; = -|10&gt;. So
+Z⊗Z|Ψ^+&gt; = (-|01&gt;-|10&gt;)/√2 = -|Ψ^+&gt;, eigenvalue -1.
+Z⊗Z|Ψ^-&gt; = (-|01&gt; - (-|10&gt;)? Let&rsquo;s do: Z⊗Z|Ψ^-&gt; = 1/√2 (Z⊗Z|01&gt; - Z⊗Z|10&gt;) = 1/√2 ((-|01&gt;) - (-|10&gt;)) = 1/√2 (-|01&gt;+|10&gt;) = ? This is actually = - (|01&gt;-|10&gt;)/√2? Because if we take -|Ψ^-&gt; = -1/√2(|01&gt;-|10&gt;) = (-|01&gt;+|10&gt;)/√2. So indeed, Z⊗Z|Ψ^-&gt; = -|Ψ^-&gt;. So eigenvalues: 
+|Φ^+&gt;: (X⊗X: +1, Z⊗Z: +1)
+|Φ^-): (X⊗X: -1, Z⊗Z: +1)
+|Ψ^+&gt;: (X⊗X: +1, Z⊗Z: -1)
+|Ψ^-): (X⊗X: -1, Z⊗Z: -1)</p>
+<p>Now, the stabilizers of the code are XXXX and ZZZZ. For a product state |a&gt;<em>{03} ⊗ |b&gt;</em>{12}, we have:
+XXXX|a&gt;|b&gt; = (X⊗X)<em>{03}|a&gt; ⊗ (X⊗X)</em>{12}|b&gt;. For this to equal |a&gt;|b&gt;, we need that (X⊗X)<em>{03}|a&gt; = λ|a&gt; and (X⊗X)</em>{12}|b&gt; = μ|b&gt; with λμ=1.
+Similarly, ZZZZ gives that (Z⊗Z)<em>{03}|a&gt; = ν|a&gt; and (Z⊗Z)</em>{12}|b&gt; = ω|b&gt; with νω=1.
+So for the state to be in the code space, the pair (λ,ν) for |a&gt; and (μ,ω) for |b&gt; must satisfy λμ=1 and νω=1.
+That means that if |a&gt; is one of the Bell states, then its (λ,ν) is either (+1,+1) for |Φ^+&gt;, (-1,+1) for |Φ^-), (+1,-1) for |Ψ^+), (-1,-1) for |Ψ^-). For |b&gt; similarly.
+Then λμ=1 means that if |a&gt; has λ=+1, then |b&gt; must have μ=+1; if |a&gt; has λ=-1, then |b&gt; must have μ=-1.
+And νω=1 means that if |a&gt; has ν=+1, then |b&gt; must have ω=+1; if |a&gt; has ν=-1, then |b&gt; must have ω=-1.
+So that means that |a&gt; and |b&gt; must be in the same &ldquo;type&rdquo; in terms of these eigenvalues. So the code space consists of states where both pairs are in the same Bell state type? Actually, wait: There are 4 Bell states. They come in two categories regarding the pair (λ,ν): 
+Category 1: (+,+) -&gt; only |Φ^+&gt;
+Category 2: (-,+) -&gt; |Φ^-)
+Category 3: (+,-) -&gt; |Ψ^+)
+Category 4: (-,-) -&gt; |Ψ^-)
+So if |a&gt; is in category 1, then |b&gt; must be in category 1 as well to have λμ=1 and νω=1? Because if |a&gt; is category 1, then λ=+1, ν=+1, so we need μ=+1 and ω=+1, so |b&gt; must be category 1. Similarly, if |a&gt; is category 2, then λ=-1, ν=+1, so we need μ=-1 and ω=+1, so |b&gt; must be category 2. So indeed, the code space states are exactly those that are products of the same Bell state on both pairs. But wait, our ideal state is |Φ^+&gt;<em>{03} ⊗ |Φ^+&gt;</em>{12}. That is category 1. So if an error takes the state to a product of Bell states that are both in category 1, then that state is actually the ideal state? Not necessarily: There is only one Bell state in category 1: |Φ^+&gt;. So if both pairs are in |Φ^+&gt;, then it is the ideal state. But what if both pairs are in some other Bell state? For example, if the error causes both pairs to become |Φ^-&gt;, then the state is |Φ^-&gt;<em>{03} ⊗ |Φ^-&gt;</em>{12}. Is that in the code space? Check: XXXX on that: (X⊗X)|Φ^-&gt; = -|Φ^-&gt;, so on both gives (-1)*(-1)=1. ZZZZ: (Z⊗Z)|Φ^-&gt; = |Φ^-&gt;, so product=1. So yes, that state is in the code space. But is it the same as the ideal logical state? The logical state is defined on two qubits. The code space is 4-dimensional. The logical operators act. The ideal state is |00&gt;<em>{AB} + |11&gt;</em>{AB} normalized. That state corresponds to |Φ^+&gt;<em>{03} ⊗ |Φ^+&gt;</em>{12} likely. What about |Φ^-&gt;<em>{03} ⊗ |Φ^-&gt;</em>{12}? That would be a different logical state? Actually, the logical operators: They are given as X_A = XIXI, X_B=XXII, Z_A=ZZII, Z_B=ZIZI. Let&rsquo;s check: On |Φ^-&gt;<em>{03} ⊗ |Φ^-&gt;</em>{12}, what are the logical values? Possibly that state is |00&gt;<em>{AB} - |11&gt;</em>{AB}? Or something like that. So errors that take the state to a different Bell state product but still within the code space are actually logical errors. They are not detected by the stabilizers because the stabilizers still give +1. So post-selection means we only keep states that are in the code space. That includes both the ideal state and states that have undergone a logical error. So then the logical fidelity after post-selection is the probability that given that the state is in the code space (no detected error), it is actually the ideal state.</p>
+<p>So we need to compute: 
+F_logical = (Probability that the state is ideal) / (Probability that the state is in the code space)
+because after post-selection, we only keep states that are in the code space. And then the fidelity is the conditional probability that the state is ideal given that it is in the code space.</p>
+<p>But wait: &ldquo;logical state fidelity&rdquo; might be defined as the fidelity of the logical state to the ideal logical state. That would be 1 if the state is in the code space and is the ideal state, and if it is a different logical state, then the fidelity might be something else? But careful: The logical state is a 2-qubit state. The ideal is (|00&gt;+|11&gt;)/√2. If the state is, say, (|00&gt;-|11&gt;)/√2, then the fidelity between that and (|00&gt;+|11&gt;)/√2 is |&lt;00|00&gt;+&lt;11|11&gt;? Actually, compute: (|00&gt;+|11&gt;)/√2 and (|00&gt;-|11&gt;)/√2 have overlap = (1-1)/2=0. So indeed, if there is a logical error that flips the sign of the |11&gt; component, the fidelity becomes 0. But wait, could there be logical errors that are not just a phase? The logical operators are Paulis on the logical qubits. So they will take the state to an orthogonal state if they are not identity. So indeed, if the state is in the code space but not the ideal state, then the fidelity to the ideal state is 0 because the ideal state is a specific state in the code space. So then the logical fidelity after post-selection is: 
+F = P(ideal | code space) = P(ideal and code space) / P(code space) = P(ideal) / P(code space) because ideal is a subset of code space.
+And P(ideal) we computed earlier? But careful: That was the physical fidelity without post-selection. But wait, that physical fidelity was (1 - 4p/5)^2. But that counts also states that are not in the code space? Actually, our previous computation gave the average fidelity over all error patterns. That fidelity was f(E,F) = |A(F)|^2 |B(E)|^2. And that was 1 only if both F and E are in the set S = {I, X⊗X, Z⊗Z, Y⊗Y}? But wait, check: For system A, we determined that |A(F)|^2 = 1 if F is in S, and 0 otherwise. But that means that if F is in S, then F|Bell&gt; is actually a Bell state. But it might not be the same Bell state as |Bell&gt; itself. For example, if F = Y⊗Y, then we computed <Bell|Y⊗Y|Bell> = -1, so that means that Y⊗Y|Bell&gt; is actually -|Bell&gt;? But wait, careful: |A(F)|^2 is the square of the overlap with the ideal Bell state. So if F is in S, then |A(F)|^2 = 1 means that F|Bell&gt; is actually exactly the same as |Bell&gt; up to a phase. But is that true? For F = X⊗X, we got overlap = 1, so X⊗X|Bell&gt; = |Bell&gt;. For F = Z⊗Z, overlap = 1, so Z⊗Z|Bell&gt; = |Bell&gt;. For F = Y⊗Y, overlap = -1, so Y⊗Y|Bell&gt; = -|Bell&gt;. So actually, if F is in S, then F|Bell&gt; is actually the same state as |Bell&gt; up to a global phase. So that means that if both E and F are in S, then the final state is exactly the ideal state. So indeed, the condition for the state to be ideal is that both E and F are in S. And that probability is: P(ideal) = [ (1-p) + (3p/15) ]^2 = (1 - 4p/5)^2. That matches our physical fidelity from before. But wait, that physical fidelity was the average fidelity over all error patterns. But that average fidelity is not the same as the probability of being ideal because there could be states that are not ideal but still have some overlap? But we computed f(E,F) = |A(F)|^2|B(E)|^2. And that is 1 only if both are in S, and 0 otherwise. So indeed, the state is ideal if and only if E and F are in S. So P(ideal) = (1 - 4p/5)^2.</p>
+<p>Now, what is the condition for the state to be in the code space? The state is in the code space if it is a product of Bell states on the two pairs that are both of the same category. That is: |ψ&gt; = |Bell_i&gt;<em>{03} ⊗ |Bell_j&gt;</em>{12} is in the code space if and only if the Bell states |Bell_i&gt; and |Bell_j&gt; have the same eigenvalues for X⊗X and Z⊗Z? Actually, as derived, for a product state to be in the code space, we need that (X⊗X)<em>{03}|Bell_i&gt; = λ|Bell_i&gt; and (X⊗X)</em>{12}|Bell_j&gt; = μ|Bell_j&gt; with λμ=1, and similarly for Z⊗Z with νω=1. That means that if |Bell_i&gt; is in category 1 (λ=+1, ν=+1), then |Bell_j&gt; must be in category 1 as well (μ=+1, ω=+1). If |Bell_i&gt; is in category 2 (λ=-1, ν=+1), then |Bell_j&gt; must be in category 2 (μ=-1, ω=+1). If category 3, then category 3. If category 4, then category 4.
+So, given an error pattern (E on system B and F on system A), what is the resulting state? 
+System A: F|Bell&gt;<em>{03}. This will be some Bell state on qubits 0,3. Which Bell state? It depends on F. Similarly, system B: E|Φ^+&gt;</em>{12} will be some Bell state on qubits 1,2.
+We know that |Bell&gt;<em>{03} is actually |Φ^+&gt;</em>{03} (since ideal state is |Φ^+&gt;<em>{03} ⊗ |Φ^+&gt;</em>{12}). So system A: F|Φ^+&gt;<em>{03}. And system B: E|Φ^+&gt;</em>{12}.
+Now, if F is in S, then F|Φ^+&gt; is actually |Φ^+&gt; itself (up to phase). So that gives category 1.
+If F is not in S, then what happens? F is a Pauli on two qubits. It will map |Φ^+&gt; to some other state. Let&rsquo;s determine: For system A, the initial Bell state is |Φ^+&gt;<em>{03} (category 1). Under a Pauli operator F (on qubits 0 and 3), what is the resulting Bell state? This is essentially the action of the Pauli group on the Bell state. Since the Pauli group acts transitively on the Bell states, for any Pauli F that is not in the stabilizer of |Φ^+&gt;? Actually, the stabilizer of |Φ^+&gt; is {I, X⊗X, Z⊗Z, Y⊗Y} actually? Check: We found that X⊗X and Z⊗Z and Y⊗Y all give either +1 or -1. So actually, these three also stabilize |Φ^+&gt; up to a phase. So indeed, if F is in S, then F|Φ^+&gt; = ±|Φ^+&gt;. So that stays in category 1.
+If F is not in S, then F will map |Φ^+&gt; to a different Bell state. For example, if F = X⊗I, then we computed that &lt;Φ^+|X⊗I|Φ^+&gt; = 0, so X⊗I|Φ^+&gt; is orthogonal to |Φ^+&gt;. And likely it will map to one of the other Bell states. Let&rsquo;s determine: F = X⊗I. Then X⊗I|00&gt; = |10&gt;, X⊗I|11&gt; = |01&gt;. So X⊗I|Φ^+&gt; = (|10&gt;+|01&gt;)/√2 = |Ψ^+&gt;. So that is category 3 because |Ψ^+&gt; has (X⊗X: +1, Z⊗Z: -1). So if F = X⊗I, then the resulting state on system A is |Ψ^+&gt;</em>{03}, which is category 3.
+Similarly, if F = I⊗X, then that gives |Ψ^+&gt; as well? Actually, I⊗X|00&gt; = |01&gt;, I⊗X|11&gt; = |10&gt;, so yes, |Ψ^+&gt;. 
+If F = Z⊗I, then Z⊗I|00&gt; = |00&gt;, Z⊗I|11&gt; = -|11&gt;, so that gives |Φ^-&gt; actually? Because |Φ^-&gt; = (|00&gt;-|11&gt;)/√2. But careful: Z⊗I|Φ^+&gt; = (|00&gt; + (-|11&gt;))/√2 = (|00&gt;-|11&gt;)/√2 = |Φ^-&gt;. So that is category 2.
+If F = I⊗Z, then similarly gives |Φ^-&gt;.
+If F = Y⊗I, then Y|0&gt;=i|1&gt;, Y|1&gt;=-i|0&gt;, so Y⊗I|00&gt; = i|10&gt;, Y⊗I|11&gt; = -i|01&gt;, so that gives? That is i(|10&gt;-|01&gt;)/√2 = i * (-|Ψ^-&gt;) actually? |Ψ^-&gt; = (|01&gt;-|10&gt;)/√2, so -|Ψ^-&gt; = (|10&gt;-|01&gt;)/√2. So Y⊗I|Φ^+&gt; = i * (-|Ψ^-&gt;) = -i|Ψ^-&gt;. So that is category 4? Because |Ψ^-&gt; has (X⊗X: -1, Z⊗Z: -1). So yes.
+Similarly, other Paulis will map |Φ^+&gt; to one of the other Bell states. So in summary, for system A, if F is in S, then the resulting state is |Φ^+&gt; (category 1). If F is not in S, then it will map to one of the other three Bell states. And importantly, these three are equally likely? Because the depolarizing channel gives each non-identity Pauli with probability p/15. And there are 12 Paulis that are not in S? Actually, S has 4 elements: I, X⊗X, Z⊗Z, Y⊗Y. But wait, careful: S as defined earlier: we said that |A(F)|^2=1 if F is in {I, X⊗X, Z⊗Z, Y⊗Y}. That set has 4 elements. So the remaining 12 Paulis will map |Φ^+&gt; to the other Bell states. And by symmetry, they will be distributed equally among the three categories? Let&rsquo;s check: The non-S Paulis: They are all Paulis that are not in S. How many map to category 2? Category 2 is |Φ^-&gt;. Which Paulis give that? We saw that Z⊗I and I⊗Z give |Φ^-&gt;. Also, what about something like? What about X⊗Z? That gave 0 overlap, so that likely maps to something else. Let&rsquo;s determine: F = X⊗Z. We computed earlier: X⊗Z|Φ^+&gt; gave? Actually, we computed &lt;Φ^+|X⊗Z|Φ^+&gt;=0, so it maps to a Bell state orthogonal to |Φ^+&gt;. To determine which, compute: X⊗Z|00&gt; = |10&gt;, X⊗Z|11&gt; = -|01&gt;. So that gives (|10&gt; -|01&gt;)/√2 = -|Ψ^-&gt;? Actually, |Ψ^-&gt; = (|01&gt;-|10&gt;)/√2, so -|Ψ^-&gt; = (|10&gt;-|01&gt;)/√2. So X⊗Z|Φ^+&gt; = -|Ψ^-&gt;, which is category 4 actually because |Ψ^-&gt; is category 4. So it seems that the mapping from Paulis to Bell states might be such that each of the three non-identity categories gets exactly 4 Paulis? Let&rsquo;s check: The Pauli group on two qubits has 16 elements. The stabilizer of |Φ^+&gt; is actually of size 4? Actually, the stabilizer of |Φ^+&gt; in the Pauli group (ignoring phases) is {I, X⊗X, Z⊗Z, Y⊗Y}. So indeed, there are 4 elements that leave |Φ^+&gt; invariant (up to phase). The remaining 12 are divided into 3 cosets of size 4 that take |Φ^+&gt; to each of the other 3 Bell states. So yes, by symmetry, if F is chosen uniformly among the 15 non-identity Paulis, then with probability 3/15 = 1/5, F is in S (and then the state remains |Φ^+&gt;), and with probability 4/15 each, it goes to each of the other three Bell states. But wait, check: There are 12 non-S Paulis, and they are equally distributed among the 3 other Bell states, so each gets 4/15 probability. But then plus the identity probability: identity probability is 1-p, but that&rsquo;s separate. So overall, for system A, the probability that the resulting state is in category 1 is: P(A in cat1) = (1-p) + (p)<em>(3/15) = 1-p + p/5 = 1 - 4p/5.
+And the probability that it is in category 2 is: p</em>(4/15) = 4p/15.
+Similarly, category 3: 4p/15, category 4: 4p/15.</p>
+<p>Now, for system B, it&rsquo;s the same because initially it is |Φ^+&gt; as well. So P(B in cat1) = 1 - 4p/5, and each of the other categories: 4p/15.</p>
+<p>Now, the state is in the code space if and only if the categories of system A and system B are the same. Because then the stabilizers will give +1. So the probability that the state is in the code space is:
+P(code) = P(A and B both cat1) + P(A and B both cat2) + P(A and B both cat3) + P(A and B both cat4)
+= (1 - 4p/5)^2 + 3<em>(4p/15)^2 = (1 - 4p/5)^2 + 3</em>(16p^2/225) = (1 - 4p/5)^2 + (48p^2/225)</p>
+<p>Now, (1 - 4p/5)^2 = 1 - 8p/5 + 16p^2/25 = 1 - 8p/5 + (16p^2/25). And 16/25 = (144/225). So that term is 1 - 8p/5 + 144p^2/225.
+So P(code) = 1 - 8p/5 + (144+48)p^2/225 = 1 - 8p/5 + 192p^2/225 = 1 - 8p/5 + (64/75)p^2? Actually, 192/225 simplifies to 64/75, so P(code) = 1 - (8/5)p + (64/75)p^2.</p>
+<p>But wait, is that correct? Let&rsquo;s also consider that errors on the two CNOTs are independent. So yes.</p>
+<p>Now, the state is ideal if and only if both systems are in category 1. That probability is P(ideal) = (1 - 4p/5)^2 = 1 - 8p/5 + 16p^2/25 = 1 - 8p/5 + (144/225)p^2 = 1 - 8p/5 + (144/225)p^2.</p>
+<p>So then the logical fidelity after post-selection is:
+F_logical = P(ideal | code) = P(ideal) / P(code) = [1 - 8p/5 + (144/225)p^2] / [1 - 8p/5 + (192/225)p^2] = [1 - 8p/5 + (144/225)p^2] / [1 - 8p/5 + (192/225)p^2].</p>
+<p>Simplify: Multiply numerator and denominator by 225:
+= [225 - 360p + 144p^2] / [225 - 360p + 192p^2] = [225 - 360p + 144p^2] / [225 - 360p + 192p^2].</p>
+<p>We can simplify by dividing numerator and denominator by 9? 225/9=25, 360/9=40, 144/9=16, 192/9 is not integer (192/9=21.333). Alternatively, divide by 3: 225/3=75, 360/3=120, 144/3=48, 192/3=64. So we get:
+F_logical = [75 - 120p + 48p^2] / [75 - 120p + 64p^2].</p>
+<p>That is a expression. But wait, is that the final answer? It might simplify further? 75,120,48,64 have common factor? 75,120,48 have common factor 3? But 64 is not divisible by 3. So that is it.</p>
+<p>But wait, could there be any contribution from errors that are not independent? They are independent because the two errors come from different gates. So yes.</p>
+<p>Thus, the logical state fidelity after post-selection is:
+F_logical = (75 - 120p + 48p^2) / (75 - 120p + 64p^2).</p>
+<p>We can also write it as: 
+F_logical = 1 - (16p^2)/(75 - 120p + 64p^2) because denominator - numerator = 16p^2.</p>
+<p>So that is the answer.</p>
+<p>I&rsquo;ll double-check with small p: When p=0, F=1. When p is small, F ≈ 1 - (16/75)p^2? That seems plausible.</p>
+<p>So final answer for subproblem 2: 
+\boxed{\frac{75 - 120p + 48p^2}{75 - 120p + 64p^2}}.</p>
+<p>I&rsquo;ll check with a specific: If p is very small, then the probability of error is small. The code space probability is nearly 1. The ideal probability is nearly 1. So fidelity is nearly 1. The next order term: numerator: 1 - 8p/5 + &hellip; denominator: 1 - 8p/5 + &hellip; so the difference is in the p^2 term: 144/225 vs 192/225, so ratio = 1 - (48/225)p^2 = 1 - (16/75)p^2. So that seems right.</p>
+<p>Thus, final answer.</p>
+                      </div>
+                    </details>
+<div class="content markdown-body"><h3 id="step-1-circuit-and-error-model">🧮 Step 1: Circuit and Error Model</h3>
+<p>The circuit to prepare the logical GHZ state is:</p>
+<div class="arithmatex">\[
+\text{CNOT}_{03} \cdot H_0 \cdot \text{CNOT}_{21} \cdot H_2
+\]</div>
+<p>Applied in reverse order (right-to-left):</p>
+<ol>
+<li>Apply <span class="arithmatex">\( H_2 \)</span> to qubit 2  </li>
+<li>Apply <span class="arithmatex">\( \text{CNOT}_{21} \)</span> (control = 2, target = 1)  </li>
+<li>Apply <span class="arithmatex">\( H_0 \)</span> to qubit 0  </li>
+<li>Apply <span class="arithmatex">\( \text{CNOT}_{03} \)</span> (control = 0, target = 3)</li>
+</ol>
+<p>The initial state is <span class="arithmatex">\( |0000\rangle \)</span>. After applying the circuit without errors, the ideal state is:</p>
+<div class="arithmatex">\[
+|\psi_{\text{ideal}}\rangle = \frac{1}{2} \left( |0000\rangle + |1001\rangle + |0110\rangle + |1111\rangle \right)
+\]</div>
+<p>This state can be rewritten as a product of two Bell states:</p>
+<div class="arithmatex">\[
+|\psi_{\text{ideal}}\rangle = |\text{Bell}\rangle_{03} \otimes |\Phi^+\rangle_{12}
+\]</div>
+<p>where</p>
+<div class="arithmatex">\[
+|\text{Bell}\rangle_{03} = \frac{|00\rangle + |11\rangle}{\sqrt{2}}, \quad |\Phi^+\rangle_{12} = \frac{|00\rangle + |11\rangle}{\sqrt{2}}
+\]</div>
+<p>Each CNOT gate is followed by a two-qubit depolarizing error channel:</p>
+<ul>
+<li>With probability <span class="arithmatex">\( 1 - p \)</span>, no error occurs  </li>
+<li>With probability <span class="arithmatex">\( p \)</span>, an error occurs, chosen uniformly from the 15 non-identity two-qubit Pauli operators (each with probability <span class="arithmatex">\( \frac{p}{15} \)</span>)</li>
+</ul>
+<p>Let:</p>
+<ul>
+<li><span class="arithmatex">\( E \)</span>: error on qubits 2 and 1 (after <span class="arithmatex">\( \text{CNOT}_{21} \)</span>)  </li>
+<li><span class="arithmatex">\( F \)</span>: error on qubits 0 and 3 (after <span class="arithmatex">\( \text{CNOT}_{03} \)</span>)</li>
+</ul>
+<p>The final state becomes:</p>
+<div class="arithmatex">\[
+|\psi(E, F)\rangle = F \cdot \text{CNOT}_{03} \cdot H_0 \cdot E \cdot \text{CNOT}_{21} \cdot H_2 |0000\rangle
+\]</div>
+<p>After simplification, this reduces to:</p>
+<div class="arithmatex">\[
+|\psi(E, F)\rangle = (F |\text{Bell}\rangle_{03}) \otimes (E |\Phi^+\rangle_{12})
+\]</div>
+<hr />
+<h3 id="step-2-post-selection-on-the-code-space">🔍 Step 2: Post-Selection on the Code Space</h3>
+<p>The [[4,2,2]] code has stabilizers <span class="arithmatex">\( XXXX \)</span> and <span class="arithmatex">\( ZZZZ \)</span>. A state is in the code space if it is a simultaneous +1 eigenvector of both stabilizers.</p>
+<p>The ideal state is:</p>
+<div class="arithmatex">\[
+|\psi_{\text{ideal}}\rangle = |\Phi^+\rangle_{03} \otimes |\Phi^+\rangle_{12}
+\]</div>
+<p>Under Pauli errors, the state becomes:</p>
+<div class="arithmatex">\[
+|\psi(E, F)\rangle = (F |\Phi^+\rangle_{03}) \otimes (E |\Phi^+\rangle_{12})
+\]</div>
+<p>Each factor <span class="arithmatex">\( F |\Phi^+\rangle \)</span> or <span class="arithmatex">\( E |\Phi^+\rangle \)</span> is a Bell state. The four Bell states fall into four categories based on their eigenvalues under <span class="arithmatex">\( X \otimes X \)</span> and <span class="arithmatex">\( Z \otimes Z \)</span>:</p>
+<ul>
+<li><strong>Category 1</strong>: <span class="arithmatex">\( |\Phi^+\rangle \)</span> → eigenvalues <span class="arithmatex">\( (+1, +1) \)</span>  </li>
+<li><strong>Category 2</strong>: <span class="arithmatex">\( |\Phi^-\rangle \)</span> → eigenvalues <span class="arithmatex">\( (-1, +1) \)</span>  </li>
+<li><strong>Category 3</strong>: <span class="arithmatex">\( |\Psi^+\rangle \)</span> → eigenvalues <span class="arithmatex">\( (+1, -1) \)</span>  </li>
+<li><strong>Category 4</strong>: <span class="arithmatex">\( |\Psi^-\rangle \)</span> → eigenvalues <span class="arithmatex">\( (-1, -1) \)</span></li>
+</ul>
+<p>The state is in the code space <strong>iff</strong> both Bell states belong to the same category.</p>
+<hr />
+<h3 id="step-3-probability-that-the-state-is-in-the-code-space">📊 Step 3: Probability that the State is in the Code Space</h3>
+<p>Let <span class="arithmatex">\( P(\text{cat}_i) \)</span> be the probability that a Bell state falls into category <span class="arithmatex">\( i \)</span>. Then:</p>
+<div class="arithmatex">\[
+P(\text{code}) = \sum_{i=1}^{4} [P(\text{cat}_i)]^2
+\]</div>
+<p>For each system (A: qubits 0,3; B: qubits 1,2), the probability that the Bell state remains in category 1 (i.e., unchanged) is:</p>
+<div class="arithmatex">\[
+P(\text{cat}_1) = 1 - p + \frac{3p}{15} = 1 - \frac{4}{5}p
+\]</div>
+<p>The probability for each of the other three categories is:</p>
+<div class="arithmatex">\[
+P(\text{cat}_2) = P(\text{cat}_3) = P(\text{cat}_4) = \frac{4p}{15}
+\]</div>
+<p>Thus,</p>
+<div class="arithmatex">\[
+P(\text{code}) = \left(1 - \frac{4}{5}p\right)^2 + 3 \left(\frac{4p}{15}\right)^2
+\]</div>
+<p>Compute:</p>
+<div class="arithmatex">\[
+\left(1 - \frac{4}{5}p\right)^2 = 1 - \frac{8}{5}p + \frac{16}{25}p^2
+\]</div>
+<div class="arithmatex">\[
+3 \left(\frac{4p}{15}\right)^2 = 3 \cdot \frac{16p^2}{225} = \frac{48p^2}{225}
+\]</div>
+<p>Convert to common denominator:</p>
+<div class="arithmatex">\[
+\frac{16}{25}p^2 = \frac{144}{225}p^2
+\]</div>
+<p>So,</p>
+<div class="arithmatex">\[
+P(\text{code}) = 1 - \frac{8}{5}p + \frac{144 + 48}{225}p^2 = 1 - \frac{8}{5}p + \frac{192}{225}p^2
+\]</div>
+<p>Simplify:</p>
+<div class="arithmatex">\[
+P(\text{code}) = 1 - \frac{8}{5}p + \frac{64}{75}p^2
+\]</div>
+<hr />
+<h3 id="step-4-probability-that-the-state-is-ideal">✅ Step 4: Probability that the State is Ideal</h3>
+<p>The state is ideal <strong>iff</strong> both systems remain in category 1:</p>
+<div class="arithmatex">\[
+P(\text{ideal}) = \left(1 - \frac{4}{5}p\right)^2 = 1 - \frac{8}{5}p + \frac{16}{25}p^2
+\]</div>
+<p>Convert to denominator 225:</p>
+<div class="arithmatex">\[
+\frac{16}{25}p^2 = \frac{144}{225}p^2
+\]</div>
+<p>So,</p>
+<div class="arithmatex">\[
+P(\text{ideal}) = 1 - \frac{8}{5}p + \frac{144}{225}p^2
+\]</div>
+<hr />
+<h3 id="step-5-logical-fidelity-after-post-selection">🎯 Step 5: Logical Fidelity After Post-Selection</h3>
+<p>The logical fidelity is the conditional probability that the state is ideal given it is in the code space:</p>
+<div class="arithmatex">\[
+F_{\text{logical}} = \frac{P(\text{ideal})}{P(\text{code})} = \frac{1 - \frac{8}{5}p + \frac{144}{225}p^2}{1 - \frac{8}{5}p + \frac{192}{225}p^2}
+\]</div>
+<p>Multiply numerator and denominator by 225:</p>
+<div class="arithmatex">\[
+F_{\text{logical}} = \frac{225 - 360p + 144p^2}{225 - 360p + 192p^2}
+\]</div>
+<p>Divide numerator and denominator by 3:</p>
+<div class="arithmatex">\[
+F_{\text{logical}} = \frac{75 - 120p + 48p^2}{75 - 120p + 64p^2}
+\]</div>
+<hr />
+<h3 id="final-answer">📦 Final Answer</h3>
+<div class="arithmatex">\[
+\boxed{\frac{75 - 120p + 48p^2}{75 - 120p + 64p^2}}
+\]</div></div>
+</article>
+
+
+<article class="message role-user">
+    <div class="meta">
+        <span class="badge">User</span>
+        <span class="idx">#5</span>
+    </div>
+    <div class="content markdown-body"><p>Populate your final answer into the code template provided below. This step is purely for formatting/display purposes. No additional reasoning or derivation should be performed. Do not import any modules or packages beyond what is provided in the template.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">answer</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the expression of logical state fidelity of the final 2-qubit logical state</span>
+<span class="sd">    at the end of the circuit as a function of the two-qubit gate error rate $p$ in Sympy format.</span>
+
+<span class="sd">    Inputs</span>
+<span class="sd">    ----------</span>
+<span class="sd">    p: sympy.Symbol, the two-qubit gate error rate, $p$</span>
+
+<span class="sd">    Outputs</span>
+<span class="sd">    ----------</span>
+<span class="sd">    F_logical: sympy.Expr, the logical state fidelity as a function of $p$</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># ------------------ FILL IN YOUR RESULTS BELOW ------------------</span>
+    <span class="n">F_logical</span> <span class="o">=</span> <span class="o">...</span>  <span class="c1"># a SymPy expression of inputs</span>
+    <span class="c1"># ---------------------------------------------------------------</span>
+
+    <span class="k">return</span> <span class="n">F_logical</span>
+</code></pre></div></div>
+</article>
+
+
+<article class="message role-assistant">
+    <div class="meta">
+        <span class="badge">Assistant</span>
+        <span class="idx">#6</span>
+    </div>
+    
+                    <details class="reasoning">
+                      <summary>Reasoning <span class="tag">(model)</span></summary>
+                      <div class="markdown-body reasoning-body">
+                        <p>We are given a template function that should return the logical state fidelity as a function of p.
+ From our derivation, the logical fidelity after post-selection is:
+ F_logical = (75 - 120p + 48p^2) / (75 - 120p + 64p^2)</p>
+<p>We will represent this expression using SymPy.</p>
+                      </div>
+                    </details>
+<div class="content markdown-body"><p>To solve this problem, we need to determine the logical state fidelity of the final 2-qubit logical state after applying a specific quantum circuit with error correction via post-selection. The logical fidelity is derived based on the probabilities of the state remaining in the code space and being ideal after post-selecting on detectable errors.</p>
+<h3 id="approach">Approach</h3>
+<ol>
+<li><strong>Circuit and Error Model</strong>: The circuit involves Hadamard and CNOT gates with depolarizing errors on each CNOT gate. Errors are modeled as Pauli operators applied to the qubits involved in the CNOT gates.</li>
+<li><strong>Post-Selection</strong>: We consider only states that remain in the code space after applying error detection via stabilizer measurements. The code space is defined by the stabilizers of the [[4,2,2]] code.</li>
+<li><strong>Probability Calculation</strong>: 
+   - Calculate the probability that the state remains in the code space after errors.
+   - Calculate the probability that the state is ideal (unchanged by errors) given it is in the code space.</li>
+<li><strong>Logical Fidelity</strong>: The logical fidelity is the ratio of the probability that the state is ideal to the probability that it is in the code space.</li>
+</ol>
+<h3 id="solution-code">Solution Code</h3>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">answer</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the expression of logical state fidelity of the final 2-qubit logical state</span>
+<span class="sd">    at the end of the circuit as a function of the two-qubit gate error rate $p$ in Sympy format.</span>
+
+<span class="sd">    Inputs</span>
+<span class="sd">    ----------</span>
+<span class="sd">    p: sympy.Symbol, the two-qubit gate error rate, $p$</span>
+
+<span class="sd">    Outputs</span>
+<span class="sd">    ----------</span>
+<span class="sd">    F_logical: sympy.Expr, the logical state fidelity as a function of $p$</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># ------------------ FILL IN YOUR RESULTS BELOW ------------------</span>
+    <span class="n">numerator</span> <span class="o">=</span> <span class="mi">75</span> <span class="o">-</span> <span class="mi">120</span><span class="o">*</span><span class="n">p</span> <span class="o">+</span> <span class="mi">48</span><span class="o">*</span><span class="n">p</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">denominator</span> <span class="o">=</span> <span class="mi">75</span> <span class="o">-</span> <span class="mi">120</span><span class="o">*</span><span class="n">p</span> <span class="o">+</span> <span class="mi">64</span><span class="o">*</span><span class="n">p</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">F_logical</span> <span class="o">=</span> <span class="n">numerator</span> <span class="o">/</span> <span class="n">denominator</span>
+    <span class="c1"># ---------------------------------------------------------------</span>
+
+    <span class="k">return</span> <span class="n">F_logical</span>
+</code></pre></div>
+
+<h3 id="explanation">Explanation</h3>
+<ul>
+<li><strong>Symbolic Expression</strong>: The logical fidelity is expressed as a rational function of the error rate <span class="arithmatex">\( p \)</span>. The numerator and denominator are polynomials in <span class="arithmatex">\( p \)</span> derived from the probabilities of the state being ideal and in the code space, respectively.</li>
+<li><strong>Post-Selection Impact</strong>: The expression accounts for the effect of post-selection by only considering states that pass error detection, thus providing the fidelity of the logical state after error correction.</li>
+<li><strong>SymPy Usage</strong>: The solution uses SymPy to handle symbolic mathematics, ensuring the expression is returned in a form that can be further manipulated or evaluated as needed.</li>
+</ul>
+<p>This approach efficiently combines probability theory with quantum error correction principles to derive the logical fidelity, highlighting the effectiveness of post-selection in mitigating errors in quantum circuits.</p></div>
+</article>
+
+</div>
+
+<footer>
+  Generated at 2025-09-24T22:02:10.639476
+</footer>
+
+<script>
+(function() {
+  // Tabs
+  const tabs = document.querySelectorAll('.tab');
+  const panels = document.querySelectorAll('.tab-content');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      const target = document.querySelector(tab.dataset.target);
+      if (target) target.classList.add('active');
+    });
+  });
+
+  // Theme toggle
+  const toggleBtn = document.getElementById('theme-toggle');
+  function setTheme(dark) {
+    if (dark) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('dark', '1');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('dark', '0');
+    }
+  }
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const stored = localStorage.getItem('dark');
+  setTheme(stored === null ? prefersDark : stored === '1');
+
+  toggleBtn.addEventListener('click', () => {
+    const isDark = document.documentElement.classList.contains('dark');
+    setTheme(!isDark);
+  });
+})();
+</script>
+</body>
+</html>

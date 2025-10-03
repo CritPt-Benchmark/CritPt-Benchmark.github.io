@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Checkpoint-1</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.codehilite .hll { background-color: #ffffcc }
+.codehilite { background: #f8f8f8; }
+.codehilite .c { color: #3D7B7B; font-style: italic } /* Comment */
+.codehilite .err { border: 1px solid #F00 } /* Error */
+.codehilite .k { color: #008000; font-weight: bold } /* Keyword */
+.codehilite .o { color: #666 } /* Operator */
+.codehilite .ch { color: #3D7B7B; font-style: italic } /* Comment.Hashbang */
+.codehilite .cm { color: #3D7B7B; font-style: italic } /* Comment.Multiline */
+.codehilite .cp { color: #9C6500 } /* Comment.Preproc */
+.codehilite .cpf { color: #3D7B7B; font-style: italic } /* Comment.PreprocFile */
+.codehilite .c1 { color: #3D7B7B; font-style: italic } /* Comment.Single */
+.codehilite .cs { color: #3D7B7B; font-style: italic } /* Comment.Special */
+.codehilite .gd { color: #A00000 } /* Generic.Deleted */
+.codehilite .ge { font-style: italic } /* Generic.Emph */
+.codehilite .ges { font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+.codehilite .gr { color: #E40000 } /* Generic.Error */
+.codehilite .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.codehilite .gi { color: #008400 } /* Generic.Inserted */
+.codehilite .go { color: #717171 } /* Generic.Output */
+.codehilite .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.codehilite .gs { font-weight: bold } /* Generic.Strong */
+.codehilite .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.codehilite .gt { color: #04D } /* Generic.Traceback */
+.codehilite .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.codehilite .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.codehilite .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.codehilite .kp { color: #008000 } /* Keyword.Pseudo */
+.codehilite .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.codehilite .kt { color: #B00040 } /* Keyword.Type */
+.codehilite .m { color: #666 } /* Literal.Number */
+.codehilite .s { color: #BA2121 } /* Literal.String */
+.codehilite .na { color: #687822 } /* Name.Attribute */
+.codehilite .nb { color: #008000 } /* Name.Builtin */
+.codehilite .nc { color: #00F; font-weight: bold } /* Name.Class */
+.codehilite .no { color: #800 } /* Name.Constant */
+.codehilite .nd { color: #A2F } /* Name.Decorator */
+.codehilite .ni { color: #717171; font-weight: bold } /* Name.Entity */
+.codehilite .ne { color: #CB3F38; font-weight: bold } /* Name.Exception */
+.codehilite .nf { color: #00F } /* Name.Function */
+.codehilite .nl { color: #767600 } /* Name.Label */
+.codehilite .nn { color: #00F; font-weight: bold } /* Name.Namespace */
+.codehilite .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.codehilite .nv { color: #19177C } /* Name.Variable */
+.codehilite .ow { color: #A2F; font-weight: bold } /* Operator.Word */
+.codehilite .w { color: #BBB } /* Text.Whitespace */
+.codehilite .mb { color: #666 } /* Literal.Number.Bin */
+.codehilite .mf { color: #666 } /* Literal.Number.Float */
+.codehilite .mh { color: #666 } /* Literal.Number.Hex */
+.codehilite .mi { color: #666 } /* Literal.Number.Integer */
+.codehilite .mo { color: #666 } /* Literal.Number.Oct */
+.codehilite .sa { color: #BA2121 } /* Literal.String.Affix */
+.codehilite .sb { color: #BA2121 } /* Literal.String.Backtick */
+.codehilite .sc { color: #BA2121 } /* Literal.String.Char */
+.codehilite .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.codehilite .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.codehilite .s2 { color: #BA2121 } /* Literal.String.Double */
+.codehilite .se { color: #AA5D1F; font-weight: bold } /* Literal.String.Escape */
+.codehilite .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.codehilite .si { color: #A45A77; font-weight: bold } /* Literal.String.Interpol */
+.codehilite .sx { color: #008000 } /* Literal.String.Other */
+.codehilite .sr { color: #A45A77 } /* Literal.String.Regex */
+.codehilite .s1 { color: #BA2121 } /* Literal.String.Single */
+.codehilite .ss { color: #19177C } /* Literal.String.Symbol */
+.codehilite .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.codehilite .fm { color: #00F } /* Name.Function.Magic */
+.codehilite .vc { color: #19177C } /* Name.Variable.Class */
+.codehilite .vg { color: #19177C } /* Name.Variable.Global */
+.codehilite .vi { color: #19177C } /* Name.Variable.Instance */
+.codehilite .vm { color: #19177C } /* Name.Variable.Magic */
+.codehilite .il { color: #666 } /* Literal.Number.Integer.Long */
+
+</style>
+<style>
+    :root {
+  --bg: #ffffff;
+  --fg: #222222;
+  --muted: #555555;
+  --border: #e0e0e0;
+  --accent: #005fcc;
+  --code-bg: #f6f8fa;
+  --role-user: #0ea5e9;
+  --role-assistant: #22c55e;
+  --role-system: #9ca3af;
+  --return-code: #a35291;
+}
+html.dark {
+  --bg: #0b0b0b;
+  --fg: #e8e8e8;
+  --muted: #a0a0a0;
+  --border: #333333;
+  --accent: #3b82f6;
+  --code-bg: #111827;
+  --role-user: #0ea5e9;
+  --role-assistant: #22c55e;
+  --role-system: #9ca3af;
+  --return-code: #a35291;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
+  line-height: 1.6;
+}
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 10;
+}
+h1 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+}
+.tab {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--border);
+  border-bottom: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 6px 6px 0 0;
+  color: var(--fg);
+}
+.tab.active {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+.tab-content {
+  display: none;
+  padding: 1rem 1.25rem;
+  border-top: 1px solid var(--border);
+}
+.tab-content.active {
+  display: block;
+}
+#theme-toggle {
+  border: 1px solid var(--border);
+  padding: 0.2rem 0.6rem;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  cursor: pointer;
+  background: transparent;
+  color: var(--fg);
+}
+.main {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.message {
+  border: 1px solid var(--border);
+  border-left-width: 6px;
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+  background: rgba(0,0,0,0.02);
+}
+.message .meta {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.6rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.message .badge {
+  font-weight: 600;
+}
+.role-user {
+  border-left-color: var(--role-user);
+}
+.role-assistant {
+  border-left-color: var(--role-assistant);
+}
+.role-system {
+  border-left-color: var(--role-system);
+}
+.role-unknown {
+  border-left-color: var(--accent);
+}
+
+.output-code-container {
+  display: flex;
+  gap: 1rem;               /* space between children */
+  align-items: center;     /* vertical alignment */
+  justify-content: start;  /* horizontal alignment */
+}
+
+.output-code-container .codeblock {
+  flex: 0 1 auto;
+}
+
+.codeblock {
+  border: 1px solid var(--border);
+  border-left-width: 6px;
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+  background: rgba(0,0,0,0.02);
+}
+.codeblock-content {
+  margin-bottom: 0.6rem;
+  border: 1px dashed var(--border);
+  border-radius: 4px;
+  padding: 0.4rem 0.6rem;
+  background: rgba(0,0,0,0.02);
+}
+
+.codeblock.eval_code {
+  border-left-color: var(--role-user);
+}
+.codeblock.target_code {
+  border-left-color: var(--role-assistant);
+}
+.codeblock.output_code {
+  border-left-color: var(--role-system);
+}
+
+html.dark .codeblock-content {
+  background: rgba(255,255,255,0.03);
+}
+.codeblock > summary {
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none; /* remove default triangle in some browsers */
+}
+.codeblock > summary::-webkit-details-marker {
+  display: none; /* Safari/Chrome marker */
+}
+.codeblock > summary::before {
+  content: "▶ ";
+  display: inline-block;
+  transform: rotate(0deg);
+  transition: transform 0.12s ease-out;
+}
+.codeblock[open] > summary::before {
+  transform: rotate(90deg);
+}
+.codeblock .tag {
+  color: var(--muted);
+  font-weight: 400;
+  font-size: 0.85em;
+  margin-left: 0.25rem;
+}
+
+.markdown-body pre code {
+  background: var(--code-bg);
+  display: block;
+  padding: 0.75rem;
+  overflow-x: auto;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+.markdown-body code {
+  background: var(--code-bg);
+  padding: 0.15rem 0.3rem;
+  border-radius: 4px;
+}
+/* Extra info tree */
+details > summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+details .block {
+  padding-left: 1rem;
+  margin: 0.25rem 0 0.5rem 0;
+  border-left: 2px solid var(--border);
+}
+.kv .key {
+  font-weight: 600;
+}
+.kv .type {
+  color: var(--muted);
+  margin-left: 0.5rem;
+  font-size: 0.85rem;
+}
+footer {
+  margin: 2rem 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+/* CodeHilite (pygments) overrides to respect theme vars */
+.codehilite {
+  background: var(--code-bg) !important;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.75rem !important;
+}
+.reasoning {
+  margin-bottom: 0.6rem;
+  border: 1px dashed var(--border);
+  border-radius: 4px;
+  padding: 0.4rem 0.6rem;
+  background: rgba(0,0,0,0.02);
+}
+html.dark .reasoning {
+  background: rgba(255,255,255,0.03);
+}
+.reasoning > summary {
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none; /* remove default triangle in some browsers */
+}
+.reasoning > summary::-webkit-details-marker {
+  display: none; /* Safari/Chrome marker */
+}
+.reasoning > summary::before {
+  content: "▶ ";
+  display: inline-block;
+  transform: rotate(0deg);
+  transition: transform 0.12s ease-out;
+}
+.reasoning[open] > summary::before {
+  transform: rotate(90deg);
+}
+.reasoning .tag {
+  color: var(--muted);
+  font-weight: 400;
+  font-size: 0.85em;
+  margin-left: 0.25rem;
+}
+.reasoning-body {
+  margin-top: 0.5rem;
+}
+</style>
+
+<!-- ===== MATHJAX CONFIG ===== -->
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [ ["\\(","\\)"] ],
+    displayMath: [ ["\\[","\\]"] ],
+    processEscapes: true,
+    processEnvironments: true
+  },
+  options: {
+    ignoreHtmlClass: ".*",
+    processHtmlClass: "arithmatex"
+
+    // skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    // if you dynamically add content later, you can call MathJax.typesetPromise()
+  }
+};
+</script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<!-- ========================== -->
+</head>
+<body>
+<header>
+  <h1>Checkpoint-1</h1>
+  <div>
+    <button id="theme-toggle" aria-label="toggle dark mode">🌓</button>
+  </div>
+</header>
+
+<div class="main">
+  
+<article class="message role-system">
+    <div class="meta">
+        <span class="badge">System</span>
+        <span class="idx">#0</span>
+    </div>
+    <div class="content markdown-body"><p>You are a physics research assistant specializing in solving complex, research-level problems using precise, step-by-step reasoning.</p>
+<p><strong>Input</strong>
+Problems will be provided in Markdown format.</p>
+<p><strong>Output (Markdown format)</strong></p>
+<ol>
+<li><strong>Step-by-Step Derivation</strong> - Show every non-trivial step in the solution.  Justify steps using relevant physical laws, theorems, or mathematical identities.</li>
+<li><strong>Mathematical Typesetting</strong> - Use LaTeX for all mathematics:  <code>$...$</code> for inline expressions, <code>$$...$$</code> for display equations.</li>
+<li><strong>Conventions and Units</strong> - Follow the unit system and conventions specified in the problem.</li>
+<li>
+<p><strong>Final Answer</strong> - At the end of the solution,  start a new line with <strong>&ldquo;Final Answer:&rdquo;</strong>, and present the final result.</p>
+<p>For final answers involving values, follow the precision requirements specified in the problem.
+If no precision is specified:
+- If an exact value is possible, provide it (e.g., \$\sqrt(2)\$, \$\pi/4\$).
+- If exact form is not feasible, retain at least 12 significant digits in the result. </p>
+</li>
+<li>
+<p><strong>Formatting Compliance</strong> - If the user requests a specific output format (e.g., code, table),  provide the final answer accordingly.</p>
+</li>
+</ol></div>
+</article>
+
+
+<article class="message role-user">
+    <div class="meta">
+        <span class="badge">User</span>
+        <span class="idx">#1</span>
+    </div>
+    <div class="content markdown-body"><h1 id="problem-setup">Problem setup:</h1>
+<p>In quantum error correction, you encode quantum states into logical states made of many qubits in order to improve their resilience to errors. In quantum error detection, you do the same but can only detect the presence of errors and not correct them. In this problem, we will consider a single [[4,2,2]] quantum error detection code, which encodes two logical qubits into four physical qubits, and investigate how robust logical quantum operations in this code are to quantum errors.</p>
+<p>Our convention is that the four physical qubits in the [[4,2,2]] code are labelled 0,1,2,3. The two logical qubits are labelled A and B. The stabilizers are <span class="arithmatex">\(XXXX\)</span> and <span class="arithmatex">\(ZZZZ\)</span>, where <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(Z\)</span> are Pauli matrices. The logical <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(Z\)</span> operators on the two qubits are <span class="arithmatex">\(X_A = XIXI\)</span>, <span class="arithmatex">\(X_B=XXII\)</span>, <span class="arithmatex">\(Z_A = ZZII\)</span>, <span class="arithmatex">\(Z_B = ZIZI\)</span>, up to multiplication by stabilizers.</p>
+<p>We will consider different state preparation circuits consisting of controlled not <span class="arithmatex">\(CNOT_{ij}\)</span> gates, where <span class="arithmatex">\(CNOT_{ij}\)</span> has control qubit <span class="arithmatex">\(i\)</span> and target qubit <span class="arithmatex">\(j\)</span>. As a simple model of quantum errors in hardware, we will suppose that each <span class="arithmatex">\(CNOT_{ij}\)</span> gate in the circuit has a two qubit depolarizing error channel following it that produces one of the 15 non-identity two-qubit Paulis with equal probability <span class="arithmatex">\(p/15\)</span>. The probability <span class="arithmatex">\(p\)</span> indicates the probability of an error in a single two-qubit gate. We will assess the logical infidelity of certain state preparation protocols as a function of the physical infidelity <span class="arithmatex">\(p\)</span>.</p>
+<h1 id="subproblems">Checkpoints</h1>
+<h2 id="subproblem-1">Checkpoint 1</h2>
+<p>Suppose that we wish to prepare a logical two-qubit GHZ state  <span class="arithmatex">\((|00\rangle_{AB}+|11\rangle_{AB})/\sqrt{2}\)</span> in the [[4,2,2]] code. To do so, we use the following state preparation circuit:</p>
+<div class="arithmatex">\[
+(CNOT_{03}) (H_0) (CNOT_{21}) (H_2).
+\]</div>
+<p>Note that this equation is written in matrix multiplication order, while the quantum operations in the circuit occur in the reverse order (from right-to-left in the above equation). <span class="arithmatex">\(H\)</span> is a single-qubit Hadamard gate.</p>
+<p>What is the physical state fidelity of the final physical 4-qubit state at the end of the circuit as a function of the two-qubit gate error rate <span class="arithmatex">\(p\)</span>?</p></div>
+</article>
+
+
+<article class="message role-assistant">
+    <div class="meta">
+        <span class="badge">Assistant</span>
+        <span class="idx">#2</span>
+    </div>
+    
+                    <details class="reasoning">
+                      <summary>Reasoning <span class="tag">(model)</span></summary>
+                      <div class="markdown-body reasoning-body">
+                        <p>We are given: &ldquo;Suppose that we wish to prepare a logical two-qubit GHZ state  <span class="arithmatex">\((|00\rangle_{AB}+|11\rangle_{AB})/\sqrt{2}\)</span> in the [[4,2,2]] code. To do so, we use the following state preparation circuit:</p>
+<div class="arithmatex">\[
+(CNOT_{03}) (H_0) (CNOT_{21}) (H_2).
+\]</div>
+<p>Note: The equation is written in matrix multiplication order, but the quantum operations occur in reverse order. So the actual circuit order from initial state to final state is: Start with some initial state? Typically, we start with all qubits in |0&gt;. But careful: The problem says: &ldquo;prepare a logical two-qubit GHZ state&rdquo;. That state is <span class="arithmatex">\((|00\rangle_{AB}+|11\rangle_{AB})/\sqrt{2}\)</span>. But note: The code is [[4,2,2]]. So the logical qubits A and B are encoded into 4 physical qubits. The circuit given: (CNOT_{03}) (H_0) (CNOT_{21}) (H_2). But wait: There is no mention of initial state? Usually, we start with all qubits in |0&gt;. But then apply these gates. Let&rsquo;s check: The circuit: From right to left: First apply H_2, then CNOT_{21}, then H_0, then CNOT_{03}. So the circuit is: 
+Step 1: H on qubit 2.
+Step 2: CNOT with control 2, target 1.
+Step 3: H on qubit 0.
+Step 4: CNOT with control 0, target 3.</p>
+<p>We start with state |0000&gt;? But then what is the resulting state? Let&rsquo;s compute ideal state:
+Initial: |0&gt;<em>0|0&gt;_1|0&gt;_2|0&gt;_3.
+After H_2: becomes: |0&gt;_0|0&gt;_1 (H|0&gt;)_2 |0&gt;_3 = |0&gt;_0|0&gt;_1 (|0&gt;+|1&gt;)/√2 _2 |0&gt;_3.
+After CNOT</em>{21}: control qubit 2, target qubit 1. So: if qubit2 is |0&gt;, then qubit1 remains; if qubit2 is |1&gt;, then flip qubit1. So state becomes: 
+= (|0&gt;<em>0|0&gt;_1|0&gt;_2|0&gt;_3 + |0&gt;_0|1&gt;_1|1&gt;_2|0&gt;_3)/√2.
+After H_0: Apply H on qubit0. So: 
+= ( (H|0&gt;)_0|0&gt;_1|0&gt;_2|0&gt;_3 + (H|0&gt;)_0|1&gt;_1|1&gt;_2|0&gt;_3 )/√2 
+= ( (|0&gt;+|1&gt;)/√2 _0|0&gt;_1|0&gt;_2|0&gt;_3 + (|0&gt;+|1&gt;)/√2 _0|1&gt;_1|1&gt;_2|0&gt;_3 )/√2 
+= 1/√2 * [ 1/√2 (|0000&gt; + |1000&gt;) + 1/√2 (|0110&gt; + |1110&gt;) ]? Wait careful: 
+First term: (|0&gt;+|1&gt;)_0 |0&gt;_1|0&gt;_2|0&gt;_3 = |0000&gt; + |1000&gt;.
+Second term: (|0&gt;+|1&gt;)_0 |1&gt;_1|1&gt;_2|0&gt;_3 = |0110&gt; + |1110&gt;.
+So overall: (1/√2)*1/√2 (|0000&gt;+|1000&gt;+|0110&gt;+|1110&gt;) = 1/2 (|0000&gt;+|1000&gt;+|0110&gt;+|1110&gt;).
+After CNOT</em>{03}: control qubit 0, target qubit 3. So:
+For each term: 
+|0000&gt;: control 0=0, so target unchanged: |0000&gt;.
+|1000&gt;: control=1, so flip target: becomes |1001&gt;.
+|0110&gt;: control=0, so unchanged: |0110&gt;.
+|1110&gt;: control=1, so flip: becomes |1111&gt;.
+So final state: 1/2 (|0000&gt; + |1001&gt; + |0110&gt; + |1111&gt;).</p>
+<p>Is that the logical GHZ state? The logical GHZ state is (|00&gt;_AB + |11&gt;_AB)/√2. But what are the logical states? The code is [[4,2,2]]. The logical operators: X_A = XIXI, X_B=XXII, Z_A=ZZII, Z_B=ZIZI.
+We need to check: What are the code words? The stabilizers are XXXX and ZZZZ. So the code space is 4-dimensional? Actually, [[4,2,2]] means: n=4, k=2, d=2. So there are 2 logical qubits, so 4 logical states. They are usually: 
+|00&gt;_L = (|0000&gt;+|1111&gt;)/√2? But careful: The stabilizers: XXXX and ZZZZ. The code space is the subspace of 4 qubits that are +1 eigenstates of both XXXX and ZZZZ. 
+Check: For state |0000&gt;, XXXX|0000&gt; = |1111&gt;, so not eigenstate. So |0000&gt; is not in code space.
+Actually, the code words: One common representation: 
+|00&gt;_L = (|0000&gt;+|1111&gt;)/√2,
+|01&gt;_L = (|0011&gt;+|1100&gt;)/√2,
+|10&gt;__L = (|0101&gt;+|1010&gt;)/√2,
+|11&gt;_L = (|0110&gt;+|1001&gt;)/√2.
+But check: Our final state: 1/2 (|0000&gt;+|1001&gt;+|0110&gt;+|1111&gt;). That equals? 
+Group: (|0000&gt;+|1111&gt;)/2 + (|1001&gt;+|0110&gt;)/2. That is (|00&gt;_L + |11&gt;_L)/√2? Because |00&gt;_L = (|0000&gt;+|1111&gt;)/√2, and |11&gt;_L = (|0110&gt;+|1001&gt;)/√2. So indeed, our state is (1/√2)(|00&gt;_L + |11&gt;_L)/? Actually: 
+(1/2)(|0000&gt;+|1111&gt;) = (1/√2)|00&gt;_L/√2? Wait: |00&gt;_L = (|0000&gt;+|1111&gt;)/√2, so (|0000&gt;+|1111&gt;)/2 = (1/√2)|00&gt;_L. Similarly, (|1001&gt;+|0110&gt;)/2 = (1/√2)|11&gt;_L. So overall state = 1/√2 (|00&gt;_L + |11&gt;_L). So it is the logical GHZ state. So circuit is correct.</p>
+<p>Now: We want: &ldquo;What is the physical state fidelity of the final physical 4-qubit state at the end of the circuit as a function of the two-qubit gate error rate p?&rdquo; 
+Interpretation: The circuit has gates: H_2, CNOT_{21}, H_0, CNOT_{03}. But note: The problem says: &ldquo;each CNOT_{ij} gate in the circuit has a two qubit depolarizing error channel following it that produces one of the 15 non-identity two-qubit Paulis with equal probability p/15.&rdquo; But wait: What about Hadamard gates? They are single-qubit gates. Are they error-free? The problem statement: &ldquo;As a simple model of quantum errors in hardware, we will suppose that each CNOT_{ij} gate in the circuit has a two qubit depolarizing error channel following it that produces one of the 15 non-identity two-qubit Paulis with equal probability p/15.&rdquo; So only CNOT gates have errors. The Hadamard gates are perfect? That is implied: &ldquo;each CNOT_{ij} gate&rdquo; so only CNOT gates have errors. So there are two CNOT gates: CNOT_{21} and CNOT_{03}. So each of these gates is followed by an error channel that with probability p applies a random two-qubit Pauli error on the two qubits involved (the control and target). And with probability 1-p, no error. And the error is one of the 15 non-identity Paulis, each with probability p/15.</p>
+<p>We want: &ldquo;the physical state fidelity&rdquo; of the final physical state. Fidelity is between the ideal state (which is the state we get if no errors occur) and the actual state (which is a mixed state due to errors). But careful: &ldquo;physical state fidelity&rdquo; might mean the fidelity of the actual output state to the ideal state. But the actual output state is a density matrix that comes from applying the circuit with errors. So we need to compute: 
+ρ_actual = E_{circuit}(|0000&gt;&lt;0000|) where E_{circuit} is the composition of perfect gates and error channels. But note: The error channels act after each CNOT. So the process: 
+Start: |0&gt;&lt;0|^⊗4.
+Then apply H_2 (perfect).
+Then apply CNOT_{21} (perfect) followed by error channel on qubits 2 and 1. That error channel: With probability 1-p, identity; with probability p, a random Pauli from {I,X,Y,Z}⊗{I,X,Y,Z} minus II? Actually: &ldquo;non-identity two-qubit Paulis&rdquo; so there are 15. So each occurs with probability p/15.
+Then apply H_0 (perfect).
+Then apply CNOT_{03} (perfect) followed by error channel on qubits 0 and 3.</p>
+<p>So we want the fidelity F = &lt;ψ_ideal| ρ_actual |ψ_ideal&gt; where |ψ_ideal&gt; = 1/2 (|0000&gt;+|1001&gt;+|0110&gt;+|1111&gt;).</p>
+<p>We need to compute ρ_actual. Because errors are Pauli errors, and the ideal state is a stabilizer state? Actually, the ideal state is a code state of the [[4,2,2]] code? But careful: The ideal state is not a pure stabilizer state? Actually, it is a logical GHZ state. But it is a superposition of two code words. But it is still a stabilizer state? Possibly we can compute the effect of Pauli errors on it.</p>
+<p>Alternatively, we can compute the evolution step by step. But note: The errors are applied after each CNOT. And they are depolarizing channels on two qubits. So we can compute the overall channel as a composition. But careful: The gates are not all CNOTs? But we can compute the effect of errors on the final state. Alternatively, we can compute the probability that no error occurs? But errors might cancel? But since errors are random Paulis, they will generally take the state out of the ideal state. But wait: Some errors might be undetectable? But we are computing physical state fidelity, not logical fidelity. Physical state fidelity is the overlap between the actual state and the ideal state. That is: F = Tr(ρ_ideal ρ_actual). And ρ_ideal = |ψ&gt;&lt;ψ|.</p>
+<p>Because the errors are Pauli errors, and the ideal state is a specific state, we can compute the average fidelity. Actually, the process is: The circuit is a unitary U (ideal circuit). Then errors occur at two steps. So the actual state is: 
+ρ = E_2 ∘ U_2 ∘ E_1 ∘ U_1 (|0&gt;&lt;0|) where U_1 = CNOT_{21} after H_2? Actually, careful: The order: 
+Step 1: H_2. So state becomes: ρ1 = H_2 |0&gt;&lt;0| H_2† on qubit2, others unchanged.
+Step 2: CNOT_{21} (perfect). So ρ2 = CNOT_{21} ρ1 CNOT_{21}†.
+Step 3: Error channel on qubits 2 and 1: This is a depolarizing channel on these two qubits. So ρ3 = (1-p) ρ2 + (p/15) * sum_{P in Paulis on {2,1}, P ≠ I⊗I} P ρ2 P†.
+Step 4: H_0. So ρ4 = H_0 ρ3 H_0†.
+Step 5: CNOT_{03} (perfect). So ρ5 = CNOT_{03} ρ4 CNOT_{03}†.
+Step 6: Error channel on qubits 0 and 3: ρ_final = (1-p) ρ5 + (p/15) * sum_{Q in Paulis on {0,3}, Q ≠ I⊗I} Q ρ5 Q†.</p>
+<p>We want F = &lt;ψ| ρ_final |ψ&gt;.</p>
+<p>Because the ideal state |ψ&gt; is produced by the ideal circuit, we can also think: Let U = overall ideal circuit. Then |ψ&gt; = U|0000&gt;. And the actual process is: ρ_final = U (with errors inserted) applied to |0&gt;&lt;0|. But careful: The errors are applied in the middle. But we can &ldquo;push&rdquo; the errors through the later gates? Because the later gates are unitaries. But note: The errors are on specific qubits. And the gates after them are on other qubits? Actually, H_0 acts on qubit 0, but error on qubits 2 and 1 commutes with H_0? Not necessarily? But H_0 acts only on qubit 0, so it commutes with any operator on qubits 2 and 1. So indeed, the error on qubits 2 and1 commutes with H_0. And then CNOT_{03} acts on qubits 0 and 3. Does it commute with an error on qubits 2 and 1? Yes, because they act on disjoint sets. So we can actually push the first error channel to the end? But careful: The error channel is applied after the CNOT_{21}. But then we have H_0 and CNOT_{03}. Since these gates commute with operators on qubits 2 and 1, we can actually move the error channel to after the entire circuit? But wait: The error channel is applied to the state after CNOT_{21}. But if we conjugate that error by the subsequent unitaries that act on other qubits, they remain the same because they commute. So indeed, we can say: The overall effect is that the ideal circuit U is applied, but then we have an error channel on qubits 2 and 1 (but now the error operators are conjugated by U? Actually, careful: 
+We have: ρ_final = (Error on 0,3) ∘ CNOT_{03} ∘ H_0 ∘ (Error on 2,1) ∘ CNOT_{21} ∘ H_2 (|0&gt;&lt;0|).
+But since H_0 and CNOT_{03} commute with any operator on qubits 2 and 1, we can write:
+ρ_final = (Error on 0,3) ∘ CNOT_{03} ∘ H_0 ∘ CNOT_{21} ∘ H_2 ∘ (Error on 2,1) (|0&gt;&lt;0|)? Not exactly: Because the error on 2,1 is applied after CNOT_{21} but before H_0. But if we want to move it to after H_0, we need to conjugate it by H_0. But H_0 commutes with operators on qubits 2 and 1, so it&rsquo;s fine. Similarly, CNOT_{03} commutes with operators on qubits 2 and 1. So indeed, we can move the error channel on qubits 2,1 to the very end. But careful: The error channel on qubits 2,1 is defined as: E_{21}(ρ) = (1-p)ρ + (p/15) ∑<em>{P in Paulis on {2,1} excluding II} P ρ P†. And if we move it through H_0 and CNOT</em>{03}, since these act on qubits 0 and 3, they commute with P on qubits 2,1. So indeed, we have:
+ρ_final = (Error on 0,3) ∘ U ∘ (Error on 2,1) (|0&gt;&lt;0|) where U = CNOT_{03} ∘ H_0 ∘ CNOT_{21} ∘ H_2. But wait: Check order: Initially: H_2, then CNOT_{21}, then Error on 2,1, then H_0, then CNOT_{03}, then Error on 0,3. So if we move Error on 2,1 to after H_0, it becomes: H_0 ∘ Error on 2,1 = Error on 2,1 ∘ H_0 because H_0 commutes. Similarly, moving through CNOT_{03} gives: CNOT_{03} ∘ Error on 2,1 = Error on 2,1 ∘ CNOT_{03}. So then the entire sequence becomes: Error on 0,3 ∘ CNOT_{03} ∘ H_0 ∘ CNOT_{21} ∘ H_2 ∘ Error on 2,1. But that is U ∘ Error on 2,1? Actually careful: U = CNOT_{03} ∘ H_0 ∘ CNOT_{21} ∘ H_2. So then ρ_final = Error on 0,3 ∘ U ∘ Error on 2,1 (|0&gt;&lt;0|). But then we can also move Error on 2,1 to after U? But careful: U acts on all qubits. But Error on 2,1 acts only on qubits 2 and 1. Does U commute with operators on qubits 2 and 1? Not necessarily: U includes CNOT_{03} and H_0. Those act on qubits 0 and 3, so they commute with operators on qubits 2 and 1. But U also includes CNOT_{21} and H_2. Those act on qubits 2 and 1. So if we try to move Error on 2,1 through U, we would get: U ∘ Error on 2,1 = (CNOT_{03} ∘ H_0 ∘ CNOT_{21} ∘ H_2) ∘ Error on 2,1. But CNOT_{21} and H_2 do not commute with an arbitrary Pauli on qubits 2 and 1? Actually, they do: Because if we conjugate a Pauli on qubits 2 and 1 by CNOT_{21} and H_2, we get another Pauli on qubits 2 and 1. But then it&rsquo;s not the same error channel? But wait: The error channel is defined as: E_{21}(ρ) = (1-p)ρ + (p/15) ∑<em>{P} P ρ P†. If we conjugate this channel by a unitary V that acts on qubits 2 and 1, then V E</em>{21}(V† ρ V) V† = (1-p)ρ + (p/15) ∑<em>{P} (V P V†) ρ (V P V†)†. But that is actually the same set because as P runs over all non-identity Paulis on two qubits, so does V P V† (since Clifford group acts transitively on Paulis). So indeed, if V is a Clifford gate on those qubits, then V E</em>{21} V† = E_{21}? Check: For a depolarizing channel, it is invariant under unitary conjugation by Clifford gates? Actually, the two-qubit depolarizing channel is: ρ -&gt; (1-p)ρ + (p/15) ∑<em>{P ≠ I} P ρ P. Under conjugation by a Clifford unitary U, we get: U ρ U† -&gt; (1-p)UρU† + (p/15) ∑</em>{P ≠ I} U P U† UρU† (U P U†)† = (1-p)ρ&rsquo; + (p/15) ∑<em>{Q ≠ I} Q ρ&rsquo; Q, because the set {U P U†} is exactly the set of all non-identity Paulis (if U is Clifford). So yes, the depolarizing channel is invariant under conjugation by Clifford gates that act on the same qubits. But careful: Our U is not entirely on qubits 2 and 1; it has parts on qubits 0 and 3. But those commute. So we can actually move the error channel through U if we conjugate it appropriately. But then we would get: ρ_final = Error on 0,3 ∘ (U ∘ Error on 2,1 ∘ U†) ∘ U (|0&gt;&lt;0|) = Error on 0,3 ∘ (U Error on 2,1 U†) ∘ (U|0&gt;&lt;0|U†). And since U Error on 2,1 U† is a depolarizing channel on qubits 2 and 1? But careful: U includes gates on qubits 2 and 1: H_2 and CNOT</em>{21}. So U Error on 2,1 U† will be a channel on qubits 2 and 1 that is still depolarizing? Actually, check: U = CNOT_{03} ∘ H_0 ∘ CNOT_{21} ∘ H_2. But note: CNOT_{03} and H_0 commute with operators on qubits 2 and 1. So U Error on 2,1 U† = (CNOT_{03} H_0) ∘ (CNOT_{21} H_2) Error on 2,1 (H_2† CNOT_{21}†) ∘ (H_0† CNOT_{03}†). And since CNOT_{03} H_0 commutes with anything on qubits 2,1, this is equal to (CNOT_{21} H_2) Error on 2,1 (H_2† CNOT_{21}†). And as argued, for a Clifford gate on two qubits, the depolarizing channel is invariant. So indeed, U Error on 2,1 U† = Error on 2,1. So then we get: ρ_final = Error on 0,3 ∘ Error on 2,1 ∘ (U|0&gt;&lt;0|U†) = Error on 0,3 ∘ Error on 2,1 (|ψ&gt;&lt;ψ|), where |ψ&gt; is the ideal state.
+So the overall effect is that the ideal state is first subjected to a depolarizing channel on qubits 2 and 1, and then to a depolarizing channel on qubits 0 and 3. And these two channels commute because they act on disjoint sets. So then:
+ρ_final = E_{0,3} ∘ E_{2,1} (|ψ&gt;&lt;ψ|).</p>
+<p>And these channels are independent. And they are two-qubit depolarizing channels: 
+E(ρ) = (1-p)ρ + (p/15) ∑_{P in Paulis on that pair, P ≠ II} P ρ P.</p>
+<p>So then the fidelity F = &lt;ψ| ρ_final |ψ&gt; = &lt;ψ| E_{0,3} ∘ E_{2,1} (|ψ&gt;&lt;ψ|) |ψ&gt;.</p>
+<p>And because these channels are acting on disjoint qubits, we can compute the effect on the overlap. In general, if we have a state |ψ&gt; and a depolarizing channel on a subset of qubits, the fidelity is: 
+F = Tr( |ψ&gt;&lt;ψ| E(ρ) ) = (1-p) + (p/15) ∑<em>{P} &lt;ψ| P |ψ&gt;&lt;ψ| P |ψ&gt;? Actually careful: 
+E(ρ) = (1-p)ρ + (p/15) ∑</em>{P ≠ I} P ρ P.
+So &lt;ψ| E(ρ) |ψ&gt; = (1-p) + (p/15) ∑<em>{P ≠ I} &lt;ψ| P |ψ&gt;&lt;ψ| P |ψ&gt;? But that is if ρ = |ψ&gt;&lt;ψ|. But wait: Actually, careful: For a given Pauli P acting on a set of qubits, we have: &lt;ψ| P |ψ&gt;&lt;ψ| P |ψ&gt; is not necessarily |&lt;ψ|P|ψ&gt;|^2? Actually, since |ψ&gt; is a pure state, Tr(|ψ&gt;&lt;ψ| P |ψ&gt;&lt;ψ| P) = |&lt;ψ|P|ψ&gt;|^2. So indeed, 
+F = (1-p) + (p/15) ∑</em>{P ≠ I} |&lt;ψ|P|ψ&gt;|^2.</p>
+<p>But careful: This is if the depolarizing channel acts on all qubits that P acts on. But here we have two separate channels on disjoint sets. And they commute. So overall, if we apply two independent depolarizing channels on disjoint sets, then the fidelity becomes:
+F = &lt;ψ| E_{0,3} ∘ E_{2,1} (|ψ&gt;&lt;ψ|) |ψ&gt; = 
+= (1-p)^2? Not exactly because the errors from different channels can combine? Actually, because they act on disjoint sets, the overall channel is: 
+ρ -&gt; (1-p)^2 ρ + (1-p)(p/15) ∑<em>{P on {0,3} non-I} P ρ P + (1-p)(p/15) ∑</em>{Q on {2,1} non-I} Q ρ Q + (p/15)^2 ∑<em>{P on {0,3} non-I} ∑</em>{Q on {2,1} non-I} (P Q) ρ (P Q).
+Then fidelity = &lt;ψ|ρ|ψ&gt; = (1-p)^2 + (1-p)(p/15) [∑<em>{P on {0,3}} |&lt;ψ|P|ψ&gt;|^2] + (1-p)(p/15) [∑</em>{Q on {2,1}} |&lt;ψ|Q|ψ&gt;|^2] + (p/15)^2 [∑<em>{P on {0,3}} ∑</em>{Q on {2,1}} |&lt;ψ|P Q|ψ&gt;|^2].</p>
+<p>But careful: The sums are over non-identity Paulis. So we need to compute these overlaps for our state |ψ&gt; = 1/2 (|0000&gt;+|1001&gt;+|0110&gt;+|1111&gt;).</p>
+<p>Let&rsquo;s denote qubits: 0,1,2,3. Our state: 
+|ψ&gt; = (|0000&gt; + |1001&gt; + |0110&gt; + |1111&gt;)/2.</p>
+<p>We want to compute &lt;ψ| P |ψ&gt; for various Paulis. But note: Paulis that act on disjoint sets: There are Paulis on qubits {0,3} and on qubits {2,1}. And also products from both sets.</p>
+<p>Because the state is symmetric? Actually, it might be easier to compute the expectation values of Paulis on these pairs. Alternatively, we can compute the density matrix of |ψ&gt;&lt;ψ| on each pair? But careful: The state is entangled across these pairs. But we can compute the reduced density matrices on qubits {0,3} and on qubits {2,1}? But then the expectation of a Pauli on {0,3} is Tr(ρ_{03} P). But then we need to sum over all non-identity Paulis on that pair. But then we need to compute Tr(ρ_{03} P) for each P. But careful: That gives &lt;ψ|P|ψ&gt; if P acts only on qubits 0 and 3. But then we need to sum |&lt;ψ|P|ψ&gt;|^2? Actually, careful: The fidelity term is: (p/15) * ∑<em>{P on {0,3} non-I} |&lt;ψ|P|ψ&gt;|^2. But if we compute Tr(ρ</em>{03} P), that is exactly &lt;ψ|P|ψ&gt; because P acts only on qubits 0 and 3. So then we need to compute these for all Paulis on two qubits. There are 15 such Paulis. But maybe we can compute the reduced density matrix ρ_{03} explicitly. Similarly for qubits {2,1}.</p>
+<p>Let&rsquo;s compute ρ_{03} from |ψ&gt;. 
+|ψ&gt; = 1/2 (|0000&gt; + |1001&gt; + |0110&gt; + |1111&gt;). 
+To get ρ_{03}, we trace out qubits 1 and 2. 
+Write basis for qubits 0,3: |00&gt;, |01&gt;, |10&gt;, |11&gt;.
+The state |ψ&gt; in terms of qubits 1,2 and 0,3: 
+|ψ&gt; = 1/2 ( |0&gt;<em>0|0&gt;_3 |00&gt;</em>{12} + |1&gt;<em>0|0&gt;_3? Actually careful: 
+Term1: |0000&gt; = |0&gt;_0|0&gt;_1|0&gt;_2|0&gt;_3 = |00&gt;</em>{03} ⊗ |00&gt;<em>{12}? But careful: Order: qubits: 0,1,2,3. So if we group as (0,3) and (1,2), then:
+|0000&gt; = |0&gt;_0|0&gt;_3 ⊗ |0&gt;_1|0&gt;_2 = |00&gt;</em>{03} ⊗ |00&gt;<em>{12}.
+Term2: |1001&gt; = |1&gt;_0|0&gt;_1|0&gt;_2|1&gt;_3 = |10&gt;</em>{03}? Actually: qubit0=1, qubit3=1 gives |11&gt;? Wait: careful: For qubits 0 and 3, the basis order: usually we list qubit0 then qubit3. So |1001&gt; means: qubit0=1, qubit1=0, qubit2=0, qubit3=1. So in the (0,3) group, that is: qubit0=1, qubit3=1, so that is |11&gt;<em>{03}? But then qubits (1,2): qubit1=0, qubit2=0 gives |00&gt;</em>{12}. So actually, |1001&gt; = |11&gt;<em>{03} ⊗ |00&gt;</em>{12}? But wait: That would be if qubit0=1 and qubit3=1, then it&rsquo;s |11&gt; but careful: The basis for two qubits: usually |00&gt;, |01&gt;, |10&gt;, |11&gt;. So if qubit0=1 and qubit3=1, then that is |11&gt; indeed. But then term3: |0110&gt; = |0&gt;<em>0|1&gt;_1|1&gt;_2|0&gt;_3 = |00&gt;</em>{03}? Because qubit0=0, qubit3=0 gives |00&gt;<em>{03} and qubits (1,2): qubit1=1, qubit2=1 gives |11&gt;</em>{12}. 
+Term4: |1111&gt; = |1&gt;<em>0|1&gt;_1|1&gt;_2|1&gt;_3 = |11&gt;</em>{03} ⊗ |11&gt;<em>{12}.
+So then |ψ&gt; = 1/2 ( |00&gt;</em>{03}|00&gt;<em>{12} + |11&gt;</em>{03}|00&gt;<em>{12} + |00&gt;</em>{03}|11&gt;<em>{12} + |11&gt;</em>{03}|11&gt;<em>{12} ) = 1/2 ( (|00&gt;</em>{03}+|11&gt;<em>{03}) ⊗ |00&gt;</em>{12} + (|00&gt;<em>{03}+|11&gt;</em>{03}) ⊗ |11&gt;<em>{12} )? That would be = 1/2 (|00&gt;</em>{03}+|11&gt;<em>{03}) ⊗ (|00&gt;</em>{12}+|11&gt;<em>{12}). But wait, check: That gives: 1/2 (|00&gt;|00&gt; + |00&gt;|11&gt; + |11&gt;|00&gt; + |11&gt;|11&gt;) which is exactly our state? But then that would mean that |ψ&gt; is a product state between pairs (0,3) and (1,2)? But is that true? Actually, our state is: |ψ&gt; = 1/2 (|0000&gt;+|1001&gt;+|0110&gt;+|1111&gt;). But if we write it as (|00&gt;</em>{03}+|11&gt;<em>{03})/√2 ⊗ (|00&gt;</em>{12}+|11&gt;<em>{12})/√2, then that product is 1/2 (|00&gt;|00&gt; + |00&gt;|11&gt; + |11&gt;|00&gt; + |11&gt;|11&gt;). But our state has terms: |0000&gt;, |1001&gt;, |0110&gt;, |1111&gt;. But careful: |1001&gt; means: qubit0=1, qubit1=0, qubit2=0, qubit3=1. In the grouping (0,3) and (1,2), |1001&gt; becomes: (qubit0,qubit3) = (1,1) so that is |11&gt;</em>{03} and (qubit1,qubit2) = (0,0) so that is |00&gt;<em>{12}. So that matches: |11&gt;</em>{03} ⊗ |00&gt;<em>{12}. And |0110&gt; becomes: (0,0) and (1,1) so that is |00&gt;</em>{03} ⊗ |11&gt;<em>{12}. So indeed, |ψ&gt; = (|00&gt;</em>{03}+|11&gt;<em>{03})/√2 ⊗ (|00&gt;</em>{12}+|11&gt;<em>{12})/√2. So the state factorizes into two Bell states on pairs (0,3) and (1,2)! That is interesting. So then:
+ρ</em>{03} = Tr_{12}(|ψ&gt;&lt;ψ|) = the density matrix of the Bell state on qubits 0 and 3? Actually, careful: |ψ&gt; = |Φ^+&gt;<em>{03} ⊗ |Φ^+&gt;</em>{12} where |Φ^+&gt; = (|00&gt;+|11&gt;)/√2. So then ρ_{03} = |Φ^+&gt;&lt;Φ^+|<em>{03} because tracing out the other pair gives 1.
+Similarly, ρ</em>{12} = |Φ^+&gt;&lt;Φ^+|_{12}.</p>
+<p>So then we can compute the overlaps for Paulis on qubits 0 and 3. For a two-qubit Pauli on qubits 0 and 3, we want &lt;ψ|P|ψ&gt; = Tr(ρ_{03} P) because P acts only on qubits 0 and 3. And since ρ_{03} is the Bell state |Φ^+&gt;&lt;Φ^+|, we know that for Paulis on two qubits, the expectation values are: 
+For Bell state |Φ^+&gt; = (|00&gt;+|11&gt;)/√2, we have:
+&lt;Φ^+| I⊗I |Φ^+&gt; = 1.
+&lt;Φ^+| X⊗X |Φ^+&gt; = 1? Actually, check: (X⊗X)|Φ^+&gt; = (|11&gt;+|00&gt;)/√2 = |Φ^+&gt;, so expectation = 1.
+&lt;Φ^+| Y⊗Y |Φ^+&gt; = ? (Y⊗Y)|Φ^+&gt; = (i)(-i) (|11&gt; - |00&gt;?) Actually, compute properly: Y|0&gt; = i|1&gt;, Y|1&gt; = -i|0&gt;. So Y⊗Y|00&gt; = i * i |11&gt; = -|11&gt;. Y⊗Y|11&gt; = (-i)<em>(-i)|00&gt; = -|00&gt;. So Y⊗Y|Φ^+&gt; = -(|11&gt;+|00&gt;)/√2 = -|Φ^+&gt;, so expectation = -1.
+&lt;Φ^+| Z⊗Z |Φ^+&gt; =? Z⊗Z|00&gt; = |00&gt;, Z⊗Z|11&gt; = |11&gt;, so expectation = 1.
+What about Paulis that are not symmetric? For example, I⊗X: 
+(I⊗X)|Φ^+&gt; = (|01&gt;+|10&gt;)/√2 = |Ψ^+&gt;, so expectation = &lt;Φ^+|Ψ^+&gt; = 0.
+Similarly, any Pauli that is not of the form A⊗A? Actually, for Bell state, the only nonzero expectations are for Paulis that are in the stabilizer of the Bell state? Actually, the Bell state |Φ^+&gt; is stabilized by X⊗X and Z⊗Z (and -Y⊗Y). So indeed, the expectation values are: 
+For Pauli P on two qubits, &lt;Φ^+|P|Φ^+&gt; is nonzero only if P is I⊗I, X⊗X, Y⊗Y, Z⊗Z. And then:
+I⊗I: 1
+X⊗X: 1
+Y⊗Y: -1
+Z⊗Z: 1.
+But careful: That is for the Bell state |Φ^+&gt; = (|00&gt;+|11&gt;)/√2. So then |&lt;ψ|P|ψ&gt;|^2 for P on qubits 0,3: 
+If P = I⊗I, but that&rsquo;s identity, so not included in error sum.
+For P = X⊗X: squared = 1.
+For P = Y⊗Y: squared = 1.
+For P = Z⊗Z: squared = 1.
+For any other Pauli on qubits 0,3, the expectation is 0.
+So there are 3 Paulis on qubits 0,3 that give nonzero squared overlap of 1.
+But wait: There are 15 non-identity Paulis. Among them, how many are of the form A⊗A? Actually, the Paulis on two qubits: They are products of Paulis on each qubit. The ones that are &ldquo;symmetric&rdquo; in the sense that they are the same on both qubits? That gives: X⊗X, Y⊗Y, Z⊗Z. Also what about I⊗X? That is not symmetric. So indeed, only these 3 give nonzero expectation. But wait: Also what about X⊗I? That gives 0. So yes.
+So for the depolarizing channel on qubits 0 and 3, the contribution to fidelity is: 
+(1-p) from the no-error part? Actually, careful: The channel on qubits 0,3: E_{03}(ρ) = (1-p)ρ + (p/15) ∑<em>{P in Paulis on {0,3} non-I} P ρ P.
+So if we apply this to |ψ&gt;&lt;ψ|, then &lt;ψ| E</em>{03}(|ψ&gt;&lt;ψ|) |ψ&gt; = (1-p) + (p/15) ∑_{P non-I} |&lt;ψ|P|ψ&gt;|^2 = (1-p) + (p/15)</em>3 = 1-p + p/5 = 1 - (4/5)p.
+But wait: That is if we only had errors on qubits 0,3. But we also have errors on qubits 2,1. And similarly, for qubits 2,1, since ρ_{12} is also a Bell state (|Φ^+&gt; on qubits 1,2), the same analysis applies: For any Pauli on qubits 1,2 that is not identity, only those that are X⊗X, Y⊗Y, Z⊗Z give expectation 1, and others give 0. So similarly, if we only had errors on qubits 2,1, the fidelity would be 1 - (4/5)p.</p>
+<p>But careful: These channels are applied sequentially. And they act on disjoint sets. And because the state factorizes as |ψ&gt; = |Φ^+&gt;<em>{03} ⊗ |Φ^+&gt;</em>{12}, the effect of the depolarizing channel on qubits 0,3 only affects the first factor, and similarly for qubits 2,1. And these channels are independent. So then the overall fidelity after both channels is the product? But careful: The channels are not necessarily giving a fidelity that multiplies because the errors are not necessarily independent in the sense of fidelity? Actually, if we have two independent depolarizing channels on two separate subsystems, and the ideal state is a product state, then the fidelity is the product of the fidelities from each channel. But here our state is a product state: |ψ&gt; = |Φ^+&gt;<em>{03} ⊗ |Φ^+&gt;</em>{12}. And the depolarizing channel on qubits 0,3 acts only on the first factor, and similarly on qubits 2,1 on the second factor. And these channels are applied independently. So then the overall state becomes: ρ = E_{03}(|Φ^+&gt;&lt;Φ^+|) ⊗ E_{12}(|Φ^+&gt;&lt;Φ^+|). And then the fidelity F = Tr( (|Φ^+&gt;&lt;Φ^+| ⊗ |Φ^+&gt;&lt;Φ^+|) ρ ) = [Tr(|Φ^+&gt;&lt;Φ^+| E_{03}(|Φ^+&gt;&lt;Φ^+|))] * [Tr(|Φ^+&gt;&lt;Φ^+| E_{12}(|Φ^+&gt;&lt;Φ^+|))] because the state is product. And each of those is 1 - (4/5)p. So then overall fidelity would be (1 - (4/5)p)^2.
+But wait: Is that correct? Let&rsquo;s check: Our derivation earlier using moving errors to the end gave: ρ_final = E_{0,3} ∘ E_{2,1} (|ψ&gt;&lt;ψ|). And since these channels act on disjoint qubits, they commute. And if |ψ&gt; is a product state between these two pairs, then indeed E_{0,3} ∘ E_{2,1} (|ψ&gt;&lt;ψ|) = E_{0,3}(|Φ^+&gt;&lt;Φ^+|) ⊗ E_{2,1}(|Φ^+&gt;&lt;Φ^+|). And then fidelity = F_{03} * F_{12} where F_{03} = &lt;Φ^+| E_{0,3}(|Φ^+&gt;&lt;Φ^+|) |Φ^+&gt; = 1 - (4/5)p, and similarly for the other. So then overall fidelity = (1 - (4/5)p)^2.
+But wait: There is also the possibility of errors from both channels simultaneously? That is included in the product because (1-p)^2 term gives fidelity 1, and cross terms: (1-p)(p/15)<em>3 from first and similarly from second give? Actually, let&rsquo;s derive properly:
+E_{03}(ρ) = (1-p)ρ + (p/15) ∑<em>{P in {0,3} non-I} P ρ P.
+So if ρ = |Φ^+&gt;&lt;Φ^+|, then F</em>{03} = (1-p) + (p/15)</em>3 = 1-p + p/5 = 1 - 4p/5.
+Similarly, F_{12} = 1 - 4p/5.
+And since the channels are independent, the overall effect on the product state is: 
+ρ_final = [ (1-p)^2 + &hellip; ] Actually, careful: The combined channel is: 
+E_{03} ∘ E_{12} (ρ_{03} ⊗ ρ_{12}) = E_{03}(ρ_{03}) ⊗ E_{12}(ρ_{12}) because they act on different subsystems. So then fidelity = F_{03} * F_{12} = (1 - 4p/5)^2.
+So that seems to be the answer.</p>
+<p>But wait: Is that the physical state fidelity? That is the overlap between the ideal state and the actual state. But careful: The actual state is not necessarily a product state? But it is because the errors act independently on disjoint sets. So yes.</p>
+<p>But wait: There is also the possibility that errors from different gates could cancel? But no, because we are averaging over errors. So the fidelity is the average over error patterns. And since errors are independent, the average fidelity is indeed the product of the fidelities from each error channel? But careful: The fidelity of a channel applied to a pure state is defined as F = ∫ &lt;ψ| E(|ψ&gt;&lt;ψ|) |ψ&gt; d(error) but here we are computing exactly that: E(|ψ&gt;&lt;ψ|) is a mixture. And we computed that as (1-p)^2 |ψ&gt;&lt;ψ| + &hellip; and then &lt;ψ| that gives (1-p)^2 + &hellip; and that equals (1 - 4p/5)^2? Let&rsquo;s check by expanding:
+From two independent depolarizing channels on two disjoint pairs, the overall effect on |ψ&gt;&lt;ψ| is:
+With probability (1-p)^2: no error -&gt; fidelity contribution: (1-p)^2.
+With probability (1-p)<em>(p/15) from first channel error (and no error on second): There are 15 such terms from first channel, but only 3 give nonzero overlap of 1, and the other 12 give 0. So contribution: (1-p)</em>(p/15)<em>3 = (1-p)</em>p/5.
+Similarly, from second channel error (and no error on first): contribution: (1-p)<em>p/5.
+With probability (p/15)^2 from both channels errors: There are 15</em>15 =225 terms. But careful: The overlap &lt;ψ| (P ⊗ Q) |ψ&gt;&lt;ψ| (P ⊗ Q) |ψ&gt; = |&lt;ψ|P⊗Q|ψ&gt;|^2. And since |ψ&gt; = |Φ^+&gt;<em>{03} ⊗ |Φ^+&gt;</em>{12}, we have &lt;ψ|P⊗Q|ψ&gt; = &lt;Φ^+|P|Φ^+&gt; * &lt;Φ^+|Q|Φ^+&gt;. So this is nonzero only if both P and Q are among the ones that give ±1. That is, P must be one of {X⊗X, Y⊗Y, Z⊗Z} on qubits 0,3, and Q must be one of {X⊗X, Y⊗Y, Z⊗Z} on qubits 1,2. So there are 3<em>3 = 9 terms. And each gives product: (&lt;Φ^+|P|Φ^+&gt;)^2 * (&lt;Φ^+|Q|Φ^+&gt;)^2. But note: (&lt;Φ^+|P|Φ^+&gt;)^2 is always 1 because even if it is -1, squared gives 1. So each such term gives 1. So contribution from both errors: (p/15)^2 * 9 = p^2/25.
+So total fidelity = (1-p)^2 + 2</em>(1-p)*p/5 + p^2/25 = (1 - 2p + p^2) + (2p/5 - 2p^2/5) + p^2/25 = 1 - 2p + p^2 + 0.4p - 0.4p^2 + 0.04p^2 = 1 - 1.6p + (1 - 0.4 + 0.04)p^2 = 1 - 1.6p + 0.64p^2 = (1 - 0.8p)^2. And 0.8p = 4p/5. So indeed F = (1 - 4p/5)^2.
+So the physical state fidelity is (1 - 4p/5)^2.</p>
+<p>But wait: Is that the answer? That is the fidelity of the output state to the ideal state. But the problem asks: &ldquo;What is the physical state fidelity of the final physical 4-qubit state at the end of the circuit as a function of the two-qubit gate error rate p?&rdquo; So answer: F = (1 - 4p/5)^2.</p>
+<p>But wait: There is also the possibility of errors from the Hadamard gates? But the problem says only CNOT gates have errors. So that&rsquo;s it.</p>
+<p>Thus answer for Subproblem 1: F = (1 - 4p/5)^2.</p>
+<p>But wait: The problem might expect an expression in terms of p. So I&rsquo;ll put: 
+Final Answer: \boxed{(1 - \frac{4p}{5})^2}</p>
+<p>But let me double-check: The circuit has two CNOT gates. Each CNOT gate error channel acts on two qubits. And we showed that by moving the errors to the end, the overall effect is two independent depolarizing channels on the pairs (0,3) and (2,1). And since the ideal state is a product of Bell states on these pairs, the fidelity from a depolarizing channel on a Bell state is: F_Bell = 1 - 4/5 p? Actually, for a two-qubit depolarizing channel on a Bell state, the fidelity is: (1-p) + (p/15)*3 = 1 - p + p/5 = 1 - 4p/5. And since they are independent, overall fidelity is product: (1 - 4p/5)^2. That seems correct.</p>
+<p>So I&rsquo;ll answer that.</p>
+<p>Thus for Subproblem 1:</p>
+                      </div>
+                    </details>
+<div class="content markdown-body"><h3 id="step-1-understand-the-circuit-and-ideal-state">Step 1. Understand the Circuit and Ideal State</h3>
+<p>The goal is to prepare the logical GHZ state:</p>
+<div class="arithmatex">\[
+|\psi_{\text{ideal}}\rangle = \frac{|00\rangle_{AB} + |11\rangle_{AB}}{\sqrt{2}}
+\]</div>
+<p>in the <span class="arithmatex">\([[4,2,2]]\)</span> code, using the circuit:</p>
+<div class="arithmatex">\[
+(\text{CNOT}_{03}) (H_0) (\text{CNOT}_{21}) (H_2)
+\]</div>
+<p>The operations are applied from right to left:</p>
+<ol>
+<li>Apply <span class="arithmatex">\(H_2\)</span> (Hadamard on qubit 2)</li>
+<li>Apply <span class="arithmatex">\(\text{CNOT}_{21}\)</span> (control qubit 2, target qubit 1)</li>
+<li>Apply <span class="arithmatex">\(H_0\)</span> (Hadamard on qubit 0)</li>
+<li>Apply <span class="arithmatex">\(\text{CNOT}_{03}\)</span> (control qubit 0, target qubit 3)</li>
+</ol>
+<p>Starting from the initial state <span class="arithmatex">\(|0000\rangle\)</span>, the ideal output is:</p>
+<div class="arithmatex">\[
+|\psi\rangle = \frac{1}{2} \left( |0000\rangle + |1001\rangle + |0110\rangle + |1111\rangle \right)
+\]</div>
+<p>This is equivalent to:</p>
+<div class="arithmatex">\[
+|\psi\rangle = |\Phi^+\rangle_{03} \otimes |\Phi^+\rangle_{12}, \quad \text{where} \quad |\Phi^+\rangle = \frac{|00\rangle + |11\rangle}{\sqrt{2}}
+\]</div>
+<hr />
+<h3 id="step-2-model-the-errors">Step 2. Model the Errors</h3>
+<p>Each CNOT gate is followed by a two-qubit depolarizing error channel:</p>
+<ul>
+<li>With probability <span class="arithmatex">\(1 - p\)</span>, no error occurs.</li>
+<li>With probability <span class="arithmatex">\(p\)</span>, a non-identity two-qubit Pauli error occurs, chosen uniformly from the 15 possibilities.</li>
+</ul>
+<p>The error channels act on the qubit pairs involved in each CNOT:</p>
+<ul>
+<li>After <span class="arithmatex">\(\text{CNOT}_{21}\)</span>: error channel on qubits 2 and 1</li>
+<li>After <span class="arithmatex">\(\text{CNOT}_{03}\)</span>: error channel on qubits 0 and 3</li>
+</ul>
+<p>Hadamard gates are assumed to be error-free.</p>
+<hr />
+<h3 id="step-3-simplify-the-error-analysis">Step 3. Simplify the Error Analysis</h3>
+<p>Since the later gates (<span class="arithmatex">\(H_0\)</span> and <span class="arithmatex">\(\text{CNOT}_{03}\)</span>) act on qubits disjoint from those affected by the first error channel, we can commute the first error channel to the end of the circuit. Similarly, the second error channel already acts at the end.</p>
+<p>Thus, the overall effect is equivalent to applying the ideal circuit <span class="arithmatex">\(U\)</span> followed by two independent depolarizing channels:</p>
+<ul>
+<li><span class="arithmatex">\(E_{21}\)</span>: acts on qubits 2 and 1</li>
+<li><span class="arithmatex">\(E_{03}\)</span>: acts on qubits 0 and 3</li>
+</ul>
+<p>So the final state is:</p>
+<div class="arithmatex">\[
+\rho_{\text{final}} = E_{03} \circ E_{21} \left( |\psi\rangle\langle\psi| \right)
+\]</div>
+<p>Since the ideal state factors as:</p>
+<div class="arithmatex">\[
+|\psi\rangle = |\Phi^+\rangle_{03} \otimes |\Phi^+\rangle_{12}
+\]</div>
+<p>and the error channels act on disjoint qubit pairs, we have:</p>
+<div class="arithmatex">\[
+\rho_{\text{final}} = E_{03}(|\Phi^+\rangle\langle\Phi^+|)_{03} \otimes E_{21}(|\Phi^+\rangle\langle\Phi^+|)_{12}
+\]</div>
+<hr />
+<h3 id="step-4-compute-the-fidelity-from-one-depolarizing-channel">Step 4. Compute the Fidelity from One Depolarizing Channel</h3>
+<p>The two-qubit depolarizing channel on a pair of qubits is:</p>
+<div class="arithmatex">\[
+E(\rho) = (1 - p)\rho + \frac{p}{15} \sum_{P \neq I \otimes I} P \rho P^\dagger
+\]</div>
+<p>For a Bell state <span class="arithmatex">\(|\Phi^+\rangle\)</span>, the fidelity is:</p>
+<div class="arithmatex">\[
+F = \langle \Phi^+ | E(|\Phi^+\rangle\langle\Phi^+|) | \Phi^+ \rangle = (1 - p) + \frac{p}{15} \sum_{P \neq I \otimes I} |\langle \Phi^+ | P | \Phi^+ \rangle|^2
+\]</div>
+<p>Only the Pauli operators <span class="arithmatex">\(X \otimes X\)</span>, <span class="arithmatex">\(Y \otimes Y\)</span>, and <span class="arithmatex">\(Z \otimes Z\)</span> have non-zero overlap with <span class="arithmatex">\(|\Phi^+\rangle\)</span>, and each gives <span class="arithmatex">\(|\langle \Phi^+ | P | \Phi^+ \rangle|^2 = 1\)</span>. There are 3 such operators, so:</p>
+<div class="arithmatex">\[
+F = 1 - p + \frac{3p}{15} = 1 - \frac{4p}{5}
+\]</div>
+<hr />
+<h3 id="step-5-combine-the-two-independent-error-channels">Step 5. Combine the Two Independent Error Channels</h3>
+<p>Since the error channels act on independent subsystems, the overall fidelity is the product of the individual fidelities:</p>
+<div class="arithmatex">\[
+F_{\text{total}} = \left(1 - \frac{4p}{5}\right) \cdot \left(1 - \frac{4p}{5}\right) = \left(1 - \frac{4p}{5}\right)^2
+\]</div>
+<hr />
+<h3 id="final-answer">Final Answer:</h3>
+<div class="arithmatex">\[
+\boxed{\left(1 - \frac{4p}{5}\right)^2}
+\]</div></div>
+</article>
+
+
+<article class="message role-user">
+    <div class="meta">
+        <span class="badge">User</span>
+        <span class="idx">#3</span>
+    </div>
+    <div class="content markdown-body"><p>Populate your final answer into the code template provided below. This step is purely for formatting/display purposes. No additional reasoning or derivation should be performed. Do not import any modules or packages beyond what is provided in the template.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">answer</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the expression of the physical state fidelity of the final physical 4-qubit state</span>
+<span class="sd">    at the end of the circuit as a function of the two-qubit gate error rate $p$.</span>
+
+<span class="sd">    Inputs</span>
+<span class="sd">    ----------</span>
+<span class="sd">    p: sympy.Symbol, two-qubit gate error rate $p$</span>
+
+<span class="sd">    Outputs</span>
+<span class="sd">    ----------</span>
+<span class="sd">    F_physical: sympy.Expr, the physical state fidelity of the final physical 4-qubit state</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># ------------------ FILL IN YOUR RESULTS BELOW ------------------</span>
+    <span class="n">F_physical</span> <span class="o">=</span> <span class="o">...</span>  <span class="c1"># a SymPy expression of inputs</span>
+    <span class="c1"># ---------------------------------------------------------------</span>
+
+    <span class="k">return</span> <span class="n">F_physical</span>
+</code></pre></div></div>
+</article>
+
+
+<article class="message role-assistant">
+    <div class="meta">
+        <span class="badge">Assistant</span>
+        <span class="idx">#4</span>
+    </div>
+    
+                    <details class="reasoning">
+                      <summary>Reasoning <span class="tag">(model)</span></summary>
+                      <div class="markdown-body reasoning-body">
+                        <p>We are given a function template to fill.
+ The answer we derived is F_physical = (1 - 4p/5)^2.
+ We need to express this in SymPy.
+ Note: We are to return a SymPy expression.
+ Let&rsquo;s write: (1 - 4<em>p/5)</em><em>2
+ But note: We must use SymPy&rsquo;s rationals to avoid floating point.
+ Alternatively, we can write: (1 - 4</em>p/5)**2 but SymPy will handle the rationals.</p>
+<p>However, note that the expression is (1 - (4/5)*p)^2.</p>
+<p>Let&rsquo;s write it as: (1 - 4<em>p/5)</em>*2</p>
+<p>But in SymPy, we can use Rational or just let it be.</p>
+<p>Since the problem says to use the template, we define:</p>
+<p>F_physical = (1 - 4<em>p/5)</em>*2</p>
+<p>However, note that 4/5 in Python is 0.8, but we want an exact symbolic expression.</p>
+<p>We can use: (1 - (4<em>sp.Rational(1,5))</em>p)**2</p>
+<p>Alternatively, we can write: (1 - 4<em>p/5)</em>*2 and SymPy will treat 4/5 as a rational if we use symbols.</p>
+<p>But note: p is a symbol, and 4/5 in SymPy is Rational(4,5). So we can write:</p>
+<p>F_physical = (1 - 4<em>p/5)</em>*2</p>
+<p>However, to be safe, we can use:</p>
+<p>F_physical = (1 - (4<em>sp.Rational(1,5))</em>p)**2</p>
+<p>But the problem says: &ldquo;Do not import any modules or packages beyond what is provided in the template.&rdquo;</p>
+<p>The template already imports sympy as sp. So we can use sp.Rational.</p>
+<p>Alternatively, we can use:</p>
+<p>F_physical = (1 - 4<em>p/5)</em>*2</p>
+<p>and since p is a symbol, SymPy will treat 4/5 as a rational.</p>
+<p>Let&rsquo;s test in a SymPy environment:</p>
+<p>import sympy as sp
+ p = sp.symbols(&lsquo;p&rsquo;)
+ expr = (1 - 4<em>p/5)</em><em>2
+ print(expr)  # gives (1 - 4</em>p/5)**2, which is correct.</p>
+<p>But note: 4/5 in SymPy is a rational number. So it&rsquo;s safe.</p>
+<p>However, if we want to be extra safe, we can write:</p>
+<p>F_physical = (1 - sp.Rational(4,5)<em>p)</em>*2</p>
+<p>But the problem does not require one over the other.</p>
+<p>I&rsquo;ll use the simpler form: (1 - 4<em>p/5)</em>*2</p>
+<p>Let&rsquo;s write the code accordingly.</p>
+                      </div>
+                    </details>
+<div class="content markdown-body"><p><strong>Final Answer:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">answer</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the expression of the physical state fidelity of the final physical 4-qubit state</span>
+<span class="sd">    at the end of the circuit as a function of the two-qubit gate error rate $p$.</span>
+
+<span class="sd">    Inputs</span>
+<span class="sd">    ----------</span>
+<span class="sd">    p: sympy.Symbol, two-qubit gate error rate $p$</span>
+
+<span class="sd">    Outputs</span>
+<span class="sd">    ----------</span>
+<span class="sd">    F_physical: sympy.Expr, the physical state fidelity of the final physical 4-qubit state</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># ------------------ FILL IN YOUR RESULTS BELOW ------------------</span>
+    <span class="n">F_physical</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mi">4</span><span class="o">*</span><span class="n">p</span><span class="o">/</span><span class="mi">5</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+    <span class="c1"># ---------------------------------------------------------------</span>
+
+    <span class="k">return</span> <span class="n">F_physical</span>
+</code></pre></div></div>
+</article>
+
+</div>
+
+<footer>
+  Generated at 2025-09-24T22:02:09.348861
+</footer>
+
+<script>
+(function() {
+  // Tabs
+  const tabs = document.querySelectorAll('.tab');
+  const panels = document.querySelectorAll('.tab-content');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      const target = document.querySelector(tab.dataset.target);
+      if (target) target.classList.add('active');
+    });
+  });
+
+  // Theme toggle
+  const toggleBtn = document.getElementById('theme-toggle');
+  function setTheme(dark) {
+    if (dark) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('dark', '1');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('dark', '0');
+    }
+  }
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const stored = localStorage.getItem('dark');
+  setTheme(stored === null ? prefersDark : stored === '1');
+
+  toggleBtn.addEventListener('click', () => {
+    const isDark = document.documentElement.classList.contains('dark');
+    setTheme(!isDark);
+  });
+})();
+</script>
+</body>
+</html>

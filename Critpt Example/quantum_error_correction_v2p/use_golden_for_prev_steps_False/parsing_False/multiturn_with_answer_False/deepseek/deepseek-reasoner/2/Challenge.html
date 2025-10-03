@@ -1,0 +1,1834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Challenge</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.codehilite .hll { background-color: #ffffcc }
+.codehilite { background: #f8f8f8; }
+.codehilite .c { color: #3D7B7B; font-style: italic } /* Comment */
+.codehilite .err { border: 1px solid #F00 } /* Error */
+.codehilite .k { color: #008000; font-weight: bold } /* Keyword */
+.codehilite .o { color: #666 } /* Operator */
+.codehilite .ch { color: #3D7B7B; font-style: italic } /* Comment.Hashbang */
+.codehilite .cm { color: #3D7B7B; font-style: italic } /* Comment.Multiline */
+.codehilite .cp { color: #9C6500 } /* Comment.Preproc */
+.codehilite .cpf { color: #3D7B7B; font-style: italic } /* Comment.PreprocFile */
+.codehilite .c1 { color: #3D7B7B; font-style: italic } /* Comment.Single */
+.codehilite .cs { color: #3D7B7B; font-style: italic } /* Comment.Special */
+.codehilite .gd { color: #A00000 } /* Generic.Deleted */
+.codehilite .ge { font-style: italic } /* Generic.Emph */
+.codehilite .ges { font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+.codehilite .gr { color: #E40000 } /* Generic.Error */
+.codehilite .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.codehilite .gi { color: #008400 } /* Generic.Inserted */
+.codehilite .go { color: #717171 } /* Generic.Output */
+.codehilite .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.codehilite .gs { font-weight: bold } /* Generic.Strong */
+.codehilite .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.codehilite .gt { color: #04D } /* Generic.Traceback */
+.codehilite .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.codehilite .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.codehilite .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.codehilite .kp { color: #008000 } /* Keyword.Pseudo */
+.codehilite .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.codehilite .kt { color: #B00040 } /* Keyword.Type */
+.codehilite .m { color: #666 } /* Literal.Number */
+.codehilite .s { color: #BA2121 } /* Literal.String */
+.codehilite .na { color: #687822 } /* Name.Attribute */
+.codehilite .nb { color: #008000 } /* Name.Builtin */
+.codehilite .nc { color: #00F; font-weight: bold } /* Name.Class */
+.codehilite .no { color: #800 } /* Name.Constant */
+.codehilite .nd { color: #A2F } /* Name.Decorator */
+.codehilite .ni { color: #717171; font-weight: bold } /* Name.Entity */
+.codehilite .ne { color: #CB3F38; font-weight: bold } /* Name.Exception */
+.codehilite .nf { color: #00F } /* Name.Function */
+.codehilite .nl { color: #767600 } /* Name.Label */
+.codehilite .nn { color: #00F; font-weight: bold } /* Name.Namespace */
+.codehilite .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.codehilite .nv { color: #19177C } /* Name.Variable */
+.codehilite .ow { color: #A2F; font-weight: bold } /* Operator.Word */
+.codehilite .w { color: #BBB } /* Text.Whitespace */
+.codehilite .mb { color: #666 } /* Literal.Number.Bin */
+.codehilite .mf { color: #666 } /* Literal.Number.Float */
+.codehilite .mh { color: #666 } /* Literal.Number.Hex */
+.codehilite .mi { color: #666 } /* Literal.Number.Integer */
+.codehilite .mo { color: #666 } /* Literal.Number.Oct */
+.codehilite .sa { color: #BA2121 } /* Literal.String.Affix */
+.codehilite .sb { color: #BA2121 } /* Literal.String.Backtick */
+.codehilite .sc { color: #BA2121 } /* Literal.String.Char */
+.codehilite .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.codehilite .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.codehilite .s2 { color: #BA2121 } /* Literal.String.Double */
+.codehilite .se { color: #AA5D1F; font-weight: bold } /* Literal.String.Escape */
+.codehilite .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.codehilite .si { color: #A45A77; font-weight: bold } /* Literal.String.Interpol */
+.codehilite .sx { color: #008000 } /* Literal.String.Other */
+.codehilite .sr { color: #A45A77 } /* Literal.String.Regex */
+.codehilite .s1 { color: #BA2121 } /* Literal.String.Single */
+.codehilite .ss { color: #19177C } /* Literal.String.Symbol */
+.codehilite .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.codehilite .fm { color: #00F } /* Name.Function.Magic */
+.codehilite .vc { color: #19177C } /* Name.Variable.Class */
+.codehilite .vg { color: #19177C } /* Name.Variable.Global */
+.codehilite .vi { color: #19177C } /* Name.Variable.Instance */
+.codehilite .vm { color: #19177C } /* Name.Variable.Magic */
+.codehilite .il { color: #666 } /* Literal.Number.Integer.Long */
+
+</style>
+<style>
+    :root {
+  --bg: #ffffff;
+  --fg: #222222;
+  --muted: #555555;
+  --border: #e0e0e0;
+  --accent: #005fcc;
+  --code-bg: #f6f8fa;
+  --role-user: #0ea5e9;
+  --role-assistant: #22c55e;
+  --role-system: #9ca3af;
+  --return-code: #a35291;
+}
+html.dark {
+  --bg: #0b0b0b;
+  --fg: #e8e8e8;
+  --muted: #a0a0a0;
+  --border: #333333;
+  --accent: #3b82f6;
+  --code-bg: #111827;
+  --role-user: #0ea5e9;
+  --role-assistant: #22c55e;
+  --role-system: #9ca3af;
+  --return-code: #a35291;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
+  line-height: 1.6;
+}
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 10;
+}
+h1 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+}
+.tab {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--border);
+  border-bottom: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 6px 6px 0 0;
+  color: var(--fg);
+}
+.tab.active {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+.tab-content {
+  display: none;
+  padding: 1rem 1.25rem;
+  border-top: 1px solid var(--border);
+}
+.tab-content.active {
+  display: block;
+}
+#theme-toggle {
+  border: 1px solid var(--border);
+  padding: 0.2rem 0.6rem;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  cursor: pointer;
+  background: transparent;
+  color: var(--fg);
+}
+.main {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.message {
+  border: 1px solid var(--border);
+  border-left-width: 6px;
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+  background: rgba(0,0,0,0.02);
+}
+.message .meta {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.6rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.message .badge {
+  font-weight: 600;
+}
+.role-user {
+  border-left-color: var(--role-user);
+}
+.role-assistant {
+  border-left-color: var(--role-assistant);
+}
+.role-system {
+  border-left-color: var(--role-system);
+}
+.role-unknown {
+  border-left-color: var(--accent);
+}
+
+.output-code-container {
+  display: flex;
+  gap: 1rem;               /* space between children */
+  align-items: center;     /* vertical alignment */
+  justify-content: start;  /* horizontal alignment */
+}
+
+.output-code-container .codeblock {
+  flex: 0 1 auto;
+}
+
+.codeblock {
+  border: 1px solid var(--border);
+  border-left-width: 6px;
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+  background: rgba(0,0,0,0.02);
+}
+.codeblock-content {
+  margin-bottom: 0.6rem;
+  border: 1px dashed var(--border);
+  border-radius: 4px;
+  padding: 0.4rem 0.6rem;
+  background: rgba(0,0,0,0.02);
+}
+
+.codeblock.eval_code {
+  border-left-color: var(--role-user);
+}
+.codeblock.target_code {
+  border-left-color: var(--role-assistant);
+}
+.codeblock.output_code {
+  border-left-color: var(--role-system);
+}
+
+html.dark .codeblock-content {
+  background: rgba(255,255,255,0.03);
+}
+.codeblock > summary {
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none; /* remove default triangle in some browsers */
+}
+.codeblock > summary::-webkit-details-marker {
+  display: none; /* Safari/Chrome marker */
+}
+.codeblock > summary::before {
+  content: "▶ ";
+  display: inline-block;
+  transform: rotate(0deg);
+  transition: transform 0.12s ease-out;
+}
+.codeblock[open] > summary::before {
+  transform: rotate(90deg);
+}
+.codeblock .tag {
+  color: var(--muted);
+  font-weight: 400;
+  font-size: 0.85em;
+  margin-left: 0.25rem;
+}
+
+.markdown-body pre code {
+  background: var(--code-bg);
+  display: block;
+  padding: 0.75rem;
+  overflow-x: auto;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+.markdown-body code {
+  background: var(--code-bg);
+  padding: 0.15rem 0.3rem;
+  border-radius: 4px;
+}
+/* Extra info tree */
+details > summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+details .block {
+  padding-left: 1rem;
+  margin: 0.25rem 0 0.5rem 0;
+  border-left: 2px solid var(--border);
+}
+.kv .key {
+  font-weight: 600;
+}
+.kv .type {
+  color: var(--muted);
+  margin-left: 0.5rem;
+  font-size: 0.85rem;
+}
+footer {
+  margin: 2rem 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+/* CodeHilite (pygments) overrides to respect theme vars */
+.codehilite {
+  background: var(--code-bg) !important;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.75rem !important;
+}
+.reasoning {
+  margin-bottom: 0.6rem;
+  border: 1px dashed var(--border);
+  border-radius: 4px;
+  padding: 0.4rem 0.6rem;
+  background: rgba(0,0,0,0.02);
+}
+html.dark .reasoning {
+  background: rgba(255,255,255,0.03);
+}
+.reasoning > summary {
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none; /* remove default triangle in some browsers */
+}
+.reasoning > summary::-webkit-details-marker {
+  display: none; /* Safari/Chrome marker */
+}
+.reasoning > summary::before {
+  content: "▶ ";
+  display: inline-block;
+  transform: rotate(0deg);
+  transition: transform 0.12s ease-out;
+}
+.reasoning[open] > summary::before {
+  transform: rotate(90deg);
+}
+.reasoning .tag {
+  color: var(--muted);
+  font-weight: 400;
+  font-size: 0.85em;
+  margin-left: 0.25rem;
+}
+.reasoning-body {
+  margin-top: 0.5rem;
+}
+</style>
+
+<!-- ===== MATHJAX CONFIG ===== -->
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [ ["\\(","\\)"] ],
+    displayMath: [ ["\\[","\\]"] ],
+    processEscapes: true,
+    processEnvironments: true
+  },
+  options: {
+    ignoreHtmlClass: ".*",
+    processHtmlClass: "arithmatex"
+
+    // skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    // if you dynamically add content later, you can call MathJax.typesetPromise()
+  }
+};
+</script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<!-- ========================== -->
+</head>
+<body>
+<header>
+  <h1>Challenge</h1>
+  <div>
+    <button id="theme-toggle" aria-label="toggle dark mode">🌓</button>
+  </div>
+</header>
+
+<div class="main">
+  
+<article class="message role-system">
+    <div class="meta">
+        <span class="badge">System</span>
+        <span class="idx">#0</span>
+    </div>
+    <div class="content markdown-body"><p>You are a physics research assistant specializing in solving complex, research-level problems using precise, step-by-step reasoning.</p>
+<p><strong>Input</strong>
+Problems will be provided in Markdown format.</p>
+<p><strong>Output (Markdown format)</strong></p>
+<ol>
+<li><strong>Step-by-Step Derivation</strong> - Show every non-trivial step in the solution.  Justify steps using relevant physical laws, theorems, or mathematical identities.</li>
+<li><strong>Mathematical Typesetting</strong> - Use LaTeX for all mathematics:  <code>$...$</code> for inline expressions, <code>$$...$$</code> for display equations.</li>
+<li><strong>Conventions and Units</strong> - Follow the unit system and conventions specified in the problem.</li>
+<li>
+<p><strong>Final Answer</strong> - At the end of the solution,  start a new line with <strong>&ldquo;Final Answer:&rdquo;</strong>, and present the final result.</p>
+<p>For final answers involving values, follow the precision requirements specified in the problem.
+If no precision is specified:
+- If an exact value is possible, provide it (e.g., \$\sqrt(2)\$, \$\pi/4\$).
+- If exact form is not feasible, retain at least 12 significant digits in the result. </p>
+</li>
+<li>
+<p><strong>Formatting Compliance</strong> - If the user requests a specific output format (e.g., code, table),  provide the final answer accordingly.</p>
+</li>
+</ol></div>
+</article>
+
+
+<article class="message role-user">
+    <div class="meta">
+        <span class="badge">User</span>
+        <span class="idx">#1</span>
+    </div>
+    <div class="content markdown-body"><h1 id="problem-setup">Problem setup:</h1>
+<p>In quantum error correction, you encode quantum states into logical states made of many qubits in order to improve their resilience to errors. In quantum error detection, you do the same but can only detect the presence of errors and not correct them. In this problem, we will consider a single [[4,2,2]] quantum error detection code, which encodes two logical qubits into four physical qubits, and investigate how robust logical quantum operations in this code are to quantum errors.</p>
+<p>Our convention is that the four physical qubits in the [[4,2,2]] code are labelled 0,1,2,3. The two logical qubits are labelled A and B. The stabilizers are <span class="arithmatex">\(XXXX\)</span> and <span class="arithmatex">\(ZZZZ\)</span>, where <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(Z\)</span> are Pauli matrices. The logical <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(Z\)</span> operators on the two qubits are <span class="arithmatex">\(X_A = XIXI\)</span>, <span class="arithmatex">\(X_B=XXII\)</span>, <span class="arithmatex">\(Z_A = ZZII\)</span>, <span class="arithmatex">\(Z_B = ZIZI\)</span>, up to multiplication by stabilizers.</p>
+<p>We will consider different state preparation circuits consisting of controlled not <span class="arithmatex">\(CNOT_{ij}\)</span> gates, where <span class="arithmatex">\(CNOT_{ij}\)</span> has control qubit <span class="arithmatex">\(i\)</span> and target qubit <span class="arithmatex">\(j\)</span>. As a simple model of quantum errors in hardware, we will suppose that each <span class="arithmatex">\(CNOT_{ij}\)</span> gate in the circuit has a two qubit depolarizing error channel following it that produces one of the 15 non-identity two-qubit Paulis with equal probability <span class="arithmatex">\(p/15\)</span>. The probability <span class="arithmatex">\(p\)</span> indicates the probability of an error in a single two-qubit gate. We will assess the logical infidelity of certain state preparation protocols as a function of the physical infidelity <span class="arithmatex">\(p\)</span>.</p>
+<h1 id="main-problem">Challenge</h1>
+<p>Suppose that we prepare a logical two-qubit <span class="arithmatex">\(|00\rangle_{AB}\)</span> state in the [[4,2,2]] code. To do so, we introduce an ancilla qubit, qubit 4, and use the following state preparation circuit:</p>
+<div class="arithmatex">\[
+M_4 (CNOT_{04}) (CNOT_{34}) (CNOT_{23}) (CNOT_{10}) (CNOT_{12}) (H_1)
+\]</div>
+<p>Note that this equation is written in matrix multiplication order, while the quantum operations in the circuit occur in the reverse order (from right-to-left in the above equation).  <span class="arithmatex">\(H\)</span> is a single-qubit Hadamard gate and <span class="arithmatex">\(M\)</span> is a single-qubit measurement. The ancilla is used to detect errors in the state preparation circuit and makes the circuit fault-tolerant. If the ancilla measurement is <span class="arithmatex">\(|0\rangle\)</span> (<span class="arithmatex">\(|1\rangle\)</span>), the state preparation succeeds (fails).</p>
+<p>What is the logical state fidelity of the final 2-qubit logical state at the end of the circuit as a function of two-qubit gate error rate <span class="arithmatex">\(p\)</span>, assuming the state is post-selected on all detectable errors in the code and on the ancilla qubit measuring <span class="arithmatex">\(|0\rangle\)</span>?</p></div>
+</article>
+
+
+<article class="message role-assistant">
+    <div class="meta">
+        <span class="badge">Assistant</span>
+        <span class="idx">#2</span>
+    </div>
+    
+                    <details class="reasoning">
+                      <summary>Reasoning <span class="tag">(model)</span></summary>
+                      <div class="markdown-body reasoning-body">
+                        <p>First, I need to find the logical state fidelity for the |00⟩_{AB} state preparation circuit. The circuit is given as:</p>
+<p>M_4 (CNOT_{04}) (CNOT_{34}) (CNOT_{23}) (CNOT_{10}) (CNOT_{12}) (H_1)</p>
+<p>But this is in matrix multiplication order, meaning the operations are applied from right to left. So, the actual order of gates in the circuit is:</p>
+<ol>
+<li>
+<p>H_1 (Hadamard on qubit 1)</p>
+</li>
+<li>
+<p>CNOT_{12} (control qubit 1, target qubit 2)</p>
+</li>
+<li>
+<p>CNOT_{10} (control qubit 1, target qubit 0)</p>
+</li>
+<li>
+<p>CNOT_{23} (control qubit 2, target qubit 3)</p>
+</li>
+<li>
+<p>CNOT_{34} (control qubit 3, target qubit 4)</p>
+</li>
+<li>
+<p>CNOT_{04} (control qubit 0, target qubit 4)</p>
+</li>
+<li>
+<p>M_4 (measurement of qubit 4)</p>
+</li>
+</ol>
+<p>The ancilla is qubit 4, and we post-select on measuring |0⟩ on qubit 4.</p>
+<p>Each CNOT gate is followed by a two-qubit depolarizing error channel with error probability p, meaning that with probability p, an error occurs, and it&rsquo;s equally likely to be any of the 15 non-identity two-qubit Pauli operators.</p>
+<p>I need to find the logical state fidelity. Since we&rsquo;re post-selecting on the ancilla measurement being |0⟩ and on detectable errors, I assume that means we&rsquo;re considering only cases where no error is detected by the code stabilizers or by the ancilla measurement.</p>
+<p>The [[4,2,2]] code has stabilizers XXXX and ZZZZ. So, after state preparation, we measure these stabilizers to detect errors. But in this circuit, the ancilla measurement is also used for detection.</p>
+<p>The problem says: &ldquo;assuming the state is post-selected on all detectable errors in the code and on the ancilla qubit measuring |0⟩&rdquo;. So, we post-select on the ancilla being |0⟩ and on no error being detected by the code stabilizers.</p>
+<p>But in the state preparation circuit, we might have errors during the gates, and we need to see how they affect the logical state.</p>
+<p>The logical state fidelity is probably the fidelity between the actual prepared state and the ideal |00⟩_{AB} logical state.</p>
+<p>Since we&rsquo;re post-selecting on no detected errors, we need to find the probability that no error occurred or that errors occurred but were not detected, and how that affects the logical state.</p>
+<p>For fidelity, we need the overlap between the actual state and the ideal state.</p>
+<p>But because of errors, the actual state might be mixed, so fidelity might be for mixed states.</p>
+<p>The depolarizing error channel introduces Pauli errors, so the state after errors will be a mixture of Pauli errors applied to the ideal state.</p>
+<p>Since we&rsquo;re post-selecting on no detection, we need to find the conditional state given that no error was detected.</p>
+<p>So, I need to find the probability that no error is detected and the state is correct, and the probability that no error is detected but the state is incorrect, and then compute the fidelity.</p>
+<p>The logical operators are given: X_A = XIXI, X_B=XXII, Z_A=ZZII, Z_B=ZIZI.</p>
+<p>The stabilizers are S1=XXXX, S2=ZZZZ.</p>
+<p>The code can detect any single-qubit error, but since it&rsquo;s distance 2, it can detect single errors but not correct them. Actually, [[4,2,2]] has distance 2, meaning it can detect single-qubit errors but not correct them. Specifically, it can detect any single-qubit Pauli error.</p>
+<p>But in this case, errors are happening on two-qubit gates, so errors might be on multiple qubits.</p>
+<p>Each CNOT gate has a depolarizing error that applies a two-qubit Pauli error to the two qubits involved.</p>
+<p>So, for each CNOT gate, with probability 1-p, no error, and with probability p, one of the 15 Pauli errors is applied, each with probability p/15.</p>
+<p>The Pauli errors are from the set {I,X,Y,Z}⊗2 minus II, so 15 possibilities.</p>
+<p>Now, the circuit has multiple CNOT gates, so errors can occur on different gates.</p>
+<p>We need to find the overall effect of errors on the logical state.</p>
+<p>Since we&rsquo;re post-selecting on no detection, we need to find which error patterns are not detected by the stabilizers or by the ancilla measurement.</p>
+<p>The ancilla measurement M_4: we measure qubit 4 in Z basis, and we want |0⟩.</p>
+<p>So, for the ancilla to be |0⟩, it must be that no error affected the ancilla measurement in a way that changes the outcome, but since we&rsquo;re measuring, the measurement itself might be perfect, I assume. The problem doesn&rsquo;t mention errors on measurements or single-qubit gates, only on CNOT gates. It says &ldquo;each CNOT_{ij} gate has a two qubit depolarizing error channel following it&rdquo;, so only CNOT gates have errors. Hadamard gate and measurement are assumed perfect? Probably, since only CNOT errors are mentioned.</p>
+<p>Let&rsquo;s read: &ldquo;each CNOT_{ij} gate in the circuit has a two qubit depolarizing error channel following it&rdquo;, so yes, only CNOT gates have errors. Single-qubit gates and measurement are noiseless.</p>
+<p>So, H_1 and M_4 are perfect.</p>
+<p>Now, the circuit prepares the logical |00⟩ state. I need to know what the ideal circuit does without errors.</p>
+<p>First, let&rsquo;s understand the ideal circuit without errors.</p>
+<p>The circuit is: H_1, then CNOT_{12}, CNOT_{10}, CNOT_{23}, CNOT_{34}, CNOT_{04}, then M_4.</p>
+<p>And we post-select on M_4 = |0⟩.</p>
+<p>What is this circuit supposed to do? It prepares |00⟩_{AB} with ancilla assistance.</p>
+<p>I recall that for the [[4,2,2]] code, there are ways to prepare the logical state using ancilla.</p>
+<p>But let&rsquo;s work out the ideal action.</p>
+<p>Assume all qubits start in |0⟩. So, physical qubits 0,1,2,3,4 all in |0⟩ initially.</p>
+<p>Now, apply H_1 to qubit 1: so qubit 1 becomes |+⟩ = (|0⟩ + |1⟩)/√2.</p>
+<p>Then CNOT_{12}: control qubit 1, target qubit 2. Since qubit 1 is |+⟩ and qubit 2 is |0⟩, after CNOT, qubit 1 and 2 are in Bell state |00⟩ + |11⟩ / √2? No.</p>
+<p>CNOT with control |+⟩ and target |0⟩: after CNOT, the state is |+0⟩ + |−1⟩? Let&rsquo;s compute properly.</p>
+<p>After H_1, state is |0⟩⊗|+⟩⊗|0⟩⊗|0⟩⊗|0⟩ for qubits 0,1,2,3,4. But since we have 5 qubits, let&rsquo;s label them.</p>
+<p>Qubits: 0,1,2,3,4. Initially |00000⟩.</p>
+<p>After H_1: qubit 1 had H, so state is |0⟩ (q0) ⊗ (|0⟩+|1⟩)/√2 (q1) ⊗ |0⟩ (q2) ⊗ |0⟩ (q3) ⊗ |0⟩ (q4) = (|00000⟩ + |01000⟩)/√2? Let&rsquo;s write indices.</p>
+<p>Better to write the state as |q0 q1 q2 q3 q4⟩.</p>
+<p>After H1: |q0⟩ |H q1⟩ |q2⟩ |q3⟩ |q4⟩ = |0⟩ (|0⟩+|1⟩)/√2 |0⟩ |0⟩ |0⟩ = (1/√2) ( |00000⟩ + |01000⟩ ) but |01000⟩ means q0=0, q1=1, q2=0, q3=0, q4=0.</p>
+<p>Now CNOT_{12}: control q1, target q2.</p>
+<p>So, if q1=0, q2 unchanged; if q1=1, q2 flipped.</p>
+<p>So, applied to state: (1/√2) ( |00000⟩ + |01000⟩ ) → (1/√2) ( |00000⟩ + |01100⟩ ) because for |01000⟩, q1=1, so flip q2 from 0 to 1, so |01100⟩.</p>
+<p>So state: (1/√2) ( |00000⟩ + |01100⟩ )</p>
+<p>Now CNOT_{10}: control q1, target q0.</p>
+<p>Control q1, target q0.</p>
+<p>Current state: (1/√2) ( |00000⟩ + |01100⟩ )</p>
+<p>For |00000⟩, q1=0, so no change, |00000⟩.</p>
+<p>For |01100⟩, q1=1, so flip q0 from 0 to 1, so |11100⟩? |01100⟩ has q0=0, q1=1, q2=1, q3=0, q4=0. After CNOT_{10}, flip q0, so q0 becomes 1, so |11100⟩.</p>
+<p>So state: (1/√2) ( |00000⟩ + |11100⟩ )</p>
+<p>Now CNOT_{23}: control q2, target q3.</p>
+<p>Current state: (1/√2) ( |00000⟩ + |11100⟩ )</p>
+<p>|00000⟩: q2=0, so no change, |00000⟩</p>
+<p>|11100⟩: q2=1, so flip q3 from 0 to 1, so |11110⟩</p>
+<p>So state: (1/√2) ( |00000⟩ + |11110⟩ )</p>
+<p>Now CNOT_{34}: control q3, target q4.</p>
+<p>Current state: (1/√2) ( |00000⟩ + |11110⟩ )</p>
+<p>|00000⟩: q3=0, so no change, |00000⟩</p>
+<p>|11110⟩: q3=1, so flip q4 from 0 to 1, so |11111⟩</p>
+<p>So state: (1/√2) ( |00000⟩ + |11111⟩ )</p>
+<p>Now CNOT_{04}: control q0, target q4.</p>
+<p>Current state: (1/√2) ( |00000⟩ + |11111⟩ )</p>
+<p>|00000⟩: q0=0, so no change, |00000⟩</p>
+<p>|11111⟩: q0=1, so flip q4 from 1 to 0, so |11110⟩</p>
+<p>So state: (1/√2) ( |00000⟩ + |11110⟩ )</p>
+<p>Finally, measure M_4: measure qubit 4 in Z basis.</p>
+<p>Qubit 4 in the state: for |00000⟩, q4=0, for |11110⟩, q4=0? |11110⟩ has q4=0? Let&rsquo;s see: |11110⟩ means q0=1,q1=1,q2=1,q3=1,q4=0? No, in standard notation, |q0 q1 q2 q3 q4⟩, so |11110⟩ is q0=1, q1=1, q2=1, q3=1, q4=0? But earlier from CNOT_{34}, we had |11110⟩ for the second term, which had q3=1, q4=0? Let&rsquo;s track.</p>
+<p>After CNOT_{34}, we had |00000⟩ and |11111⟩? No:</p>
+<p>After CNOT_{34}: from (1/√2) ( |00000⟩ + |11110⟩ ) but |11110⟩ has q4=0? No:</p>
+<p>After CNOT_{23}, state is (1/√2) ( |00000⟩ + |11110⟩ ) where |11110⟩ means q0=1,q1=1,q2=1,q3=1,q4=0? But q3=1, q4=0.</p>
+<p>Then CNOT_{34}: control q3, target q4.</p>
+<p>For |00000⟩: q3=0, no change, |00000⟩ with q4=0.</p>
+<p>For |11110⟩: q3=1, so flip q4 from 0 to 1, so |11111⟩ with q4=1.</p>
+<p>So after CNOT_{34}, state is (1/√2) ( |00000⟩ + |11111⟩ )</p>
+<p>Then CNOT_{04}: control q0, target q4.</p>
+<p>For |00000⟩: q0=0, no change, |00000⟩ with q4=0.</p>
+<p>For |11111⟩: q0=1, so flip q4 from 1 to 0, so |11110⟩ with q4=0.</p>
+<p>So after CNOT_{04}, state is (1/√2) ( |00000⟩ + |11110⟩ )</p>
+<p>Now, in |11110⟩, what is q4? |11110⟩ means q0=1,q1=1,q2=1,q3=1,q4=0? But q3=1, q4=0.</p>
+<p>So both terms have q4=0. So when we measure qubit 4, we always get |0⟩ with probability 1. So ideal circuit always measures |0⟩ on ancilla.</p>
+<p>And what is the state of qubits 0,1,2,3 after this? After CNOT_{04}, we have (1/√2) ( |00000⟩ + |11110⟩ ) but since q4 is measured and always 0, after measurement, the state is collapsed to the subspace where q4=0, but since both terms have q4=0, the state is unchanged, and we have (1/√2) ( |0000⟩ |0⟩ + |1111⟩ |0⟩ ) for q0-3 and q4, but after measuring q4=0, the state of q0-3 is (1/√2) ( |0000⟩ + |1111⟩ ) which is exactly the |00⟩ logical state for the [[4,2,2]] code? Let&rsquo;s see.</p>
+<p>The logical |00⟩ for [[4,2,2]] is indeed (|0000⟩ + |1111⟩)/√2, since the stabilizers are XXXX and ZZZZ, and both stabilize this state.</p>
+<p>Yes, so ideal circuit prepares |00⟩_{AB} perfectly, and ancilla is always |0⟩.</p>
+<p>Now, with errors, we have depolarizing errors after each CNOT gate.</p>
+<p>There are 5 CNOT gates: CNOT_{12}, CNOT_{10}, CNOT_{23}, CNOT_{34}, CNOT_{04}.</p>
+<p>Each CNOT gate is followed by a depolarizing error on the two qubits it acts on.</p>
+<p>The error channel: after each CNOT, with prob 1-p, no error, with prob p, a Pauli error from {I,X,Y,Z}^{⊗2} minus II, each with prob p/15.</p>
+<p>Since the errors are Pauli, and the circuit consists of Clifford gates, the overall effect of errors can be analyzed by propagating the Pauli errors through the circuit.</p>
+<p>Because the circuit is Clifford, and errors are Pauli, the state after errors will be a mixture of Pauli errors applied to the ideal state.</p>
+<p>Moreover, since we have post-selection on no detection, we need to find which error patterns are not detected by the stabilizers or by the ancilla measurement.</p>
+<p>The ancilla measurement: we measure qubit 4 and want |0⟩. So, for the ancilla to be |0⟩, the state must have qubit 4 in |0⟩ after the circuit but before measurement? No, the measurement is perfect, so we measure the actual state of qubit 4.</p>
+<p>But since errors might affect qubit 4, the measurement outcome might not be always |0⟩ now.</p>
+<p>In the ideal case, it was always |0⟩, but with errors, it might not be.</p>
+<p>We post-select on measurement outcome |0⟩, so we only consider cases where the measurement of qubit 4 gives 0.</p>
+<p>Also, we post-select on detectable errors in the code, meaning that we measure the stabilizers XXXX and ZZZZ on qubits 0,1,2,3 and get +1 for both, so no error detected.</p>
+<p>So, after the circuit, we measure qubit 4 and get 0, and we measure S1=XXXX and S2=ZZZZ and get +1 for both.</p>
+<p>Then we keep the state only if all measurements are +1.</p>
+<p>Now, the logical state fidelity is the fidelity between the actual state after post-selection and the ideal |00⟩_{AB}.</p>
+<p>Since the ideal state is pure, and the actual state might be mixed, fidelity F = ⟨ψ|ρ|ψ⟩ for ideal |ψ⟩.</p>
+<p>But because we post-select, we need the conditional state given that no error was detected.</p>
+<p>So, I need to find the probability that no error is detected and the state is correct, and the probability that no error is detected but the state has logical error.</p>
+<p>Since the errors are Pauli, and the circuit is Clifford, I can think in terms of Pauli errors applied to the initial state or to the circuit.</p>
+<p>A common way is to consider the error patterns: each CNOT gate can have an error, so there are 5 locations where errors can occur, each error is a two-qubit Pauli.</p>
+<p>But the errors occur after each CNOT, so they are applied at different points in the circuit.</p>
+<p>To find the final effect, I need to propagate these errors through the subsequent gates.</p>
+<p>Since the subsequent gates are Clifford, propagating Pauli errors is straightforward: they remain Pauli but might change form.</p>
+<p>Then, the overall effect is equivalent to some Pauli error on the initial state or on the final state.</p>
+<p>But since we have post-selection, it might be easier to find which error patterns are not detected and what logical error they cause.</p>
+<p>Let me list all the CNOT gates in order of application:</p>
+<ol>
+<li>
+<p>CNOT_{12} with error E1 on qubits 1,2</p>
+</li>
+<li>
+<p>CNOT_{10} with error E2 on qubits 1,0</p>
+</li>
+<li>
+<p>CNOT_{23} with error E3 on qubits 2,3</p>
+</li>
+<li>
+<p>CNOT_{34} with error E4 on qubits 3,4</p>
+</li>
+<li>
+<p>CNOT_{04} with error E5 on qubits 0,4</p>
+</li>
+</ol>
+<p>Each error Ei is one of the 15 Pauli errors on two qubits, or identity.</p>
+<p>The probability for each Ei: P(Ei = I) = 1-p, P(Ei = P) = p/15 for each non-identity Pauli P on the two qubits.</p>
+<p>Now, these errors are applied after each CNOT, so they occur after the gate but before the next gate.</p>
+<p>So, the actual circuit with errors is: start with |00000⟩</p>
+<p>Apply H1 (perfect)</p>
+<p>Apply CNOT_{12}, then error E1 on {1,2}</p>
+<p>Apply CNOT_{10}, then error E2 on {1,0}</p>
+<p>Apply CNOT_{23}, then error E3 on {2,3}</p>
+<p>Apply CNOT_{34}, then error E4 on {3,4}</p>
+<p>Apply CNOT_{04}, then error E5 on {0,4}</p>
+<p>Then measure M4.</p>
+<p>But since the errors are Pauli, and the gates are Clifford, I can commute the errors through the subsequent gates to find the overall error at the end.</p>
+<p>That is, each error Ei can be propagated through the subsequent gates to see what Pauli it becomes at the end of the circuit.</p>
+<p>Then, the net effect is that the ideal state is acted upon by some overall Pauli error, which is a function of the Ei&rsquo;s.</p>
+<p>Then, we can find when this overall error is not detected by the stabilizers and ancilla measurement.</p>
+<p>Let me define the circuit gates without errors as U, so U = CNOT04 • CNOT34 • CNOT23 • CNOT10 • CNOT12 • H1</p>
+<p>But H1 is only on qubit 1, and CNOTs are on pairs.</p>
+<p>Since the initial state is |0⟩^{⊗5}, and U applied to it gives the ideal state |ψ⟩<em>{ideal} = U |0⟩^{⊗5} which is (|0000⟩ + |1111⟩)/√2 ⊗ |0⟩ for q4? From earlier, after U, before measurement, the state has q4=0 always, so |ψ⟩</em>{ideal} = (|0000⟩ + |1111⟩)/√2 ⊗ |0⟩ for qubits 0-3 and 4.</p>
+<p>But after measurement, we have only qubits 0-3.</p>
+<p>With errors, after applying U with errors, we have some state, then we measure q4 and stabilizers.</p>
+<p>But since errors are during the circuit, the actual operation is not unitary, but because errors are Pauli channels, the overall channel can be described as applying some Pauli with probability.</p>
+<p>Let me first find how each error Ei propagates through the subsequent gates.</p>
+<p>Let me list the gates in order:</p>
+<p>G1: H1</p>
+<p>G2: CNOT12</p>
+<p>G3: CNOT10</p>
+<p>G4: CNOT23</p>
+<p>G5: CNOT34</p>
+<p>G6: CNOT04</p>
+<p>Then measurement M4.</p>
+<p>Errors occur after G2, after G3, after G4, after G5, after G6. So after each CNOT, there is an error.</p>
+<p>So, the full operation is: M4 • E5 • CNOT04 • E4 • CNOT34 • E3 • CNOT23 • E2 • CNOT10 • E1 • CNOT12 • H1 • |0⟩^{⊗5}</p>
+<p>But since M4 is measurement, it&rsquo;s not unitary, so for the state before measurement, we have the state after E5 • CNOT04 • &hellip; etc.</p>
+<p>To find the state before measurement, we have applied V = E5 • CNOT04 • E4 • CNOT34 • E3 • CNOT23 • E2 • CNOT10 • E1 • CNOT12 • H1</p>
+<p>Then we measure M4.</p>
+<p>But since E5 is after CNOT04, and CNOT04 is the last gate, E5 is applied after CNOT04, so before measurement, we have applied E5, so the state before measurement has error E5 already applied.</p>
+<p>Then we measure M4.</p>
+<p>Now, for post-selection, we need that when we measure M4, we get 0, and when we measure stabilizers, we get +1.</p>
+<p>But the stabilizers are measured on qubits 0-3, after the circuit, so after measurement of M4, we measure XXXX and ZZZZ on 0-3.</p>
+<p>Since the measurement of M4 is on qubit 4, it might affect the state of 0-3 if entangled, but in this case, ideally, they are not entangled with q4 after CNOT04, but with errors, they might be.</p>
+<p>To simplify, since the errors are Pauli, and the circuit is Clifford, the overall effect of V can be thought of as: V = U • E_total for some overall Pauli error E_total on all qubits, but since U is not unitary for the whole process? U is the ideal unitary without errors, but with errors, V is not necessarily U times an error because errors are applied between gates.</p>
+<p>However, because each gate is Clifford, and errors are Pauli, we can propagate each error through the subsequent gates to find the cumulative error at the end.</p>
+<p>That is, for each error Ei, we can find how it is conjugated by the gates after it.</p>
+<p>Let me define the sequence of operations.</p>
+<p>Let A = H1</p>
+<p>B = CNOT12</p>
+<p>C = CNOT10</p>
+<p>D = CNOT23</p>
+<p>E = CNOT34</p>
+<p>F = CNOT04</p>
+<p>Then the ideal unitary U = F • E • D • C • B • A</p>
+<p>With errors, the actual operation is: E5 • F • E4 • E • E3 • D • E2 • C • E1 • B • A</p>
+<p>Where E1 is after B, etc.</p>
+<p>Now, this can be written as: E5 • F • E4 • E • E3 • D • E2 • C • E1 • B • A</p>
+<p>Since A, B, C, D, E, F are Clifford gates, we can commute the errors to the end by conjugating them through the gates.</p>
+<p>Specifically, we can write this as: U • E_total where E_total is some Pauli error on the initial state, but since the initial state is |0⟩, it might be better to have error on the final state.</p>
+<p>Let&rsquo;s think of the overall effect on the state.</p>
+<p>The state after A is A |0⟩</p>
+<p>Then after B • E1, but E1 is after B, so after B, we apply E1, so state is E1 B A |0⟩</p>
+<p>Then we apply C • E2, so state is E2 C E1 B A |0⟩</p>
+<p>Then apply D • E3, so state is E3 D E2 C E1 B A |0⟩</p>
+<p>Then apply E • E4, so state is E4 E E3 D E2 C E1 B A |0⟩</p>
+<p>Then apply F • E5, so state is E5 F E4 E E3 D E2 C E1 B A |0⟩</p>
+<p>So the final state before measurement is E5 F E4 E E3 D E2 C E1 B A |0⟩</p>
+<p>Now, since A B C D E F are unitary, this is equal to F E D C B A • ( something ) |0⟩</p>
+<p>But F E D C B A = U, the ideal unitary.</p>
+<p>So state = E5 F E4 E E3 D E2 C E1 B A |0⟩ = U • [ U^\dagger E5 F E4 E E3 D E2 C E1 B A ] |0⟩ but that doesn&rsquo;t help.</p>
+<p>Since |0⟩ is not necessarily eigenstate, better to express as state = U • K |0⟩ where K is some operator, but K may not be Pauli.</p>
+<p>Since the gates are Clifford, and errors are Pauli, each E_i is Pauli, so when conjugated through gates, they remain Pauli.</p>
+<p>So, let me define the overall error operator at the end.</p>
+<p>Notice that state = E5 F E4 E E3 D E2 C E1 B A |0⟩</p>
+<p>But B A |0⟩ is some state, but let&rsquo;s find what U is applied to.</p>
+<p>Since U = F E D C B A, then U |0⟩ = ideal state.</p>
+<p>But here we have extra errors.</p>
+<p>We can write state = E5 F E4 E E3 D E2 C E1 B A |0⟩ = E5 F E4 E E3 D E2 C E1 U^\dagger U B A |0⟩ messy.</p>
+<p>Another way: since the initial state is |0⟩^{⊗5}, and all gates are Clifford, the final state will be a stabilizer state, and with Pauli errors, it will be a Pauli error applied to the ideal state, but only if errors are at the end, but here errors are during, so it&rsquo;s equivalent to a Pauli error on the initial state or on the final state? Let&rsquo;s see.</p>
+<p>Consider that for Clifford circuits, the effect of Pauli errors during the circuit is equivalent to some Pauli error on the input or output, but since the input is |0⟩, it might be easier to think of error on output.</p>
+<p>Recall that in Clifford circuits, if you have a Pauli error after a Clifford gate, it is equivalent to a Pauli error before the gate, up to conjugation.</p>
+<p>Specifically, for any Clifford gate G and Pauli P, G P = P&rsquo; G for some Pauli P&rsquo;, where P&rsquo; = G P G^\dagger.</p>
+<p>So, in our sequence, we have E5 F E4 E E3 D E2 C E1 B A</p>
+<p>Now, E1 is after B A, but let&rsquo;s start from the end.</p>
+<p>We have E5 F E4 E E3 D E2 C E1 B A</p>
+<p>We can commute E5 to the right through F? But E5 is after F, so we have E5 F, which is F (F^\dagger E5 F) = F E5&rsquo; where E5&rsquo; = F^\dagger E5 F, which is Pauli since F is Clifford.</p>
+<p>Similarly, E4 E can be written as E (E^\dagger E4 E) = E E4&rsquo; where E4&rsquo; = E^\dagger E4 E</p>
+<p>And so on.</p>
+<p>So, let&rsquo;s do that.</p>
+<p>State = E5 F E4 E E3 D E2 C E1 B A</p>
+<p>= F (F^\dagger E5 F) E4 E E3 D E2 C E1 B A  since E5 F = F (F^\dagger E5 F)</p>
+<p>But F^\dagger E5 F is Pauli, call it E5_f</p>
+<p>So state = F E5_f E4 E E3 D E2 C E1 B A</p>
+<p>Now, E5_f E4 E = E5_f (E E4&rsquo;) where E4&rsquo; = E^\dagger E4 E? Let&rsquo;s see.</p>
+<p>E4 E = E (E^\dagger E4 E) = E E4_e where E4_e = E^\dagger E4 E</p>
+<p>So state = F E5_f E E4_e E3 D E2 C E1 B A</p>
+<p>Now, E5_f E = E (E^\dagger E5_f E) = E E5_fe where E5_fe = E^\dagger E5_f E</p>
+<p>So state = F E E5_fe E4_e E3 D E2 C E1 B A</p>
+<p>But F E is part of U, but let&rsquo;s continue.</p>
+<p>State = F E E5_fe E4_e E3 D E2 C E1 B A</p>
+<p>Now, E5_fe E4_e E3 D = E5_fe E4_e (D D^\dagger) E3 D = E5_fe E4_e D (D^\dagger E3 D) = E5_fe E4_e D E3_d where E3_d = D^\dagger E3 D</p>
+<p>So state = F E E5_fe E4_e D E3_d E2 C E1 B A</p>
+<p>Now, E5_fe E4_e D = D (D^\dagger E5_fe E4_e D) but E5_fe and E4_e are Paulis, so their product is Pauli, so D^\dagger (E5_fe E4_e) D is Pauli, call it E_de = D^\dagger E5_fe E4_e D</p>
+<p>Then E5_fe E4_e D = D E_de</p>
+<p>So state = F E D E_de E3_d E2 C E1 B A</p>
+<p>Now, E_de E3_d E2 C = E_de E3_d (C C^\dagger) E2 C = E_de E3_d C (C^\dagger E2 C) = E_de E3_d C E2_c where E2_c = C^\dagger E2 C</p>
+<p>So state = F E D E_de E3_d C E2_c E1 B A</p>
+<p>Now, E_de E3_d C = C (C^\dagger E_de E3_d C) = C E_cd where E_cd = C^\dagger E_de E3_d C</p>
+<p>So state = F E D C E_cd E2_c E1 B A</p>
+<p>Now, E_cd E2_c E1 B = E_cd E2_c (B B^\dagger) E1 B = E_cd E2_c B (B^\dagger E1 B) = E_cd E2_c B E1_b where E1_b = B^\dagger E1 B</p>
+<p>So state = F E D C B E_cd E2_c E1_b A</p>
+<p>Now, F E D C B is almost U, but U = F E D C B A, so state = F E D C B E_cd E2_c E1_b A</p>
+<p>Now, E_cd E2_c E1_b A = A (A^\dagger E_cd E2_c E1_b A) because A is Clifford, so A E_total_a where E_total_a = A^\dagger E_cd E2_c E1_b A</p>
+<p>So state = F E D C B A E_total_a = U E_total_a |0⟩</p>
+<p>But U |0⟩ is the ideal state, so state = U E_total_a |0⟩</p>
+<p>Now, E_total_a is a Pauli operator on all five qubits, since it&rsquo;s a product of Paulis conjugated by Cliffords.</p>
+<p>So, the final state before measurement is U E_total_a |0⟩</p>
+<p>But U |0⟩ is the ideal state, so state = E_total_a&rsquo; U |0⟩ where E_total_a&rsquo; = U E_total_a U^\dagger, which is also Pauli because U is Clifford.</p>
+<p>So state = E_total_a&rsquo; U |0⟩ = E_total_a&rsquo; |ψ_{ideal}⟩</p>
+<p>where |ψ_{ideal}⟩ = U |0⟩ is the ideal state before measurement, which is (|0000⟩ + |1111⟩)/√2 ⊗ |0⟩ for qubits 0-3 and 4.</p>
+<p>So, with errors, the state before measurement is E_total_a&rsquo; |ψ_{ideal}⟩, where E_total_a&rsquo; is some Pauli operator on all 5 qubits.</p>
+<p>E_total_a&rsquo; depends on all the errors E1 to E5.</p>
+<p>Now, since |ψ_{ideal}⟩ is a stabilizer state, it is stabilized by the stabilizers of the code and by Z4, because in ideal state, qubit 4 is |0⟩, so Z4 |ψ_{ideal}⟩ = |ψ_{ideal}⟩.</p>
+<p>The stabilizers for the code are S1=XXXX on qubits 0-3, and S2=ZZZZ on qubits 0-3, and for qubit 4, since it&rsquo;s |0⟩, it is stabilized by Z4.</p>
+<p>So, the full stabilizer group for |ψ_{ideal}⟩ is generated by XXXX, ZZZZ, and Z4.</p>
+<p>Now, with errors, the state is E_total_a&rsquo; |ψ_{ideal}⟩.</p>
+<p>Now, we measure the ancilla qubit 4 in Z basis. The measurement outcome will be +1 if E_total_a&rsquo; commutes with Z4, or -1 if it anticommutes, because the expectation value.</p>
+<p>Specifically, for a stabilizer state |ψ⟩ stabilized by S, if we measure operator P, the probability of outcome +1 is 1 if P commutes with all stabilizers, but since |ψ⟩ is eigenstate, for Pauli measurement, the outcome depends on whether the error anticommutes with the measurement operator.</p>
+<p>More precisely: since |ψ_{ideal}⟩ is stabilized by Z4, i.e., Z4 |ψ_{ideal}⟩ = |ψ_{ideal}⟩, then for the state E |ψ_{ideal}⟩, when we measure Z4, the probability of getting +1 is 1 if E commutes with Z4, and 0 if E anticommutes with Z4, because if E anticommutes with Z4, then Z4 E |ψ_{ideal}⟩ = - E Z4 |ψ_{ideal}⟩ = - E |ψ_{ideal}⟩, so the state is eigenvector of Z4 with eigenvalue -1, so measurement always gives -1.</p>
+<p>Similarly, if E commutes with Z4, then Z4 E |ψ_{ideal}⟩ = E Z4 |ψ_{ideal}⟩ = E |ψ_{ideal}⟩, so state is eigenvector with eigenvalue +1, so measurement gives +1.</p>
+<p>Therefore, for the ancilla measurement to be |0⟩ (i.e., Z4 outcome +1), we need that E_total_a&rsquo; commutes with Z4.</p>
+<p>Otherwise, if it anticommutes, we always get -1, and we post-select away.</p>
+<p>Similarly, after measuring ancilla and getting +1, we then measure the stabilizers S1 and S2 on qubits 0-3.</p>
+<p>Since the state is E_total_a&rsquo; |ψ_{ideal}⟩, and we have post-selected on Z4 measurement +1, which means that E_total_a&rsquo; commutes with Z4, so after measurement, the state is still E_total_a&rsquo; |ψ_{ideal}⟩ but now we know that Z4 has +1, but since we measure stabilizers, we need to see when S1 and S2 give +1.</p>
+<p>S1 and S2 act only on qubits 0-3, so they commute with Z4, so for the state E_total_a&rsquo; |ψ_{ideal}⟩, the measurement outcome of S1 will be +1 if E_total_a&rsquo; commutes with S1, and -1 if it anticommutes, similarly for S2.</p>
+<p>Because |ψ_{ideal}⟩ is stabilized by S1 and S2, so S1 |ψ_{ideal}⟩ = |ψ_{ideal}⟩, so S1 E |ψ_{ideal}⟩ = E S1 |ψ_{ideal}⟩ if [S1,E]=0, or = - E S1 |ψ_{ideal}⟩ if {S1,E}=0, so similarly, if E commutes with S1, outcome +1, if anticommutes, outcome -1.</p>
+<p>Same for S2.</p>
+<p>Therefore, for no error detected, we need that E_total_a&rsquo; commutes with S1, commutes with S2, and commutes with Z4.</p>
+<p>That is, E_total_a&rsquo; must be in the commutant of the stabilizer group generated by S1, S2, and Z4.</p>
+<p>The stabilizer group is generated by XXXX, ZZZZ, and Z4.</p>
+<p>The commutant of this group is itself, since it&rsquo;s abelian, so the operators that commute with all stabilizers are exactly the elements of the stabilizer group.</p>
+<p>Because for abelian groups, the centralizer is the group itself.</p>
+<p>So, E_total_a&rsquo; must be an element of the stabilizer group generated by XXXX, ZZZZ, and Z4.</p>
+<p>That is, E_total_a&rsquo; must be a product of these generators.</p>
+<p>Now, E_total_a&rsquo; is a Pauli operator on all 5 qubits.</p>
+<p>The stabilizer group has elements like (XXXX)^a (ZZZZ)^b (Z4)^c for a,b,c in {0,1}.</p>
+<p>But since XXXX and ZZZZ act on qubits 0-3, and Z4 on qubit 4, so the stabilizer group consists of operators that act on 0-3 as (XXXX)^a (ZZZZ)^b and on qubit 4 as (Z4)^c, so essentially, on qubits 0-3, it must be in the code stabilizer, and on qubit 4, it must be I or Z.</p>
+<p>But E_total_a&rsquo; must be such that it commutes with Z4, which we already have from ancilla measurement, but for stabilizers, we need it to commute with S1 and S2, which means that the part on qubits 0-3 must be in the stabilizer of the code, i.e., must be a product of XXXX and ZZZZ.</p>
+<p>Therefore, for no error detected, E_total_a&rsquo; must have its restriction to qubits 0-3 in the stabilizer group of the code, and its action on qubit 4 must be I or Z, but since it commutes with Z4, it can be I or Z on qubit 4, but from the stabilizer, we don&rsquo;t care about qubit 4 for S1 and S2, but since we already post-selected on Z4 measurement, qubit 4 is already |0⟩, so after measurement, the state on qubits 0-3 is the same as before, but with qubit 4 discarded, so for the logical state, we only care about the part on qubits 0-3.</p>
+<p>After measuring Z4 and getting +1, and if E_total_a&rsquo; commutes with Z4, then the state on qubits 0-3 is proportional to the projection of E_total_a&rsquo; |ψ_{ideal}⟩ onto Z4=+1, but since E_total_a&rsquo; commutes with Z4, the state is already in Z4=+1 subspace, so we can just trace out qubit 4, but since |ψ_{ideal}⟩ has qubit 4 in |0⟩, and E_total_a&rsquo; commutes with Z4, it means that E_total_a&rsquo; does not flip qubit 4, so it acts as I or Z on qubit 4.</p>
+<p>If it acts as Z on qubit 4, then E_total_a&rsquo; |ψ_{ideal}⟩ = (E_{03} ⊗ Z4) |ψ_{ideal}⟩ but |ψ_{ideal}⟩ has qubit 4 in |0⟩, so Z4 |0⟩ = |0⟩, so it is E_{03} |ψ_{code}⟩ ⊗ |0⟩ where |ψ_{code}⟩ is the logical state.</p>
+<p>Similarly if I on qubit 4.</p>
+<p>So, in both cases, the state on qubits 0-3 is E_{03} |ψ_{code}⟩ where E_{03} is the part of E_total_a&rsquo; on qubits 0-3.</p>
+<p>And for no error detected by stabilizers, we need that E_{03} commutes with S1 and S2, which means that E_{03} is in the stabilizer group of the code, i.e., E_{03} = (XXXX)^a (ZZZZ)^b for some a,b.</p>
+<p>If E_{03} is in the stabilizer, then E_{03} |ψ_{code}⟩ = |ψ_{code}⟩ since |ψ_{code}⟩ is stabilized by it.</p>
+<p>Therefore, if E_total_a&rsquo; is such that its restriction to qubits 0-3 is in the stabilizer group, then the state on qubits 0-3 is exactly |ψ_{code}⟩, so the logical state is correct.</p>
+<p>If E_total_a&rsquo; is not in the stabilizer group, but we measure stabilizers and get +1, that means that E_total_a&rsquo; commutes with S1 and S2, so E_{03} commutes with S1 and S2, but since the code is distance 2, the operators that commute with both S1 and S2 are exactly the stabilizers and the logical operators? No.</p>
+<p>For the [[4,2,2]] code, the stabilizer group is generated by S1=XXXX and S2=ZZZZ.</p>
+<p>The logical operators are X_A = XIXI, X_B=XXII, Z_A=ZZII, Z_B=ZIZI, and they commute with the stabilizers.</p>
+<p>The full Pauli group on 4 qubits modulo phase, the operators that commute with both S1 and S2 are exactly the stabilizers and the logical operators, but since there are two logical qubits, the logical operators include products like X_A X_B etc., but all operators that commute with S1 and S2 are in the normalizer of the stabilizer group, which for this code is generated by the stabilizers and the logical operators.</p>
+<p>But for the state |ψ_{code}⟩, if we apply a logical operator, it will change the logical state, but when we measure the stabilizers, if we apply a logical operator that commutes with the stabilizers, the measurement outcome will still be +1 because the logical operator commutes with stabilizers, so we cannot detect it.</p>
+<p>Therefore, if E_{03} is a logical operator, then when we measure S1 and S2, we get +1, but the logical state is changed, so we have an undetected error.</p>
+<p>If E_{03} is not in the normalizer, then it will anticommute with at least one stabilizer, so measurement will give -1, and we detect error.</p>
+<p>So, for no error detected, we need that E_{03} is in the normalizer of the stabilizer group, which means that E_{03} is either a stabilizer or a logical operator.</p>
+<p>If it is a stabilizer, the state is correct; if it is a logical operator, the state has logical error.</p>
+<p>Now, in terms of E_total_a&rsquo;, since qubit 4 is already handled, we need E_total_a&rsquo; to commute with Z4, which it does from ancilla measurement, and E_{03} to commute with S1 and S2, i.e., E_{03} in normalizer.</p>
+<p>But E_total_a&rsquo; includes qubit 4, but since it commutes with Z4, it acts as I or Z on qubit 4, so E_{03} is the part on 0-3.</p>
+<p>So, for the logical state to be correct, we need that E_{03} is in the stabilizer group, not just normalizer.</p>
+<p>Otherwise, if E_{03} is in the normalizer but not stabilizer, logical error.</p>
+<p>Now, back to E_total_a&rsquo;: we have that E_total_a&rsquo; = U E_total_a U^\dagger</p>
+<p>And E_total_a = A^\dagger E_cd E2_c E1_b A</p>
+<p>But from earlier, E_total_a is a Pauli operator, and we need to find when E_{03} is in stabilizer or normalizer.</p>
+<p>But since U is fixed, and E_total_a&rsquo; depends on the errors, we need to express E_total_a&rsquo; in terms of the errors E1 to E5.</p>
+<p>From the propagation, we have E_total_a = A^\dagger E_cd E2_c E1_b A</p>
+<p>But E_cd = C^\dagger E_de E3_d C</p>
+<p>And E_de = D^\dagger E5_fe E4_e D</p>
+<p>And E5_fe = E^\dagger E5_f E</p>
+<p>E5_f = F^\dagger E5 F</p>
+<p>This seems messy, but since A, B, C, D, E, F are known gates, we can compute how each error propagates.</p>
+<p>Notice that E_total_a&rsquo; is the overall error on the final state, and it is equivalent to the cumulative error after propagating all errors to the end.</p>
+<p>Since the circuit is designed to prepare the state, and errors occur, we need to find for each possible set of errors, what is E_total_a&rsquo;, and then whether it is detected or not.</p>
+<p>But since p is small, we might only need to consider low-weight errors, but let&rsquo;s see.</p>
+<p>The logical infidelity might be dominated by errors that cause logical errors without detection.</p>
+<p>So, we need to find the probability that E_total_a&rsquo; has E_{03} being a logical operator, and not detected.</p>
+<p>But since we post-select on no detection, the fidelity is the probability that the state is correct given no detection, which is P( E_{03} in stabilizer | no detection) but since no detection means E_{03} in normalizer, so P( correct | no detection) = P( E_{03} in stabilizer ) / P( E_{03} in normalizer ) because if E_{03} in normalizer, no detection, and if in stabilizer, correct, if in normalizer but not stabilizer, error.</p>
+<p>So, the fidelity F = P( E_{03} in stabilizer ) / P( E_{03} in normalizer )</p>
+<p>But this is conditional on the ancilla measurement being |0⟩, which requires that E_total_a&rsquo; commutes with Z4, which means that the error on qubit 4 is I or Z, so no X or Y on qubit 4.</p>
+<p>In terms of E_total_a&rsquo;, it must have no X or Y on qubit 4.</p>
+<p>But since E_total_a&rsquo; includes qubit 4, and we need it to commute with Z4, so the Pauli on qubit 4 must be I or Z.</p>
+<p>Similarly, for the normalizer on 0-3, but let&rsquo;s first find how E_total_a&rsquo; depends on the errors.</p>
+<p>To find E_total_a&rsquo;, we need to find the overall error after propagating all errors through the circuit.</p>
+<p>Since the circuit is small, we can compute the effect of each error location on the final Pauli error.</p>
+<p>Each error Ei is applied at a specific point, and we can find how it contributes to the final error.</p>
+<p>Because the circuit is Clifford, the overall error E_total_a&rsquo; can be written as a product of each error propagated to the end.</p>
+<p>From the state preparation, the final state is U E_total_a |0⟩, but E_total_a is the error on the initial state, but since |0⟩ is not invariant, better to use E_total_a&rsquo; on the final state.</p>
+<p>From earlier, state = U E_total_a |0⟩ = E_total_a&rsquo; U |0⟩ with E_total_a&rsquo; = U E_total_a U^\dagger</p>
+<p>So E_total_a&rsquo; is the overall error on the final state.</p>
+<p>Now, E_total_a is from the errors, and U is known.</p>
+<p>From the propagation in the circuit, we have that E_total_a = A^\dagger E_cd E2_c E1_b A</p>
+<p>But let&rsquo;s list what each term is.</p>
+<p>From earlier steps:</p>
+<p>E1_b = B^\dagger E1 B</p>
+<p>E2_c = C^\dagger E2 C</p>
+<p>E3_d = D^\dagger E3 D</p>
+<p>E4_e = E^\dagger E4 E</p>
+<p>E5_f = F^\dagger E5 F</p>
+<p>Then E5_fe = E^\dagger E5_f E = E^\dagger (F^\dagger E5 F) E</p>
+<p>But since E and F are gates, let&rsquo;s use the actual gates.</p>
+<p>Recall the gates:</p>
+<p>A = H1 (Hadamard on qubit 1)</p>
+<p>B = CNOT12</p>
+<p>C = CNOT10</p>
+<p>D = CNOT23</p>
+<p>E = CNOT34</p>
+<p>F = CNOT04</p>
+<p>Now, each error Ei is a Pauli on two qubits.</p>
+<p>E1 on qubits 1,2</p>
+<p>E2 on qubits 1,0</p>
+<p>E3 on qubits 2,3</p>
+<p>E4 on qubits 3,4</p>
+<p>E5 on qubits 0,4</p>
+<p>Now, when we propagate these errors through the subsequent gates, we need to find E_total_a.</p>
+<p>From earlier, we have state = F E D C B A E_total_a |0⟩ with E_total_a = A^\dagger E_cd E2_c E1_b A</p>
+<p>And E_cd = C^\dagger E_de E3_d C</p>
+<p>E_de = D^\dagger E5_fe E4_e D</p>
+<p>E5_fe = E^\dagger E5_f E</p>
+<p>E5_f = F^\dagger E5 F</p>
+<p>This is complicated, but notice that E_total_a is a Pauli operator, and since A is H1, which is single-qubit, it might be easier to compute the effect on each error.</p>
+<p>Since the circuit is designed to be fault-tolerant for state preparation, likely only certain errors can cause undetected logical errors.</p>
+<p>Perhaps for this specific circuit, we can find which error patterns lead to logical error.</p>
+<p>Another way: the ancilla measurement is used to detect errors, so errors that affect the ancilla might be detected.</p>
+<p>Let&rsquo;s think about the purpose of each gate in the circuit.</p>
+<p>From the ideal circuit, we saw that the circuit creates a Bell pair between qubits 0,1,2,3 and then measures qubit 4 to verify.</p>
+<p>But with errors, we need to see when errors propagate to logical errors.</p>
+<p>Perhaps we can compute the probability that no error occurs or errors cancel, but let&rsquo;s list all possible error locations.</p>
+<p>There are 5 CNOT gates, each with error probability p, and error can be any of 15 Paulis.</p>
+<p>But since p is small, we can compute the logical infidelity to first order in p.</p>
+<p>The logical infidelity is 1 - F, where F is the fidelity.</p>
+<p>Since we post-select, the fidelity might be high, but let&rsquo;s see.</p>
+<p>For the logical state to be incorrect, we need that E_{03} is a logical operator, and not detected, so we need that the overall error on qubits 0-3 is a logical operator.</p>
+<p>From the circuit, the errors on qubits 0-3 can come from errors on CNOT gates involving these qubits.</p>
+<p>Now, to find E_total_a&rsquo;, we need to find how each error Ei affects the final state.</p>
+<p>Notice that the last error is E5 on qubits 0,4, which is after CNOT04, so E5 is applied directly before measurement, so it affects qubits 0 and 4 immediately.</p>
+<p>Similarly, E4 on qubits 3,4 after CNOT34, etc.</p>
+<p>Perhaps we can compute the stabilizer measurement and ancilla measurement for each error.</p>
+<p>But since errors can combine, we need to consider all possible products.</p>
+<p>For simplicity, since the code can detect single errors, and errors on two-qubit gates can be seen as two single-qubit errors, but each two-qubit error can be two single-qubit Pauli errors.</p>
+<p>So, each Ei can be written as product of single-qubit Paulis on the two qubits.</p>
+<p>So, for example, E1 on qubits 1,2 can be P1 P2 for some Paulis P1 and P2, but since it&rsquo;s two-qubit Pauli, it can be I1 X2, etc., but always product of single-qubit Paulis.</p>
+<p>Similarly for others.</p>
+<p>So, each error Ei corresponds to applying a Pauli on qubit i1 and i2.</p>
+<p>Now, these Paulis are applied at different times, and then propagated through the circuit.</p>
+<p>To find the net effect on the final state, we can propagate each single-qubit Pauli error through the subsequent gates.</p>
+<p>So, for each error location, the applied Pauli on a qubit will be conjugated by the gates after it.</p>
+<p>Then, the overall error on each qubit at the end is the product of all the propagated errors from different locations.</p>
+<p>Then, for the final state, the overall error E_total_a&rsquo; is the product of these individual errors on each qubit.</p>
+<p>Since the errors are Pauli, and the gates are Clifford, the propagation of a Pauli error through a Clifford gate is another Pauli error on the same or other qubits.</p>
+<p>So, let&rsquo;s list the order of gates and error locations.</p>
+<p>The sequence of operations is:</p>
+<ol>
+<li>
+<p>H1</p>
+</li>
+<li>
+<p>CNOT12</p>
+</li>
+<li>
+<p>error E1 on {1,2}</p>
+</li>
+<li>
+<p>CNOT10</p>
+</li>
+<li>
+<p>error E2 on {1,0}</p>
+</li>
+<li>
+<p>CNOT23</p>
+</li>
+<li>
+<p>error E3 on {2,3}</p>
+</li>
+<li>
+<p>CNOT34</p>
+</li>
+<li>
+<p>error E4 on {3,4}</p>
+</li>
+<li>
+<p>CNOT04</p>
+</li>
+<li>
+<p>error E5 on {0,4}</p>
+</li>
+<li>
+<p>measure M4</p>
+</li>
+</ol>
+<p>Now, for each error, we can find how it propagates to the end.</p>
+<p>Let&rsquo;s consider a Pauli error on a qubit at a certain point, and see what it becomes after subsequent gates.</p>
+<p>Since the subsequent gates are CNOTs, the conjugation of Pauli errors through CNOT gates is well-known.</p>
+<p>For example, if we have a Pauli on control or target, after CNOT, it might change.</p>
+<p>But let&rsquo;s consider each error separately.</p>
+<p>First, error E1 on qubits 1 and 2 after CNOT12.</p>
+<p>E1 is applied after CNOT12, so before CNOT10.</p>
+<p>Then after E1, we apply CNOT10, then E2, etc.</p>
+<p>So, the error E1 will be conjugated by all gates after it: CNOT10, CNOT23, CNOT34, CNOT04.</p>
+<p>Similarly for other errors.</p>
+<p>So, let&rsquo;s find for each error Ei, what is its contribution to the final error after all gates.</p>
+<p>Let&rsquo;s define the final error on each qubit.</p>
+<p>But since the final state has qubits 0-3 and 4, and we measure qubit 4, we care about the error on qubits 0-3 at the end.</p>
+<p>So, let&rsquo;s find how an error on a qubit at a certain time affects the final state on qubits 0-3.</p>
+<p>Perhaps for this circuit, since it&rsquo;s a standard state preparation, we can know that only certain errors are harmful.</p>
+<p>Another idea: the logical fidelity can be found by simulating the error propagation.</p>
+<p>But let&rsquo;s list the gates and errors.</p>
+<p>Let me denote the Pauli errors as follows.</p>
+<p>For E1 on qubits 1 and2, let&rsquo;s say E1 = P1^{(1)} P2^{(1)} where P1^{(1)} is Pauli on qubit 1 from E1, etc. But since E1 is a two-qubit Pauli, it can have terms like X1, I1, etc., but for example, if E1 = X1 I2, then it applies X on qubit 1, etc.</p>
+<p>Similarly for others.</p>
+<p>Now, when we propagate through gates, the Pauli on a qubit may spread to other qubits via CNOT gates.</p>
+<p>So, let&rsquo;s find the effect of each error on the final state.</p>
+<p>First, consider error E1 on qubits 1 and2 after CNOT12.</p>
+<p>After E1 is applied, we have gates: CNOT10, CNOT23, CNOT34, CNOT04.</p>
+<p>CNOT10 has control 1, target 0.</p>
+<p>CNOT23 has control 2, target 3.</p>
+<p>CNOT34 has control 3, target 4.</p>
+<p>CNOT04 has control 0, target 4.</p>
+<p>So, for an error on qubit 1 at this point: after CNOT10, if error on qubit 1, since CNOT10 has control 1, if the error is X or Y on qubit 1, it might affect the control, but when conjugating Pauli through CNOT, if Pauli on control, after CNOT, it becomes Pauli on control and Pauli on target if certain conditions.</p>
+<p>Recall the conjugation rules for CNOT:</p>
+<ul>
+<li>
+<p>If Pauli on control, say X_c, after CNOT, it becomes X_c X_t</p>
+</li>
+<li>
+<p>If Z_c, after CNOT, it becomes Z_c</p>
+</li>
+<li>
+<p>If X_t, after CNOT, it becomes X_t</p>
+</li>
+<li>
+<p>If Z_t, after CNOT, it becomes Z_c Z_t</p>
+</li>
+</ul>
+<p>Similarly for Y, but Y can be decomposed.</p>
+<p>So, for error on qubit 1 from E1: after CNOT10, which has control 1 and target 0, so if there is X on qubit 1, after CNOT10, it becomes X1 X0</p>
+<p>If Z on qubit 1, after CNOT10, it becomes Z1</p>
+<p>If Y on qubit 1, after CNOT10, it becomes Y1 X0? Let&rsquo;s see: Y = i X Z, so when conjugated, it might involve both.</p>
+<p>But since we care about the Pauli, we can keep track of the Pauli operator.</p>
+<p>Similarly for errors on qubit 2 from E1.</p>
+<p>After CNOT10, we have CNOT23, which has control 2, target 3.</p>
+<p>Then CNOT34, control 3, target 4.</p>
+<p>Then CNOT04, control 0, target 4.</p>
+<p>So, let&rsquo;s propagate the error from E1 through subsequent gates.</p>
+<p>But also, there are other errors applied later, so for the overall error, we need to consider all errors together.</p>
+<p>Perhaps for small p, the probability of multiple errors is small, so we can consider single error events, i.e., only one CNOT gate has error, and others are no error.</p>
+<p>Then, for each single error, we can find what E_total_a&rsquo; is, and whether it is detected or not, and what logical error it causes.</p>
+<p>Then, the logical infidelity to first order is the probability that a single error causes logical error and is not detected.</p>
+<p>Similarly, for no error, fidelity is 1.</p>
+<p>So, let&rsquo;s assume that only one CNOT gate has error, and others are perfect.</p>
+<p>So, for each i, consider that Ei has error, and other Ej=I.</p>
+<p>Then find E_total_a&rsquo; for that case.</p>
+<p>Then see if it is detected or not, and if not, what is the logical state.</p>
+<p>Then the probability of logical error from single error is sum over i of P(Ei error) times indicator that it causes logical error and not detected.</p>
+<p>But since we post-select on no detection, for single error, if it is detected, we discard, so only if it is not detected, we have error.</p>
+<p>But for fidelity, we need the probability that the state is correct given no detection, so for single error, if it is not detected and causes logical error, then fidelity decreases.</p>
+<p>If it is not detected and does not cause error, then fidelity remains 1.</p>
+<p>So, for each single error, we need to find if it is detected or not, and if not, what is the effect on logical state.</p>
+<p>So, let&rsquo;s do that.</p>
+<p>First, suppose only E1 has error, so E1 ≠ I, and E2=E3=E4=E5=I.</p>
+<p>Then, from the state preparation, the state after all gates is affected only by E1.</p>
+<p>Now, E1 is applied after CNOT12, so after CNOT12, we have state, then apply E1, then apply CNOT10, etc.</p>
+<p>But since no other errors, the state after E1 is E1 times the state after CNOT12.</p>
+<p>Then after applying subsequent gates, the state is U&rsquo; E1 |s⟩ where |s⟩ is the state after CNOT12, but since U&rsquo; is the unitary from after CNOT12 to end, but it&rsquo;s messy.</p>
+<p>From earlier, the overall error E_total_a&rsquo; = U E_total_a U^\dagger, and for single error, E_total_a depends on E1.</p>
+<p>From the expression, E_total_a = A^\dagger E_cd E2_c E1_b A</p>
+<p>But since E2=I, E3=I, etc., so E2_c = C^\dagger I C = I</p>
+<p>Similarly, E3_d = I, etc.</p>
+<p>So, from earlier, E_cd = C^\dagger E_de E3_d C = C^\dagger E_de I C = C^\dagger E_de C</p>
+<p>But E_de = D^\dagger E5_fe E4_e D</p>
+<p>Since E4=I, E4_e = E^\dagger I E = I</p>
+<p>E5=I, so E5_f = F^\dagger I F = I</p>
+<p>E5_fe = E^\dagger I E = I</p>
+<p>So E_de = D^\dagger I I D = I</p>
+<p>So E_cd = C^\dagger I C = I</p>
+<p>Then E_total_a = A^\dagger I * I * E1_b A = A^\dagger E1_b A</p>
+<p>But E1_b = B^\dagger E1 B</p>
+<p>So E_total_a = A^\dagger B^\dagger E1 B A</p>
+<p>Then E_total_a&rsquo; = U E_total_a U^\dagger = U A^\dagger B^\dagger E1 B A U^\dagger</p>
+<p>But U = F E D C B A, so U A^\dagger B^\dagger = F E D C B A A^\dagger B^\dagger = F E D C B B^\dagger = F E D C</p>
+<p>So U A^\dagger B^\dagger = F E D C</p>
+<p>Thus E_total_a&rsquo; = F E D C E1 C^\dagger D^\dagger E^\dagger F^\dagger</p>
+<p>So for single error E1, the overall error on the final state is F E D C E1 C^\dagger D^\dagger E^\dagger F^\dagger</p>
+<p>This is the conjugation of E1 through the gates C, D, E, F.</p>
+<p>Similarly, for other errors, we can find.</p>
+<p>Now, gates C, D, E, F are: C=CNOT10, D=CNOT23, E=CNOT34, F=CNOT04</p>
+<p>So, for E1 on qubits 1,2, we need to compute F E D C E1 C^\dagger D^\dagger E^\dagger F^\dagger</p>
+<p>Since C, D, E, F are CNOTs, this is like propagating E1 through the inverse of the gates in reverse order, but since we have conjugation, it&rsquo;s the same as applying the gates to the Pauli.</p>
+<p>So, effectively, we need to take E1 and apply the gates C, D, E, F to it, but since it&rsquo;s conjugation, we can compute how E1 changes when we apply these CNOTs.</p>
+<p>So, let&rsquo;s compute the propagation of E1 through CNOT10, CNOT23, CNOT34, CNOT04.</p>
+<p>E1 is on qubits 1 and2.</p>
+<p>First, apply CNOT10: which has control 1, target 0. So, when we conjugate E1 by CNOT10, since E1 acts on qubits 1 and2, and CNOT10 acts on 1 and0, so it may affect qubit 0.</p>
+<p>Similarly, then CNOT23 on 2 and3, then CNOT34 on 3 and4, then CNOT04 on 0 and4.</p>
+<p>So, let&rsquo;s do step by step.</p>
+<p>Let P = E1, which is a Pauli on qubits 1 and2.</p>
+<p>After conjugation by C=CNOT10: since CNOT10 has control 1 and target 0, so for each Pauli in P, it may change.</p>
+<p>But since P is on qubits 1 and2, and CNOT10 involves qubit 1, so if P has X on qubit 1, after CNOT10, it becomes X1 X0, so now it acts on qubits 0,1,2.</p>
+<p>Similarly if Z on qubit 1, after CNOT10, it remains Z1, so only on qubit 1.</p>
+<p>If Y on qubit 1, after CNOT10, it becomes Y1 X0, so X on qubit 0.</p>
+<p>Similarly, if P has X on qubit 2, it remains X2 since qubit 2 is not involved in CNOT10.</p>
+<p>Similarly for Z on qubit 2.</p>
+<p>So, after CNOT10, the new Pauli is on qubits 0,1,2.</p>
+<p>Then after that, we conjugate by D=CNOT23, which has control 2, target 3.</p>
+<p>So, now the Pauli is on qubits 0,1,2, and CNOT23 acts on 2 and3, so it may affect qubit 3.</p>
+<p>Then after that, conjugate by E=CNOT34, which has control 3, target 4, so may affect qubit 4.</p>
+<p>Then conjugate by F=CNOT04, which has control 0, target 4, so may affect qubit 4 and0.</p>
+<p>So, finally, the overall error will be on qubits 0,1,2,3,4.</p>
+<p>But since we care about E_total_a&rsquo; on all qubits, and then for detection, we need it to commute with Z4 and with S1 and S2.</p>
+<p>For single error E1, we can compute for each possible E1, what is the resulting E_total_a&rsquo;, and then see if it is detected.</p>
+<p>But since E1 can be any of 15 Paulis on {1,2}, we need to do this for each, but perhaps we can find which E1 cause logical error.</p>
+<p>Similarly for other errors.</p>
+<p>But this might be tedious, but let&rsquo;s try.</p>
+<p>First, note that for the logical state to be affected, the error on qubits 0-3 must be a logical operator.</p>
+<p>From the propagation, we can see which errors propagate to logical operators.</p>
+<p>Since the circuit is symmetric, perhaps only certain errors are important.</p>
+<p>Another thought: in state preparation, the ancilla is used to detect errors on the Bell pair, so errors that flip the ancilla measurement are detected, so for no detection, we need that the error does not flip the ancilla measurement, which means that the error on qubit 4 must be I or Z, so no X or Y on qubit 4.</p>
+<p>From the propagation, errors that involve qubit 4 might be detected.</p>
+<p>Let&rsquo;s consider error on E5 itself.</p>
+<p>Suppose only E5 has error, so E5 on qubits 0,4 after CNOT04.</p>
+<p>Then from the overall error, since E5 is applied last, after CNOT04, so before measurement, so the state is E5 times the ideal state, because after CNOT04, the state is ideal, then E5 is applied, so state is E5 |ψ_{ideal}⟩.</p>
+<p>Then we measure M4.</p>
+<p>So, for E5 on qubits 0,4, if E5 has X or Y on qubit 4, then it will flip qubit 4, so measurement will give -1, so detected.</p>
+<p>If E5 has only I or Z on qubit 4, then it commutes with Z4, so measurement gives +1, and then for stabilizers, if E5 has on qubit 0 something, then E5 |ψ_{ideal}⟩ = (E0 ⊗ E4) |ψ_{ideal}⟩ where E0 is on qubit 0, E4 on qubit 4.</p>
+<p>If E4 is I or Z, then since |ψ_{ideal}⟩ has qubit 4 in |0⟩, it is unchanged, so the state on qubits 0-3 is E0 |ψ_{code}⟩, but E0 acts on qubit 0, so on the code, it applies a Pauli on qubit 0.</p>
+<p>Now, for the stabilizers, we measure S1 and S2 on qubits 0-3.</p>
+<p>If E0 is I, then no error.</p>
+<p>If E0 is X, Y, or Z on qubit 0, then since the code can detect single-qubit errors, because distance 2, any single-qubit error on qubits 0-3 will be detected by the stabilizers because it will anticommute with either S1 or S2.</p>
+<p>For example, if X on qubit 0, then it anticommutes with ZZZZ because Z on qubit 0 anticommutes with X, so S2 will give -1, detected.</p>
+<p>Similarly for Y or Z on qubit 0, it will anticommute with XXXX or ZZZZ, so detected.</p>
+<p>Therefore, for any non-identity E0, it will be detected.</p>
+<p>So, for E5 error, if E5 has no X or Y on qubit 4, and if E5 has identity on qubit 0, then no error, but if has error on qubit 0, it is detected.</p>
+<p>So, for E5 error, it is always detected if it has error on qubit 0, or if it has X or Y on qubit 4.</p>
+<p>The only case where it might not be detected is if E5 has I on qubit 0 and I or Z on qubit 4, but if I on qubit 0, then E5=I, so no error.</p>
+<p>So, for E5 error, whenever there is an error, it is always detected, because if error on qubit 0, detected by stabilizer, if error on qubit 4 with X or Y, detected by ancilla measurement.</p>
+<p>So, for single error on E5, it is always detected, so it never causes undetected error. So for fidelity, it doesn&rsquo;t contribute to logical error after post-selection.</p>
+<p>Similarly, now consider error on E4.</p>
+<p>E4 on qubits 3,4 after CNOT34.</p>
+<p>If only E4 has error, then from the overall error, similar to above, we can find E_total_a&rsquo; .</p>
+<p>Since no other errors, the state after CNOT34 is ideal, then apply E4, then apply CNOT04, then apply E5=I, so state after CNOT04 is CNOT04 E4 |ψ_{ideal}⟩ but |ψ_{ideal}⟩ is before CNOT04? Let&rsquo;s see.</p>
+<p>After CNOT34, the state is supposed to be ideal after CNOT34? No, in ideal circuit, after CNOT34, we have state before CNOT04.</p>
+<p>From ideal circuit, after CNOT34, state is (1/√2) ( |00000⟩ + |11111⟩ ) as earlier? From earlier calculation, after CNOT34, state is (1/√2) ( |00000⟩ + |11111⟩ ) for qubits 0-4.</p>
+<p>Then ideally, CNOT04 changes it to (1/√2) ( |00000⟩ + |11110⟩ ) and then measure.</p>
+<p>But with error, after CNOT34, we apply E4, so state is E4 |ψ1⟩ where |ψ1⟩ = (1/√2) ( |00000⟩ + |11111⟩ )</p>
+<p>Then apply CNOT04, so state is CNOT04 E4 |ψ1⟩</p>
+<p>Then since E5=I, no error, so state before measurement is CNOT04 E4 |ψ1⟩</p>
+<p>Now, |ψ1⟩ is not exactly |ψ_{ideal}⟩ because |ψ_{ideal}⟩ is after CNOT04, but |ψ1⟩ is before CNOT04.</p>
+<p>But |ψ1⟩ is a state where qubits 0-3 are in |ψ_{code}⟩ and qubit 4 is |1⟩ in the second term? |ψ1⟩ = (|00000⟩ + |11111⟩)/√2, so qubits 0-3 are in (|0000⟩ + |1111⟩)/√2 = |ψ_{code}⟩, and qubit 4 is |0⟩ in first term and |1⟩ in second term, so not eigenstate of Z4.</p>
+<p>Then after CNOT04, ideally, it becomes |ψ_{ideal}⟩ with qubit 4 always |0⟩.</p>
+<p>But with error, state is CNOT04 E4 |ψ1⟩</p>
+<p>Since CNOT04 is unitary, let&rsquo;s define |φ⟩ = CNOT04 |ψ1⟩, which is the ideal state after CNOT04, so |φ⟩ = |ψ_{ideal}⟩ = (|0000⟩ + |1111⟩)/√2 ⊗ |0⟩ for qubits 0-3 and 4.</p>
+<p>But |ψ1⟩ = CNOT04^\dagger |φ⟩ because CNOT04 is self-inverse? CNOT is self-inverse, so CNOT04 |ψ1⟩ = |φ⟩, so |ψ1⟩ = CNOT04 |φ⟩</p>
+<p>So state with error is CNOT04 E4 |ψ1⟩ = CNOT04 E4 CNOT04 |φ⟩ = (CNOT04 E4 CNOT04) |φ⟩</p>
+<p>So the overall error is CNOT04 E4 CNOT04 applied to |φ⟩.</p>
+<p>So E_total_a&rsquo; = CNOT04 E4 CNOT04</p>
+<p>So for error E4, the overall error is the conjugation of E4 by CNOT04.</p>
+<p>CNOT04 has control 0 and target 4, so for E4 on qubits 3,4, after conjugation by CNOT04, it becomes a Pauli on qubits 3,4, but may involve qubit 0.</p>
+<p>Let&rsquo;s compute.</p>
+<p>E4 is on qubits 3 and4.</p>
+<p>Conjugation by CNOT04: since CNOT04 acts on qubits 0 and4, so if E4 has X on qubit 4, after CNOT04, it becomes X4 X0? Let&rsquo;s see.</p>
+<p>When conjugating a Pauli by CNOT_{c,t}, if the Pauli has X on target, it becomes X on target only? Recall rules.</p>
+<p>For example, if Pauli is X4, then CNOT04 X4 CNOT04: since CNOT04 has target 4, X4 on target, after conjugation, it remains X4, because CNOT X_t CNOT = X_t</p>
+<p>If Pauli is Z4, then CNOT04 Z4 CNOT04 = Z4 Z0? because CNOT Z_t CNOT = Z_c Z_t</p>
+<p>If Pauli is X3, since qubit 3 not involved, it remains X3.</p>
+<p>Similarly, if Pauli is Z3, remains Z3.</p>
+<p>If Pauli is X on qubit 4, it remains X4.</p>
+<p>If Pauli is Z on qubit 4, it becomes Z4 Z0.</p>
+<p>If Pauli is X on qubit 3, remains X3.</p>
+<p>If Pauli is Z on qubit 3, remains Z3.</p>
+<p>If Pauli is Y on qubit 4, Y4 = i X4 Z4, so after conjugation, CNOT04 Y4 CNOT04 = i CNOT04 X4 Z4 CNOT04 = i (CNOT04 X4 CNOT04) (CNOT04 Z4 CNOT04) = i X4 (Z4 Z0) = i X4 Z4 Z0 = Y4 Z0</p>
+<p>So similarly, if Pauli has Y on qubit 4, it becomes Y4 Z0.</p>
+<p>Now, E4 is on qubits 3 and4, so it can be product of Paulis on 3 and4.</p>
+<p>So, after conjugation by CNOT04, the new Pauli will involve qubits 0,3,4.</p>
+<p>Then this E_total_a&rsquo; is applied to |φ⟩, which is |ψ_{code}⟩ ⊗ |0⟩.</p>
+<p>Then we measure Z4.</p>
+<p>For ancilla measurement to be +1, we need that E_total_a&rsquo; commutes with Z4.</p>
+<p>E_total_a&rsquo; is on qubits 0,3,4, so we need that the Pauli on qubit 4 in E_total_a&rsquo; is I or Z, not X or Y.</p>
+<p>Similarly, then for stabilizers, we need that the part on qubits 0-3 commutes with S1 and S2.</p>
+<p>Now, from above, after conjugation, depending on E4.</p>
+<p>For example, if E4 = I3 X4, then after conjugation, it becomes X4, because X4 on target, remains X4.</p>
+<p>So E_total_a&rsquo; = X4 on qubit 4.</p>
+<p>Then when applied to |φ⟩, it becomes X4 |φ⟩, but |φ⟩ has qubit 4 in |0⟩, so X4 |0⟩ = |1⟩, so when measure Z4, we get -1, so detected.</p>
+<p>Similarly, if E4 = I3 Z4, after conjugation, it becomes Z4 Z0, so on qubits 0 and4.</p>
+<p>Then E_total_a&rsquo; = Z4 Z0</p>
+<p>Then applied to |φ⟩, since Z4 |φ⟩ = |φ⟩ because |φ⟩ has |0⟩ on4, so Z4 |0⟩ = |0⟩, so Z4 Z0 |φ⟩ = Z0 |φ⟩</p>
+<p>Now, |φ⟩ has |ψ_{code}⟩ on 0-3, so Z0 |ψ_{code}⟩.</p>
+<p>Then when measure Z4, since Z4 commutes with Z0, and state has Z4 eigenvalue +1, so measurement gives +1.</p>
+<p>Then we measure stabilizers S1 and S2 on qubits 0-3.</p>
+<p>Z0 |ψ_{code}⟩, now Z0 on qubit 0. Since |ψ_{code}⟩ is |0000⟩+|1111⟩, so Z0 |0000⟩ = |0000⟩, Z0 |1111⟩ = - |1111⟩, so Z0 |ψ_{code}⟩ = |0000⟩ - |1111⟩, which is not stabilized by XXXX, because XXXX ( |0000⟩ - |1111⟩ ) = |1111⟩ - |0000⟩ = - ( |0000⟩ - |1111⟩ ), so S1 gives -1, detected.</p>
+<p>Similarly, S2 ZZZZ gives +1 because ZZZZ |0000⟩ = |0000⟩, ZZZZ |1111⟩ = |1111⟩, so ZZZZ Z0 |ψ_{code}⟩ = Z0 ZZZZ |ψ_{code}⟩ = Z0 |ψ_{code}⟩ since ZZZZ |ψ_{code}⟩ = |ψ_{code}⟩, so S2 gives +1, but S1 gives -1, so detected.</p>
+<p>So, for E4 = I3 Z4, it is detected.</p>
+<p>Similarly, if E4 = X3 I4, then after conjugation, it remains X3, so E_total_a&rsquo; = X3 on qubit 3.</p>
+<p>Then applied to |φ⟩, X3 |ψ_{code}⟩ ⊗ |0⟩.</p>
+<p>Then measure Z4, gives +1 since no change on qubit 4.</p>
+<p>Then measure stabilizers: X3 on qubit 3. Since |ψ_{code}⟩ is |0000⟩+|1111⟩, X3 |0000⟩ = |0010⟩? |0000⟩ has qubit 3=0, so X3 |0000⟩ = |0010⟩ if qubits are 0,1,2,3 with 3 being last, but |0000⟩ means all 0, so X3 |0000⟩ = |0001⟩ if qubit 3 is the fourth, but in terms of basis, |ψ_{code}⟩ = |0⟩|0⟩|0⟩|0⟩ + |1⟩|1⟩|1⟩|1⟩, so X3 on the fourth qubit, so X3 |0000⟩ = |0001⟩, X3 |1111⟩ = |1110⟩, so X3 |ψ_{code}⟩ = |0001⟩ + |1110⟩, which is not stabilized by XXXX or ZZZZ. For example, XXXX ( |0001⟩ + |1110⟩ ) = |1110⟩ + |0001⟩ = same, so S1 gives +1? XXXX |0001⟩ = product of X on each qubit, so X on qubit 0,1,2,3: |0001⟩ -&gt; |1110⟩, and XXXX |1110⟩ -&gt; |0001⟩, so indeed XXXX ( |0001⟩ + |1110⟩ ) = |1110⟩ + |0001⟩, so S1 gives +1.</p>
+<p>Now S2 ZZZZ: ZZZZ |0001⟩ = since Z on each, |0001⟩ -&gt; - |0001⟩ because Z on qubit 3 gives -1, so ZZZZ |0001⟩ = - |0001⟩, similarly ZZZZ |1110⟩ = - |1110⟩ because Z on qubit 3? |1110⟩ has qubit 3=0, so Z on qubit 3 gives no sign, but Z on qubit 0,1,2: |1110⟩ -&gt; |1110⟩ since Z|1⟩ = -|1⟩, so for each qubit, Z|1⟩ = -|1⟩, so for |1110⟩, Z0 Z1 Z2 Z3 |1110⟩ = (-1)(-1)(-1)(1) |1110⟩ = (-1) |1110⟩? Let&rsquo;s calculate: for |1110⟩, the state is |1⟩|1⟩|1⟩|0⟩, so Z0|1⟩ = -|1⟩, similarly Z1 and Z2, Z3|0⟩ = |0⟩, so applying Z0 Z1 Z2 Z3 to |1110⟩ gives (-1)(-1)(-1)(1) |1110⟩ = - |1110⟩ because three minus signs.</p>
+<p>Similarly for |0001⟩, |0⟩|0⟩|0⟩|1⟩, Z0|0⟩ = |0⟩, etc., Z3|1⟩ = -|1⟩, so ZZZZ |0001⟩ = (1)(1)(1)(-1) |0001⟩ = - |0001⟩</p>
+<p>So ZZZZ ( |0001⟩ + |1110⟩ ) = - |0001⟩ - |1110⟩ = - ( |0001⟩ + |1110⟩ ), so S2 gives -1, detected.</p>
+<p>So for E4 = X3 I4, it is detected.</p>
+<p>Similarly, other E4 will be detected because any error on qubit 3 or4 will cause either ancilla measurement or stabilizer measurement to fail.</p>
+<p>So for single error on E4, it is always detected.</p>
+<p>Similarly for E3 on qubits 2,3 after CNOT23.</p>
+<p>If only E3 has error, then similarly, we can find the overall error.</p>
+<p>After CNOT23, we apply E3, then CNOT34, then CNOT04, so the state after CNOT04 is CNOT04 CNOT34 E3 |ψ2⟩ where |ψ2⟩ is the state after CNOT23.</p>
+<p>In ideal case, after CNOT23, from earlier, state is (1/√2) ( |00000⟩ + |11110⟩ ) for qubits 0-4? From earlier calculation, after CNOT23, state is (1/√2) ( |00000⟩ + |11110⟩ ) where |11110⟩ means q0=1,q1=1,q2=1,q3=1,q4=0? But from earlier, after CNOT23, we had |00000⟩ and |11110⟩, but |11110⟩ has q3=1? Let&rsquo;s recall.</p>
+<p>From earlier: after CNOT10, state is (1/√2) ( |00000⟩ + |11100⟩ ) because after CNOT10, we had |00000⟩ and |11100⟩? No:</p>
+<p>After CNOT10, state is (1/√2) ( |00000⟩ + |11100⟩ )? From earlier: after CNOT10, from |00000⟩ and |01100⟩, after CNOT10, |00000⟩ and |11100⟩, so yes, |00000⟩ and |11100⟩.</p>
+<p>Then CNOT23: control q2, target q3.</p>
+<p>|00000⟩: q2=0, so no change, |00000⟩</p>
+<p>|11100⟩: q2=1, so flip q3 from 0 to 1, so |11110⟩? |11100⟩ has q3=0, so after flip, q3=1, so |11110⟩, but since q4=0, so |11110⟩ means q0=1,q1=1,q2=1,q3=1,q4=0.</p>
+<p>So state after CNOT23: (1/√2) ( |00000⟩ + |11110⟩ )</p>
+<p>Then ideally, CNOT34: control q3, target q4.</p>
+<p>|00000⟩: q3=0, no change, |00000⟩</p>
+<p>|11110⟩: q3=1, flip q4 from 0 to 1, so |11111⟩</p>
+<p>So after CNOT34: (1/√2) ( |00000⟩ + |11111⟩ )</p>
+<p>Then CNOT04: control q0, target q4.</p>
+<p>|00000⟩: q0=0, no change, |00000⟩</p>
+<p>|11111⟩: q0=1, flip q4 from 1 to 0, so |11110⟩</p>
+<p>So after CNOT04: (1/√2) ( |00000⟩ + |11110⟩ ) which is |ψ_{ideal}⟩ with qubit 4=0.</p>
+<p>But |11110⟩ has q4=0, so yes.</p>
+<p>Now back to error E3: after CNOT23, state is |ψ2⟩ = (1/√2) ( |00000⟩ + |11110⟩ )</p>
+<p>Then apply E3 on qubits 2,3, so state is E3 |ψ2⟩</p>
+<p>Then apply CNOT34, so state is CNOT34 E3 |ψ2⟩</p>
+<p>Then apply CNOT04, so state is CNOT04 CNOT34 E3 |ψ2⟩</p>
+<p>Now |ψ2⟩ is not the ideal state, but we can write it in terms of ideal state.</p>
+<p>Notice that CNOT04 CNOT34 |ψ2⟩ = |ψ_{ideal}⟩ because from above, without error, CNOT34 |ψ2⟩ = |ψ3⟩ = (1/√2) ( |00000⟩ + |11111⟩ ) and then CNOT04 |ψ3⟩ = |ψ_{ideal}⟩</p>
+<p>So |ψ2⟩ = CNOT34^\dagger CNOT04^\dagger |ψ_{ideal}⟩ since CNOT is self-inverse.</p>
+<p>So state with error is CNOT04 CNOT34 E3 |ψ2⟩ = CNOT04 CNOT34 E3 CNOT34 CNOT04 |ψ_{ideal}⟩</p>
+<p>So overall error is CNOT04 CNOT34 E3 CNOT04 CNOT34</p>
+<p>Since CNOT04 and CNOT34 commute? CNOT04 acts on 0 and4, CNOT34 acts on 3 and4, so they commute if they share no common qubit? But they share qubit 4, so do they commute? Let&rsquo;s see.</p>
+<p>CNOT04 with control 0 target 4, CNOT34 with control 3 target 4. Since both have target 4, they may not commute.</p>
+<p>For example, apply CNOT04 then CNOT34 to state |000⟩ for qubits 0,3,4: CNOT04 |000⟩ = |000⟩ because control 0=0, so no change. Then CNOT34 |000⟩ = |000⟩ because control 3=0, so no change.</p>
+<p>Apply CNOT34 then CNOT04: same, |000⟩ -&gt; |000⟩.</p>
+<p>Now |100⟩: CNOT04 |100⟩ = |101⟩ because control 0=1, flip target 4. Then CNOT34 |101⟩ = since control 3=0, no change, so |101⟩.</p>
+<p>CNOT34 first: |100⟩ -&gt; |100⟩ because control 3=0? |100⟩ has qubit 3=0? Assume qubits order: let&rsquo;s say qubit 0,3,4 for simplicity. |100⟩ means qubit 0=1, qubit 3=0, qubit 4=0.</p>
+<p>CNOT34 with control 3, target 4: since control 3=0, no change, so |100⟩.</p>
+<p>Then CNOT04: control 0=1, so flip target 4, so |101⟩.</p>
+<p>Same result. So they commute.</p>
+<p>Similarly, for other states, since they both have target 4, and controls are different, they commute because the order doesn&rsquo;t matter when flipping qubit 4.</p>
+<p>So CNOT04 and CNOT34 commute.</p>
+<p>So overall error is CNOT04 CNOT34 E3 CNOT04 CNOT34 = CNOT34 CNOT04 E3 CNOT04 CNOT34</p>
+<p>But since CNOT04 and CNOT34 commute, this is equal to CNOT34 (CNOT04 E3 CNOT04) CNOT34</p>
+<p>So first conjugate E3 by CNOT04, then by CNOT34.</p>
+<p>E3 is on qubits 2 and3.</p>
+<p>CNOT04 acts on qubits 0 and4, so since qubits 2 and3 are not involved, CNOT04 commutes with E3, so CNOT04 E3 CNOT04 = E3</p>
+<p>Then conjugate by CNOT34: CNOT34 acts on qubits 3 and4, so since E3 acts on qubits 2 and3, it may affect qubit 3.</p>
+<p>So after conjugation by CNOT34, the error becomes on qubits 2,3,4可能.</p>
+<p>So E_total_a&rsquo; = CNOT34 E3 CNOT34</p>
+<p>So for error E3, the overall error is the conjugation of E3 by CNOT34.</p>
+<p>CNOT34 has control 3, target 4.</p>
+<p>So for E3 on qubits 2 and3, after conjugation by CNOT34, since CNOT34 acts on 3 and4, so if E3 has X on qubit 3, after CNOT34, it becomes X3 X4? Let&rsquo;s see.</p>
+<p>If Pauli on qubit 3, say X3, then CNOT34 X3 CNOT34: since X3 on control, after CNOT, it becomes X3 X4</p>
+<p>Similarly, if Z3 on control, after CNOT, it becomes Z3</p>
+<p>If X2, since not involved, remains X2.</p>
+<p>Similarly for Z2.</p>
+<p>So for E3 on qubits 2 and3, after conjugation by CNOT34, the new Pauli will involve qubits 2,3,4.</p>
+<p>Then this is applied to |ψ_{ideal}⟩.</p>
+<p>Then for ancilla measurement, we need that this error commutes with Z4, so no X or Y on qubit 4.</p>
+<p>Similarly for stabilizers.</p>
+<p>So, for example, if E3 = I2 X3, then after conjugation, it becomes X3 X4, so E_total_a&rsquo; = X3 X4</p>
+<p>Then applied to |ψ_{ideal}⟩, X3 X4 |ψ_{ideal}⟩ = X3 |ψ_{code}⟩ ⊗ X4 |0⟩ = X3 |ψ_{code}⟩ ⊗ |1⟩, so when measure Z4, we get -1, detected.</p>
+<p>If E3 = I2 Z3, after conjugation, it becomes Z3, so E_total_a&rsquo; = Z3</p>
+<p>Then applied to |ψ_{ideal}⟩, Z3 |ψ_{code}⟩ ⊗ |0⟩, so measure Z4, gives +1.</p>
+<p>Then measure stabilizers: Z3 on qubit 3. As before, Z3 |ψ_{code}⟩ = |0000⟩ - |1111⟩ if qubit 3 is the fourth, but |ψ_{code}⟩ = |0⟩|0⟩|0⟩|0⟩ + |1⟩|1⟩|1⟩|1⟩, so Z3 on fourth qubit, Z3 |0⟩ = |0⟩, Z3 |1⟩ = -|1⟩, so Z3 |ψ_{code}⟩ = |0000⟩ - |1111⟩, which anticommutes with XXXX, so S1 gives -1, detected.</p>
+<p>Similarly, if E3 = X2 I3, after conjugation, it remains X2, so E_total_a&rsquo; = X2</p>
+<p>Then applied to |ψ_{ideal}⟩, X2 |ψ_{code}⟩ ⊗ |0⟩</p>
+<p>Measure Z4, +1.</p>
+<p>Measure stabilizers: X2 on qubit 2. X2 |0000⟩ = |0010⟩ if qubit 2 is third, but |0000⟩ means qubit 0,1,2,3 all 0, so X2 |0000⟩ = |0100⟩ if qubit 2 is second, let&rsquo;s define qubits order.</p>
+<p>Assume qubits 0,1,2,3 with 0 first, 1 second, 2 third, 3 fourth.</p>
+<p>So |ψ_{code}⟩ = |0⟩0|0⟩1|0⟩2|0⟩3 + |1⟩0|1⟩1|1⟩2|1⟩3</p>
+<p>So X2 on qubit 2: X2 |0000⟩ = |0010⟩? No, |0000⟩ means qubit 0=0,1=0,2=0,3=0, so X2 on qubit 2: |0000⟩ -&gt; |0010⟩? No, if we write state as |q0 q1 q2 q3⟩, then X2 acts on qubit 2, so for |0000⟩, it becomes |0010⟩? But |0010⟩ has qubit 3=0, so it&rsquo;s |0,0,1,0⟩.</p>
+<p>Similarly X2 |1111⟩ = |1101⟩? |1,1,1,1&gt; -&gt; X2 |1,1,1,1&gt; = |1,1,0,1&gt; so |1101⟩.</p>
+<p>So X2 |ψ_{code}⟩ = |0010⟩ + |1101⟩? But this is not necessarily eigenstate of XXXX or ZZZZ.</p>
+<p>XXXX |0010⟩ = since X on each, |0010⟩ -&gt; |1101⟩, and XXXX |1101⟩ -&gt; |0010⟩, so XXXX ( |0010⟩ + |1101⟩ ) = |1101⟩ + |0010⟩ = same, so S1 gives +1.</p>
+<p>ZZZZ |0010⟩ = Z on each, |0010⟩ -&gt; since Z|0⟩= |0⟩, Z|1⟩= -|1⟩, so for |0010⟩, qubit 0=0,1=0,2=1,3=0, so Z0|0⟩=1, Z1|0⟩=1, Z2|1⟩= -1, Z3|0⟩=1, so sign -1, so ZZZZ |0010⟩ = - |0010⟩</p>
+<p>Similarly ZZZZ |1101⟩ = Z|1⟩= -1, Z|1⟩= -1, Z|0⟩=1, Z|1⟩= -1, so sign (-1)(-1)(1)(-1) = -1, so - |1101⟩</p>
+<p>So ZZZZ ( |0010⟩ + |1101⟩ ) = - |0010⟩ - |1101⟩ = - ( |0010⟩ + |1101⟩ ), so S2 gives -1, detected.</p>
+<p>So for E3 = X2 I3, it is detected.</p>
+<p>Similarly, other E3 will be detected.</p>
+<p>So for single error on E3, it is always detected.</p>
+<p>Now consider error on E2.</p>
+<p>E2 on qubits 1,0 after CNOT10.</p>
+<p>If only E2 has error, then from overall error, similarly, we can find E_total_a&rsquo; .</p>
+<p>After CNOT10, we apply E2, then CNOT23, then CNOT34, then CNOT04.</p>
+<p>So state after CNOT04 is CNOT04 CNOT34 CNOT23 E2 |ψ3⟩ where |ψ3⟩ is after CNOT10.</p>
+<p>From ideal circuit, after CNOT10, state is (1/√2) ( |00000⟩ + |11100⟩ ) as earlier.</p>
+<p>Then after CNOT23, CNOT34, CNOT04, we get |ψ_{ideal}⟩.</p>
+<p>So |ψ3⟩ = CNOT23^\dagger CNOT34^\dagger CNOT04^\dagger |ψ_{ideal}⟩</p>
+<p>But CNOT23, CNOT34, CNOT04 do not all commute, but we can compute.</p>
+<p>State with error is CNOT04 CNOT34 CNOT23 E2 |ψ3⟩ = CNOT04 CNOT34 CNOT23 E2 CNOT23 CNOT34 CNOT04 |ψ_{ideal}⟩</p>
+<p>So overall error is CNOT04 CNOT34 CNOT23 E2 CNOT23 CNOT34 CNOT04</p>
+<p>This is the conjugation of E2 by CNOT23, CNOT34, CNOT04.</p>
+<p>Since these CNOTs act on different qubits, we can compute step by step.</p>
+<p>E2 is on qubits 1 and0.</p>
+<p>First, conjugate by CNOT23: CNOT23 acts on qubits 2 and3, so since E2 on 1 and0, not involved, so CNOT23 commutes with E2, so conjugation by CNOT23 does nothing: CNOT23 E2 CNOT23 = E2</p>
+<p>Then conjugate by CNOT34: CNOT34 acts on 3 and4, so not involved with E2, so commutes, so CNOT34 E2 CNOT34 = E2</p>
+<p>Then conjugate by CNOT04: CNOT04 acts on 0 and4, so since E2 has qubit 0, it may change.</p>
+<p>So overall, E_total_a&rsquo; = CNOT04 E2 CNOT04</p>
+<p>So for error E2, the overall error is conjugation of E2 by CNOT04.</p>
+<p>CNOT04 has control 0 and target 4.</p>
+<p>E2 is on qubits 1 and0, so after conjugation by CNOT04, since CNOT04 acts on 0 and4, so if E2 has X on qubit 0, after CNOT04, it becomes X0 X4? Let&rsquo;s see.</p>
+<p>If E2 has X on qubit 0, then CNOT04 X0 CNOT04: since X0 on control, after CNOT, it becomes X0 X4</p>
+<p>Similarly, if Z on qubit 0, after CNOT, it becomes Z0</p>
+<p>If X on qubit 1, remains X1.</p>
+<p>So for E2 on qubits 1 and0, after conjugation by CNOT04, the new Pauli will involve qubits 0,1,4.</p>
+<p>Then applied to |ψ_{ideal}⟩.</p>
+<p>For ancilla measurement, need that no X or Y on qubit 4.</p>
+<p>For example, if E2 = X1 I0, then after conjugation, it remains X1, so E_total_a&rsquo; = X1</p>
+<p>Then applied to |ψ_{ideal}⟩, X1 |ψ_{code}⟩ ⊗ |0⟩</p>
+<p>Measure Z4, +1.</p>
+<p>Measure stabilizers: X1 on qubit 1. X1 |0000⟩ = |0100⟩ if qubit 1 is second, so |0,1,0,0⟩ for qubits 0,1,2,3.</p>
+<p>X1 |1111⟩ = |1011⟩? |1,1,1,1&gt; -&gt; X1 |1,1,1,1&gt; = |1,0,1,1&gt; so |1011⟩.</p>
+<p>So X1 |ψ_{code}⟩ = |0100⟩ + |1011⟩</p>
+<p>Now XXXX |0100⟩ = since X on each, |0100⟩ -&gt; |1011⟩, and XXXX |1011⟩ -&gt; |0100⟩, so XXXX ( |0100⟩ + |1011⟩ ) = |1011⟩ + |0100⟩, so S1 gives +1.</p>
+<p>ZZZZ |0100⟩ = Z on each, |0100⟩ -&gt; since Z|0⟩=1, Z|1⟩= -1, so for |0100⟩, qubit 0=0,1=1,2=0,3=0, so Z0|0⟩=1, Z1|1⟩= -1, Z2|0⟩=1, Z3|0⟩=1, so sign -1, so - |0100⟩</p>
+<p>Similarly ZZZZ |1011⟩ = Z|1⟩= -1, Z|0⟩=1, Z|1⟩= -1, Z|1⟩= -1, so sign (-1)(1)(-1)(-1) = -1, so - |1011⟩</p>
+<p>So ZZZZ ( |0100⟩ + |1011⟩ ) = - |0100⟩ - |1011⟩ = - ( |0100⟩ + |1011⟩ ), so S2 gives -1, detected.</p>
+<p>So for E2 = X1 I0, it is detected.</p>
+<p>Similarly, if E2 = I1 X0, then after conjugation by CNOT04, it becomes X0 X4, so E_total_a&rsquo; = X0 X4</p>
+<p>Then applied to |ψ_{ideal}⟩, X0 X4 |ψ_{ideal}⟩ = X0 |ψ_{code}⟩ ⊗ X4 |0⟩ = X0 |ψ_{code}⟩ ⊗ |1⟩, so measure Z4, gives -1, detected.</p>
+<p>If E2 = I1 Z0, after conjugation, it becomes Z0, so E_total_a&rsquo; = Z0</p>
+<p>Then applied to |ψ_{ideal}⟩, Z0 |ψ_{code}⟩ ⊗ |0⟩</p>
+<p>Measure Z4, +1.</p>
+<p>Measure stabilizers: Z0 on qubit 0. Z0 |0000⟩ = |0000⟩, Z0 |1111⟩ = - |1111⟩, so Z0 |ψ_{code}⟩ = |0000⟩ - |1111⟩, which anticommutes with XXXX, so S1 gives -1, detected.</p>
+<p>So for E2, it is always detected.</p>
+<p>Now finally, consider error on E1.</p>
+<p>E1 on qubits 1,2 after CNOT12.</p>
+<p>If only E1 has error, then from overall error, we have E_total_a&rsquo; = F E D C E1 C^\dagger D^\dagger E^\dagger F^\dagger</p>
+<p>As earlier.</p>
+<p>With C=CNOT10, D=CNOT23, E=CNOT34, F=CNOT04.</p>
+<p>So we need to conjugate E1 by C, then by D, then by E, then by F.</p>
+<p>E1 is on qubits 1 and2.</p>
+<p>First, conjugate by C=CNOT10: CNOT10 acts on qubits 1 and0.</p>
+<p>So if E1 has X on qubit 1, after CNOT10, it becomes X1 X0</p>
+<p>If Z on qubit 1, becomes Z1</p>
+<p>If X on qubit 2, remains X2</p>
+<p>etc.</p>
+<p>So after conjugation by C, the Pauli is on qubits 0,1,2.</p>
+<p>Then conjugate by D=CNOT23: CNOT23 acts on qubits 2 and3.</p>
+<p>So if the Pauli has X on qubit 2, after CNOT23, it becomes X2 X3</p>
+<p>If Z on qubit 2, becomes Z2</p>
+<p>etc.</p>
+<p>So after D, the Pauli is on qubits 0,1,2,3.</p>
+<p>Then conjugate by E=CNOT34: CNOT34 acts on qubits 3 and4.</p>
+<p>So if Pauli has X on qubit 3, after CNOT34, it becomes X3 X4</p>
+<p>etc.</p>
+<p>So after E, the Pauli is on qubits 0,1,2,3,4.</p>
+<p>Then conjugate by F=CNOT04: CNOT04 acts on qubits 0 and4.</p>
+<p>So if Pauli has X on qubit 0, after CNOT04, it becomes X0 X4</p>
+<p>etc.</p>
+<p>So finally, the overall error E_total_a&rsquo; is on all five qubits.</p>
+<p>Then applied to |ψ_{ideal}⟩.</p>
+<p>For no detection, we need that E_total_a&rsquo; commutes with Z4, so no X or Y on qubit 4, and commutes with S1 and S2, so that the part on qubits 0-3 is in the normalizer.</p>
+<p>Now, for E1, if it is identity, then no error.</p>
+<p>If it has error, we need to see if it can be undetected.</p>
+<p>Suppose E1 = X1 I2, then after conjugation by C=CNOT10: since X on qubit 1, and CNOT10 has control 1, so becomes X1 X0</p>
+<p>So after C, we have X1 X0 on qubits 0 and1.</p>
+<p>Then conjugate by D=CNOT23: since no qubit 2 or3 involved, remains X1 X0</p>
+<p>Then conjugate by E=CNOT34: no qubit 3 or4 involved, remains X1 X0</p>
+<p>Then conjugate by F=CNOT04: CNOT04 acts on qubits 0 and4, so for X0, since X0 on control, after CNOT04, it becomes X0 X4</p>
+<p>So overall, E_total_a&rsquo; = X1 X0 X4? From above: after F, X0 becomes X0 X4, and X1 remains, so X1 X0 X4</p>
+<p>So E_total_a&rsquo; = X1 X0 X4</p>
+<p>Then applied to |ψ_{ideal}⟩, X1 X0 X4 |ψ_{ideal}⟩ = X1 X0 |ψ_{code}⟩ ⊗ X4 |0⟩ = X1 X0 |ψ_{code}⟩ ⊗ |1⟩</p>
+<p>So when measure Z4, we get -1, so detected.</p>
+<p>Similarly, if E1 = I1 X2, then after conjugation by C: remains I1 X2, so X2</p>
+<p>Then conjugate by D: CNOT23 has control 2, so X2 on target? X2 on qubit 2, after CNOT23, since X2 on target? CNOT23 has control 2 and target 3, so if Pauli has X on qubit 2, which is control, after CNOT, it becomes X2 X3</p>
+<p>So after D, we have X2 X3</p>
+<p>Then conjugate by E: CNOT34 has control 3, so X3 on control, after CNOT34, it becomes X3 X4</p>
+<p>So after E, we have X2 X3 X4? X2 and X3 X4, so X2 X3 X4</p>
+<p>Then conjugate by F: CNOT04 acts on 0 and4, so X4 on target, after CNOT04, X4 remains X4, and X2 X3 unchanged, so overall X2 X3 X4</p>
+<p>So E_total_a&rsquo; = X2 X3 X4</p>
+<p>Then applied to |ψ_{ideal}⟩, X2 X3 X4 |ψ_{ideal}⟩ = X2 X3 |ψ_{code}⟩ ⊗ X4 |0⟩ = X2 X3 |ψ_{code}⟩ ⊗ |1⟩, so measure Z4, -1, detected.</p>
+<p>Now, if E1 = Z1 I2, then after conjugation by C: CNOT10, Z1 on control, after CNOT, it becomes Z1</p>
+<p>So after C, Z1</p>
+<p>Then conjugate by D: remains Z1</p>
+<p>Then conjugate by E: remains Z1</p>
+<p>Then conjugate by F: remains Z1</p>
+<p>So E_total_a&rsquo; = Z1</p>
+<p>Then applied to |ψ_{ideal}⟩, Z1 |ψ_{code}⟩ ⊗ |0⟩</p>
+<p>Measure Z4, +1.</p>
+<p>Measure stabilizers: Z1 on qubit 1. Z1 |0000⟩ = |0000⟩, Z1 |1111⟩ = - |1111⟩, so Z1 |ψ_{code}⟩ = |0000⟩ - |1111⟩, which anticommutes with XXXX, so S1 gives -1, detected.</p>
+<p>Similarly, if E1 = I1 Z2, then after conjugation by C: remains I1 Z2, so Z2</p>
+<p>Then conjugate by D: CNOT23, Z2 on control, after CNOT, it becomes Z2</p>
+<p>So after D, Z2</p>
+<p>Then conjugate by E: remains Z2</p>
+<p>Then conjugate by F: remains Z2</p>
+<p>So E_total_a&rsquo; = Z2</p>
+<p>Then applied to |ψ_{ideal}⟩, Z2 |ψ_{code}⟩ ⊗ |0⟩</p>
+<p>Measure Z4, +1.</p>
+<p>Measure stabilizers: Z2 on qubit 2. Similarly, Z2 |0000⟩ = |0000⟩, Z2 |1111⟩ = - |1111⟩, so |0000⟩ - |1111⟩, anticommutes with XXXX, so S1 gives -1, detected.</p>
+<p>Now, what if E1 = Y1 I2 or other Paulis? But from above, for single Pauli on qubit 1 or 2, it seems always detected.</p>
+<p>But is there a case where E1 causes an error that is not detected?</p>
+<p>For example, if E1 = X1 X2, then after conjugation by C: X1 on qubit 1, so becomes X1 X0, and X2 on qubit 2, remains X2, so after C, we have X1 X0 X2</p>
+<p>Then conjugate by D: CNOT23, has control 2, so X2 on control, after CNOT, it becomes X2 X3, so now X1 X0 X2 X3</p>
+<p>But X2 X2 = I, so X1 X0 X3</p>
+<p>After D, we have X1 X0 X3</p>
+<p>Then conjugate by E: CNOT34, has control 3, so X3 on control, after CNOT, it becomes X3 X4, so now X1 X0 X3 X4</p>
+<p>So X1 X0 X4 after canceling X3? X3 X3 = I, so X1 X0 X4</p>
+<p>Then conjugate by F: CNOT04, has control 0, so X0 on control, after CNOT, it becomes X0 X4, and X1 remains, X4 on target, so X4 becomes X4? Let&rsquo;s see: after F, we have X1 X0 X4, so when conjugating by CNOT04, X0 becomes X0 X4, and X4 remains X4, but X0 X4 and X4, so X1 X0 X4 X4 = X1 X0 since X4 X4 = I.</p>
+<p>So after F, E_total_a&rsquo; = X1 X0</p>
+<p>Then applied to |ψ_{ideal}⟩, X1 X0 |ψ_{code}⟩ ⊗ |0⟩</p>
+<p>Measure Z4, +1.</p>
+<p>Measure stabilizers: X1 X0 on qubits 0 and1. Now, what is X1 X0 |ψ_{code}⟩? |ψ_{code}⟩ = |0000⟩ + |1111⟩, so X0 X1 |0000⟩ = |1100⟩? X0 X1 |0000⟩ = |11&gt; on qubits 0,1 and |00&gt; on 2,3, so |1100⟩</p>
+<p>X0 X1 |1111⟩ = |0011⟩? X0 X1 |1111⟩ = |00&gt; on qubits 0,1 and |11&gt; on 2,3, so |0011⟩</p>
+<p>So X0 X1 |ψ_{code}⟩ = |1100⟩ + |0011⟩</p>
+<p>Now, does this commute with S1 and S2?</p>
+<p>S1= XXXX, so XXXX |1100⟩ = since X on each, |1100⟩ -&gt; |0011⟩, and XXXX |0011⟩ -&gt; |1100⟩, so XXXX ( |1100⟩ + |0011⟩ ) = |0011⟩ + |1100⟩ = same, so S1 gives +1.</p>
+<p>S2= ZZZZ, so ZZZZ |1100⟩ = Z on each, |1100⟩ -&gt; since Z|1⟩= -1, Z|1⟩= -1, Z|0⟩=1, Z|0⟩=1, so sign (-1)(-1)(1)(1) =1, so |1100⟩</p>
+<p>ZZZZ |0011⟩ = Z|0⟩=1, Z|0⟩=1, Z|1⟩= -1, Z|1⟩= -1, so sign (1)(1)(-1)(-1)=1, so |0011⟩</p>
+<p>So ZZZZ ( |1100⟩ + |0011⟩ ) = |1100⟩ + |0011⟩, so S2 gives +1.</p>
+<p>So for E1 = X1 X2, the error on qubits 0-3 is X0 X1, which is a logical operator? What is the logical operator for qubit A and B?</p>
+<p>From the problem, logical X_A = XIXI, which is on qubits 0,1,2,3: X on qubit 0? XIXI means X on qubit 0, I on qubit 1, X on qubit 2, I on qubit 3? But from the notation, X_A = XIXI, which might be Pauli on four qubits.</p>
+<p>In the problem, it says: X_A = XIXI, X_B=XXII, Z_A=ZZII, Z_B=ZIZI.</p>
+<p>So for X_A, it is X on qubit 0, I on qubit 1, X on qubit 2, I on qubit 3? But typically, for four qubits, we have positions, but from the operators, XXII might mean X on qubit 0 and 1, I on 2 and 3.</p>
+<p>Similarly, XIXI might mean X on qubit 0, I on qubit 1, X on qubit 2, I on qubit 3.</p>
+<p>But in the state |ψ_{code}⟩ = |0000⟩ + |1111⟩, which is stabilized by XXXX and ZZZZ.</p>
+<p>The logical operators should commute with stabilizers.</p>
+<p>X_A = XIXI: then X_A |0000⟩ = |1010⟩? X on qubit 0 and2, so |1,0,1,0⟩</p>
+<p>X_A |1111⟩ = |0101⟩? |0,1,0,1⟩</p>
+<p>So X_A |ψ_{code}⟩ = |1010⟩ + |0101⟩</p>
+<p>But earlier with X0 X1, we have |1100⟩ + |0011⟩, which is different.</p>
+<p>What is X0 X1? This is X on qubit 0 and X on qubit 1.</p>
+<p>Now, does X0 X1 commute with S1 and S2? S1=XXXX, which commutes with X0 X1 because X0 X1 commutes with X on each qubit? X0 X1 commutes with X2 and X3, so yes, commutes with XXXX.</p>
+<p>S2=ZZZZ, ZZZZ commutes with X0 X1? X0 X1 anticommutes with Z0 and Z1, but since ZZZZ has Z on all, so X0 X1 anticommutes with Z0 and Z1, so it anticommutes with ZZZZ? Let&rsquo;s see: X0 X1 and Z0 Z1 Z2 Z3.</p>
+<p>X0 X1 commutes with Z2 and Z3, but anticommutes with Z0 and Z1, so overall, X0 X1 anticommutes with Z0 Z1 Z2 Z3 because anticommute with Z0 and Z1.</p>
+<p>But from earlier calculation, when we applied ZZZZ to |1100⟩ + |0011⟩, we got the same state, so it seems to commute? But mathematically, X0 X1 should anticommute with Z0 Z1, but since Z2 and Z3 commute, but Z0 Z1 Z2 Z3, so if X0 X1 anticommutes with Z0 and Z1, then X0 X1 Z0 Z1 Z2 Z3 = - Z0 Z1 Z2 Z3 X0 X1, so they anticommute.</p>
+<p>But in the state |1100⟩ + |0011⟩, is it eigenstate of ZZZZ? From earlier, ZZZZ |1100⟩ = |1100⟩ because as calculated, sign positive, and ZZZZ |0011⟩ = |0011⟩, so indeed, ZZZZ has eigenvalue +1 on this state, but X0 X1 has applied, so for the state X0 X1 |ψ_{code}⟩, we have ZZZZ X0 X1 |ψ_{code}⟩ = - X0 X1 ZZZZ |ψ_{code}⟩ = - X0 X1 |ψ_{code}⟩ because ZZZZ |ψ_{code}⟩ = |ψ_{code}⟩, so ZZZZ should have eigenvalue -1 on X0 X1 |ψ_{code}⟩, but from calculation, we have ZZZZ ( |1100⟩ + |0011⟩ ) = |1100⟩ + |0011⟩, so contradiction?</p>
+<p>What&rsquo;s wrong?</p>
+<p>Ah, I see the mistake. When I calculated ZZZZ |1100⟩, I said sign positive, but let&rsquo;s calculate carefully.</p>
+<p>|1100⟩ means qubit 0=1, qubit 1=1, qubit 2=0, qubit 3=0.</p>
+<p>Now ZZZZ |1100⟩ = Z0 Z1 Z2 Z3 |1100⟩ = (Z0|1⟩) (Z1|1⟩) (Z2|0⟩) (Z3|0⟩) = (-1) (-1) (1) (1) |1100⟩ = (1) |1100⟩? (-1)(-1)=1, so yes, sign positive.</p>
+<p>But for the operator, X0 X1 and Z0 Z1 Z2 Z3: since X0 anticommutes with Z0, X1 anticommutes with Z1, and X0 X1 commutes with Z2 and Z3, so indeed, X0 X1 Z0 Z1 Z2 Z3 = - Z0 Z1 Z2 Z3 X0 X1, so they anticommute.</p>
+<p>But for the state |ψ_{code}⟩, ZZZZ |ψ_{code}⟩ = |ψ_{code}⟩, so when we apply X0 X1 to |ψ_{code}⟩, we get a state that should be eigenstate of ZZZZ with eigenvalue -1, because ZZZZ X0 X1 |ψ_{code}⟩ = - X0 X1 ZZZZ |ψ_{code}⟩ = - X0 X1 |ψ_{code}⟩.</p>
+<p>But from calculation, ZZZZ ( X0 X1 |ψ_{code}⟩ ) = ZZZZ ( |1100⟩ + |0011⟩ ) = |1100⟩ + |0011⟩, so it seems eigenvalue +1, but this is only if X0 X1 |ψ_{code}⟩ is indeed |1100⟩ + |0011⟩, but let&rsquo;s verify what is X0 X1 |ψ_{code}⟩.</p>
+<p>|ψ_{code}⟩ = |0000⟩ + |1111⟩</p>
+<p>X0 X1 |0000⟩ = |1100⟩</p>
+<p>X0 X1 |1111⟩ = |0011⟩</p>
+<p>So yes, X0 X1 |ψ_{code}⟩ = |1100⟩ + |0011⟩</p>
+<p>Now, what is ZZZZ |1100⟩? As above, since all Z, the phase is determined by the state: for |1100⟩, the eigenvalue of Z0 is -1 for |1⟩, but when applying Z0 to |1⟩, it gives -1 times |1⟩, so for the state |1100⟩, applying Z0 Z1 Z2 Z3, we get (Z0|1⟩)(Z1|1⟩)(Z2|0⟩)(Z3|0⟩) = (-1)(-1)(1)(1) |1100⟩ = 1 * |1100⟩, so indeed, ZZZZ |1100⟩ = |1100⟩</p>
+<p>Similarly for |0011⟩, ZZZZ |0011⟩ = (Z0|0⟩)(Z1|0⟩)(Z2|1⟩)(Z3|1⟩) = (1)(1)(-1)(-1) |0011⟩ = 1 * |0011⟩</p>
+<p>So ZZZZ ( |1100⟩ + |0011⟩ ) = |1100⟩ + |0011⟩</p>
+<p>But this seems to imply that ZZZZ commutes with X0 X1 on this state, but from operator algebra, they anticommute.</p>
+<p>The resolution is that for the state |ψ_{code}⟩, it is not true that ZZZX X0 X1 |ψ_{code}⟩ = - X0 X1 ZZZZ |ψ_{code}⟩ because although operators anticommute, the state may not be in the eigenspace, but since |ψ_{code}⟩ is eigenvector of ZZZZ with eigenvalue +1, then for any operator that anticommutes with ZZZZ, it will change the eigenvalue, so indeed, should have ZZZZ X0 X1 |ψ_{code}⟩ = - X0 X1 |ψ_{code}⟩, but from calculation, we have +, so there is a mistake in the operator anticommutation.</p>
+<p>Let&rsquo;s check the anticommutation: X0 and Z0 anticommute, so X0 Z0 = - Z0 X0</p>
+<p>Similarly X1 Z1 = - Z1 X1</p>
+<p>Now, X0 X1 and Z0 Z1 Z2 Z3: 
+X0 X1 Z0 Z1 Z2 Z3 = X0 Z0 X1 Z1 Z2 Z3 = (- Z0 X0) (- Z1 X1) Z2 Z3 = ( Z0 X0 Z1 X1) Z2 Z3 = Z0 Z1 X0 X1 Z2 Z3</p>
+<p>Now X0 X1 commutes with Z2 and Z3, so = Z0 Z1 Z2 Z3 X0 X1</p>
+<p>So actually, X0 X1 commutes with Z0 Z1 Z2 Z3! Because the minus signs from X0 Z0 and X1 Z1 cancel each other since there are two anticommutations.</p>
+<p>Similarly, X0 X1 commutes with X0 X1 X2 X3? X0 X1 and X0 X1 X2 X3: X0 X1 commutes with X0 and X1, and with X2 and X3, so yes, commutes.</p>
+<p>So for X0 X1, it commutes with both XXXX and ZZZZ.</p>
+<p>So X0 X1 is in the normalizer of the stabilizer group.</p>
+<p>In fact, from the logical operators, what is the logical operator for the code?</p>
+<p>From the problem, X_B = XXII, which is X on qubit 0 and X on qubit 1, so X0 X1 is exactly the logical X_B operator.</p>
+<p>Similarly, X_A = XIXI, which is X on qubit 0 and X on qubit 2? XIXI might be interpreted as X on qubit 0, I on qubit 1, X on qubit 2, I on qubit 3, so X0 X2.</p>
+<p>In the problem, it says X_A = XIXI, and X_B=XXII, so likely, for four qubits, the string is for qubits 0,1,2,3 in order.</p>
+<p>So XXII means X on qubit 0 and X on qubit 1, I on qubit 2 and I on qubit 3, so X0 X1.</p>
+<p>Similarly, XIXI means X on qubit 0, I on qubit 1, X on qubit 2, I on qubit 3, so X0 X2.</p>
+<p>And Z_A=ZZII means Z on qubit 0 and Z on qubit 1, so Z0 Z1.</p>
+<p>Z_B=ZIZI means Z on qubit 0, I on qubit 1, Z on qubit 2, I on qubit 3, so Z0 Z2.</p>
+<p>So for the error X0 X1, it is the logical X_B operator.</p>
+<p>So for E1 = X1 X2, but from above, we have E_total_a&rsquo; = X0 X1 for the case where E1 = X1 X2? From earlier, for E1 = X1 X2, we got E_total_a&rsquo; = X1 X0, which is X0 X1, so logical X_B.</p>
+<p>So in this case, the error on qubits 0-3 is X_B, so it changes the logical state from |00&gt; to |10&gt; if we apply X_B to |00&gt;, but since |00&gt; is for both logical qubits, applying X_B to |00&gt; gives |10&gt; for logical B.</p>
+<p>But in terms of fidelity, for the state to be correct, we want |00&gt;, so if X_B is applied, it is wrong.</p>
+<p>And since it commutes with stabilizers, it is not detected.</p>
+<p>Also, for ancilla measurement, since E_total_a&rsquo; = X0 X1, which has no operator on qubit 4, so it commutes with Z4, so measure +1.</p>
+<p>So for this error, it is not detected and causes logical error.</p>
+<p>Now, what is the probability for this error?</p>
+<p>E1 = X1 X2, which is a specific Pauli error on qubits 1 and2.</p>
+<p>Since there are 15 possible errors for E1, each with probability p/15.</p>
+<p>Similarly, there might be other errors that cause logical error.</p>
+<p>For example, if E1 = X1 Y2 or other, but let&rsquo;s see what logical operator it becomes.</p>
+<p>From above, for E1 = X1 X2, we got logical X_B.</p>
+<p>Similarly, if E1 = Y1 Y2, then after conjugation, let&rsquo;s see what happens.</p>
+<p>But for single error on E1, only certain errors might cause logical error.</p>
+<p>Since the circuit is symmetric, perhaps for other errors, but from earlier, for errors on E2, E3, E4, E5, they are always detected, so only errors on E1 can cause undetected logical error.</p>
+<p>And for E1, only when it corresponds to a logical operator after propagation.</p>
+<p>From the propagation, for E1 on qubits 1 and2, after conjugation, it becomes an operator on qubits 0-3.</p>
+<p>From the example, for E1 = X1 X2, it became X0 X1, which is X_B.</p>
+<p>Similarly, if E1 = Z1 Z2, then after conjugation by C: Z1 on qubit 1, after CNOT10, since Z1 on control, it becomes Z1, and Z2 on qubit 2, remains Z2, so after C, Z1 Z2</p>
+<p>Then conjugate by D: CNOT23, has control 2, so Z2 on control, after CNOT, it becomes Z2, so still Z1 Z2</p>
+<p>Then conjugate by E: remains Z1 Z2</p>
+<p>Then conjugate by F: remains Z1 Z2</p>
+<p>So E_total_a&rsquo; = Z1 Z2</p>
+<p>Now, what is Z1 Z2 on the code? From above, Z1 Z2 is not a logical operator? Logical operators are Z0 Z1 for Z_A and Z0 Z2 for Z_B.</p>
+<p>Z1 Z2 might be a stabilizer or something.</p>
+<p>Check if Z1 Z2 commutes with stabilizers.</p>
+<p>S1=XXXX, commutes with Z1 Z2? X1 anticommutes with Z1, X2 anticommutes with Z2, so X1 X2 anticommutes with Z1 Z2, but S1 is X0 X1 X2 X3, so X0 and X3 commute with Z1 Z2, so overall, S1 commutes with Z1 Z2? Let&rsquo;s see: X0 X1 X2 X3 and Z1 Z2.</p>
+<p>X1 anticommutes with Z1, X2 anticommutes with Z2, so X1 X2 anticommutes with Z1 Z2, but since X0 and X3 commute, so S1 anticommutes with Z1 Z2? No: the operator S1 = X0 X1 X2 X3, and Z1 Z2.</p>
+<p>X0 commutes with Z1 and Z2, so X0 Z1 Z2 = Z1 Z2 X0</p>
+<p>X1 anticommutes with Z1, so X1 Z1 = - Z1 X1, similarly X2 Z2 = - Z2 X2</p>
+<p>X3 commutes with Z1 and Z2.</p>
+<p>So S1 Z1 Z2 = X0 X1 X2 X3 Z1 Z2 = X0 X1 Z1 X2 Z2 X3 = X0 (- Z1 X1) (- Z2 X2) X3 = X0 Z1 X1 Z2 X2 X3 = Z1 Z2 X0 X1 X2 X3 = Z1 Z2 S1</p>
+<p>So actually, S1 commutes with Z1 Z2.</p>
+<p>Similarly, S2=ZZZZ, which is Z0 Z1 Z2 Z3, and Z1 Z2, so obviously commutes.</p>
+<p>So Z1 Z2 commutes with both stabilizers, so it is in the normalizer.</p>
+<p>But is it a stabilizer? The stabilizer group has XXXX and ZZZZ, so products like XXXX times ZZZZ etc., but Z1 Z2 is not a product of XXXX and ZZZZ because XXXX has X on all, ZZZZ has Z on all, so their products have either X or Z on each qubit, but Z1 Z2 has Z on qubit 1 and2, and I on others, which is not equal to (XXXX)^a (ZZZZ)^b for any a,b, since for example if a=0,b=1, ZZZZ, which is Z on all, not only on 1 and2.</p>
+<p>So Z1 Z2 is not a stabilizer, so it must be a logical operator.</p>
+<p>What logical operator? Since it commutes with stabilizers, it should be a logical operator.</p>
+<p>From the logical operators, we have Z_A = ZZII = Z0 Z1, and Z_B = ZIZI = Z0 Z2.</p>
+<p>So Z1 Z2 is not one of them, but it could be a product of logical operators.</p>
+<p>For example, Z1 Z2 = (Z0 Z1) (Z0 Z2) since Z0 Z0 = I, so Z1 Z2 = Z_A Z_B.</p>
+<p>So applying Z1 Z2 to |00&gt; would give something, but since |00&gt; is eigenstate of Z_A and Z_B with eigenvalue +1, so Z_A Z_B |00&gt; = |00&gt;, so it does not change the state.</p>
+<p>So for E1 = Z1 Z2, the error on qubits 0-3 is Z1 Z2, which is Z_A Z_B, so it acts trivially on the logical state? Since |00&gt; is stabilized by Z_A and Z_B, so Z_A |00&gt; = |00&gt;, Z_B |00&gt; = |00&gt;, so Z_A Z_B |00&gt; = |00&gt;, so no change.</p>
+<p>So for this error, the logical state is correct.</p>
+<p>And since it commutes with stabilizers, it is not detected.</p>
+<p>But for fidelity, it is correct, so no problem.</p>
+<p>Similarly, other errors might act trivially.</p>
+<p>For example, if E1 = I, no error.</p>
+<p>So for undetected error that causes logical error, we need that the error on qubits 0-3 is a logical operator that changes the state, like X_B or X_A etc.</p>
+<p>From above, for E1 = X1 X2, we have X_B.</p>
+<p>Similarly, if E1 = X1 Y2, let&rsquo;s see what it becomes.</p>
+<p>But perhaps for this problem, since we want logical state fidelity, and for single error on E1, only certain errors cause logical error.</p>
+<p>But from the propagation, the overall error depends on E1.</p>
+<p>Now, for E1, the probability of error is p, and there are 15 possible errors.</p>
+<p>Some of them may cause logical error after propagation.</p>
+<p>But since we post-select, we need the probability that the state is correct given no detection.</p>
+<p>But for that, we need to find for each error pattern, whether it is detected or not, and what is the effect.</p>
+<p>But since p is small, perhaps we can compute to first order.</p>
+<p>But from above, for single error on E1, if it is not detected, it may cause logical error or not.</p>
+<p>From the example, for E1 = X1 X2, it causes logical error.</p>
+<p>Similarly, if E1 = Y1 Y2, then after conjugation by C: Y1 on qubit 1, after CNOT10, since Y1 on control, after CNOT, it becomes Y1 X0? Let&rsquo;s recall: for CNOT, if Pauli on control, X_c becomes X_c X_t, Z_c becomes Z_c, Y_c becomes Y_c X_t? Because Y = i X Z, so CNOT Y_c CNOT = i CNOT X_c Z_c CNOT = i (X_c X_t) Z_c = i X_c Z_c X_t = Y_c X_t</p>
+<p>Similarly, if on target, etc.</p>
+<p>So for Y1 on qubit 1, after CNOT10, it becomes Y1 X0</p>
+<p>And Y2 on qubit 2, remains Y2</p>
+<p>So after C, we have Y1 X0 Y2</p>
+<p>Then conjugate by D: CNOT23, has control 2, so Y2 on control, after CNOT, it becomes Y2 X3</p>
+<p>So after D, we have Y1 X0 Y2 X3</p>
+<p>Then conjugate by E: CNOT34, has control 3, so X3 on control, after CNOT, it becomes X3 X4</p>
+<p>So after E, we have Y1 X0 Y2 X3 X4</p>
+<p>Then conjugate by F: CNOT04, has control 0, so X0 on control, after CNOT, it becomes X0 X4</p>
+<p>And Y1 remains, Y2 remains, X3 remains, X4 on target, so X4 becomes X4? So after F, we have Y1 X0 X4 Y2 X3 X4? Let&rsquo;s see: from after E, we have Y1 X0 Y2 X3 X4</p>
+<p>Now CNOT04: X0 becomes X0 X4</p>
+<p>X4 remains X4</p>
+<p>Y1 remains because not involved</p>
+<p>Y2 remains</p>
+<p>X3 remains</p>
+<p>So overall, Y1 (X0 X4) Y2 X3 X4 = Y1 X0 Y2 X3 X4 X4 = Y1 X0 Y2 X3 since X4 X4 = I</p>
+<p>So E_total_a&rsquo; = Y1 X0 Y2 X3</p>
+<p>Now, this on qubits 0-3 is X0 Y1 Y2 X3? But Y1 Y2 X3, etc.</p>
+<p>This may not be a logical operator, and it may anticommute with stabilizers, so likely detected.</p>
+<p>But for simplicity, perhaps only errors that are products of X or Y on qubits 1 and2 might give logical operators.</p>
+<p>From above, for E1 = X1 X2, we got X0 X1</p>
+<p>Similarly, if E1 = X1 I2, we got detected, etc.</p>
+<p>So for E1 to give undetected logical error, it needs to become a logical operator on qubits 0-3.</p>
+<p>From the propagation, the conjugation through C,D,E,F will map Paulis on qubits 1,2 to Paulis on qubits 0-3.</p>
+<p>Since the logical operators are X0 X1 for X_B, X0 X2 for X_A, etc., so for example, to get X0 X1, from above, we need that after propagation, we have X0 X1.</p>
+<p>From the example, with E1 = X1 X2, we got X0 X1.</p>
+<p>Similarly, if E1 = X1 X2, it worked.</p>
+<p>What if E1 = X1 alone? But E1 is on two qubits, so it must be a two-qubit Pauli, so for example, X1 I2, but we saw that gives X1 X0 X4 after propagation, which has X4, so detected.</p>
+<p>So only when the error on E1 has both qubits involved in a way that the X4 terms cancel.</p>
+<p>From above, for E1 = X1 X2, the X4 terms canceled because from earlier, after E, we had X2 X3 X4, but then after F, X4 was canceled with another X4? In the calculation, for E1 = X1 X2, after E, we had X2 X3 X4, but after F, we got X1 X0, so indeed canceled.</p>
+<p>Similarly, if E1 = Y1 Y2, we got Y1 X0 Y2 X3, which may not be logical.</p>
+<p>But let&rsquo;s list all E1 that give no operator on qubit 4 and give a logical operator on 0-3.</p>
+<p>From the propagation, the only way to have no operator on qubit 4 is that after conjugation by E and F, the Pauli on qubit 4 is I.</p>
+<p>From the gates, conjugation by E=CNOT34 introduces X4 if there is X on qubit 3, and conjugation by F=CNOT04 introduces X4 if there is X on qubit 0, but can cancel if there are even number of X4.</p>
+<p>But from the example, for E1 = X1 X2, we ended up with no X4.</p>
+<p>Now, for logical error, we need that the on 0-3 is not stabilizer.</p>
+<p>So for example, if E1 = X1 X2, we have X_B.</p>
+<p>Similarly, if E1 = something that gives X_A = X0 X2.</p>
+<p>So what E1 gives X0 X2?</p>
+<p>Suppose we want after propagation to have X0 X2.</p>
+<p>From the conjugation, let&rsquo;s see what E1 gives X0 X2.</p>
+<p>Perhaps from symmetry, if E1 = X2 alone, but E1 must be on both qubits, so like X2 I1, but from earlier, for E1 = I1 X2, we got after propagation X2 X3 X4, which has X4, so detected.</p>
+<p>So only specific combinations.</p>
+<p>Another example: if E1 = Z1 X2, then after conjugation by C: Z1 on qubit 1, after CNOT10, becomes Z1, and X2 on qubit 2, remains X2, so after C, Z1 X2</p>
+<p>Then conjugate by D: CNOT23, has control 2, so X2 on control, after CNOT, it becomes X2 X3, so after D, Z1 X2 X3</p>
+<p>Then conjugate by E: CNOT34, has control 3, so X3 on control, after CNOT, it becomes X3 X4, so after E, Z1 X2 X3 X4</p>
+<p>Then conjugate by F: CNOT04, has control 0, but no X0, so Z1 remains, X2 remains, X3 remains, X4 on target, so X4 remains, so after F, Z1 X2 X3 X4</p>
+<p>So E_total_a&rsquo; = Z1 X2 X3 X4</p>
+<p>Then applied to |ψ_{ideal}⟩, this has X4, so measure Z4, -1, detected.</p>
+<p>So not good.</p>
+<p>From this, it seems that only when E1 has both X on qubit 1 and X on qubit 2, we got a logical operator without X4.</p>
+<p>Similarly, if E1 = X1 X2, we got X0 X1.</p>
+<p>What if E1 = X1 Y2? Then from earlier, we got Y1 X0 Y2 X3, which has no X4, but let&rsquo;s see what it is on 0-3: Y1 X0 Y2 X3, which is X0 Y1 Y2 X3.</p>
+<p>Now, is this a logical operator? It commutes with stabilizers? likely not, because it may anticommute with some.</p>
+<p>But for example, if we apply to |ψ_{code}⟩, it might change it, but let&rsquo;s see if it is in the normalizer.</p>
+<p>But from operator, X0 Y1 Y2 X3, with S1= X0 X1 X2 X3, does it commute? X0 commute with X0, Y1 anticommute with X1, Y2 anticommute with X2, X3 commute with X3, so overall, anticommute with X1 X2, so anticommute with S1, so detected.</p>
+<p>So for E1 = X1 Y2, it is detected.</p>
+<p>Similarly, other errors are detected.</p>
+<p>So for single error on E1, only when E1 = X1 X2, it causes undetected logical error.</p>
+<p>Similarly, perhaps E1 = Y1 Y2 might give something, but from earlier calculation, we got Y1 X0 Y2 X3, which anticommutes with S1, so detected.</p>
+<p>So only E1 = X1 X2 gives undetected logical error.</p>
+<p>But is that all? What about E1 = X1 X2 but with signs? But Pauli errors can have signs, but since we care about the operator, the sign might affect the state, but for logical state, if we apply X_B, it changes |0&gt; to |1&gt; for B, so fidelity decreases.</p>
+<p>But in terms of probability, for E1, the error X1 X2 has probability p/15.</p>
+<p>But are there other errors on E1 that cause logical error? For example, if E1 = something that gives X_A = X0 X2.</p>
+<p>So what E1 gives X0 X2?</p>
+<p>Suppose after propagation, we have X0 X2.</p>
+<p>From the conjugation, the operators on qubit 0 come from conjugation of CNOT10, which requires X on qubit 1.</p>
+<p>Similarly, operator on qubit 2 comes from qubit 2 itself.</p>
+<p>So if we want X0 X2, then from propagation, when we have X on qubit 1, it becomes X0 X1 after CNOT10, so to have X0, we need to cancel X1, so perhaps if we have Z on qubit 1 or something.</p>
+<p>Suppose E1 = X1 I2, then after C, we have X1 X0, so X0 X1</p>
+<p>Then after D, remains X0 X1</p>
+<p>After E, remains X0 X1</p>
+<p>After F, for X0, after CNOT04, it becomes X0 X4, so after F, X0 X4 X1</p>
+<p>So X1 X0 X4, which has X4, so detected.</p>
+<p>So to avoid X4, we need that after F, the X0 is not present or canceled.</p>
+<p>From earlier, for E1 = X1 X2, after C, we have X1 X0 X2</p>
+<p>After D, X1 X0 X2 X3? From earlier calculation: for E1 = X1 X2, after C: X1 on qubit 1 becomes X1 X0, and X2 on qubit 2 remains X2, so X1 X0 X2</p>
+<p>Then after D: CNOT23, X2 on control, becomes X2 X3, so now X1 X0 X2 X3</p>
+<p>But X2 X2 = I, so X1 X0 X3</p>
+<p>After D, we have X1 X0 X3</p>
+<p>Then after E: CNOT34, X3 on control, becomes X3 X4, so X1 X0 X3 X4</p>
+<p>So X1 X0 X4 after canceling X3? X3 X3 = I, so X1 X0 X4</p>
+<p>Then after F: CNOT04, X0 on control, becomes X0 X4, and X1 remains, X4 on target, so X4 becomes X4, so X1 X0 X4 X4 = X1 X0 since X4 X4 = I.</p>
+<p>So indeed X0 X1.</p>
+<p>So for this to work, we needed the X2 from E1 to later cancel with the X2 from conjugation, but in this case, the X2 was used to introduce X3, which then introduced X4, but then X4 was canceled by another X4 from F? In the process, after E, we have X4, but after F, we have another X4 from X0, which canceled with the existing X4.</p>
+<p>So for having X0 X2, perhaps we need something similar.</p>
+<p>Suppose E1 = X1 Z2, then after C: X1 becomes X1 X0, Z2 remains, so after C, X1 X0 Z2</p>
+<p>Then after D: CNOT23, Z2 on control, after CNOT, it becomes Z2, so still X1 X0 Z2</p>
+<p>Then after E: remains X1 X0 Z2</p>
+<p>Then after F: CNOT04, X0 on control, becomes X0 X4, so after F, X1 X0 X4 Z2</p>
+<p>So has X4, so detected.</p>
+<p>Not good.</p>
+<p>Suppose E1 = Z1 X2, then after C: Z1 becomes Z1, X2 remains, so Z1 X2</p>
+<p>After D: X2 on control, becomes X2 X3, so Z1 X2 X3</p>
+<p>After E: X3 on control, becomes X3 X4, so Z1 X2 X3 X4</p>
+<p>After F: remains Z1 X2 X3 X4, has X4, detected.</p>
+<p>So indeed, only when E1 has both X1 and X2, we get no X4 and logical operator.</p>
+<p>But for E1 = X1 X2, we got X0 X1, which is X_B.</p>
+<p>What if E1 = Y1 Y2? Then after C: Y1 becomes Y1 X0, Y2 remains, so Y1 X0 Y2</p>
+<p>After D: Y2 on control, becomes Y2 X3, so Y1 X0 Y2 X3</p>
+<p>After E: X3 on control, becomes X3 X4, so Y1 X0 Y2 X3 X4</p>
+<p>After F: X0 on control, becomes X0 X4, so Y1 X0 X4 Y2 X3 X4 = Y1 X0 Y2 X3 since X4 X4 = I</p>
+<p>So Y1 X0 Y2 X3</p>
+<p>Now, this on qubits 0-3 is X0 Y1 Y2 X3</p>
+<p>Now, does this commute with S1? S1= X0 X1 X2 X3</p>
+<p>X0 commute with X0, Y1 anticommute with X1, Y2 anticommute with X2, X3 commute with X3, so overall, anticommute with X1 X2, so anticommute with S1, so detected.</p>
+<p>So not undetected.</p>
+<p>Similarly, other errors are detected.</p>
+<p>So for single error on E1, only E1 = X1 X2 causes undetected logical error.</p>
+<p>Similarly, perhaps E1 = X1 X2 with different sign, but since Pauli, the sign might not affect the logical state significantly for fidelity, but for the state, if we apply X_B, it changes the state, so for fidelity, it matters.</p>
+<p>But in terms of probability, for each error of type X1 X2, it has probability p/15.</p>
+<p>But X1 X2 is one of the 15 errors, so probability p/15.</p>
+<p>But are there other errors on E1 that cause logical error? For example, if E1 = something that gives X_A = X0 X2.</p>
+<p>But from above, it seems not.</p>
+<p>So for single error, only with probability P(E1 = X1 X2) = p/15, we have undetected logical error.</p>
+<p>For no error, fidelity is 1.</p>
+<p>For multiple errors, since p is small, we can neglect higher order terms.</p>
+<p>So the probability of logical error after post-selection is approximately p/15 for single error on E1.</p>
+<p>But this is the probability that an error occurs and is not detected and causes logical error.</p>
+<p>But for fidelity, since we post-select, the fidelity F is the probability that the state is correct given no detection.</p>
+<p>The probability of no detection is the probability that no error occurs or errors occur but are not detected.</p>
+<p>For no error, probability (1-p)^5 ≈ 1-5p for small p.</p>
+<p>For errors that are not detected, like for E1 = X1 X2, probability p/15, and it is not detected, so contributes to no detection but with error.</p>
+<p>Also, for other errors that are not detected but do not cause logical error, like E1 = Z1 Z2, which has probability p/15, and it is not detected, and logical state is correct.</p>
+<p>Similarly, there might be other errors.</p>
+<p>For example, if E1 = I1 I2, but that is no error.</p>
+<p>So for E1, the errors that are not detected are those that after propagation, have no X or Y on qubit 4, and commute with stabilizers.</p>
+<p>From above, for E1 = X1 X2, it is not detected and causes logical error.</p>
+<p>For E1 = Z1 Z2, it is not detected and does not cause logical error.</p>
+<p>What about E1 = X1 Z2? From earlier, after propagation, we have X1 X0 X4 Z2 for E1 = X1 Z2? Let&rsquo;s calculate quickly.</p>
+<p>E1 = X1 Z2</p>
+<p>After C: X1 becomes X1 X0, Z2 remains, so X1 X0 Z2</p>
+<p>After D: CNOT23, Z2 on control, becomes Z2, so X1 X0 Z2</p>
+<p>After E: remains X1 X0 Z2</p>
+<p>After F: CNOT04, X0 on control, becomes X0 X4, so X1 X0 X4 Z</p>
+                      </div>
+                    </details>
+</article>
+
+
+<article class="message role-user">
+    <div class="meta">
+        <span class="badge">User</span>
+        <span class="idx">#3</span>
+    </div>
+    <div class="content markdown-body"><p>Populate your final answer into the code template provided below. This step is purely for formatting/display purposes. No additional reasoning or derivation should be performed. Do not import any modules or packages beyond what is provided in the template.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">answer</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the expression of the logical state fidelity of the final 2-qubit logical state</span>
+<span class="sd">    at the end of the circuit as a function of two-qubit gate error rate $p$.</span>
+
+<span class="sd">    Inputs</span>
+<span class="sd">    ----------</span>
+<span class="sd">    p: sympy.Symbol, two-qubit gate error rate, $p$</span>
+
+<span class="sd">    Outputs</span>
+<span class="sd">    ----------</span>
+<span class="sd">    F_logical: sympy.Expr, logical state fidelity of the final 2-qubit logical state</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># ------------------ FILL IN YOUR RESULTS BELOW ------------------</span>
+    <span class="n">F_logical</span> <span class="o">=</span> <span class="o">...</span>  <span class="c1"># a SymPy expression of inputs</span>
+    <span class="c1"># ---------------------------------------------------------------</span>
+
+    <span class="k">return</span> <span class="n">F_logical</span>
+</code></pre></div></div>
+</article>
+
+
+<article class="message role-assistant">
+    <div class="meta">
+        <span class="badge">Assistant</span>
+        <span class="idx">#4</span>
+    </div>
+    
+                    <details class="reasoning">
+                      <summary>Reasoning <span class="tag">(model)</span></summary>
+                      <div class="markdown-body reasoning-body">
+                        <p>First, I need to find the logical state fidelity for the |00⟩_{AB} state preparation circuit. From the problem, we&rsquo;re post-selecting on the ancilla measurement being |0⟩ and on no error detected by the stabilizers. The fidelity is the probability that the state is correct given no detection.</p>
+<p>From my reasoning, I concluded that only errors on the first CNOT gate (E1) can cause undetected logical errors, and specifically, only when E1 is the Pauli error X1 X2. The probability of this error is p/15, since there are 15 possible non-identity errors, each with probability p/15.</p>
+<p>For no error, the probability is (1-p)^5 for all five CNOT gates having no error. But since p is small, I should consider the leading order terms.</p>
+<p>The logical fidelity F_logical is the probability that the state is correct given no detection. That means:</p>
+<p>F_logical = P(correct and no detection) / P(no detection)</p>
+<p>P(no detection) includes cases where there is no error or errors that are not detected and don&rsquo;t change the logical state.</p>
+<p>From my earlier thought:</p>
+<ul>
+<li>
+<p>No error: probability approximately (1-p)^5 ≈ 1 - 5p for small p.</p>
+</li>
+<li>
+<p>Undetected errors that cause logical error: only E1 = X1 X2 with probability p/15.</p>
+</li>
+<li>
+<p>Undetected errors that do not cause logical error: for example, E1 = Z1 Z2 with probability p/15. But are there others?</p>
+</li>
+</ul>
+<p>I need to find all error patterns that are not detected and whether they affect the logical state.</p>
+<p>In my reasoning, I considered only single errors. For multiple errors, since p is small, I can neglect higher order terms, so I&rsquo;ll stick to first order in p.</p>
+<p>So, for single errors:</p>
+<ul>
+<li>Error on E1: only X1 X2 causes undetected logical error. Other errors on E1 are either detected or not detected but don&rsquo;t change logic (like Z1 Z2).</li>
+</ul>
+<p>But I need to be careful. From the propagation, for E1 = Z1 Z2, the overall error is Z1 Z2 on qubits 0-3, which is Z_A Z_B, and since Z_A Z_B |00⟩ = |00⟩, it doesn&rsquo;t change the logical state. So for E1 = Z1 Z2, it is not detected and the state is correct.</p>
+<p>Similarly, are there other errors on E1 that are not detected and leave the state correct? For example, if E1 is identity, but that&rsquo;s no error. Or other products that act as stabilizers.</p>
+<p>The stabilizers are XXXX and ZZZZ. So if the error on qubits 0-3 is a stabilizer, it doesn&rsquo;t change the state. For example, if the error is XXXX or ZZZZ or their products.</p>
+<p>But from the propagation, for E1 errors, what errors lead to stabilizers?</p>
+<p>For instance, if E1 = X1 X2, we got X_B, which is not a stabilizer.</p>
+<p>If E1 = Z1 Z2, we got Z_A Z_B, which is not a stabilizer but acts trivially on |00⟩.</p>
+<p>Now, for E1, the probability of no error is 1-p, but since E1 is one gate, the probability that E1 has no error is 1-p, but for the whole circuit, no error means all gates have no error, so probability (1-p)^5.</p>
+<p>But for undetected errors, we have cases where errors occur but are not detected.</p>
+<p>In first order, only single errors matter.</p>
+<p>So, let&rsquo;s list all single error events that are not detected.</p>
+<p>From my earlier analysis:</p>
+<ul>
+<li>
+<p>Errors on E2, E3, E4, E5 are always detected, so they don&rsquo;t contribute to undetected events.</p>
+</li>
+<li>
+<p>Only errors on E1 can be undetected.</p>
+</li>
+</ul>
+<p>For E1, there are 15 possible errors. I need to find which ones are not detected.</p>
+<p>From propagation:</p>
+<ul>
+<li>
+<p>E1 = X1 X2: leads to X_B on logical, so logical error.</p>
+</li>
+<li>
+<p>E1 = Z1 Z2: leads to Z_A Z_B on logical, which acts as identity on |00⟩, so no logical error.</p>
+</li>
+<li>
+<p>Other errors: for example, E1 = X1 I2: leads to X1 X0 X4, which has X4, so detected.</p>
+</li>
+</ul>
+<p>E1 = I1 X2: leads to X2 X3 X4, detected.</p>
+<p>E1 = Y1 I2: similarly, should have Y1 X0 X4 or something, detected.</p>
+<p>E1 = I1 Y2: detected.</p>
+<p>E1 = X1 Y2: leads to X0 Y1 Y2 X3, which anticommutes with S1, detected.</p>
+<p>E1 = Y1 X2: likely detected.</p>
+<p>E1 = Y1 Y2: leads to X0 Y1 Y2 X3, anticommutes with S1, detected.</p>
+<p>E1 = Z1 I2: leads to Z1, which on logical, Z1 |ψ_code⟩ = |0000⟩ - |1111⟩, which anticommutes with XXXX, so detected.</p>
+<p>E1 = I1 Z2: leads to Z2, similarly detected.</p>
+<p>E1 = X1 Z2: leads to X1 X0 X4 Z2, has X4, detected.</p>
+<p>E1 = Z1 X2: leads to Z1 X2 X3 X4, has X4, detected.</p>
+<p>E1 = Y1 Z2: likely has X4 or anticommutes, detected.</p>
+<p>E1 = Z1 Y2: detected.</p>
+<p>So, only E1 = X1 X2 and E1 = Z1 Z2 are not detected? But what about other errors like E1 = -X1 X2 or something? But since we&rsquo;re dealing with Pauli operators, the sign might matter, but for the error channel, the Pauli errors are applied with equal probability, and the sign might affect the state, but in terms of measurement, the sign might not affect the detection because stabilizers measure eigenvalues, and for Pauli errors, the commutation determines detection, not the sign.</p>
+<p>In the depolarizing channel, the errors are from the set of Pauli matrices, which include signs? Typically, Pauli errors are considered without signs because they are Hermitian and unitary, and the error probability includes the operator without sign dependence. In quantum error correction, when we say Pauli error, we usually mean the operator like X, Y, Z, and Y includes i, but for error detection, the sign might not affect the commutation with stabilizers because stabilizers are also Pauli, and commutation is about anticommutation relations, which are sign-independent for Pauli groups. For example, X and -X both anticommute with Z in the same way. But when applied to a state, -X |0⟩ = -|1⟩, which is different from |1⟩, but for the stabilizer measurement, since we measure the eigenvalue, if we have a state -|ψ⟩, it will have the same eigenvalue as |ψ⟩ for any operator that commutes with the sign? No.</p>
+<p>Actually, for stabilizer measurement, we measure the operator and get +1 or -1. If an error applies a phase, it might affect the state, but since the stabilizer measurement is projective, the outcome depends on whether the error commutes or anticommutes with the stabilizer, regardless of the phase. For example, if a stabilizer S has S|ψ⟩ = |ψ⟩, and we apply an error E that anticommutes with S, then S E|ψ⟩ = - E S|ψ⟩ = - E|ψ⟩, so the measurement will give -1. If E commutes with S, then S E|ψ⟩ = E S|ψ⟩ = E|ψ⟩, so measurement gives +1. The phase of E doesn&rsquo;t affect this commutation relation because the phase commutes with everything.</p>
+<p>So, for detection, only the Pauli type matters, not the overall phase. Therefore, in the error channel, when we say Pauli error, we can ignore the signs for detection purposes. So, for E1, the errors are like X1 I2, I1 X2, X1 X2, etc., without signs.</p>
+<p>So, for E1, there are 15 non-identity errors, each with probability p/15.</p>
+<p>From above, only two errors are not detected: X1 X2 and Z1 Z2.</p>
+<p>For X1 X2, it causes logical error (applies X_B).</p>
+<p>For Z1 Z2, it does not cause logical error because Z_A Z_B |00⟩ = |00⟩.</p>
+<p>Now, are there any other errors on E1 that are not detected? For example, what about E1 = Y1 Y2? From earlier, it leads to X0 Y1 Y2 X3, which anticommutes with S1, so it should be detected. Similarly, others are detected.</p>
+<p>So, only E1 = X1 X2 and E1 = Z1 Z2 are not detected.</p>
+<p>Therefore, for single errors on E1, we have:</p>
+<ul>
+<li>
+<p>Probability of E1 = X1 X2: p/15, undetected, logical error.</p>
+</li>
+<li>
+<p>Probability of E1 = Z1 Z2: p/15, undetected, no logical error.</p>
+</li>
+<li>
+<p>Other errors on E1: detected, so not included in post-selection.</p>
+</li>
+</ul>
+<p>Now, for no error on all gates: probability (1-p)^5.</p>
+<p>But since we are post-selecting on no detection, we need to find P(no detection).</p>
+<p>P(no detection) = P(no error) + P(undetected errors)</p>
+<p>In first order, P(no error) ≈ 1 - 5p</p>
+<p>P(undetected errors) = P(E1 = X1 X2) + P(E1 = Z1 Z2) = 2 * (p/15) = 2p/15</p>
+<p>But this is only for single errors on E1. What about errors on other gates? From earlier, errors on E2, E3, E4, E5 are always detected, so they don&rsquo;t contribute to undetected events. Also, multiple errors are higher order, so neglect.</p>
+<p>So P(no detection) ≈ (1 - 5p) + 2p/15 = 1 - 5p + 2p/15 = 1 - (75p/15 - 2p/15) = 1 - 73p/15</p>
+<p>Now, P(correct and no detection) = P(no error) + P(undetected errors that don&rsquo;t change logic) = (1-p)^5 + P(E1 = Z1 Z2) ≈ 1 - 5p + p/15</p>
+<p>Because P(E1 = Z1 Z2) = p/15</p>
+<p>So P(correct and no detection) ≈ 1 - 5p + p/15 = 1 - (75p/15 - p/15) = 1 - 74p/15</p>
+<p>Then fidelity F = P(correct | no detection) = P(correct and no detection) / P(no detection) ≈ [1 - 74p/15] / [1 - 73p/15]</p>
+<p>For small p, we can approximate this as F ≈ 1 - (74p/15 - 73p/15) = 1 - p/15</p>
+<p>Because [1 - a] / [1 - b] ≈ 1 - (a - b) for small a,b.</p>
+<p>So F ≈ 1 - p/15</p>
+<p>But is this exact? Since we have higher order terms, but for the expression, we might need to write it in terms of p.</p>
+<p>The problem asks for the logical state fidelity as a function of p, and since no precision is specified, we might need to provide the exact expression or approximate.</p>
+<p>In the output, we should probably provide the expression to first order, as higher orders are messy.</p>
+<p>But let&rsquo;s confirm if there are other undetected errors.</p>
+<p>What about no error on E1 but errors on other gates? But from earlier, errors on E2, E3, E4, E5 are always detected, so they never contribute to undetected events. So only E1 errors can be undetected.</p>
+<p>And for E1, only X1 X2 and Z1 Z2 are undetected.</p>
+<p>So, in first order, F = 1 - p/15</p>
+<p>But let&rsquo;s write the exact fidelity.</p>
+<p>P(no detection) = P(no error) + P(E1=X1 X2) + P(E1=Z1 Z2) + higher order terms</p>
+<p>P(no error) = (1-p)^5</p>
+<p>P(E1=X1 X2) = (1-p)^4 * (p/15)  because other gates have no error, but since we are considering single error, for exact, we need to include the probability that only E1 has error and others have no error.</p>
+<p>Similarly for P(E1=Z1 Z2) = (1-p)^4 * (p/15)</p>
+<p>But in the post-selection, when we have no detection, it includes cases where there are multiple errors that cancel or something, but since p is small, we neglect multiple errors.</p>
+<p>For simplicity, in the context of this problem, we might assume that only single errors are considered, or we need to include the probabilities properly.</p>
+<p>The depolarizing error is after each CNOT gate, and errors are independent.</p>
+<p>So, for the circuit, the probability of a particular set of errors is product of probabilities.</p>
+<p>For no detection, we need the state to have no error detected, which means that the overall error E_total_a&rsquo; must commute with Z4 and with S1 and S2, i.e., must be in the normalizer of the stabilizer group including Z4.</p>
+<p>From earlier, E_total_a&rsquo; must have no X or Y on qubit 4, and on qubits 0-3, it must be in the normalizer, which for this code is the stabilizer group plus the logical operators.</p>
+<p>But for the logical state to be correct, it must be that on qubits 0-3, the error is in the stabilizer group.</p>
+<p>From the propagation, for single errors, only when E1 is Z1 Z2, the error is in the normalizer but not stabilizer, but it acts trivially on |00⟩.</p>
+<p>For multiple errors, it might be possible to have undetected errors, but for small p, we neglect.</p>
+<p>So, for practical purposes, the logical fidelity to first order is 1 - p/15.</p>
+<p>But let&rsquo;s see the answer format; we need to return a SymPy expression.</p>
+<p>Perhaps we can write F = 1 - p/15</p>
+<p>But is this exact? No, because there are higher order terms.</p>
+<p>But the problem might expect the first-order expression.</p>
+<p>Since the problem says &ldquo;what is the logical state fidelity&rdquo;, and no precision, but in the output, it says &ldquo;retain at least 12 significant digits&rdquo;, but for expression, we need symbolic.</p>
+<p>Perhaps we need to include the exact probability.</p>
+<p>But from above, P(no detection) = (1-p)^5 + 2 * [ (1-p)^4 * (p/15) ] + &hellip; but this is only for single errors on E1, but for multiple errors, there might be cases where errors on other gates cancel, but from earlier, errors on E2,E3,E4,E5 are always detected when alone, so if there are multiple errors, they might still be detected or not, but it&rsquo;s complicated.</p>
+<p>For example, if there is an error on E5 and error on E1, it might be detected because E5 error is always detected alone, so with additional error, it might still be detected.</p>
+<p>Similarly, so perhaps in first order, only single errors on E1 contribute to undetected events.</p>
+<p>So, approximately, P(no detection) = (1-p)^5 + 2 * (p/15) * (1-p)^4</p>
+<p>P(correct and no detection) = (1-p)^5 + 1 * (p/15) * (1-p)^4  because only Z1 Z2 doesn&rsquo;t change logic.</p>
+<p>Then F = [ (1-p)^5 + (p/15)(1-p)^4 ] / [ (1-p)^5 + 2*(p/15)(1-p)^4 ] = [ (1-p) + p/15 ] / [ (1-p) + 2p/15 ] after dividing by (1-p)^4</p>
+<p>So F = [1 - p + p/15] / [1 - p + 2p/15] = [1 - (14p/15)] / [1 - (13p/15)] = [1 - 14p/15] / [1 - 13p/15]</p>
+<p>For small p, this is approximately 1 - p/15</p>
+<p>But let&rsquo;s simplify.</p>
+<p>F = (15 - 14p)/15 / (15 - 13p)/15 = (15 - 14p) / (15 - 13p)</p>
+<p>So F = (15 - 14p) / (15 - 13p)</p>
+<p>This is an expression in terms of p.</p>
+<p>Now, is this accurate? This assumes that only single errors on E1 contribute, and no other errors. But from earlier, errors on other gates are always detected, so for single errors, yes. But for multiple errors, there might be contributions, but for small p, we neglect.</p>
+<p>Since the problem might expect this first-order expression, or perhaps we need to consider that for E1, the errors are only two types that are undetected.</p>
+<p>In the code, we can return this expression.</p>
+<p>So F_logical = (15 - 14p) / (15 - 13p)</p>
+<p>But let&rsquo;s confirm the probability.</p>
+<p>P(E1 has error) = p, and for E1, there are 15 errors, so P(specific error) = p/15.</p>
+<p>In the expression, we have (1-p)^5 for no error, but (1-p)^5 is the probability that all five CNOT gates have no error, which is correct for no error event.</p>
+<p>For undetected error events, we have when only E1 has error and it is X1 X2 or Z1 Z2, so probability for that is [ (1-p)^4 * (p/15) ] for each, so total undetected probability from single errors: 2 * (p/15) * (1-p)^4</p>
+<p>Then P(no detection) = (1-p)^5 + 2 * (p/15) (1-p)^4</p>
+<p>P(correct and no detection) = (1-p)^5 + 1 * (p/15) (1-p)^4  because only Z1 Z2 is correct.</p>
+<p>So F = [ (1-p)^5 + (p/15)(1-p)^4 ] / [ (1-p)^5 + 2*(p/15)(1-p)^4 ] = [ (1-p) + p/15 ] / [ (1-p) + 2p/15 ] = [1 - p + p/15] / [1 - p + 2p/15] = [1 - (14p/15)] / [1 - (13p/15)] = (15 - 14p)/15 / (15 - 13p)/15 = (15 - 14p) / (15 - 13p)</p>
+<p>Yes.</p>
+<p>So for the SymPy expression, we can return (15 - 14<em>p) / (15 - 13</em>p)</p>
+<p>But this is an approximation since we neglected multiple errors, but for the purpose of this problem, it might be acceptable.</p>
+<p>Perhaps the problem expects only the first-order term, but since we have an expression, we can use this.</p>
+<p>Another thing: in the state preparation, there might be other undetected errors from multiple gates, but from the circuit, it seems that the ancilla measurement detects most errors, so probably this is fine.</p>
+<p>So I&rsquo;ll go with that.</p>
+                      </div>
+                    </details>
+<div class="content markdown-body"><div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">answer</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the expression of the logical state fidelity of the final 2-qubit logical state</span>
+<span class="sd">    at the end of the circuit as a function of two-qubit gate error rate $p$.</span>
+
+<span class="sd">    Inputs</span>
+<span class="sd">    ----------</span>
+<span class="sd">    p: sympy.Symbol, two-qubit gate error rate, $p$</span>
+
+<span class="sd">    Outputs</span>
+<span class="sd">    ----------</span>
+<span class="sd">    F_logical: sympy.Expr, logical state fidelity of the final 2-qubit logical state</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># ------------------ FILL IN YOUR RESULTS BELOW ------------------</span>
+    <span class="n">F_logical</span> <span class="o">=</span> <span class="p">(</span><span class="mi">15</span> <span class="o">-</span> <span class="mi">14</span><span class="o">*</span><span class="n">p</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">15</span> <span class="o">-</span> <span class="mi">13</span><span class="o">*</span><span class="n">p</span><span class="p">)</span>
+    <span class="c1"># ---------------------------------------------------------------</span>
+
+    <span class="k">return</span> <span class="n">F_logical</span>
+</code></pre></div></div>
+</article>
+
+</div>
+
+<footer>
+  Generated at 2025-09-24T22:02:08.787306
+</footer>
+
+<script>
+(function() {
+  // Tabs
+  const tabs = document.querySelectorAll('.tab');
+  const panels = document.querySelectorAll('.tab-content');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      const target = document.querySelector(tab.dataset.target);
+      if (target) target.classList.add('active');
+    });
+  });
+
+  // Theme toggle
+  const toggleBtn = document.getElementById('theme-toggle');
+  function setTheme(dark) {
+    if (dark) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('dark', '1');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('dark', '0');
+    }
+  }
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const stored = localStorage.getItem('dark');
+  setTheme(stored === null ? prefersDark : stored === '1');
+
+  toggleBtn.addEventListener('click', () => {
+    const isDark = document.documentElement.classList.contains('dark');
+    setTheme(!isDark);
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Checkpoint-1</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.codehilite .hll { background-color: #ffffcc }
+.codehilite { background: #f8f8f8; }
+.codehilite .c { color: #3D7B7B; font-style: italic } /* Comment */
+.codehilite .err { border: 1px solid #F00 } /* Error */
+.codehilite .k { color: #008000; font-weight: bold } /* Keyword */
+.codehilite .o { color: #666 } /* Operator */
+.codehilite .ch { color: #3D7B7B; font-style: italic } /* Comment.Hashbang */
+.codehilite .cm { color: #3D7B7B; font-style: italic } /* Comment.Multiline */
+.codehilite .cp { color: #9C6500 } /* Comment.Preproc */
+.codehilite .cpf { color: #3D7B7B; font-style: italic } /* Comment.PreprocFile */
+.codehilite .c1 { color: #3D7B7B; font-style: italic } /* Comment.Single */
+.codehilite .cs { color: #3D7B7B; font-style: italic } /* Comment.Special */
+.codehilite .gd { color: #A00000 } /* Generic.Deleted */
+.codehilite .ge { font-style: italic } /* Generic.Emph */
+.codehilite .ges { font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+.codehilite .gr { color: #E40000 } /* Generic.Error */
+.codehilite .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.codehilite .gi { color: #008400 } /* Generic.Inserted */
+.codehilite .go { color: #717171 } /* Generic.Output */
+.codehilite .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.codehilite .gs { font-weight: bold } /* Generic.Strong */
+.codehilite .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.codehilite .gt { color: #04D } /* Generic.Traceback */
+.codehilite .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.codehilite .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.codehilite .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.codehilite .kp { color: #008000 } /* Keyword.Pseudo */
+.codehilite .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.codehilite .kt { color: #B00040 } /* Keyword.Type */
+.codehilite .m { color: #666 } /* Literal.Number */
+.codehilite .s { color: #BA2121 } /* Literal.String */
+.codehilite .na { color: #687822 } /* Name.Attribute */
+.codehilite .nb { color: #008000 } /* Name.Builtin */
+.codehilite .nc { color: #00F; font-weight: bold } /* Name.Class */
+.codehilite .no { color: #800 } /* Name.Constant */
+.codehilite .nd { color: #A2F } /* Name.Decorator */
+.codehilite .ni { color: #717171; font-weight: bold } /* Name.Entity */
+.codehilite .ne { color: #CB3F38; font-weight: bold } /* Name.Exception */
+.codehilite .nf { color: #00F } /* Name.Function */
+.codehilite .nl { color: #767600 } /* Name.Label */
+.codehilite .nn { color: #00F; font-weight: bold } /* Name.Namespace */
+.codehilite .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.codehilite .nv { color: #19177C } /* Name.Variable */
+.codehilite .ow { color: #A2F; font-weight: bold } /* Operator.Word */
+.codehilite .w { color: #BBB } /* Text.Whitespace */
+.codehilite .mb { color: #666 } /* Literal.Number.Bin */
+.codehilite .mf { color: #666 } /* Literal.Number.Float */
+.codehilite .mh { color: #666 } /* Literal.Number.Hex */
+.codehilite .mi { color: #666 } /* Literal.Number.Integer */
+.codehilite .mo { color: #666 } /* Literal.Number.Oct */
+.codehilite .sa { color: #BA2121 } /* Literal.String.Affix */
+.codehilite .sb { color: #BA2121 } /* Literal.String.Backtick */
+.codehilite .sc { color: #BA2121 } /* Literal.String.Char */
+.codehilite .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.codehilite .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.codehilite .s2 { color: #BA2121 } /* Literal.String.Double */
+.codehilite .se { color: #AA5D1F; font-weight: bold } /* Literal.String.Escape */
+.codehilite .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.codehilite .si { color: #A45A77; font-weight: bold } /* Literal.String.Interpol */
+.codehilite .sx { color: #008000 } /* Literal.String.Other */
+.codehilite .sr { color: #A45A77 } /* Literal.String.Regex */
+.codehilite .s1 { color: #BA2121 } /* Literal.String.Single */
+.codehilite .ss { color: #19177C } /* Literal.String.Symbol */
+.codehilite .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.codehilite .fm { color: #00F } /* Name.Function.Magic */
+.codehilite .vc { color: #19177C } /* Name.Variable.Class */
+.codehilite .vg { color: #19177C } /* Name.Variable.Global */
+.codehilite .vi { color: #19177C } /* Name.Variable.Instance */
+.codehilite .vm { color: #19177C } /* Name.Variable.Magic */
+.codehilite .il { color: #666 } /* Literal.Number.Integer.Long */
+
+</style>
+<style>
+    :root {
+  --bg: #ffffff;
+  --fg: #222222;
+  --muted: #555555;
+  --border: #e0e0e0;
+  --accent: #005fcc;
+  --code-bg: #f6f8fa;
+  --role-user: #0ea5e9;
+  --role-assistant: #22c55e;
+  --role-system: #9ca3af;
+  --return-code: #a35291;
+}
+html.dark {
+  --bg: #0b0b0b;
+  --fg: #e8e8e8;
+  --muted: #a0a0a0;
+  --border: #333333;
+  --accent: #3b82f6;
+  --code-bg: #111827;
+  --role-user: #0ea5e9;
+  --role-assistant: #22c55e;
+  --role-system: #9ca3af;
+  --return-code: #a35291;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
+  line-height: 1.6;
+}
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 10;
+}
+h1 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+}
+.tab {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--border);
+  border-bottom: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 6px 6px 0 0;
+  color: var(--fg);
+}
+.tab.active {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+.tab-content {
+  display: none;
+  padding: 1rem 1.25rem;
+  border-top: 1px solid var(--border);
+}
+.tab-content.active {
+  display: block;
+}
+#theme-toggle {
+  border: 1px solid var(--border);
+  padding: 0.2rem 0.6rem;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  cursor: pointer;
+  background: transparent;
+  color: var(--fg);
+}
+.main {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.message {
+  border: 1px solid var(--border);
+  border-left-width: 6px;
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+  background: rgba(0,0,0,0.02);
+}
+.message .meta {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.6rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.message .badge {
+  font-weight: 600;
+}
+.role-user {
+  border-left-color: var(--role-user);
+}
+.role-assistant {
+  border-left-color: var(--role-assistant);
+}
+.role-system {
+  border-left-color: var(--role-system);
+}
+.role-unknown {
+  border-left-color: var(--accent);
+}
+
+.output-code-container {
+  display: flex;
+  gap: 1rem;               /* space between children */
+  align-items: center;     /* vertical alignment */
+  justify-content: start;  /* horizontal alignment */
+}
+
+.output-code-container .codeblock {
+  flex: 0 1 auto;
+}
+
+.codeblock {
+  border: 1px solid var(--border);
+  border-left-width: 6px;
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+  background: rgba(0,0,0,0.02);
+}
+.codeblock-content {
+  margin-bottom: 0.6rem;
+  border: 1px dashed var(--border);
+  border-radius: 4px;
+  padding: 0.4rem 0.6rem;
+  background: rgba(0,0,0,0.02);
+}
+
+.codeblock.eval_code {
+  border-left-color: var(--role-user);
+}
+.codeblock.target_code {
+  border-left-color: var(--role-assistant);
+}
+.codeblock.output_code {
+  border-left-color: var(--role-system);
+}
+
+html.dark .codeblock-content {
+  background: rgba(255,255,255,0.03);
+}
+.codeblock > summary {
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none; /* remove default triangle in some browsers */
+}
+.codeblock > summary::-webkit-details-marker {
+  display: none; /* Safari/Chrome marker */
+}
+.codeblock > summary::before {
+  content: "▶ ";
+  display: inline-block;
+  transform: rotate(0deg);
+  transition: transform 0.12s ease-out;
+}
+.codeblock[open] > summary::before {
+  transform: rotate(90deg);
+}
+.codeblock .tag {
+  color: var(--muted);
+  font-weight: 400;
+  font-size: 0.85em;
+  margin-left: 0.25rem;
+}
+
+.markdown-body pre code {
+  background: var(--code-bg);
+  display: block;
+  padding: 0.75rem;
+  overflow-x: auto;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+.markdown-body code {
+  background: var(--code-bg);
+  padding: 0.15rem 0.3rem;
+  border-radius: 4px;
+}
+/* Extra info tree */
+details > summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+details .block {
+  padding-left: 1rem;
+  margin: 0.25rem 0 0.5rem 0;
+  border-left: 2px solid var(--border);
+}
+.kv .key {
+  font-weight: 600;
+}
+.kv .type {
+  color: var(--muted);
+  margin-left: 0.5rem;
+  font-size: 0.85rem;
+}
+footer {
+  margin: 2rem 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+/* CodeHilite (pygments) overrides to respect theme vars */
+.codehilite {
+  background: var(--code-bg) !important;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.75rem !important;
+}
+.reasoning {
+  margin-bottom: 0.6rem;
+  border: 1px dashed var(--border);
+  border-radius: 4px;
+  padding: 0.4rem 0.6rem;
+  background: rgba(0,0,0,0.02);
+}
+html.dark .reasoning {
+  background: rgba(255,255,255,0.03);
+}
+.reasoning > summary {
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none; /* remove default triangle in some browsers */
+}
+.reasoning > summary::-webkit-details-marker {
+  display: none; /* Safari/Chrome marker */
+}
+.reasoning > summary::before {
+  content: "▶ ";
+  display: inline-block;
+  transform: rotate(0deg);
+  transition: transform 0.12s ease-out;
+}
+.reasoning[open] > summary::before {
+  transform: rotate(90deg);
+}
+.reasoning .tag {
+  color: var(--muted);
+  font-weight: 400;
+  font-size: 0.85em;
+  margin-left: 0.25rem;
+}
+.reasoning-body {
+  margin-top: 0.5rem;
+}
+</style>
+
+<!-- ===== MATHJAX CONFIG ===== -->
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [ ["\\(","\\)"] ],
+    displayMath: [ ["\\[","\\]"] ],
+    processEscapes: true,
+    processEnvironments: true
+  },
+  options: {
+    ignoreHtmlClass: ".*",
+    processHtmlClass: "arithmatex"
+
+    // skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    // if you dynamically add content later, you can call MathJax.typesetPromise()
+  }
+};
+</script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<!-- ========================== -->
+</head>
+<body>
+<header>
+  <h1>Checkpoint-1</h1>
+  <div>
+    <button id="theme-toggle" aria-label="toggle dark mode">🌓</button>
+  </div>
+</header>
+
+<div class="main">
+  
+<article class="message role-system">
+    <div class="meta">
+        <span class="badge">System</span>
+        <span class="idx">#0</span>
+    </div>
+    <div class="content markdown-body"><p>You are a physics research assistant specializing in solving complex, research-level problems using precise, step-by-step reasoning.</p>
+<p><strong>Input</strong>
+Problems will be provided in Markdown format.</p>
+<p><strong>Output (Markdown format)</strong></p>
+<ol>
+<li><strong>Step-by-Step Derivation</strong> - Show every non-trivial step in the solution.  Justify steps using relevant physical laws, theorems, or mathematical identities.</li>
+<li><strong>Mathematical Typesetting</strong> - Use LaTeX for all mathematics:  <code>$...$</code> for inline expressions, <code>$$...$$</code> for display equations.</li>
+<li><strong>Conventions and Units</strong> - Follow the unit system and conventions specified in the problem.</li>
+<li>
+<p><strong>Final Answer</strong> - At the end of the solution,  start a new line with <strong>&ldquo;Final Answer:&rdquo;</strong>, and present the final result.</p>
+<p>For final answers involving values, follow the precision requirements specified in the problem.
+If no precision is specified:
+- If an exact value is possible, provide it (e.g., \$\sqrt(2)\$, \$\pi/4\$).
+- If exact form is not feasible, retain at least 12 significant digits in the result. </p>
+</li>
+<li>
+<p><strong>Formatting Compliance</strong> - If the user requests a specific output format (e.g., code, table),  provide the final answer accordingly.</p>
+</li>
+</ol></div>
+</article>
+
+
+<article class="message role-user">
+    <div class="meta">
+        <span class="badge">User</span>
+        <span class="idx">#1</span>
+    </div>
+    <div class="content markdown-body"><h1 id="problem-setup">Problem setup:</h1>
+<p>In quantum error correction, you encode quantum states into logical states made of many qubits in order to improve their resilience to errors. In quantum error detection, you do the same but can only detect the presence of errors and not correct them. In this problem, we will consider a single [[4,2,2]] quantum error detection code, which encodes two logical qubits into four physical qubits, and investigate how robust logical quantum operations in this code are to quantum errors.</p>
+<p>Our convention is that the four physical qubits in the [[4,2,2]] code are labelled 0,1,2,3. The two logical qubits are labelled A and B. The stabilizers are <span class="arithmatex">\(XXXX\)</span> and <span class="arithmatex">\(ZZZZ\)</span>, where <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(Z\)</span> are Pauli matrices. The logical <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(Z\)</span> operators on the two qubits are <span class="arithmatex">\(X_A = XIXI\)</span>, <span class="arithmatex">\(X_B=XXII\)</span>, <span class="arithmatex">\(Z_A = ZZII\)</span>, <span class="arithmatex">\(Z_B = ZIZI\)</span>, up to multiplication by stabilizers.</p>
+<p>We will consider different state preparation circuits consisting of controlled not <span class="arithmatex">\(CNOT_{ij}\)</span> gates, where <span class="arithmatex">\(CNOT_{ij}\)</span> has control qubit <span class="arithmatex">\(i\)</span> and target qubit <span class="arithmatex">\(j\)</span>. As a simple model of quantum errors in hardware, we will suppose that each <span class="arithmatex">\(CNOT_{ij}\)</span> gate in the circuit has a two qubit depolarizing error channel following it that produces one of the 15 non-identity two-qubit Paulis with equal probability <span class="arithmatex">\(p/15\)</span>. The probability <span class="arithmatex">\(p\)</span> indicates the probability of an error in a single two-qubit gate. We will assess the logical infidelity of certain state preparation protocols as a function of the physical infidelity <span class="arithmatex">\(p\)</span>.</p>
+<h1 id="subproblems">Checkpoints</h1>
+<h2 id="subproblem-1">Checkpoint 1</h2>
+<p>Suppose that we wish to prepare a logical two-qubit GHZ state  <span class="arithmatex">\((|00\rangle_{AB}+|11\rangle_{AB})/\sqrt{2}\)</span> in the [[4,2,2]] code. To do so, we use the following state preparation circuit:</p>
+<div class="arithmatex">\[
+(CNOT_{03}) (H_0) (CNOT_{21}) (H_2).
+\]</div>
+<p>Note that this equation is written in matrix multiplication order, while the quantum operations in the circuit occur in the reverse order (from right-to-left in the above equation). <span class="arithmatex">\(H\)</span> is a single-qubit Hadamard gate.</p>
+<p>What is the physical state fidelity of the final physical 4-qubit state at the end of the circuit as a function of the two-qubit gate error rate <span class="arithmatex">\(p\)</span>?</p></div>
+</article>
+
+
+<article class="message role-assistant">
+    <div class="meta">
+        <span class="badge">Assistant</span>
+        <span class="idx">#2</span>
+    </div>
+    
+                    <details class="reasoning">
+                      <summary>Reasoning <span class="tag">(model)</span></summary>
+                      <div class="markdown-body reasoning-body">
+                        <p>We are given: &ldquo;Suppose that we wish to prepare a logical two-qubit GHZ state  <span class="arithmatex">\((|00\rangle_{AB}+|11\rangle_{AB})/\sqrt{2}\)</span> in the [[4,2,2]] code. To do so, we use the following state preparation circuit:</p>
+<div class="arithmatex">\[
+(CNOT_{03}) (H_0) (CNOT_{21}) (H_2).
+\]</div>
+<p>Note: This equation is written in matrix multiplication order, while the quantum operations in the circuit occur in the reverse order (from right-to-left in the above equation). <span class="arithmatex">\(H\)</span> is a single-qubit Hadamard gate.</p>
+<p>What is the physical state fidelity of the final physical 4-qubit state at the end of the circuit as a function of the two-qubit gate error rate <span class="arithmatex">\(p\)</span>?&rdquo;</p>
+<p>Interpretation: We have a circuit that prepares a logical state. But then we are adding errors: &ldquo;each CNOT_{ij} gate in the circuit has a two qubit depolarizing error channel following it that produces one of the 15 non-identity two-qubit Paulis with equal probability p/15.&rdquo; So after each CNOT gate, there is an error channel. Also, are there errors on Hadamard gates? The problem statement: &ldquo;each CNOT_{ij} gate in the circuit has a two qubit depolarizing error channel following it&rdquo;. It does not mention errors on single-qubit gates. So we assume that Hadamard gates are perfect? Possibly yes. So only errors on CNOT gates.</p>
+<p>The circuit: The operations in order (from right to left in the given equation) are:</p>
+<ol>
+<li>H_2</li>
+<li>CNOT_{21}</li>
+<li>H_0</li>
+<li>CNOT_{03}</li>
+</ol>
+<p>But careful: The given equation: (CNOT_{03}) (H_0) (CNOT_{21}) (H_2). In matrix multiplication order, that means the overall unitary is U = CNOT_{03} * H_0 * CNOT_{21} * H_2. But in quantum circuit, the order is from left to right? Actually, typically: if we write a circuit as gates applied in sequence, then the rightmost gate is applied first. So the circuit: Start with initial state? Possibly initial state is |0000&gt;? But wait: The logical GHZ state: (|00&gt;<em>{AB} + |11&gt;</em>{AB})/√2. That is a logical state. But the circuit is given. Let&rsquo;s check: The circuit: H_2, then CNOT_{21}, then H_0, then CNOT_{03}. Let&rsquo;s compute the state without errors.</p>
+<p>Initial state: presumably all qubits are in |0&gt;. So initial state: |0&gt;_0|0&gt;_1|0&gt;_2|0&gt;_3.</p>
+<p>Step 1: Apply H_2. H on qubit 2: |0&gt;_2 -&gt; (|0&gt;+|1&gt;)/√2. So state becomes: |0&gt;_0|0&gt;_1 (|0&gt;+|1&gt;)/√2 |0&gt;_3 = (|0000&gt; + |0010&gt;)/√2? But careful: qubits: 0,1,2,3. So state: |q0,q1,q2,q3&gt;. After H_2: state = 1/√2 (|0,0,0,0&gt; + |0,0,1,0&gt;).</p>
+<p>Step 2: Apply CNOT_{21}. That is control qubit 2, target qubit 1. So if qubit2 is 1, flip qubit1. So:
+|0,0,0,0&gt; -&gt; remains |0,0,0,0&gt;
+|0,0,1,0&gt; -&gt; becomes |0,1,1,0&gt;
+So state becomes: 1/√2 (|0000&gt; + |0110&gt;).</p>
+<p>Step 3: Apply H_0. H on qubit 0. So:
+|0000&gt; -&gt; (|0&gt;+|1&gt;)/√2 on qubit0 gives: 1/√2 (|0000&gt; + |1000&gt;)
+|0110&gt; -&gt; 1/√2 (|0110&gt; + |1110&gt;)
+So state becomes: 1/2 (|0000&gt; + |1000&gt; + |0110&gt; + |1110&gt;).</p>
+<p>Step 4: Apply CNOT_{03}. Control qubit 0, target qubit 3.
+For each term:
+|0000&gt;: control=0 so no flip -&gt; |0000&gt;
+|1000&gt;: control=1 so flip qubit3 -&gt; |1001&gt;
+|0110&gt;: control=0 -&gt; |0110&gt;
+|1110&gt;: control=1 -&gt; |1111&gt;
+So final state: 1/2 (|0000&gt; + |1001&gt; + |0110&gt; + |1111&gt;).</p>
+<p>Now, what is the logical state? The [[4,2,2]] code: It encodes two logical qubits. The stabilizers are XXXX and ZZZZ. The logical operators: 
+X_A = XIXI, X_B = XXII, Z_A = ZZII, Z_B = ZIZI.
+We want the logical GHZ state: (|00&gt;<em>{AB} + |11&gt;</em>{AB})/√2.
+Check: What are the logical basis states? For the [[4,2,2]] code, the code space is 4-dimensional. The logical states are usually defined. Possibly the state we got is indeed the logical GHZ state? Let&rsquo;s check: 
+For logical |00&gt;? Possibly: |00&gt;_{AB} might be: (|0000&gt; + |1111&gt;)/√2? But our state has terms: |0000&gt;, |1001&gt;, |0110&gt;, |1111&gt;. That is not exactly that. Alternatively, maybe the logical states are: 
+|00&gt; = (|0000&gt;+|1111&gt;)/√2, 
+|01&gt; = (|0011&gt;+|1100&gt;)/√2,
+|10&gt; = (|0101&gt;+|1010&gt;)/√2,
+|11&gt; = (|0110&gt;+|1001&gt;)/√2.
+Then the GHZ state (|00&gt;+|11&gt;)/√2 becomes: 
+= 1/√2 [ (|0000&gt;+|1111&gt;)/√2 + (|0110&gt;+|1001&gt;)/√2 ] = 1/2 (|0000&gt;+|1111&gt;+|0110&gt;+|1001&gt;). 
+That matches our state exactly. So indeed the circuit produces the logical GHZ state.</p>
+<p>So without errors, the final state is the ideal state: |ψ_ideal&gt; = 1/2 (|0000&gt;+|1001&gt;+|0110&gt;+|1111&gt;).</p>
+<p>Now, we consider errors. The circuit has two CNOT gates: CNOT_{21} and CNOT_{03}. Each CNOT gate is followed by a depolarizing error channel. That error channel: after the CNOT gate, with probability p, an error occurs. And if an error occurs, it is one of the 15 non-identity two-qubit Paulis on the two qubits involved, each with probability p/15. So overall, after a CNOT gate, the state becomes: 
+(1 - p) * (CNOT applied perfectly) + (p/15)*∑<em>{P in non-identity Paulis on that pair} (P applied after CNOT? But careful: The error channel is applied after the gate. So if the gate is U, then the actual operation is: with probability 1-p, we get U; with probability p/15 for each non-identity Pauli, we get (P) U. But wait: The problem says: &ldquo;each CNOT</em>{ij} gate in the circuit has a two qubit depolarizing error channel following it that produces one of the 15 non-identity two-qubit Paulis with equal probability p/15.&rdquo; That means: After the CNOT gate, we apply an error operator that is one of the 15 Paulis (on the two qubits) with probability p/15 each, and with probability 1-p, we apply identity. So the overall channel for that step is: 
+ρ -&gt; (1-p) U ρ U† + (p/15) ∑_{P in {non-identity Paulis on qubits i,j}} (P U) ρ (U† P).</p>
+<p>But careful: The order: The circuit is: first H_2 (perfect), then CNOT_{21} with error, then H_0 (perfect), then CNOT_{03} with error.
+So we want the final state fidelity. The fidelity is between the ideal state (which is pure) and the actual state (which is mixed due to errors). So we want F = &lt;ψ_ideal| ρ_actual |ψ_ideal&gt;.</p>
+<p>We need to compute ρ_actual. The initial state is |0000&gt;&lt;0000|. Then we apply operations. Let&rsquo;s denote:
+U1 = H_2 (perfect)
+U2 = CNOT_{21} (with error channel)
+U3 = H_0 (perfect)
+U4 = CNOT_{03} (with error channel)</p>
+<p>So the overall channel: ρ_final = E_4 ∘ U_4 ∘ E_3 ∘ U_3 ∘ E_2 ∘ U_2 ∘ U_1 (|0&gt;&lt;0|) but careful: Actually, the order: The circuit: first apply U1, then apply the channel for CNOT_{21}? But wait: The error channel is after the CNOT gate. So after U1, we apply the CNOT_{21} gate. But that gate itself is perfect? Actually, the gate is perfect, but then immediately after it, we apply the error channel. So the operation for the step is: ρ -&gt; (1-p) CNOT_{21} ρ CNOT_{21}^† + (p/15) ∑<em>{P in Paulis on qubits 2,1 (non-identity)} (P CNOT</em>{21}) ρ (CNOT_{21}^† P). But careful: The Paulis are on the two qubits that the CNOT acts on. For CNOT_{21}, the qubits are 2 and 1. So the Paulis are operators on qubits 2 and 1. Similarly, for CNOT_{03}, the Paulis are on qubits 0 and 3.</p>
+<p>Then after that, we apply H_0 (perfect). Then apply CNOT_{03} with its error channel.</p>
+<p>So we want to compute the final density matrix. But we only need the fidelity: F = &lt;ψ_ideal| ρ_final |ψ_ideal&gt;. And since the errors are small, we might compute the probability that no error occurs? But careful: The errors are depolarizing channels. They might produce states that are not orthogonal to the ideal state? Actually, if an error occurs, it might sometimes be a stabilizer of the code? But wait: The state we are preparing is a logical state. The errors that are stabilizers (like XXXX or ZZZZ) actually leave the state invariant? But careful: The state is not necessarily in the code space? Actually, the ideal state is in the code space. And the stabilizers: XXXX and ZZZZ. Do they act trivially on the code space? Yes, because the code space is defined as the +1 eigenspace of these stabilizers. So if an error is a stabilizer, then it will map the code state to itself. But wait: But our errors are applied on physical qubits. For example, if an error is XXXX, then it commutes with the logical operators? Actually, if the state is in the code space, then applying a stabilizer gives the same state. But here, the errors occur during the circuit. They might take the state out of the code space. But then later gates might not correct it. However, we are only interested in the fidelity at the end. The fidelity is the overlap with the ideal state. So if an error is a stabilizer, then it might actually not reduce the fidelity? But careful: The error occurs in the middle of the circuit. For example, if an error happens that is a stabilizer, then after the circuit, the state might still be the ideal state? But not necessarily: because the circuit is not necessarily fault-tolerant? Actually, the circuit is designed to prepare the logical state. If an error occurs that is a stabilizer, then it commutes with all subsequent gates? Possibly? But we need to check: The errors are applied after a CNOT gate. They are Pauli errors. They will propagate through subsequent gates. So we need to compute the overall effect.</p>
+<p>Maybe we can compute the probability that the final state is exactly the ideal state. That probability is: (1-p)^2 (if no error occurs) plus contributions from errors that are equivalent to identity on the final state. But careful: Even if an error occurs, if it is such that after the entire circuit, the state is the same as the ideal state, then that error does not reduce fidelity. So we want to compute the fidelity F = probability that the final state is the ideal state. But wait: Is that exactly the fidelity? Actually, if the channel is a Pauli channel (because errors are Pauli and the circuit is Clifford), then the final state will be a mixture of states that are Pauli errors applied to the ideal state. And since the ideal state is a stabilizer state (it is a code state of a stabilizer code), then the fidelity is the sum of probabilities of all Pauli errors that stabilize the state. But careful: The errors occur at different times. But because the circuit is Clifford, we can propagate the errors through the circuit. That is a common technique: Instead of applying errors after gates, we can push them to the end. But careful: The errors are applied after specific gates. But we can use the fact that if we have a Clifford circuit, then if an error occurs at some point, it is equivalent to a Pauli error at the end (maybe with a sign change) if we commute it through the subsequent Clifford gates. But here, the errors are not necessarily Pauli errors on the initial state because they occur after gates. But we can use the idea of &ldquo;error propagation&rdquo;: 
+We have a circuit: U = U4 U3 U2 U1. But with errors: Actually, the actual operation is: After U1, we apply CNOT_{21} and then an error E on qubits 2,1. That error E is a Pauli. Then U3 (H_0) and then CNOT_{03} and then an error F on qubits 0,3. So the overall operation is: (F * CNOT_{03}) * (H_0) * (E * CNOT_{21}) * (H_2) on the initial state. But note that H_0 and H_2 are single-qubit gates. But we can combine: Actually, careful: The order: The circuit is: 
+Step 1: H_2 (perfect)
+Step 2: CNOT_{21} then error on qubits 2,1. So that step is: ρ -&gt; ∑<em>{E in {I} ∪ {non-identity Paulis on {2,1}} with probabilities: (1-p) for I, and p/15 for each non-identity} (E CNOT</em>{21}) ρ (CNOT_{21}^† E†).
+Step 3: H_0 (perfect)
+Step 4: CNOT_{03} then error on qubits 0,3. So that step: ρ -&gt; ∑<em>{F in {I} ∪ {non-identity Paulis on {0,3}} with probabilities: (1-p) for I, and p/15 for each non-identity} (F CNOT</em>{03}) ρ (CNOT_{03}^† F†).</p>
+<p>So overall, if we denote the perfect unitary as U_perfect = CNOT_{03} H_0 CNOT_{21} H_2. Then the actual operation is: 
+For each error E on qubits {2,1} and F on qubits {0,3}, we get: 
+U_actual = F * CNOT_{03} * H_0 * E * CNOT_{21} * H_2.
+But note that H_0 and H_2 are Clifford gates. So we can commute E through H_0? But careful: E acts on qubits 2 and 1. H_0 acts on qubit 0. They commute because they act on different qubits. So H_0 * E = E * H_0. Similarly, F acts on qubits 0 and 3. But F does not necessarily commute with H_0? Actually, H_0 acts on qubit 0, and F acts on qubits 0 and 3. They might not commute if F has a Pauli on qubit 0 that is not identity? But we can compute: H_0 Pauli_X on qubit0 H_0 = Pauli_Z, etc. But maybe we can push all errors to the end. Write:
+U_actual = F * CNOT_{03} * H_0 * E * CNOT_{21} * H_2.
+= F * CNOT_{03} * E * H_0 * CNOT_{21} * H_2   (since E commutes with H_0)
+= F * (CNOT_{03} E CNOT_{03}^†) * CNOT_{03} * H_0 * CNOT_{21} * H_2
+= (F * (CNOT_{03} E CNOT_{03}^†)) * U_perfect.
+So then U_actual = G * U_perfect, where G = F * (CNOT_{03} E CNOT_{03}^†). But careful: The order: Actually, U_perfect = CNOT_{03} H_0 CNOT_{21} H_2. And we have: U_actual = F CNOT_{03} H_0 E CNOT_{21} H_2 = F CNOT_{03} E H_0 CNOT_{21} H_2 = F (CNOT_{03} E CNOT_{03}^†) CNOT_{03} H_0 CNOT_{21} H_2 = (F * (CNOT_{03} E CNOT_{03}^†)) U_perfect.
+So indeed, the overall effect is that the actual state is obtained by applying some Pauli error G on the perfect state. But wait: Is that always a Pauli? E is a Pauli on qubits {2,1}. CNOT_{03} acts on qubits {0,3}. So CNOT_{03} E CNOT_{03}^† will be a Pauli on qubits? Because CNOT is Clifford. So it maps Pauli to Pauli. But careful: E acts on qubits 2 and 1. CNOT_{03} does not act on qubits 2 and 1, so it commutes with E? Actually, no: CNOT_{03} acts on qubits 0 and 3. E acts on qubits 2 and 1. They act on disjoint sets, so they commute. So actually, CNOT_{03} E CNOT_{03}^† = E. Because E is on qubits 2 and 1, and CNOT_{03} acts on qubits 0 and 3, so they commute. So then G = F * E. So indeed, the overall error is just the product of the two errors: one from the first CNOT (E on qubits 2,1) and the second from the second CNOT (F on qubits 0,3). But wait: Is that always? Check: U_actual = F CNOT_{03} H_0 E CNOT_{21} H_2. And since H_0 commutes with E (different qubits), we get = F CNOT_{03} E H_0 CNOT_{21} H_2. But then CNOT_{03} and E commute because they act on disjoint sets? Actually, careful: CNOT_{03} acts on qubits 0 and 3. E acts on qubits 2 and 1. They are on disjoint sets, so they commute. So then U_actual = F E CNOT_{03} H_0 CNOT_{21} H_2 = (F E) U_perfect. So indeed, the overall effect is that the actual unitary is (F E) U_perfect, where E is a Pauli on qubits {2,1} and F is a Pauli on qubits {0,3}. But wait: There is also the probabilities: The error E occurs with probability: if E = I, probability = 1-p; if E is any non-identity Pauli on qubits {2,1}, probability = p/15 each. Similarly, F: if F = I, probability = 1-p; if F is non-identity on qubits {0,3}, probability = p/15 each.
+And these errors are independent? They occur on different gates. So the overall error operator is G = F * E, which is a Pauli on all 4 qubits. But careful: E acts on qubits 2 and 1, F acts on qubits 0 and 3. So G is a Pauli on all qubits. And the probability distribution over G is: 
+P(G) = (probability for E) * (probability for F) such that F<em>E = G.
+But note: E and F are independent. So we can compute the probability that the overall error is a particular Pauli on the 4 qubits. But then the final state, if the error is G, is: |ψ_actual&gt; = G U_perfect |0000&gt; = G |ψ_ideal&gt;. But wait: Is that always true? Check: U_perfect |0000&gt; = |ψ_ideal&gt;. So indeed, if the errors are Pauli, then the final state is exactly G |ψ_ideal&gt;. But careful: There might be phases? But Pauli operators are either ±1? Actually, Pauli operators can have factors of i, but typically we consider Pauli group elements up to phase? But here, since we are taking the state, if G has a phase, then |ψ&gt; becomes that phase times the state. But fidelity is |&lt;ψ_ideal| G |ψ_ideal&gt;|^2. But if G is not identity, then typically the overlap might be 0 if G changes the state. But there might be cases where G is a stabilizer of the state? But careful: The state |ψ_ideal&gt; is not necessarily a stabilizer state of the full Pauli group? Actually, it is a stabilizer state. The stabilizer of |ψ_ideal&gt;? The ideal state is the logical GHZ state. But it is a code state of the [[4,2,2]] code. Its stabilizer group? The code space is stabilized by XXXX and ZZZZ. But the state |ψ_ideal&gt; is a specific state in that code space. Its stabilizer subgroup (the Paulis that leave it invariant up to a phase) might be larger? Actually, for a stabilizer state, the stabilizer group is generated by the stabilizers of the code and the logical operators that fix that state. For the GHZ state (|00&gt;+|11&gt;)/√2, the stabilizers include also something like X_A X_B? Actually, for a two-qubit GHZ state, the stabilizers are: X⊗X, Z⊗Z? But here it&rsquo;s logical qubits. But we are interested in the physical overlap: &lt;ψ_ideal| G |ψ_ideal&gt;. That is 1 if G is in the stabilizer of |ψ_ideal&gt; (up to phase, but careful: if G gives a phase, then the overlap might be that phase. But fidelity is the square of the absolute value of the overlap. So if G gives a phase factor e^(iθ), then &lt;ψ_ideal| G |ψ_ideal&gt; = e^(iθ) and then |&hellip;|^2 = 1. So indeed, if G is such that G|ψ_ideal&gt; = (phase)</em>|ψ_ideal&gt;, then the fidelity contribution from that error is that the state is actually the ideal state (up to global phase). So we want to compute the probability that the overall error G is such that G|ψ_ideal&gt; is proportional to |ψ_ideal&gt;. That is, G is in the stabilizer group of |ψ_ideal&gt; (the set of Paulis that fix the state, not necessarily exactly +1, but any phase factor, because fidelity is |&lt;ψ_ideal|G|ψ_ideal&gt;|^2, and if G|ψ_ideal&gt; = c|ψ_ideal&gt; with |c|=1, then that equals 1).</p>
+<p>So then the fidelity F = probability that the overall error G is in the stabilizer of |ψ_ideal&gt; (i.e., G|ψ_ideal&gt; = (phase)*|ψ_ideal&gt;) plus maybe contributions from errors that are not exactly stabilizers but have nonzero overlap? But wait: If G is not a stabilizer, then typically for a stabilizer state, the overlap &lt;ψ|G|ψ&gt; is 0. Because stabilizer states are eigenstates of stabilizers, and if G is not in the stabilizer group, then it will map to an orthogonal state. But is that always true? For a stabilizer state, if G is a Pauli that is not in the stabilizer group, then either it anticommutes with some stabilizer, so the expectation value is 0. So indeed, for a stabilizer state, &lt;ψ|P|ψ&gt; is either ±1 if P is in the stabilizer group (up to phase) or 0 if not. So then the fidelity is exactly the probability that the overall error G is such that G is in the stabilizer group of |ψ_ideal&gt;. But careful: There is also the possibility that the error occurs but then the state is not exactly G|ψ_ideal&gt; because the errors are applied in the middle? But we already pushed them to the end. But wait: Is it valid to push errors through Hadamard gates? We did: H_0 commutes with E because E acts on qubits 2,1. And H_2? Actually, we had H_2 at the beginning. But then we applied E after CNOT_{21}. But that E is on qubits 2,1. H_2 acts on qubit2. So careful: E acts on qubits 2 and 1. H_2 acts on qubit2. They do not necessarily commute. But we already handled that: We had: U_actual = F CNOT_{03} H_0 E CNOT_{21} H_2. And we argued that H_0 commutes with E because H_0 acts on qubit0 and E on qubits 2,1. But what about H_2? H_2 is at the very right. Actually, the order: U_actual = F CNOT_{03} H_0 E CNOT_{21} H_2. Here, H_2 is applied to the initial state. Then CNOT_{21} is applied. Then E is applied. Then H_0 is applied. Then CNOT_{03} is applied. Then F is applied. So if we want to push E to the end, we need to commute it through H_0 and CNOT_{03}. We already commuted through H_0: H_0 and E commute because they act on different qubits. Then we commute through CNOT_{03}: CNOT_{03} and E commute because they act on disjoint sets? Check: CNOT_{03} acts on qubits 0 and 3. E acts on qubits 2 and 1. So they commute. So then indeed, U_actual = F E CNOT_{03} H_0 CNOT_{21} H_2 = F E U_perfect. So it&rsquo;s valid. But wait: What about the Hadamard H_2? That is inside U_perfect. So it&rsquo;s fine.</p>
+<p>So then the final state, given errors E and F, is: |ψ&gt; = (F E) U_perfect |0000&gt; = (F E) |ψ_ideal&gt;. And these errors are independent. So the overall channel is: ρ = ∑<em>{E on {2,1}} ∑</em>{F on {0,3}} P(E) P(F) (F E) |ψ_ideal&gt;&lt;ψ_ideal| (F E)^†.
+Then the fidelity is: F = &lt;ψ_ideal| ρ |ψ_ideal&gt; = ∑_{E,F} P(E)P(F) |&lt;ψ_ideal| F E |ψ_ideal&gt;|^2.
+And as argued, for a stabilizer state, &lt;ψ_ideal| P |ψ_ideal&gt; is either 0 or 1 (in absolute value squared, it&rsquo;s 1 if P is in the stabilizer group of |ψ_ideal&gt;, and 0 otherwise). So we need to determine: Which Pauli operators G on the 4 qubits (that are of the form F * E, where E is on qubits {2,1} and F is on qubits {0,3}) are in the stabilizer of |ψ_ideal&gt;? But careful: The errors are not arbitrary Paulis on all 4 qubits? They are products of a Pauli on qubits {0,3} and a Pauli on qubits {2,1}. So G = (F_0 ⊗ F_3) ⊗ (E_2 ⊗ E_1) but order: qubits: 0,1,2,3. So G = (F on qubit0) ⊗ (E on qubit1) ⊗ (E on qubit2) ⊗ (F on qubit3)? Actually, careful: E acts on qubits 2 and 1. So let E = E_2 ⊗ E_1. And F acts on qubits 0 and 3, so F = F_0 ⊗ F_3. So then G = F_0 ⊗ E_1 ⊗ E_2 ⊗ F_3.
+So the overall error is a Pauli that factorizes between the pair (0,3) and (1,2) but not necessarily: Actually, it is: qubit0 comes from F, qubit1 from E, qubit2 from E, qubit3 from F. So it&rsquo;s not necessarily a product of two independent Paulis on {0,3} and {1,2} because the Pauli on qubit1 and qubit2 are from the same error E, so they can be correlated? But they are independent in the sense that E can be any Pauli on two qubits. So indeed, G is such that the Pauli on qubit0 and qubit3 are from F, and on qubit1 and qubit2 are from E. But note: There is no constraint that the Pauli on qubit0 and qubit3 are the same? They are independent: F can be any two-qubit Pauli. So G is of the form: 
+G = (a Pauli on qubit0) ⊗ (a Pauli on qubit1) ⊗ (a Pauli on qubit2) ⊗ (a Pauli on qubit3) with the condition that the Pauli on qubit0 and qubit3 come from the same two-qubit Pauli? Actually, careful: F is a Pauli on qubits 0 and 3. That means F is one of the 16 Paulis on qubits 0 and 3. So it is of the form: F = i^k (X^{b0} Z^{c0})_0 ⊗ (X^{b3} Z^{c3})_3. But the phase factor is not important because we only care about the action on the state up to phase. Similarly, E on qubits 2 and 1: E = i^m (X^{d2} Z^{e2})_2 ⊗ (X^{d1} Z^{e1})_1.
+So then G = (from F on qubit0) * (from E on qubit1) * (from E on qubit2) * (from F on qubit3) times a global phase. So indeed, the errors on qubits 0 and 3 are correlated? Actually, they are independent: The probability for a given F is: if F = I (on both qubits) then probability = 1-p; if F is any non-identity on qubits 0 and 3, then probability = p/15. But note: F = I means that on qubit0 and qubit3, the Pauli is identity. But if F is, say, X_0 I_3, that is a non-identity Pauli on the two-qubit system? But careful: The error channel: It produces one of the 15 non-identity two-qubit Paulis. The two-qubit Paulis are operators on two qubits. They are considered non-identity if they are not the identity on both qubits. So for example, X ⊗ I is non-identity because it is not I⊗I. So indeed, F can be such that it acts as identity on one qubit and non-identity on the other. So then G can have, for instance, Pauli X on qubit0 and identity on qubit3. So there is no constraint that the Pauli on qubit0 and qubit3 are the same. They are independent: F is any element of the Pauli group on two qubits except the identity? But wait: The error channel: It says: &ldquo;produces one of the 15 non-identity two-qubit Paulis with equal probability p/15.&rdquo; That means that if F is a Pauli on two qubits that is not the identity (i.e., not I⊗I), then its probability is p/15. And if F = I⊗I, then probability is 1-p. So indeed, F can be, for example, X⊗I, I⊗X, X⊗X, etc. So then G is: on qubit0: from F, on qubit3: from F, on qubit1: from E, on qubit2: from E. And these are independent.</p>
+<p>Now, we need to determine: For which such G does G stabilize |ψ_ideal&gt;? That is, G|ψ_ideal&gt; = (phase)|ψ_ideal&gt;. Equivalently, |&lt;ψ_ideal|G|ψ_ideal&gt;|^2 = 1.
+Since |ψ_ideal&gt; is a stabilizer state, its stabilizer group is the set of all Paulis that commute with all stabilizers of the state? Actually, for a stabilizer state, the state is the unique simultaneous +1 eigenvector of a set of commuting Paulis. The stabilizer group of the state is the group generated by these. For the logical GHZ state, what is its stabilizer? The state is: |ψ_ideal&gt; = 1/2 (|0000&gt; + |1001&gt; + |0110&gt; + |1111&gt;). Let&rsquo;s find some stabilizers. The code stabilizers: S1 = XXXX, S2 = ZZZZ. Check: XXXX|ψ_ideal&gt; = ? For each term: XXXX|0000&gt; = |1111&gt;, so that gives |1111&gt;; XXXX|1001&gt; = |0110&gt;; XXXX|0110&gt; = |1001&gt;; XXXX|1111&gt; = |0000&gt;. So indeed, XXXX|ψ_ideal&gt; = |ψ_ideal&gt;. Similarly, ZZZZ: ZZZZ|0000&gt; = |0000&gt;; ZZZZ|1001&gt; = (-1)^(1+0+0+1?) Actually, careful: ZZZZ means apply Z on each qubit. For |1001&gt;, the phase is: qubit0: 1 gives -1, qubit1: 0 gives +1, qubit2: 0 gives +1, qubit3: 1 gives -1, so product = (-1)<em>(-1)=+1? Actually, more systematically: ZZZZ|a,b,c,d&gt; = (-1)^(a+b+c+d) |a,b,c,d&gt;. For |0000&gt;, sum=0 -&gt; +1; |1001&gt;: sum=1+0+0+1=2 -&gt; even -&gt; +1; |0110&gt;: 0+1+1+0=2 -&gt; +1; |1111&gt;: sum=4 -&gt; +1. So indeed, ZZZZ stabilizes.
+But there are more stabilizers specific to the GHZ state. The logical GHZ state on two qubits: (|00&gt;+|11&gt;)/√2. Its stabilizers include X_A X_B and Z_A Z_B? Actually, for a Bell state, the stabilizers are X⊗X and Z⊗Z (with appropriate signs). Here, the logical qubits A and B. Their logical operators: X_A = XIXI, X_B = XXII, so X_A X_B = (X⊗I⊗X⊗I) * (X⊗X⊗I⊗I) = (X^2 ⊗ X ⊗ X ⊗ I) = (I ⊗ X ⊗ X ⊗ I) but careful: Actually, multiplication: X_A = X on qubit0, I on qubit1, X on qubit2, I on qubit3. X_B = X on qubit0, X on qubit1, I on qubit2, I on qubit3. So product: X_A X_B = (X0 X0) ⊗ (I1 X1) ⊗ (X2 I2) ⊗ (I3 I3) = (I0) ⊗ (X1) ⊗ (X2) ⊗ (I3) = X_1 X_2. So one stabilizer is X_1 X_2. Check: X_1 X_2|ψ_ideal&gt;: For |0000&gt;, becomes |0,1,1,0&gt; = |0110&gt;; for |1001&gt;, becomes |1,1,1,1&gt;? Actually, careful: X_1 X_2|1001&gt; = |1, (1 flip), (1 flip), 1&gt; = |1111&gt;; for |0110&gt;, becomes |0,0,0,0&gt; = |0000&gt;; for |1111&gt;, becomes |1,0,0,1&gt; = |1001&gt;. So indeed, X_1 X_2|ψ_ideal&gt; = |ψ_ideal&gt;. So S3 = X_1 X_2.
+Also, what about Z_A Z_B? Z_A = ZZII, Z_B = ZIZI, so product: Z_A Z_B = (Z0 Z0?) Actually: Z_A = Z on qubit0, Z on qubit1, I on qubit2, I on qubit3. Z_B = Z on qubit0, I on qubit1, Z on qubit2, I on qubit3. So product: Z_A Z_B = (Z0 Z0) ⊗ (Z1 I1) ⊗ (I2 Z2) ⊗ (I3 I3) = (I0) ⊗ (Z1) ⊗ (Z2) ⊗ (I3) = Z_1 Z_2. But check: Z_1 Z_2|ψ_ideal&gt;: For |0000&gt;, phase = +1; |1001&gt;: qubit1=0, qubit2=0 so +1; |0110&gt;: qubit1=1, qubit2=1 so (-1)</em>(-1)=+1; |1111&gt;: qubit1=1, qubit2=1 so +1. So Z_1 Z_2 also gives +1. But wait, are these independent? Actually, X_1 X_2 and Z_1 Z_2 commute? They anticommute on qubits 1 and 2? Actually, X and Z on the same qubit anticommute. But here, X_1 X_2 and Z_1 Z_2: On qubit1, X and Z anticommute, on qubit2, X and Z anticommute, so overall they commute because two anticommutations give a sign of (-1)<em>(-1)=+1. So they are independent. But then we have stabilizers: S1 = XXXX, S2 = ZZZZ, S3 = X_1 X_2. That gives 3 generators. The stabilizer group of a 4-qubit state is of size 2^4 = 16 if it is a stabilizer state. Actually, a stabilizer state is defined by a subgroup of the Pauli group of size 2^n. Here n=4, so the stabilizer group should have 16 elements. The generators we have: S1, S2, S3. That gives 2^3 = 8 elements. So there is one more generator. What is the fourth stabilizer? The state is a logical GHZ state. For a Bell state on two qubits, the stabilizers are: X⊗X and Z⊗Z. But here, the logical qubits are encoded. Actually, the state |ψ_ideal&gt; is not a full code space; it&rsquo;s a specific state. Its stabilizer group should be of order 16. Let&rsquo;s find another Pauli that fixes |ψ_ideal&gt;. Consider: X_0 X_3? Check: X_0 X_3|0000&gt; = |1001&gt;; X_0 X_3|1001&gt; = |0000&gt;; X_0 X_3|0110&gt; = |1111&gt;; X_0 X_3|1111&gt; = |0110&gt;. So X_0 X_3 also gives the state. So S4 = X_0 X_3. But are these independent? S1 = XXXX, so S1 * S4 = X_1 X_2, which is S3. So actually, S1, S2, S4 are generators? Then S3 is not independent. Alternatively, we can take S1, S2, S4, and then what is the fourth? Possibly Z_0 Z_3? Check: Z_0 Z_3|0000&gt; = |0000&gt;; Z_0 Z_3|1001&gt; = (-1)</em>|1001&gt;? Actually, careful: Z_0 Z_3|1001&gt;: qubit0=1 gives -1, qubit3=1 gives -1, product = +1? Actually, (-1)<em>(-1)=+1. So Z_0 Z_3 gives +1 on all terms? Check: |0110&gt;: qubit0=0, qubit3=0 so +1; |1111&gt;: qubit0=1, qubit3=1 so (+1) because (-1)</em>(-1)=+1. So Z_0 Z_3 also stabilizes. But then S2 = ZZZZ, and Z_0 Z_3, then product gives Z_1 Z_2, which we already had. So maybe the stabilizer group is generated by: S1 = XXXX, S2 = ZZZZ, S4 = X_0 X_3, and then S5 = Z_0 Z_3? But then S1 * S4 = X_1 X_2, and S2 * S5 = Z_1 Z_2. So then the group has generators: XXXX, ZZZZ, X_0 X_3, Z_0 Z_3. That gives 2^4 = 16 elements. And indeed, these commute? Check: X_0 X_3 and Z_0 Z_3: On qubit0, X and Z anticommute, on qubit3, X and Z anticommute, so overall they commute. So yes, the stabilizer group of |ψ_ideal&gt; is: 
+{ I, XXXX, ZZZZ, XXXX ZZZZ, 
+X_0 X_3, (X_0 X_3)(XXXX) = X_1 X_2, (X_0 X_3)(ZZZZ) = ? Actually, let&rsquo;s systematically: The generators: 
+A = XXXX
+B = ZZZZ
+C = X_0 X_3
+D = Z_0 Z_3
+They are independent and commute. So the stabilizer group is all Paulis of the form: A^a B^b C^c D^d, where a,b,c,d in {0,1}. And these Paulis will act as: 
+A^a B^b C^c D^d = (X on all qubits)^a (Z on all qubits)^b (X_0 X_3)^c (Z_0 Z_3)^d.
+What is the action on qubit1 and qubit2? That becomes: from A: X_1 X_2, from B: Z_1 Z_2, from C: nothing on 1,2, from D: nothing on 1,2. So on qubits 1,2, it&rsquo;s (X_1 X_2)^a (Z_1 Z_2)^b. And on qubits 0,3, it&rsquo;s (X_0 X_3)^(a+c) (Z_0 Z_3)^(b+d) times also from A: X_0 X_3^? Actually, careful: A = X_0 X_1 X_2 X_3, so it gives X on qubit0 and X on qubit3 as well. So indeed, the stabilizer group consists of Paulis that are of the form: 
+On qubit0: X^(a+c) Z^(b+d)
+On qubit3: X^(a+c) Z^(b+d)
+On qubit1: X^a Z^b
+On qubit2: X^a Z^b
+So the stabilizer group elements are exactly those Paulis that are &ldquo;even&rdquo; in the sense that the Pauli on qubit0 and qubit3 are the same, and the Pauli on qubit1 and qubit2 are the same. And also there is no condition on the relation between the pair (0,3) and (1,2)? Actually, they are independent: a,b,c,d can be arbitrary. So the stabilizer group S consists of all Paulis of the form:
+G = (P on qubit0) ⊗ (Q on qubit1) ⊗ (Q on qubit2) ⊗ (P on qubit3) 
+where P and Q are Paulis (including identity) but with the additional condition that the phase? Actually, check: If we take a=0,b=0,c=1,d=0, then we get: C = X_0 X_3. So that gives P = X, Q = I. If we take a=1,b=0,c=0,d=0, then A = XXXX gives: on qubit0: X, on qubit1: X, on qubit2: X, on qubit3: X, so that is P = X, Q = X. So indeed, P and Q can be arbitrary Paulis? But wait, are there any restrictions? For a given P and Q, can we always find a,b,c,d such that: On qubit0: X^(a+c) Z^(b+d) = P, and on qubit1: X^a Z^b = Q? That means: if P = X^{p_x} Z^{p_z} and Q = X^{q_x} Z^{q_z} (with p_x, p_z, q_x, q_z in {0,1}), then we need:
+a+c = p_x mod 2, b+d = p_z mod 2,
+a = q_x, b = q_z.
+So then c = p_x - q_x mod 2, d = p_z - q_z mod 2. So indeed, for any P and Q, there is a stabilizer element. So the stabilizer group of |ψ_ideal&gt; is exactly: 
+S = { G such that G = P_0 ⊗ Q_1 ⊗ Q_2 ⊗ P_3 } where P and Q are any Paulis (including I) on a single qubit. But wait: Check: What about the phase? For example, if P = I and Q = I, then that&rsquo;s identity. If P = Z and Q = I, then that is Z_0 I_1 I_2 Z_3. Is that in the stabilizer? According to our generators, can we get that? We want: on qubit0: Z, on qubit3: Z, and on qubits 1,2: I. That corresponds to: a+c should give: for qubit0, we want no X part, so a+c=0 mod2; and b+d should give: for qubit0, we want Z, so b+d=1 mod2. And on qubit1: a=0, b=0. Then c=0, d=1 mod2. So that gives D = Z_0 Z_3. So yes.
+So the condition for G to be in the stabilizer of |ψ_ideal&gt; is: 
+G = (something on qubit0) ⊗ (something on qubit1) ⊗ (something on qubit2) ⊗ (something on qubit3) such that the Pauli on qubit0 and qubit3 are the same, and the Pauli on qubit1 and qubit2 are the same. But careful: Is that sufficient? Check: What if G = X_0 ⊗ I_1 ⊗ I_2 ⊗ I_3? That would mean P = X, Q = I. But then on qubit0: X, on qubit3: I. That is not the same. So that is not in the stabilizer. So indeed, the condition is: The Pauli on qubit0 must equal the Pauli on qubit3, and the Pauli on qubit1 must equal the Pauli on qubit2.</p>
+<p>Now, our overall error G is: G = F_0 ⊗ E_1 ⊗ E_2 ⊗ F_3. But careful: F is on qubits 0 and 3. So F gives: on qubit0: some Pauli, and on qubit3: some Pauli. But these are not necessarily the same. Because F is an arbitrary two-qubit Pauli. So F can be, for example, X_0 I_3. Then G would have: qubit0: X, qubit3: I. And E gives: on qubit1 and qubit2, they are from the same Pauli? Actually, E is on qubits 2 and 1. So E gives: on qubit1: some Pauli, and on qubit2: some Pauli. But these are from the same two-qubit Pauli? Actually, careful: E is a Pauli on qubits 2 and 1. That means E = (Pauli on qubit2) ⊗ (Pauli on qubit1) (order: usually we list qubits in order? But here, it&rsquo;s CNOT_{21} so the control is qubit2 and target is qubit1. But the error channel is on the two qubits involved. So E is an operator on the Hilbert space of qubits 2 and 1. So it is of the form: E = (something on qubit2) ⊗ (something on qubit1). So indeed, if E is, say, I_2 ⊗ X_1, then on qubit1 we get X, and on qubit2 we get I. So then G would have: qubit1: X, qubit2: I. So then the condition for G to be in the stabilizer is: The Pauli from F on qubit0 must equal the Pauli from F on qubit3. And the Pauli from E on qubit1 must equal the Pauli from E on qubit2.
+But wait: Could there be cases where even if these are not equal, the product might accidentally be a stabilizer? For example, suppose F gives: on qubit0: X, on qubit3: Z. And E gives: on qubit1: X, on qubit2: Z. Then G = X_0 ⊗ X_1 ⊗ Z_2 ⊗ Z_3. Is that in the stabilizer? For it to be in the stabilizer, we need that the Pauli on qubit0 and qubit3 are the same. Here they are X and Z, which are not the same. So it&rsquo;s not. What if F gives: on qubit0: X, on qubit3: X? Then it would be stabilizer if also E gives: on qubit1: something and on qubit2: the same something. So indeed, the condition is: For the error from the first CNOT (on qubits 2,1), we need that the Pauli on qubit2 and qubit1 are the same. And for the error from the second CNOT (on qubits 0,3), we need that the Pauli on qubit0 and qubit3 are the same.</p>
+<p>But wait: There is also the possibility that the overall error is a stabilizer even if individually they are not? For example, if F gives: on qubit0: X, on qubit3: I, and E gives: on qubit1: I, on qubit2: X? Then G = X_0 ⊗ I_1 ⊗ X_2 ⊗ I_3. That is not of the form: qubit0 and qubit3 are the same? They are X and I, so no. What if F gives: on qubit0: X, on qubit3: Y? That is not the same. So indeed, the condition is exactly: For the error on the CNOT_{03} gate, the error Pauli F must be such that its action on qubit0 and qubit3 are identical. And for the error on the CNOT_{21} gate, the error Pauli E must be such that its action on qubit2 and qubit1 are identical.</p>
+<p>But wait: There is also the possibility that the error is not exactly identity but a phase factor? But as argued, if it is a stabilizer, then the fidelity is 1. So we want the probability that both errors are of that type.</p>
+<p>Now, what are the probabilities? For the CNOT_{21} error: E is a Pauli on qubits {2,1}. There are 16 Paulis total. The probability: P(E = I) = 1-p. And for any non-identity Pauli, probability = p/15. Among these, which ones have the property that the Pauli on qubit2 and qubit1 are the same? That means E should be of the form: (P on qubit2) ⊗ (P on qubit1) for some Pauli P (which can be I, X, Y, Z). But careful: If P = I, then that&rsquo;s identity. So the non-identity ones that satisfy this: They are: X⊗X, Y⊗Y, Z⊗Z. Also, what about ones like I⊗X? That is not the same because on qubit2 it&rsquo;s I and on qubit1 it&rsquo;s X. So there are 3 non-identity Paulis that are &ldquo;same on both qubits&rdquo;. But wait: Also, what about ones that are like: i * (X⊗X)? Actually, the Pauli group elements are defined up to phase? But here, the error channel: &ldquo;produces one of the 15 non-identity two-qubit Paulis&rdquo;. Typically, the two-qubit Paulis are considered as the set {I, X, Y, Z}⊗{I, X, Y, Z} excluding the identity. But careful: They are not taken with phases? Actually, the depolarizing channel is usually defined as: With probability p, apply an error from the set of Pauli errors (excluding identity) uniformly. And these Pauli errors are usually taken to be the ones with no phase factors? Actually, the Pauli matrices are Hermitian and square to identity. So the non-identity Paulis on two qubits are: There are 15 of them. They are: For qubits i and j, the set is: {P ⊗ Q} where P, Q ∈ {I, X, Y, Z} but not both I. But note: X⊗Y is different from Y⊗X, etc. So indeed, there are 15. Among these, the ones that are &ldquo;same on both&rdquo; are: X⊗X, Y⊗Y, Z⊗Z. So there are 3.
+So for the CNOT_{21} error, the probability that the error is a stabilizer (i.e., that it does not actually cause an error that reduces fidelity) is: P(stab from first) = P(E such that E acts as the same Pauli on both qubits) = P(E = I) + (3/15)<em>p = 1-p + (p/5) = 1 - (4/5)p? Actually, careful: For non-identity, total probability p is distributed over 15 errors, so each specific non-identity error has probability p/15. So the probability that E is one of {X⊗X, Y⊗Y, Z⊗Z} is 3</em>(p/15) = p/5. So overall, probability that the error from the first CNOT is &ldquo;good&rdquo; (i.e., it results in a stabilizer error overall) is: (1-p) + (p/5) = 1 - (4/5)p.</p>
+<p>Similarly, for the CNOT_{03} error: F is a Pauli on qubits {0,3}. The condition for it to be &ldquo;good&rdquo; is that F acts as the same Pauli on qubit0 and qubit3. That is: F should be either identity, or one of: X⊗X, Y⊗Y, Z⊗Z. So the probability that F is good is also: 1-p + (p/5) = 1 - (4/5)p.</p>
+<p>And these errors are independent. So the overall probability that the final state is exactly the ideal state (up to a phase) is: (1 - (4/5)p)^2? But wait: Is that the fidelity? Because if both errors are good, then G is in the stabilizer, so the state is ideal. But what if one error is good and the other is not? Then G is not in the stabilizer, so the overlap is 0. So then the fidelity F = probability that both errors are good = [1 - (4/5)p]^2 = 1 - (8/5)p + (16/25)p^2.
+But wait: Could there be cases where the errors are not individually good but their product is good? For example, suppose from the first CNOT, we get an error E that is not &ldquo;same on both&rdquo; but from the second, we get an error F that is not &ldquo;same on both&rdquo;, but when multiplied, they might become same on both? But careful: G = F E. But F acts on qubits 0 and 3, E acts on qubits 2 and 1. They act on disjoint sets. So the condition for G to be a stabilizer is that on qubits 0 and 3, the Pauli from F must be the same, and on qubits 1 and 2, the Pauli from E must be the same. There is no cross term because they are on different qubits. So if F is not such that its action on qubit0 and qubit3 are the same, then no matter what E is, on qubits 0 and 3, G will have different Paulis. Similarly, if E is not such that its action on qubit1 and qubit2 are the same, then on qubits 1 and 2, G will have different Paulis. So indeed, for G to be in the stabilizer, we need that F is &ldquo;good&rdquo; (i.e., F&rsquo;s Pauli on qubit0 equals its Pauli on qubit3) and E is &ldquo;good&rdquo; (E&rsquo;s Pauli on qubit1 equals its Pauli on qubit2). So the fidelity is exactly the product of the probabilities that each error is good. So F = (1 - (4/5)p)^2.</p>
+<p>But wait: There is also the possibility that the error is such that it gives a phase factor? But that is included in &ldquo;good&rdquo; because if it&rsquo;s the same Pauli, it might be, say, X⊗X, and that is in the stabilizer? Check: Is X⊗X on qubits 0 and 3 a stabilizer? Yes, because that is X_0 X_3. And on qubits 1 and 2, if it is X⊗X, that is X_1 X_2, which is also a stabilizer. So indeed.</p>
+<p>So then the physical state fidelity is F = (1 - (4/5)p)^2 = 1 - (8/5)p + (16/25)p^2.</p>
+<p>But wait: Is that the entire story? There is also the possibility that the error occurs but then the state is not exactly G|ψ_ideal&gt; because the errors are applied after the gates. But we already pushed them to the end. So it seems correct.</p>
+<p>However, we should check a specific example: Suppose on the first CNOT, the error is E = X_2 ⊗ I_1 (so on qubit2: X, on qubit1: I). That is not good because the Paulis on qubits 2 and 1 are different. Then the overall error is G = (from F, if F is identity) then G = I_0 ⊗ I_1 ⊗ X_2 ⊗ I_3. Is that a stabilizer? That would require that on qubits 1 and 2, they are the same. But here qubit1 is I, qubit2 is X, so no. So fidelity contribution 0.
+What if on the first CNOT, error is E = X_2 ⊗ X_1 (good), and on the second, error is F = X_0 ⊗ I_3 (not good). Then G = X_0 ⊗ X_1 ⊗ X_2 ⊗ I_3. On qubits 0 and 3: X and I are different, so not stabilizer. So indeed.</p>
+<p>So then the fidelity is the probability that both errors are of the type that are &ldquo;same on the pair&rdquo;. And that probability is: For each CNOT, probability of no error or error that is one of {X⊗X, Y⊗Y, Z⊗Z} is: (1-p) + 3*(p/15) = 1-p + p/5 = 1 - (4/5)p. And since they are independent, overall probability = (1 - (4/5)p)^2.</p>
+<p>But wait: There is also the possibility that the error is such that it is a stabilizer but not necessarily identity? But that is included: if it is a stabilizer, then the state is ideal. So yes.</p>
+<p>So the physical state fidelity F = (1 - 4p/5)^2.</p>
+<p>But is that the answer? It says &ldquo;physical state fidelity&rdquo;. That is the overlap between the ideal state and the actual state. But careful: The actual state is a mixture. The fidelity is the average of the square of the overlap. And since for each error pattern, the overlap is either 1 or 0, the fidelity is exactly the probability that the error pattern is such that the final state is the ideal state. So that is correct.</p>
+<p>But wait: Could there be errors that are not Pauli? But the error channel is depolarizing, so it produces Pauli errors. So it&rsquo;s fine.</p>
+<p>Thus, the answer: F = 1 - (8/5)p + (16/25)p^2.</p>
+<p>But maybe we need to express it as: F = 1 - (8/5)p + O(p^2). But the problem likely expects an exact expression.</p>
+<p>Double-check: The probability that a given CNOT gate error is &ldquo;harmless&rdquo; (i.e., does not cause a logical error) is: The error Pauli on the two qubits must be such that it is either identity or of the form P⊗P. There are 1 + 3 = 4 such Paulis out of the 16 total. But careful: The error channel: With probability 1-p, we get identity. With probability p, we get a non-identity Pauli uniformly among 15. So the probability of a specific non-identity Pauli is p/15. So the probability that the error is harmless is: 1-p + 3*(p/15) = 1-p + p/5 = 1 - (4/5)p. So that is correct.</p>
+<p>And since there are two CNOT gates, and they are independent, the overall probability that both are harmless is (1 - 4p/5)^2.</p>
+<p>So the fidelity F = (1 - 4p/5)^2.</p>
+<p>Thus, the answer: F(p) = 1 - (8/5)p + (16/25)p^2.</p>
+<p>But wait: Could there be contributions from errors that are not exactly stabilizers but still have some overlap? For example, if an error occurs that is a logical operator? But logical operators on the code would take the state to an orthogonal logical state. For instance, if we apply X_A, then |00&gt; becomes |10&gt; and |11&gt; becomes |01&gt;, so the state becomes (|10&gt;+|01&gt;)/√2, which is orthogonal to the GHZ state? Actually, for two qubits, the Bell states are orthogonal. So indeed, overlap 0. So no.</p>
+<p>Thus, the answer is as above.</p>
+<p>So final answer: F = (1 - 4p/5)^2.</p>
+<p>But wait: There is also the possibility of errors that are products of stabilizers? But that is already included.</p>
+<p>So I&rsquo;ll answer: The physical state fidelity is F = 1 - (8/5)p + (16/25)p^2.</p>
+<p>But the problem might want it in a simplified form: F = (5 - 4p)^2/25.</p>
+<p>So I&rsquo;ll put: F(p) = \frac{(5-4p)^2}{25}.</p>
+<p>I&rsquo;ll check: When p=0, F=1; when p is small, F ≈ 1 - (8/5)p.</p>
+<p>That seems plausible.</p>
+<p>Thus, final answer.</p>
+<p>I&rsquo;ll now write the step-by-step derivation.</p>
+                      </div>
+                    </details>
+<div class="content markdown-body"><h3 id="step-1-understand-the-circuit-and-the-ideal-state">Step 1. Understand the Circuit and the Ideal State</h3>
+<p>The goal is to prepare the logical GHZ state:</p>
+<div class="arithmatex">\[
+|\psi_{\text{ideal}}\rangle = \frac{|00\rangle_{AB} + |11\rangle_{AB}}{\sqrt{2}}
+\]</div>
+<p>using the [[4,2,2]] code, which encodes two logical qubits (A and B) into four physical qubits (labeled 0, 1, 2, 3). The circuit is:</p>
+<div class="arithmatex">\[
+\text{CNOT}_{03} \cdot H_0 \cdot \text{CNOT}_{21} \cdot H_2
+\]</div>
+<p>where the operations are applied from right to left. The initial state is:</p>
+<div class="arithmatex">\[
+|0000\rangle
+\]</div>
+<p>Applying the gates in order:</p>
+<ol>
+<li><strong>Apply <span class="arithmatex">\( H_2 \)</span></strong>:</li>
+</ol>
+<div class="arithmatex">\[
+   H_2 |0\rangle_2 = \frac{|0\rangle + |1\rangle}{\sqrt{2}} \Rightarrow |\psi_1\rangle = \frac{1}{\sqrt{2}}(|0000\rangle + |0010\rangle)
+\]</div>
+<ol start="2">
+<li><strong>Apply <span class="arithmatex">\( \text{CNOT}_{21} \)</span></strong> (control qubit 2, target qubit 1):</li>
+</ol>
+<div class="arithmatex">\[
+   |0000\rangle \rightarrow |0000\rangle,\quad |0010\rangle \rightarrow |0110\rangle \Rightarrow |\psi_2\rangle = \frac{1}{\sqrt{2}}(|0000\rangle + |0110\rangle)
+\]</div>
+<ol start="3">
+<li><strong>Apply <span class="arithmatex">\( H_0 \)</span></strong>:</li>
+</ol>
+<div class="arithmatex">\[
+   H_0 |0\rangle_0 = \frac{|0\rangle + |1\rangle}{\sqrt{2}} \Rightarrow |\psi_3\rangle = \frac{1}{2}(|0000\rangle + |1000\rangle + |0110\rangle + |1110\rangle)
+\]</div>
+<ol start="4">
+<li><strong>Apply <span class="arithmatex">\( \text{CNOT}_{03} \)</span></strong> (control qubit 0, target qubit 3):</li>
+</ol>
+<div class="arithmatex">\[
+   |0000\rangle \rightarrow |0000\rangle,\quad |1000\rangle \rightarrow |1001\rangle,\quad |0110\rangle \rightarrow |0110\rangle,\quad |1110\rangle \rightarrow |1111\rangle
+\]</div>
+<div class="arithmatex">\[
+   \Rightarrow |\psi_{\text{ideal}}\rangle = \frac{1}{2}(|0000\rangle + |1001\rangle + |0110\rangle + |1111\rangle)
+\]</div>
+<p>This matches the logical GHZ state in the [[4,2,2]] code.</p>
+<hr />
+<h3 id="step-2-model-the-errors">Step 2. Model the Errors</h3>
+<p>Each CNOT gate is followed by a two-qubit depolarizing error channel:</p>
+<ul>
+<li>With probability <span class="arithmatex">\( 1 - p \)</span>, the gate is applied perfectly.</li>
+<li>With probability <span class="arithmatex">\( p \)</span>, an error occurs: one of the 15 non-identity two-qubit Pauli operators is applied with equal probability <span class="arithmatex">\( p/15 \)</span>.</li>
+</ul>
+<p>The Hadamard gates are assumed to be perfect.</p>
+<p>Let:</p>
+<ul>
+<li><span class="arithmatex">\( E \)</span>: error on <span class="arithmatex">\( \text{CNOT}_{21} \)</span>, acting on qubits 2 and 1.</li>
+<li><span class="arithmatex">\( F \)</span>: error on <span class="arithmatex">\( \text{CNOT}_{03} \)</span>, acting on qubits 0 and 3.</li>
+</ul>
+<p>The overall operation becomes:</p>
+<div class="arithmatex">\[
+U_{\text{actual}} = F \cdot \text{CNOT}_{03} \cdot H_0 \cdot E \cdot \text{CNOT}_{21} \cdot H_2
+\]</div>
+<p>Since <span class="arithmatex">\( E \)</span> and <span class="arithmatex">\( F \)</span> act on disjoint sets of qubits, they commute with <span class="arithmatex">\( H_0 \)</span> and <span class="arithmatex">\( \text{CNOT}_{03} \)</span>, respectively. Thus, we can push them to the end:</p>
+<div class="arithmatex">\[
+U_{\text{actual}} = F \cdot E \cdot \text{CNOT}_{03} \cdot H_0 \cdot \text{CNOT}_{21} \cdot H_2 = (F E) \cdot U_{\text{perfect}}
+\]</div>
+<p>where <span class="arithmatex">\( U_{\text{perfect}} = \text{CNOT}_{03} \cdot H_0 \cdot \text{CNOT}_{21} \cdot H_2 \)</span>. Therefore, the final state is:</p>
+<div class="arithmatex">\[
+|\psi_{\text{actual}}\rangle = G |\psi_{\text{ideal}}\rangle,\quad \text{where } G = F E
+\]</div>
+<p>Since <span class="arithmatex">\( E \)</span> and <span class="arithmatex">\( F \)</span> are Pauli operators, <span class="arithmatex">\( G \)</span> is also a Pauli operator.</p>
+<hr />
+<h3 id="step-3-compute-the-fidelity">Step 3. Compute the Fidelity</h3>
+<p>The fidelity is:</p>
+<div class="arithmatex">\[
+F = \langle \psi_{\text{ideal}} | \rho_{\text{actual}} | \psi_{\text{ideal}} \rangle
+\]</div>
+<p>where <span class="arithmatex">\( \rho_{\text{actual}} \)</span> is the mixed state after averaging over errors.</p>
+<p>Since <span class="arithmatex">\( |\psi_{\text{ideal}}\rangle \)</span> is a stabilizer state, for any Pauli operator <span class="arithmatex">\( P \)</span>:</p>
+<div class="arithmatex">\[
+\langle \psi_{\text{ideal}} | P | \psi_{\text{ideal}} \rangle = 
+\begin{cases}
+\pm 1 &amp; \text{if } P \text{ is a stabilizer of } |\psi_{\text{ideal}}\rangle \\
+0 &amp; \text{otherwise}
+\end{cases}
+\]</div>
+<p>Thus, the fidelity is the total probability that <span class="arithmatex">\( G \)</span> is a stabilizer of <span class="arithmatex">\( |\psi_{\text{ideal}}\rangle \)</span>.</p>
+<p>The stabilizer group of <span class="arithmatex">\( |\psi_{\text{ideal}}\rangle \)</span> is generated by:</p>
+<ul>
+<li><span class="arithmatex">\( XXXX \)</span></li>
+<li><span class="arithmatex">\( ZZZZ \)</span></li>
+<li><span class="arithmatex">\( X_0 X_3 \)</span></li>
+<li><span class="arithmatex">\( Z_0 Z_3 \)</span></li>
+</ul>
+<p>A Pauli operator <span class="arithmatex">\( G \)</span> is a stabilizer iff:</p>
+<ul>
+<li>On qubits 0 and 3: the Pauli is the same.</li>
+<li>On qubits 1 and 2: the Pauli is the same.</li>
+</ul>
+<p>Since <span class="arithmatex">\( G = F E \)</span>, and <span class="arithmatex">\( F \)</span> acts on qubits 0 and 3 while <span class="arithmatex">\( E \)</span> acts on qubits 2 and 1, the condition becomes:</p>
+<ul>
+<li><span class="arithmatex">\( F \)</span> must act as the same Pauli on qubits 0 and 3.</li>
+<li><span class="arithmatex">\( E \)</span> must act as the same Pauli on qubits 2 and 1.</li>
+</ul>
+<hr />
+<h3 id="step-4-probability-that-an-error-is-harmless">Step 4. Probability that an Error is “Harmless”</h3>
+<h4 id="for-textcnot_21-error-e">For <span class="arithmatex">\( \text{CNOT}_{21} \)</span> (error <span class="arithmatex">\( E \)</span>):</h4>
+<ul>
+<li>Probability that <span class="arithmatex">\( E = I \)</span>: <span class="arithmatex">\( 1 - p \)</span></li>
+<li>Probability that <span class="arithmatex">\( E \)</span> is a specific non-identity Pauli: <span class="arithmatex">\( p/15 \)</span></li>
+</ul>
+<p>The “harmless” errors are those where <span class="arithmatex">\( E \)</span> acts as the same Pauli on qubits 2 and 1:</p>
+<ul>
+<li>Non-identity examples: <span class="arithmatex">\( X \otimes X \)</span>, <span class="arithmatex">\( Y \otimes Y \)</span>, <span class="arithmatex">\( Z \otimes Z \)</span></li>
+<li>Total such operators: 3</li>
+</ul>
+<p>So, the probability that <span class="arithmatex">\( E \)</span> is harmless is:</p>
+<div class="arithmatex">\[
+P_{\text{good}}(E) = (1 - p) + 3 \cdot \frac{p}{15} = 1 - p + \frac{p}{5} = 1 - \frac{4}{5}p
+\]</div>
+<h4 id="for-textcnot_03-error-f">For <span class="arithmatex">\( \text{CNOT}_{03} \)</span> (error <span class="arithmatex">\( F \)</span>):</h4>
+<p>By symmetry, the probability that <span class="arithmatex">\( F \)</span> is harmless is also:</p>
+<div class="arithmatex">\[
+P_{\text{good}}(F) = 1 - \frac{4}{5}p
+\]</div>
+<p>Since the errors are independent, the overall probability that both are harmless is:</p>
+<div class="arithmatex">\[
+P(G \in \text{Stab}) = \left(1 - \frac{4}{5}p\right)^2
+\]</div>
+<p>Hence, the fidelity is:</p>
+<div class="arithmatex">\[
+F(p) = \left(1 - \frac{4}{5}p\right)^2 = 1 - \frac{8}{5}p + \frac{16}{25}p^2
+\]</div>
+<hr />
+<h3 id="final-answer">Final Answer:</h3>
+<div class="arithmatex">\[
+F(p) = \frac{(5 - 4p)^2}{25}
+\]</div></div>
+</article>
+
+
+<article class="message role-user">
+    <div class="meta">
+        <span class="badge">User</span>
+        <span class="idx">#3</span>
+    </div>
+    <div class="content markdown-body"><p>Populate your final answer into the code template provided below. This step is purely for formatting/display purposes. No additional reasoning or derivation should be performed. Do not import any modules or packages beyond what is provided in the template.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">answer</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the expression of the physical state fidelity of the final physical 4-qubit state</span>
+<span class="sd">    at the end of the circuit as a function of the two-qubit gate error rate $p$.</span>
+
+<span class="sd">    Inputs</span>
+<span class="sd">    ----------</span>
+<span class="sd">    p: sympy.Symbol, two-qubit gate error rate $p$</span>
+
+<span class="sd">    Outputs</span>
+<span class="sd">    ----------</span>
+<span class="sd">    F_physical: sympy.Expr, the physical state fidelity of the final physical 4-qubit state</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># ------------------ FILL IN YOUR RESULTS BELOW ------------------</span>
+    <span class="n">F_physical</span> <span class="o">=</span> <span class="o">...</span>  <span class="c1"># a SymPy expression of inputs</span>
+    <span class="c1"># ---------------------------------------------------------------</span>
+
+    <span class="k">return</span> <span class="n">F_physical</span>
+</code></pre></div></div>
+</article>
+
+
+<article class="message role-assistant">
+    <div class="meta">
+        <span class="badge">Assistant</span>
+        <span class="idx">#4</span>
+    </div>
+    
+                    <details class="reasoning">
+                      <summary>Reasoning <span class="tag">(model)</span></summary>
+                      <div class="markdown-body reasoning-body">
+                        <p>We are given a function template to fill.
+ The fidelity expression we derived is: F(p) = (1 - 4p/5)^2 = (5 - 4p)^2 / 25.
+ We will represent this using SymPy.</p>
+                      </div>
+                    </details>
+<div class="content markdown-body"><p><strong>Final Answer:</strong></p>
+<p>The physical state fidelity of the final 4-qubit state is given by:</p>
+<div class="arithmatex">\[
+F(p) = \left(1 - \frac{4p}{5}\right)^2 = \frac{(5 - 4p)^2}{25}
+\]</div>
+<p>This expression accounts for the two-qubit depolarizing error channels after each CNOT gate in the circuit, where errors that preserve the stabilizer structure of the logical GHZ state do not reduce fidelity.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">answer</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the expression of the physical state fidelity of the final physical 4-qubit state</span>
+<span class="sd">    at the end of the circuit as a function of the two-qubit gate error rate $p$.</span>
+
+<span class="sd">    Inputs</span>
+<span class="sd">    ----------</span>
+<span class="sd">    p: sympy.Symbol, two-qubit gate error rate $p$</span>
+
+<span class="sd">    Outputs</span>
+<span class="sd">    ----------</span>
+<span class="sd">    F_physical: sympy.Expr, the physical state fidelity of the final physical 4-qubit state</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># ------------------ FILL IN YOUR RESULTS BELOW ------------------</span>
+    <span class="n">F_physical</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span> <span class="o">-</span> <span class="mi">4</span><span class="o">*</span><span class="n">p</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="mi">25</span>
+    <span class="c1"># ---------------------------------------------------------------</span>
+
+    <span class="k">return</span> <span class="n">F_physical</span>
+</code></pre></div></div>
+</article>
+
+</div>
+
+<footer>
+  Generated at 2025-09-24T22:02:09.437181
+</footer>
+
+<script>
+(function() {
+  // Tabs
+  const tabs = document.querySelectorAll('.tab');
+  const panels = document.querySelectorAll('.tab-content');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      const target = document.querySelector(tab.dataset.target);
+      if (target) target.classList.add('active');
+    });
+  });
+
+  // Theme toggle
+  const toggleBtn = document.getElementById('theme-toggle');
+  function setTheme(dark) {
+    if (dark) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('dark', '1');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('dark', '0');
+    }
+  }
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const stored = localStorage.getItem('dark');
+  setTheme(stored === null ? prefersDark : stored === '1');
+
+  toggleBtn.addEventListener('click', () => {
+    const isDark = document.documentElement.classList.contains('dark');
+    setTheme(!isDark);
+  });
+})();
+</script>
+</body>
+</html>
