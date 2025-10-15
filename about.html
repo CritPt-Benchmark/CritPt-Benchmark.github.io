@@ -20,27 +20,113 @@
             top: 50%;
             transform: translateY(-50%);
             z-index: 30;
+            width: 240px;
         }
 
-        @media (max-width: 1500px) {
+        /* Timeline container - invisible spacer */
+        .timeline-container {
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 280px;
+            z-index: 25;
+        }
+
+        /* Large screens */
+        @media (min-width: 1601px) {
+            .timeline-container {
+                width: 300px;
+            }
+            .main-with-timeline {
+                margin-left: 300px !important;
+            }
             .timeline-label {
-                font-size: 14px;
+                font-size: 16px;
+                max-width: 240px;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
         }
 
-        @media (max-width: 1350px) {
-            .timeline-label {
-                font-size: 13px;
-            }
-        }
-
-        @media (max-width: 1250px) {
+        /* Medium-large screens - responsive fonts */
+        @media (max-width: 1600px) and (min-width: 1351px) {
             .timeline {
+                left: 20px;
+            }
+            .timeline-container {
+                width: 280px;
+            }
+            .timeline-label {
+                font-size: calc(12px + 0.3vw);
+                max-width: 220px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            .main-with-timeline {
+                margin-left: 280px !important;
+            }
+            /* Responsive content font size */
+            .main-with-timeline .text-lg {
+                font-size: calc(14px + 0.2vw);
+            }
+            .main-with-timeline h2 {
+                font-size: calc(24px + 0.5vw);
+            }
+            .main-with-timeline h3 {
+                font-size: calc(20px + 0.3vw);
+            }
+        }
+
+        /* Medium screens - smaller responsive fonts */
+        @media (max-width: 1350px) and (min-width: 1251px) {
+            .timeline {
+                left: 15px;
+            }
+            .timeline-container {
+                width: 260px;
+            }
+            .timeline-label {
+                font-size: calc(11px + 0.2vw);
+                max-width: 200px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            .timeline-dot {
+                width: 10px;
+                height: 10px;
+            }
+            .timeline-line {
+                height: 450px;
+            }
+            .main-with-timeline {
+                margin-left: 260px !important;
+            }
+            /* Smaller responsive content font size */
+            .main-with-timeline .text-lg {
+                font-size: calc(13px + 0.2vw);
+            }
+            .main-with-timeline h2 {
+                font-size: calc(22px + 0.4vw);
+            }
+            .main-with-timeline h3 {
+                font-size: calc(18px + 0.3vw);
+            }
+        }
+
+        /* Small screens - hide timeline */
+        @media (max-width: 1250px) {
+            .timeline,
+            .timeline-container {
                 display: none;
             }
 
             .main-with-timeline {
                 margin-left: 0 !important;
+            }
+            /* Normal font sizes for small screens */
+            .main-with-timeline .text-lg {
+                font-size: 18px;
             }
         }
 
@@ -68,6 +154,8 @@
             align-items: center;
             gap: 8px;
             cursor: pointer;
+            width: 250px;
+            padding-right: 10px;
         }
 
         .timeline-item:hover .timeline-label {
@@ -81,9 +169,13 @@
         .timeline-label {
             font-size: 16px;
             color: rgb(89, 89, 89);
-            opacity: 0.5;
+            opacity: 0.7;
             transition: all 0.3s ease;
             white-space: nowrap;
+            max-width: 220px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: block;
         }
 
         .timeline-label.active {
@@ -107,9 +199,14 @@
             border-color: rgb(15, 76, 129);
         }
 
-        /* Add margin to main content */
+        /* Add margin to main content - default */
         .main-with-timeline {
-            margin-left: 60px;
+            margin-left: 280px !important;
+            margin-right: 0;
+            padding-left: 40px;
+            padding-right: 40px;
+            box-sizing: border-box;
+            min-height: 100vh;
         }
 
         /* Timeline offset is only for main content, not header */
@@ -363,6 +460,7 @@
 
             return (
                 <div className="min-h-screen" style={{backgroundColor: 'rgb(240, 237, 228)', color: 'rgb(89, 89, 89)'}}>
+                    <div className="timeline-container"></div>
                     <Timeline sections={sections} activeSection={activeSection} onSectionClick={scrollToSection} />
                     {/* Top Nav */}
                     <header className="sticky top-0 z-40 w-full border-b border-black/5 backdrop-blur" style={{backgroundColor: 'rgb(15, 76, 129)'}}>
@@ -381,8 +479,8 @@
                     </header>
 
                     {/* Main Content */}
-                    <main className="mx-auto max-w-6xl px-4 py-16 main-with-timeline">
-                        <div className="prose prose-zinc max-w-none">
+                    <main className="py-16 main-with-timeline">
+                        <div className="max-w-5xl">
                             <section className="mb-16" ref={el => sectionRefs.current[0] = el}>
                                 <h2 className="text-4xl font-semibold mb-4" style={{color: 'rgb(89, 89, 89)'}}>Contact</h2>
                                 <p className="text-lg leading-relaxed" style={{color: 'rgb(89, 89, 89)'}}>
