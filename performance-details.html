@@ -77,21 +77,46 @@
 
         // Main App Component
         function App() {
+            const [menuOpen, setMenuOpen] = useState(false);
+            const mobileLinkClass = "text-left w-full px-3 py-2 rounded-lg font-medium text-base text-[rgb(240,237,228)] hover:bg-white/10";
+
             return (
                 <div className="min-h-screen" style={{backgroundColor: 'rgb(240, 237, 228)', color: 'rgb(89, 89, 89)'}}>
                     {/* Top Nav */}
                     <header className="sticky top-0 z-40 w-full border-b border-black/5 backdrop-blur" style={{backgroundColor: 'rgb(15, 76, 129)'}}>
-                        <div className="mx-auto max-w-6xl px-4">
+                        <div className="relative mx-auto max-w-6xl px-4">
                             <div className="flex h-20 items-center justify-between gap-4">
                                 <BrandMark />
-                                <nav className="hidden md:flex items-center gap-2">
-                                    <Pill href="index.html">Overview</Pill>
-                                    <Pill href="benchmark-coverage.html">Coverage</Pill>
-                                    <Pill active>Performance</Pill>
-                                    <Pill href="example.html">Example</Pill>
-                                    <Pill href="about.html">About</Pill>
-                                </nav>
+                                <div className="flex items-center gap-2">
+                                    <button
+                                        className="md:hidden inline-flex items-center gap-2 rounded-full border border-white/30 px-3 py-1 text-sm font-semibold text-[rgb(240,237,228)] shadow-sm active:scale-[0.98]"
+                                        onClick={() => setMenuOpen((v) => !v)}
+                                        aria-expanded={menuOpen ? 'true' : 'false'}
+                                        aria-label="Toggle navigation menu"
+                                    >
+                                        <span className="text-base">☰</span>
+                                        <span>Menu</span>
+                                    </button>
+                                    <nav className="hidden md:flex items-center gap-2">
+                                        <Pill href="index.html">Overview</Pill>
+                                        <Pill href="benchmark-coverage.html">Coverage</Pill>
+                                        <Pill active>Performance</Pill>
+                                        <Pill href="example.html">Example</Pill>
+                                        <Pill href="about.html">About</Pill>
+                                    </nav>
+                                </div>
                             </div>
+                            {menuOpen && (
+                                <div className="absolute left-0 right-0 top-20 md:hidden border-t border-white/10" style={{backgroundColor: 'rgba(15, 76, 129, 0.95)'}}>
+                                    <div className="flex flex-col gap-1 px-4 py-3">
+                                        <a className={mobileLinkClass} href="index.html" onClick={() => setMenuOpen(false)}>Overview</a>
+                                        <a className={mobileLinkClass} href="benchmark-coverage.html" onClick={() => setMenuOpen(false)}>Coverage</a>
+                                        <button className={mobileLinkClass} onClick={() => setMenuOpen(false)}>Performance</button>
+                                        <a className={mobileLinkClass} href="example.html" onClick={() => setMenuOpen(false)}>Example</a>
+                                        <a className={mobileLinkClass} href="about.html" onClick={() => setMenuOpen(false)}>About</a>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     </header>
 
@@ -105,7 +130,7 @@
                         <section className="mb-12">
                             <div className="overflow-hidden rounded-2xl border border-zinc-200 bg-[#FAF8F3] shadow-lg">
                                 <div className="overflow-x-auto">
-                                    <table className="w-full text-left table-fixed">
+                                    <table className="w-full min-w-[960px] text-left table-fixed">
                                         <colgroup>
                                             <col style={{width: '20.1%'}} />
                                             <col style={{width: '13.5%'}} />

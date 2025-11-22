@@ -120,22 +120,46 @@
                 const el = document.getElementById('leaderboard');
                 if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
             };
+            const [menuOpen, setMenuOpen] = useState(false);
+            const mobileLinkClass = "text-left w-full px-3 py-2 rounded-lg font-medium text-base text-[rgb(240,237,228)] hover:bg-white/10";
 
             return (
                 <div className="min-h-screen scroll-smooth" style={{backgroundColor: 'rgb(240, 237, 228)', color: 'rgb(89, 89, 89)'}}>
                     {/* Top Nav */}
                     <header className="sticky top-0 z-40 w-full border-b border-black/5 backdrop-blur" style={{backgroundColor: 'rgb(15, 76, 129)'}}>
-                        <div className="mx-auto max-w-6xl px-4">
+                        <div className="relative mx-auto max-w-6xl px-4">
                             <div className="flex h-20 items-center justify-between gap-4">
                                 <BrandMark />
-                                <nav className="hidden md:flex items-center gap-2">
-                                    <Pill active onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); window.history.pushState(null, '', window.location.pathname); }}>Overview</Pill>
-                                    <Pill onClick={() => window.location.href = 'benchmark-coverage.html'}>Coverage</Pill>
-                                    <Pill onClick={() => window.location.href = 'performance-details.html'}>Performance</Pill>
-                                    <Pill onClick={() => window.location.href = 'example.html'}>Example</Pill>
-                                    <Pill onClick={() => window.location.href = 'about.html'}>About</Pill>
-                                </nav>
+                                <div className="flex items-center gap-2">
+                                    <button
+                                        className="md:hidden inline-flex items-center gap-2 rounded-full border border-white/30 px-3 py-1 text-sm font-semibold text-[rgb(240,237,228)] shadow-sm active:scale-[0.98]"
+                                        onClick={() => setMenuOpen((v) => !v)}
+                                        aria-expanded={menuOpen ? 'true' : 'false'}
+                                        aria-label="Toggle navigation menu"
+                                    >
+                                        <span className="text-base">☰</span>
+                                        <span>Menu</span>
+                                    </button>
+                                    <nav className="hidden md:flex items-center gap-2">
+                                        <Pill active onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); window.history.pushState(null, '', window.location.pathname); }}>Overview</Pill>
+                                        <Pill onClick={() => window.location.href = 'benchmark-coverage.html'}>Coverage</Pill>
+                                        <Pill onClick={() => window.location.href = 'performance-details.html'}>Performance</Pill>
+                                        <Pill onClick={() => window.location.href = 'example.html'}>Example</Pill>
+                                        <Pill onClick={() => window.location.href = 'about.html'}>About</Pill>
+                                    </nav>
+                                </div>
                             </div>
+                            {menuOpen && (
+                                <div className="absolute left-0 right-0 top-20 md:hidden border-t border-white/10" style={{backgroundColor: 'rgba(15, 76, 129, 0.95)'}}>
+                                    <div className="flex flex-col gap-1 px-4 py-3">
+                                        <button className={mobileLinkClass} onClick={() => { setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); window.history.pushState(null, '', window.location.pathname); }}>Overview</button>
+                                        <button className={mobileLinkClass} onClick={() => { setMenuOpen(false); window.location.href = 'benchmark-coverage.html'; }}>Coverage</button>
+                                        <button className={mobileLinkClass} onClick={() => { setMenuOpen(false); window.location.href = 'performance-details.html'; }}>Performance</button>
+                                        <button className={mobileLinkClass} onClick={() => { setMenuOpen(false); window.location.href = 'example.html'; }}>Example</button>
+                                        <button className={mobileLinkClass} onClick={() => { setMenuOpen(false); window.location.href = 'about.html'; }}>About</button>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     </header>
 
